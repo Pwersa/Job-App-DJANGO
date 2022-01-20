@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+    </head>
+
+    <body background="/static/pictures/bg.jpg">
+            <div class="container mt-3">
+                <h1 class=" p-4 mb-3 text-center" style="font-weight: bolder; background-color: #1f2833; color: #66fcf1;">Make a Job Posting</h1>
+                <form class="row g-3" style="color: #000;">
+                    <div class="col-md-12">
+                        <label for="jobtitle" class="form-label"style="font-weight: bold;">Job Title:</label>
+                        <input type="text" class="form-control" id="jobTitle" required>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="jobdescription" class="form-label" style="font-weight: bold;">Job Description:</label>
+                        <textarea class="form-control" id="jobDescription" rows="4" required></textarea>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="jobrequirements" class="form-label" style="font-weight: bold;">Job Requirements:</label>
+                        <textarea class="form-control" id="jobRequirements" rows="4" required></textarea>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text" style="font-weight: bold;">Salary: ₱</span>
+                        <input type="number" class="form-control" id="salary" min="1" required>
+                        <span class="input-group-text">.00</span>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit" style="font-weight: bold;" class="btn btn-primary" onclick="postJob()">Post!</button>
+                    </div>
+                </form>
+            </div>
+    </body>
+
+    <script>
+        function postJob() {
+            event.preventDefault();
+            if ((document.getElementById("jobTitle").value == "") && 
+            (document.getElementById("jobDescription").value == "") && 
+            (document.getElementById("jobRequirements").value == "") && 
+            (document.getElementById("salary").value == "")) {
+                alert("Please Fill up the forms.");
+            }
+            else if (document.getElementById("jobTitle").value == "") {
+                alert("Please Input the Job Title.");
+            }
+            else if (document.getElementById("jobDescription").value == "") {
+                 alert("Please Input the Job Description.");
+            }
+            else if (document.getElementById("jobRequirements").value == "") {
+                alert("Please Input the Job Requirements.");
+            }
+            else if (document.getElementById("salary").value == "") {
+                alert("Please Input the Salary.");
+            }
+            else {
+                alert("Job Has Been Created!");
+                location.replace("{% url 'hrdashboard' %}")
+            }
+        }
+    </script>
+</html>

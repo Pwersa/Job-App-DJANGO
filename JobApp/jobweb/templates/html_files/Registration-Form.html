@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+
+    <body class="row g-3", background="/static/pictures/bg.jpg" >
+      <div class="fs-1 p-4 mb-2 fw-bold text-center" style="background-color: #1f2833; color: #66fcf1">Registration Form</div>
+      <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e; color: #000000">Account Details</div>
+      
+      <form class="row g-4" onsubmit="SubmitData()">
+        <div class="col-md-4">
+          <label for="Email" class="form-label">Email (This Will Be Your Login)</label>
+          <input class="form-control" type="email"  id="Email" required>
+        </div>
+
+        <div class="col-md-4">
+          <label for="Password" class="form-label" >Password (1 A-Z, 1 no. and > 8 char)</label>
+          <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" id="Password" required>
+        </div>
+
+        <div class="col-md-4">
+          <label for="Password2" class="form-label" >Confirm Password</label>
+          <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" id="Password2" required>
+        </div>
+
+        <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e; color: #000000">Personal Data</div>
+        
+
+            <div class="col-md-3">
+                <label for="formFile" class="form-label" >Upload Photo</label>
+                <input class="form-control" type="file" id="formFile" required>
+            </div>
+
+            <div class="col-md-3">
+              <label for="Surname" class="form-label"  >Surname</label>
+              <input type="text" class="form-control" id="Surname" required>
+            </div>
+
+            <div class="col-md-3">
+                <label for="First_name" class="form-label" >First Name</label>
+                <input type="text" class="form-control" id="First_name" required>
+              </div>
+
+            <div class="col-md-3">
+                <label for="Middle_name" class="form-label" >Middle Name</label>
+                <input type="text" class="form-control" id="Middle_name" required>
+            </div>
+
+            <div class="col-md-6">
+              <label for="Address" class="form-label" >Address</label>
+              <input type="text" class="form-control" id="Address" required>
+            </div>
+
+            <div class="col-md-3">
+                <label for="cellphone." class="form-label" >Cellphone No.</label>
+                <input type="text" pattern="[0-9]{11}" class="form-control" id="cellphone" required>
+              </div>
+            
+              <div class="col-md-3">
+                <label for="bday" class="form-label">Birthday</label>
+                <input type="date" class="form-control" id="bday" required>
+              </div>
+
+              <div class="col-md-3">
+                <label for="bplace" class="form-label" >Birthplace</label>
+                <input type="text" class="form-control" id="bplace" required>
+              </div>
+            
+              <div class="col-md-3">
+                <label for="civilstatus" class="form-label" >Civil Status</label>
+                <select id="civilstatus" class="form-select" required>
+                  <option selected>Single</option>
+                  <option>Married</option>
+                  <option>Widowed</option>
+                </select>
+              </div>
+
+              <div class="col-md-3">
+                <label for="citizenship" class="form-label" >Citizenship</label>
+                <input type="text" class="form-control" id="citizenship" required="true">
+              </div>
+
+              <div class="col-md-3">
+                <label for="religion" class="form-label" >Religion</label>
+                <input type="text" class="form-control" id="religion" required>
+              </div>
+
+              <div class="col-md-3">
+                <label for="econtact" class="form-label" >Emergency Contact</label>
+                <input type="text" class="form-control" id="econtact" required>
+              </div>
+
+              <div class="col-md-3">
+                <label for="econtact_no" class="form-label">Emergency Contact No.</label>
+                <input type="text" pattern="[0-9]{11}" class="form-control" id="econtact_no" required>
+              </div>
+
+        <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e; color: #000000">Educational Background</div>
+        
+
+            
+                <div class="col-md-6">
+                  <label for="elementary" class="form-label" >Elementary</label>
+                  <input type="text" class="form-control" id="elementary" >
+                </div>
+
+                <div class="col-md-6">
+                  <label for="year_elem" class="form-label" > Year Graduated</label>
+                  <input type="text" pattern="[0-9]{4}" class="form-control" id="year_elem" >
+                </div>
+
+                <div class="col-md-6">
+                  <label for="hschool" class="form-label" >Highschool</label>
+                  <input type="text" class="form-control" id="hschool" >
+                </div>
+
+                <div class="col-md-6">
+                  <label for="year_hs" class="form-label" >Year Graduated</label>
+                  <input type="text" pattern="[0-9]{4}" class="form-control" id="year_hs" >
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="college" class="form-label" >College</label>
+                    <input type="text" class="form-control" id="college" >
+                  </div>
+  
+                  <div class="col-md-6">
+                    <label for="year_college" class="form-label" >Year Graduated</label>
+                    <input type="text" pattern="[0-9]{4}" class="form-control" id="year_college" >
+                  </div>
+
+                  <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e;">Employment Record</div>
+                  
+
+                    <div class="col-md-3">
+                      <label for="company1" class="form-label" >Company Name</label>
+                      <input type="text" class="form-control" id="company1">
+                    </div>
+
+                    <div class="col-md-3">
+                      <label for="position1" class="form-label" >Position</label>
+                      <input type="text" class="form-control" id="position1">
+                    </div>
+                    
+                    <div class="col-md-3">
+                      <label for="from1" class="form-label">From</label>
+                      <input type="date" class="form-control" id="from1">
+                    </div>
+
+                    <div class="col-md-3">
+                      <label for="to1" class="form-label" >To</label>
+                      <input type="date" class="form-control" id="to1">
+                    </div>
+
+                    <div class="col-md-3">
+                      <label for="company2" class="form-label">Company Name</label>
+                      <input type="text" class="form-control" id="company2">
+                    </div>
+
+                    <div class="col-md-3">
+                      <label for="position2" class="form-label" >Position</label>
+                      <input type="text" class="form-control" id="position2">
+                    </div>
+                    
+                    <div class="col-md-3">
+                      <label for="from2" class="form-label" >From</label>
+                      <input type="date" class="form-control" id="from2">
+                    </div>
+
+                    <div class="col-md-3">
+                      <label for="to2" class="form-label" >To</label>
+                      <input type="date" class="form-control" id="to2">
+                    </div>
+
+                    <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;">Character Reference</div>
+                  
+
+                    <div class="col-md-3">
+                      <label for="ref1" class="form-label" >Name</label>
+                      <input type="text" class="form-control" id="ref1">
+                    </div>
+                    
+                    <div class="col-md-3">
+                      <label for="refcon1" class="form-label" >Contact No.</label>
+                      <input type="text" pattern="[0-9]{11}" class="form-control" id="refcon1">
+                    </div>
+
+                    <div class="col-md-3">
+                      <label for="refpos1" class="form-label" >Position</label>
+                      <input type="text" class="form-control" id="refpos1">
+                    </div>
+
+                    <div class="col-md-3">
+                      <label for="refcom1" class="form-label" >Company</label>
+                      <input type="text" class="form-control" id="refcom1">
+                    </div>
+
+                    <div class="col-md-3">
+                      <label for="ref2" class="form-label" >Name</label>
+                      <input type="text" class="form-control" id="ref2">
+                    </div>
+                    
+                    <div class="col-md-3">
+                      <label for="refcon2" class="form-label" >Contact No.</label>
+                      <input type="text" pattern="[0-9]{11}" class="form-control" id="refcon2">
+                    </div>
+
+                    <div class="col-md-3">
+                      <label for="refpos2" class="form-label" >Position</label>
+                      <input type="text" class="form-control" id="refpos2">
+                    </div>
+
+                    <div class="col-md-3">
+                      <label for="refcom2" class="form-label" >Company</label>
+                      <input type="text" class="form-control" id="refcom2">
+                    </div>
+
+                    <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;">Government Numbers</div>
+                  
+
+                    <div class="col-md-4">
+                      <label for="sss" class="form-label" >SSS</label>
+                      <input type="text" pattern="[0-9]{10}" class="form-control" id="sss" required>
+                    </div>
+
+                    <div class="col-md-4">
+                      <label for="philhealth" class="form-label" >Philhealth</label>
+                      <input type="text" pattern="[0-9]{12}" class="form-control" id="philhealth" required>
+                    </div>
+
+                    <div class="col-md-4">
+                      <label for="pag-ibig" class="form-label" >Pag-ibig</label>
+                      <input type="text" pattern="[0-9]{12}" class="form-control" id="pagibig" required>
+                    </div>
+
+                    <div class="col-md-4">
+                      <label for="tin" class="form-label" >TIN</label>
+                      <input type="text" pattern="[0-9]{9}" class="form-control" id="tin" required>
+                    </div>
+
+                    <div class="col-md-4">
+                      <label for="med-record" class="form-label" >Medical Record Slip</label>
+                      <input type="text" pattern="[0-9]{6}" class="form-control" id="med-record" required>
+                    </div>
+
+                    <div class="col-md-4">
+                      <label for="nbi" class="form-label" > NBI</label>
+                      <input type="text" pattern="[0-9]{6}" class="form-control" id="nbi" required>
+                    </div>
+                    
+                    <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;">Position And Signature</div>
+                  
+
+                    
+                      
+                      <div class="container">
+                        <div class="row">
+                          <div class="col">
+                            <div>
+                              <label for="signature" class="form-label" >Upload Signature</label>
+                              <input class="form-control" type="file" id="signature" required>
+                          </div>
+                          </div>
+                          <div class="col">
+                            <div>
+                              <label for="applyingfor" class="form-label" >Applying For</label>
+                              <select id="applyingfor" class="form-select">
+                                <option selected>IT Specialist</option>
+                                <option>Junior Engineer</option>
+                                <option>HR</option>
+                              </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="d-grid p-3 gap-2 d-md-block text-center">
+                        <button class="btn btn-primary te" type="submit" >Submit</button>
+                      </div>
+
+                      
+                      
+                      <div class="text-center" >
+                        <p>I hereby certify that the above information as true and correct to the best of my
+                          knowledge and belief. I also understand that any misinterpration will be considered
+                          reason for withdrawal of an offer or subsequent dismissal if employed.</p>
+                      </div>
+
+                      <script>
+                        function SubmitData() {
+                         event.preventDefault();
+                         window.alert("Success! You may now login at the homepage");
+                         location.replace("{% url 'home' %}");
+                         console.log("hello there I am working");
+                        }
+                      </script>
+                    
+      </form>
+
+                    
+                    
+    </body>  
+    
+</html>
