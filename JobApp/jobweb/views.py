@@ -22,3 +22,4 @@ def addjob(request):
 def profile(request):
     return render(request, 'html_files/User Profile.html')
 
+# wassup
