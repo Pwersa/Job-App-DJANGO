@@ -10,57 +10,125 @@
     </head>
 
     <body background="/static/pictures/bg.jpg">
-            <div class="container mt-3">
-                <h1 class=" p-4 mb-3 text-center" style="font-weight: bolder; background-color: #1f2833; color: #66fcf1;">Make a Job Posting</h1>
-                <form class="row g-3" style="color: #000;">
-                    <div class="col-md-12">
-                        <label for="jobtitle" class="form-label"style="font-weight: bold;">Job Title:</label>
-                        <input type="text" class="form-control" id="jobTitle" required>
-                    </div>
-                    <div class="col-md-12">
-                        <label for="jobdescription" class="form-label" style="font-weight: bold;">Job Description:</label>
-                        <textarea class="form-control" id="jobDescription" rows="4" required></textarea>
-                    </div>
-                    <div class="col-md-12">
+        <div class="container mt-3">
+            <h1 class=" p-4 mb-3 text-center" style="font-weight: bolder; background-color: #1f2833; color: #66fcf1;">Make a Job</h1>
+            <form class="row g-3" style="color: #000;">
+                <div class="col-md-12">
+                    <label for="jobtitle" class="form-label"style="font-weight: bold;">Job Title:</label>
+                    <input type="text" class="form-control" id="job_title" required>
+                </div>
+                <div class="col-md-12">
+                    <label for="jobdescription" class="form-label" style="font-weight: bold;">Job Description:</label>
+                    <textarea class="form-control" id="job_description" rows="4" required></textarea>
+                </div>
+                <div class="col-md-12 d">
+                    <div>
                         <label for="jobrequirements" class="form-label" style="font-weight: bold;">Job Requirements:</label>
-                        <textarea class="form-control" id="jobRequirements" rows="4" required></textarea>
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-text" style="font-weight: bold;">Salary: ₱</span>
-                        <input type="number" class="form-control" id="salary" min="1" required>
-                        <span class="input-group-text">.00</span>
+                    <div>
+                        <label for="jobrequirement1" class="form-label">Educational Attainment:</label>
                     </div>
-                    <div class="col-md-12">
-                        <button type="submit" style="font-weight: bold;" class="btn btn-primary" onclick="postJob()">Post!</button>
+                    <div class="form-check-inline">
+                        <input type="radio" class="form-check-input" id="radio1" name="jobreq1" value="No Diploma Needed" checked>
+                        <label class="form-check-label" for="radio1">No Diploma Needed</label>
                     </div>
-                </form>
-            </div>
+                    <div class="form-check-inline">
+                        <input type="radio" class="form-check-input" id="radio2" name="jobreq1" value="Atleast Highschool Graduate">
+                        <label class="form-check-label" for="radio2">Atleast Highschool Graduate</label>
+                    </div>
+                    <div class="form-check-inline">
+                        <input type="radio" class="form-check-input" id="radio3" name="jobreq1" value="Atleast College Graduate">
+                        <label class="form-check-label" for="radio3">Atleast College Graduate</label>
+                    </div>
+                    <hr>
+                    <div>
+                        <label for="jobrequirement2" class="form-label">Character Reference Needed:</label>
+                    </div>
+                    <div class="form-check-inline">
+                        <input type="radio" class="form-check-input" id="radio4" name="jobreq2" value="No Reference Needed" checked>
+                        <label class="form-check-label" for="radio4">No Reference Needed</label>
+                    </div>
+                    <div class="form-check-inline">
+                        <input type="radio" class="form-check-input" id="radio5" name="jobreq2" value="Atleast 1 Reference Needed">
+                        <label class="form-check-label" for="radio5">Atleast 1 Reference Needed</label>
+                    </div>
+                    <div class="form-check-inline">
+                        <input type="radio" class="form-check-input" id="radio6" name="jobreq2" value="Atleast 2 Reference Needed">
+                        <label class="form-check-label" for="radio6">Atleast 2 Reference Needed</label>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text" style="font-weight: bold;">Salary: ₱</span>
+                    <input type="number" class="form-control" id="salary" min="1" required>
+                    <span class="input-group-text">.00</span>
+                </div>
+                <div class="col-md-12" style="text-align: center;">
+                    <button type="submit" style="font-weight: bold;" class="btn btn-primary" onclick="postJob()">Post!</button>
+                </div>
+            </form>
+        </div>
+        <div class="container mt-3 p-3">
+            <h1 class=" p-4 mb-3 text-center" style="font-weight: bolder; background-color: #1f2833; color: #66fcf1;">Delete a Job</h1>
+            <form class="row g-3" style="color: #000;">
+                <div class="container">
+                    <select id="del_job" class="form-select">
+                        <option selected>Example Job 1</option>
+                        <option>Example Job 2</option>
+                        <option>Example Job 3</option>
+                        <option>Example Job 4</option>
+                        <option>Example Job 5</option>
+                    </select>
+                </div>
+                <div class="col-md-12" style="text-align: center;">
+                    <button type="submit" style="font-weight: bold;" class="btn btn-primary" onclick="deleteJob()">Delete!</button>
+                </div>
+            </form>
+        </div>   
     </body>
 
     <script>
         function postJob() {
             event.preventDefault();
-            if ((document.getElementById("jobTitle").value == "") && 
-            (document.getElementById("jobDescription").value == "") && 
-            (document.getElementById("jobRequirements").value == "") && 
+            if ((document.getElementById("job_title").value == "") && 
+            (document.getElementById("job_description").value == "") &&
             (document.getElementById("salary").value == "")) {
                 alert("Please Fill up the forms.");
             }
-            else if (document.getElementById("jobTitle").value == "") {
+            else if (document.getElementById("job_title").value == "") {
                 alert("Please Input the Job Title.");
             }
-            else if (document.getElementById("jobDescription").value == "") {
+            else if (document.getElementById("job_description").value == "") {
                  alert("Please Input the Job Description.");
-            }
-            else if (document.getElementById("jobRequirements").value == "") {
-                alert("Please Input the Job Requirements.");
             }
             else if (document.getElementById("salary").value == "") {
                 alert("Please Input the Salary.");
             }
             else {
-                alert("Job Has Been Created!");
-                location.replace("{% url 'hrdashboard' %}")
+                var result = "" ;
+                if (confirm("Do you want to Proceed?")) {
+                    result = 1;
+                }
+                else {
+                    result = 0;
+                }
+                if (result == 1) {
+                    alert(document.getElementById("job_title").value +" "+ "Has Been Added!");
+                    location.replace("{% url 'hrdashboard' %}")
+                }
+            }
+        }
+        function deleteJob() {
+            event.preventDefault();
+            var result = "" ;
+            if (confirm("Do you want to Proceed?")) {
+                result = 1;
+            }
+            else {
+                result = 0;
+            }
+            if (result == 1) {
+                window.alert(document.getElementById("del_job").value +" "+ "Has Been Deleted");
+                location.replace("{% url 'hrdashboard' %}");
             }
         }
     </script>
