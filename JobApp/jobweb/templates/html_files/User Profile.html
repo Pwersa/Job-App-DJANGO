@@ -46,7 +46,9 @@
                     <img src="/static/pictures/image.jpg" id="photo">
                     <input type="file" id="file">
                     <label for="file" id="uploadBtn">Choose Photo</label>
-                  </div>
+                
+                </div>
+                <button id="save" onclick="myFunction();">Save</button>
 
     
             </fieldset>
@@ -182,6 +184,20 @@
                         }
                     });
               </script>
+            <script>
+                function myFunction() {
+                    var result = "" ;
+                    if (confirm("Do you want to proceed?")) {
+                        result = 1;
+                    }
+                    else {
+                        result = 0;
+                    }
+                    if (result == 1){
+                        location.replace("{% url 'User Profile' %}");
+                    }
+                }
+            </script>
     </body>
 
 </html>
