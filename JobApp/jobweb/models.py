@@ -44,3 +44,14 @@ class account_data(models.Model):
     applyingfor = models.CharField(verbose_name='applyingfor',max_length=99)
     job = models.CharField(verbose_name='job',max_length=99)
     account_type = models.CharField(verbose_name='account_type',max_length=99)
+    
+class job_listing(models.Model):
+    jtitle = models.CharField(primary_key = True , verbose_name='job_title', max_length=99)
+    jdesc = models.TextField(verbose_name='job_description', max_length=300)
+    no_dipl = models.BooleanField()
+    hs_grad = models.BooleanField()
+    col_grad = models.BooleanField()
+    no_char = models.BooleanField()
+    char_ref1 = models.BooleanField()
+    char_ref2 = models.BooleanField()
+    salary = models.PositiveIntegerField(verbose_name='salary')
