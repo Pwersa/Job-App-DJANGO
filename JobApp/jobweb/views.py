@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import account_data
+from .models import job_listing
 
 def home(request):
     return render(request, 'html_files/HOMEWEBSITE.html')
@@ -70,3 +71,22 @@ def showAccount(request):
     accounts = account_data.objects.all()
     context ={'accounts':accounts}
     return render(request,"account_show.html", context)
+
+def createJobs(request):
+    joblist = job_listing.objects_create(
+        jobtitle = request.Post['jobtitle'],
+        jdesc = request.Post['jdesc'],
+        nodipl = request.Post['no_dipl'],
+        hsgrad = request.Post['hs_grad'],
+        colgrad = request.Post['col_grad'],
+        nochar = request.Post['no_char'],
+        charref1 = request.Post['char_ref1'],
+        charref2 = request.Post['char_ref2'],
+        salary = request.Post['salary'],
+        )
+    return render(request,'jobs_index.html')
+
+def showJobs(request):
+    joblist = job_listing.objects.all()
+    context ={'joblist':joblist}
+    return render(request,"jobs_show.html", context)
