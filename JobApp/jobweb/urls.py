@@ -1,3 +1,4 @@
+from django.contrib import admin
 from django.urls import path
 from . import views 
 
@@ -10,4 +11,8 @@ urlpatterns = [
     path('applicant', views.applicant, name='applicant'),
     path('addjob', views.addjob, name="addjob"),
     path('profile', views.profile, name='profile'),
-]
+
+    path('admin/', admin.site.urls),
+    path('createacc', views.createAccount),
+    path('showacc', views.showAccount),
+    ]
