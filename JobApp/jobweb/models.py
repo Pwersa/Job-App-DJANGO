@@ -56,7 +56,6 @@ class job_listing(models.Model):
     char_ref2 = models.BooleanField()
     salary = models.PositiveIntegerField(verbose_name='salary')
 
-
 class interview(models.Model):
     name = models.CharField(verbose_name='name' ,max_length=99)
     applying_for = models.CharField(verbose_name='applying_for',max_length=99)
