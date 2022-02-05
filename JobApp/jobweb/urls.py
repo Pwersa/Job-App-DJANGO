@@ -15,4 +15,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('createacc', views.createAccount),
     path('showacc', views.showAccount),
+
+    path('createjobs', views.createJobs),
+    path('showjobs', views.showJobs)
     ]

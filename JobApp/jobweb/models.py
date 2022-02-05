@@ -48,12 +48,12 @@ class account_data(models.Model):
 class job_listing(models.Model):
     jtitle = models.CharField(primary_key = True , verbose_name='job_title', max_length=99)
     jdesc = models.TextField(verbose_name='job_description', max_length=300)
-    no_dipl = models.BooleanField()
-    hs_grad = models.BooleanField()
-    col_grad = models.BooleanField()
-    no_char = models.BooleanField()
-    char_ref1 = models.BooleanField()
-    char_ref2 = models.BooleanField()
+    no_dipl = models.BooleanField(verbose_name='no_diploma')
+    hs_grad = models.BooleanField(verbose_name='highschool_graduate')
+    col_grad = models.BooleanField(verbose_name='college_graduate')
+    no_char = models.BooleanField(verbose_name='no_character_reference_needed')
+    char_ref1 = models.BooleanField(verbose_name='1_character_reference_needed')
+    char_ref2 = models.BooleanField(verbose_name='2_character_reference_needed')
     salary = models.PositiveIntegerField(verbose_name='salary')
 
 class interview(models.Model):
