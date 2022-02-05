@@ -10,8 +10,9 @@
     <body class="row g-3", background="/static/pictures/bg.jpg" >
       <div class="fs-1 p-4 mb-2 fw-bold text-center" style="background-color: #1f2833; color: #66fcf1">Registration Form</div>
       <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e; color: #000000">Account Details</div>
-      
-      <form class="row g-4" onsubmit="SubmitData()">
+
+      {% csrf_token %}
+      <form method="POST" class="row g-4" onsubmit="SubmitData()" action="/signup">
         <div class="col-md-4">
           <label for="Email" class="form-label">Email (This Will Be Your Login)</label>
           <input class="form-control" type="email"  id="Email" required>
@@ -29,10 +30,9 @@
 
         <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e; color: #000000">Personal Data</div>
         
-
             <div class="col-md-3">
-                <label for="formFile" class="form-label" >Upload Photo</label>
-                <input class="form-control" type="file" id="formFile" required>
+              <label for="formFile" class="form-label" >Upload Photo</label>
+              <input class="form-control" type="file" id="formFile" required>
             </div>
 
             <div class="col-md-3">
@@ -41,9 +41,9 @@
             </div>
 
             <div class="col-md-3">
-                <label for="First_name" class="form-label" >First Name</label>
-                <input type="text" class="form-control" id="First_name" required>
-              </div>
+              <label for="First_name" class="form-label" >First Name</label>
+              <input type="text" class="form-control" id="First_name" required>
+            </div>
 
             <div class="col-md-3">
                 <label for="Middle_name" class="form-label" >Middle Name</label>
@@ -56,9 +56,9 @@
             </div>
 
             <div class="col-md-3">
-                <label for="cellphone." class="form-label" >Cellphone No.</label>
-                <input type="text" pattern="[0-9]{11}" class="form-control" id="cellphone" required>
-              </div>
+              <label for="cellphone." class="form-label" >Cellphone No.</label>
+              <input type="text" pattern="[0-9]{11}" class="form-control" id="cellphone" required>
+            </div>
             
               <div class="col-md-3">
                 <label for="bday" class="form-label">Birthday</label>
@@ -253,9 +253,6 @@
                     </div>
                     
                     <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;">Position And Signature</div>
-                  
-
-                    
                       
                       <div class="container">
                         <div class="row">
