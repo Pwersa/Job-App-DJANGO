@@ -17,5 +17,7 @@ urlpatterns = [
     path('showacc', views.showAccount),
 
     path('createjobs', views.createJobs),
-    path('showjobs', views.showJobs)
+    path('showjobs', views.showJobs),
+
+    path('login', views.login),
     ]

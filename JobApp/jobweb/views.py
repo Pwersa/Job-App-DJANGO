@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import account_data
 from .models import job_listing
+import mysql.connector
 
 def home(request):
     return render(request, 'html_files/HOMEWEBSITE.html')
@@ -102,3 +103,29 @@ def showJobs(request):
     joblist = job_listing.objects.all()
     context ={'joblist':joblist}
     return render(request,"jobs_show.html", context)
+
+def login(request):
+    
+    check_email = request.POST['email1'],
+
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="Admin123",
+        database="jobapp")
+
+    mycursor = mydb.cursor()
+
+    sql = "SELECT account_type FROM jobweb_account_data WHERE email = %s"
+    value = (check_email)
+    mycursor.execute(sql, value)
+    got = mycursor.fetchone()[0]
+
+    if got == "Applicant":
+        return render(request, 'html_files/Applicant-Details.html')
+    elif got == "HRManager":
+        return render(request, 'html_files/HRMANAGER.html')
+    elif got == "Employee":
+        return render(request, 'html_files/User Profile.html')
+    else:
+        return render(request, 'html_files/HOMEWEBSITE.html')

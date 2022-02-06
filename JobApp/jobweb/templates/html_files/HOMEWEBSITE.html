@@ -13,15 +13,30 @@
             <nav class="navbar navbar-expand-sm style" style="background: #1F2833;">
                 <div class="container-fluid">
                   <a class="navbar-brand" style="font-weight: bold; font-size: x-large; color: #66fcf1;">Welcome to our Job Website</a>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="email" placeholder="Email" aria-label="Search" style="width: 200px;" id="email1" required>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="password" placeholder="Password" aria-label="Search" style="width: 200px;" id="password1" required>
-                <form class="d-flex">
-                    <button class="btn btn-outline-info" button="submit" style="color: #C5C6C7"; onclick="login()">Log In</button>
-                &nbsp;     
-                <form class="d-flex">
-                    <button class="btn btn-outline-info" type="button" style="width: 90px; color: #C5C6C7"; onclick="apply_now()">Sign Up</button>
+                </div>
+
+                <div>
+                    <form class="d-flex" method="POST" action="/login">
+                        {% csrf_token %}
+                        <div>
+                            <input class="form-control me-2" type="email" placeholder="Email" aria-label="Search" style="width: 200px;" id="email1" name="email1" required>
+                        </div>
+
+                        <div>
+                            <input class="form-control me-2" type="password" placeholder="Password" aria-label="Search" style="width: 200px;" id="password1" name="password1" required>
+                        </div>
+
+                        <div>
+                            <button class="btn btn-outline-info" button="submit" style="width: 90px; color: #C5C6C7"; onclick="login()">Log In</button>
+                        </div>
+                    </form>
+                </div>
+
+                &nbsp; 
+
+                <div>    
+                    <form class="d-flex">
+                        <button class="btn btn-outline-info" type="button" style="width: 90px; color: #C5C6C7"; onclick="apply_now()">Sign Up</button>
                 </div>
             </nav>
         </div>
