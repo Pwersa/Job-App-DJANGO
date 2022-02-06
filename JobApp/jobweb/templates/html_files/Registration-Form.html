@@ -11,8 +11,9 @@
       <div class="fs-1 p-4 mb-2 fw-bold text-center" style="background-color: #1f2833; color: #66fcf1">Registration Form</div>
       <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e; color: #000000">Account Details</div>
 
-      {% csrf_token %}
-      <form method="POST" class="row g-4" onsubmit="SubmitData()" action="/signup">
+      
+      <form method="POST" class="row g-4" onsubmit="SubmitData()" action="/createacc">
+        {% csrf_token %}
         <div class="col-md-4">
           <label for="Email" class="form-label">Email (This Will Be Your Login)</label>
           <input class="form-control" type="email"  id="Email" required>
@@ -288,7 +289,7 @@
 
                       <script>
                         function SubmitData() {
-                         event.preventDefault();
+                         //event.preventDefault();
                          window.alert("Success! You may now login at the homepage");
                          location.replace("{% url 'home' %}");
                          console.log("hello there I am working");
@@ -297,7 +298,7 @@
                     
       </form>
 
-                    
+          
                     
     </body>  
     
