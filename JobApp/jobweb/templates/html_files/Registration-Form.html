@@ -16,12 +16,12 @@
         {% csrf_token %}
         <div class="col-md-4">
           <label for="Email" class="form-label">Email (This Will Be Your Login)</label>
-          <input class="form-control" type="email"  id="Email" required>
+          <input class="form-control" type="email"  id="Email" name="email" required>
         </div>
 
         <div class="col-md-4">
           <label for="Password" class="form-label" >Password (1 A-Z, 1 no. and > 8 char)</label>
-          <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" id="Password" required>
+          <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" id="Password" name="password" required>
         </div>
 
         <div class="col-md-4">
@@ -33,47 +33,47 @@
         
             <div class="col-md-3">
               <label for="formFile" class="form-label" >Upload Photo</label>
-              <input class="form-control" type="file" id="formFile" required>
+              <input class="form-control" type="file" id="formFile" name="photo" required>
             </div>
 
             <div class="col-md-3">
               <label for="Surname" class="form-label"  >Surname</label>
-              <input type="text" class="form-control" id="Surname" required>
+              <input type="text" class="form-control" id="Surname" name="full_name" required>
             </div>
 
             <div class="col-md-3">
               <label for="First_name" class="form-label" >First Name</label>
-              <input type="text" class="form-control" id="First_name" required>
+              <input type="text" class="form-control" id="First_name" name="full_name" required>
             </div>
 
             <div class="col-md-3">
                 <label for="Middle_name" class="form-label" >Middle Name</label>
-                <input type="text" class="form-control" id="Middle_name" required>
+                <input type="text" class="form-control" id="Middle_name" name="full_name" required>
             </div>
 
             <div class="col-md-6">
               <label for="Address" class="form-label" >Address</label>
-              <input type="text" class="form-control" id="Address" required>
+              <input type="text" class="form-control" id="Address" name="address" required>
             </div>
 
             <div class="col-md-3">
               <label for="cellphone." class="form-label" >Cellphone No.</label>
-              <input type="text" pattern="[0-9]{11}" class="form-control" id="cellphone" required>
+              <input type="text" pattern="[0-9]{11}" class="form-control" id="cellphone" name="cellphone" required>
             </div>
             
               <div class="col-md-3">
                 <label for="bday" class="form-label">Birthday</label>
-                <input type="date" class="form-control" id="bday" required>
+                <input type="date" class="form-control" id="bday" name="birthday" required>
               </div>
 
               <div class="col-md-3">
                 <label for="bplace" class="form-label" >Birthplace</label>
-                <input type="text" class="form-control" id="bplace" required>
+                <input type="text" class="form-control" id="bplace" name="bplace" required>
               </div>
             
               <div class="col-md-3">
                 <label for="civilstatus" class="form-label" >Civil Status</label>
-                <select id="civilstatus" class="form-select" required>
+                <select id="civilstatus" class="form-select" name="civilstatus" required>
                   <option selected>Single</option>
                   <option>Married</option>
                   <option>Widowed</option>
@@ -82,22 +82,22 @@
 
               <div class="col-md-3">
                 <label for="citizenship" class="form-label" >Citizenship</label>
-                <input type="text" class="form-control" id="citizenship" required="true">
+                <input type="text" class="form-control" id="citizenship" name="citizenship" required="true">
               </div>
 
               <div class="col-md-3">
                 <label for="religion" class="form-label" >Religion</label>
-                <input type="text" class="form-control" id="religion" required>
+                <input type="text" class="form-control" id="religion" name="religion" required>
               </div>
 
               <div class="col-md-3">
                 <label for="econtact" class="form-label" >Emergency Contact</label>
-                <input type="text" class="form-control" id="econtact" required>
+                <input type="text" class="form-control" id="econtact" name="emer_cont" required>
               </div>
 
               <div class="col-md-3">
                 <label for="econtact_no" class="form-label">Emergency Contact No.</label>
-                <input type="text" pattern="[0-9]{11}" class="form-control" id="econtact_no" required>
+                <input type="text" pattern="[0-9]{11}" class="form-control" id="econtact_no" name="emer_contno" required>
               </div>
 
         <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e; color: #000000">Educational Background</div>
@@ -106,32 +106,32 @@
             
                 <div class="col-md-6">
                   <label for="elementary" class="form-label" >Elementary</label>
-                  <input type="text" class="form-control" id="elementary" >
+                  <input type="text" class="form-control" id="elementary" name="elementary">
                 </div>
 
                 <div class="col-md-6">
                   <label for="year_elem" class="form-label" > Year Graduated</label>
-                  <input type="text" pattern="[0-9]{4}" class="form-control" id="year_elem" >
+                  <input type="text" pattern="[0-9]{4}" class="form-control" id="year_elem" name="elementary_grad">
                 </div>
 
                 <div class="col-md-6">
                   <label for="hschool" class="form-label" >Highschool</label>
-                  <input type="text" class="form-control" id="hschool" >
+                  <input type="text" class="form-control" id="hschool" name="highschool">
                 </div>
 
                 <div class="col-md-6">
                   <label for="year_hs" class="form-label" >Year Graduated</label>
-                  <input type="text" pattern="[0-9]{4}" class="form-control" id="year_hs" >
+                  <input type="text" pattern="[0-9]{4}" class="form-control" id="year_hs" name="highschool_grad">
                 </div>
                 
                 <div class="col-md-6">
                     <label for="college" class="form-label" >College</label>
-                    <input type="text" class="form-control" id="college" >
+                    <input type="text" class="form-control" id="college" name="college" >
                   </div>
   
                   <div class="col-md-6">
                     <label for="year_college" class="form-label" >Year Graduated</label>
-                    <input type="text" pattern="[0-9]{4}" class="form-control" id="year_college" >
+                    <input type="text" pattern="[0-9]{4}" class="form-control" id="year_college" name="college_grad" >
                   </div>
 
                   <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e;">Employment Record</div>
@@ -139,42 +139,42 @@
 
                     <div class="col-md-3">
                       <label for="company1" class="form-label" >Company Name</label>
-                      <input type="text" class="form-control" id="company1">
+                      <input type="text" class="form-control" id="company1" name="company1">
                     </div>
 
                     <div class="col-md-3">
                       <label for="position1" class="form-label" >Position</label>
-                      <input type="text" class="form-control" id="position1">
+                      <input type="text" class="form-control" id="position1" name="position1">
                     </div>
                     
                     <div class="col-md-3">
                       <label for="from1" class="form-label">From</label>
-                      <input type="date" class="form-control" id="from1">
+                      <input type="date" class="form-control" id="from1" name="from1">
                     </div>
 
                     <div class="col-md-3">
                       <label for="to1" class="form-label" >To</label>
-                      <input type="date" class="form-control" id="to1">
+                      <input type="date" class="form-control" id="to1" name="to1">
                     </div>
 
                     <div class="col-md-3">
                       <label for="company2" class="form-label">Company Name</label>
-                      <input type="text" class="form-control" id="company2">
+                      <input type="text" class="form-control" id="company2" name="company2">
                     </div>
 
                     <div class="col-md-3">
                       <label for="position2" class="form-label" >Position</label>
-                      <input type="text" class="form-control" id="position2">
+                      <input type="text" class="form-control" id="position2" name="position2">
                     </div>
                     
                     <div class="col-md-3">
                       <label for="from2" class="form-label" >From</label>
-                      <input type="date" class="form-control" id="from2">
+                      <input type="date" class="form-control" id="from2" name="from2">
                     </div>
 
                     <div class="col-md-3">
                       <label for="to2" class="form-label" >To</label>
-                      <input type="date" class="form-control" id="to2">
+                      <input type="date" class="form-control" id="to2" name="to2">
                     </div>
 
                     <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;">Character Reference</div>
@@ -182,42 +182,42 @@
 
                     <div class="col-md-3">
                       <label for="ref1" class="form-label" >Name</label>
-                      <input type="text" class="form-control" id="ref1">
+                      <input type="text" class="form-control" id="ref1" name="ref1">
                     </div>
                     
                     <div class="col-md-3">
                       <label for="refcon1" class="form-label" >Contact No.</label>
-                      <input type="text" pattern="[0-9]{11}" class="form-control" id="refcon1">
+                      <input type="text" pattern="[0-9]{11}" class="form-control" id="refcon1" name="refcon1">
                     </div>
 
                     <div class="col-md-3">
                       <label for="refpos1" class="form-label" >Position</label>
-                      <input type="text" class="form-control" id="refpos1">
+                      <input type="text" class="form-control" id="refpos1" name="refpos1">
                     </div>
 
                     <div class="col-md-3">
                       <label for="refcom1" class="form-label" >Company</label>
-                      <input type="text" class="form-control" id="refcom1">
+                      <input type="text" class="form-control" id="refcom1" name="refcom1">
                     </div>
 
                     <div class="col-md-3">
                       <label for="ref2" class="form-label" >Name</label>
-                      <input type="text" class="form-control" id="ref2">
+                      <input type="text" class="form-control" id="ref2" name="ref2">
                     </div>
                     
                     <div class="col-md-3">
                       <label for="refcon2" class="form-label" >Contact No.</label>
-                      <input type="text" pattern="[0-9]{11}" class="form-control" id="refcon2">
+                      <input type="text" pattern="[0-9]{11}" class="form-control" id="refcon2" name="refcon2">
                     </div>
 
                     <div class="col-md-3">
                       <label for="refpos2" class="form-label" >Position</label>
-                      <input type="text" class="form-control" id="refpos2">
+                      <input type="text" class="form-control" id="refpos2" name="refpos2">
                     </div>
 
                     <div class="col-md-3">
                       <label for="refcom2" class="form-label" >Company</label>
-                      <input type="text" class="form-control" id="refcom2">
+                      <input type="text" class="form-control" id="refcom2" name="refcom2">
                     </div>
 
                     <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;">Government Numbers</div>
@@ -225,32 +225,32 @@
 
                     <div class="col-md-4">
                       <label for="sss" class="form-label" >SSS</label>
-                      <input type="text" pattern="[0-9]{10}" class="form-control" id="sss" required>
+                      <input type="text" pattern="[0-9]{10}" class="form-control" id="sss" name="S_S_S" required>
                     </div>
 
                     <div class="col-md-4">
                       <label for="philhealth" class="form-label" >Philhealth</label>
-                      <input type="text" pattern="[0-9]{12}" class="form-control" id="philhealth" required>
+                      <input type="text" pattern="[0-9]{12}" class="form-control" id="philhealth" name="philhealth" required>
                     </div>
 
                     <div class="col-md-4">
                       <label for="pag-ibig" class="form-label" >Pag-ibig</label>
-                      <input type="text" pattern="[0-9]{12}" class="form-control" id="pagibig" required>
+                      <input type="text" pattern="[0-9]{12}" class="form-control" id="pagibig" name="pag-ibig" required>
                     </div>
 
                     <div class="col-md-4">
                       <label for="tin" class="form-label" >TIN</label>
-                      <input type="text" pattern="[0-9]{9}" class="form-control" id="tin" required>
+                      <input type="text" pattern="[0-9]{9}" class="form-control" id="tin" name="T_I_N" required>
                     </div>
 
                     <div class="col-md-4">
                       <label for="med-record" class="form-label" >Medical Record Slip</label>
-                      <input type="text" pattern="[0-9]{6}" class="form-control" id="med-record" required>
+                      <input type="text" pattern="[0-9]{6}" class="form-control" id="med-record" name="med_record" required>
                     </div>
 
                     <div class="col-md-4">
                       <label for="nbi" class="form-label" > NBI</label>
-                      <input type="text" pattern="[0-9]{6}" class="form-control" id="nbi" required>
+                      <input type="text" pattern="[0-9]{6}" class="form-control" id="nbi" name="N_B_I" required>
                     </div>
                     
                     <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;">Position And Signature</div>
@@ -260,13 +260,13 @@
                           <div class="col">
                             <div>
                               <label for="signature" class="form-label" >Upload Signature</label>
-                              <input class="form-control" type="file" id="signature" required>
+                              <input class="form-control" type="file" id="signature" name="signature" required>
                           </div>
                           </div>
                           <div class="col">
                             <div>
                               <label for="applyingfor" class="form-label" >Applying For</label>
-                              <select id="applyingfor" class="form-select">
+                              <select id="applyingfor" class="form-select" name="applyingfor">
                                 <option selected>IT Specialist</option>
                                 <option>Junior Engineer</option>
                                 <option>HR</option>
