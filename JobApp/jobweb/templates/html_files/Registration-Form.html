@@ -38,17 +38,17 @@
 
             <div class="col-md-3">
               <label for="Surname" class="form-label"  >Surname</label>
-              <input type="text" class="form-control" id="Surname" name="full_name" required>
+              <input type="text" class="form-control" id="Surname" name="surname" required>
             </div>
 
             <div class="col-md-3">
               <label for="First_name" class="form-label" >First Name</label>
-              <input type="text" class="form-control" id="First_name" name="full_name" required>
+              <input type="text" class="form-control" id="First_name" name="first_name" required>
             </div>
 
             <div class="col-md-3">
                 <label for="Middle_name" class="form-label" >Middle Name</label>
-                <input type="text" class="form-control" id="Middle_name" name="full_name" required>
+                <input type="text" class="form-control" id="Middle_name" name="middle_name" required>
             </div>
 
             <div class="col-md-6">
@@ -275,12 +275,20 @@
                         </div>
                       </div>
 
+                      <div class="col-md-4">
+                        <label for="job" class="form-label"></label>
+                        <input class="form-control" type="hidden"  id="job" name="job" value="Applicant" >
+                      </div>
+
+                      <div class="col-md-4">
+                        <label for="accounttype" class="form-label"></label>
+                        <input class="form-control" type="hidden"  id="accounttype" name="account_type" value="Applicant" >
+                      </div>
+
                       <div class="d-grid p-3 gap-2 d-md-block text-center">
                         <button class="btn btn-primary te" type="submit" >Submit</button>
                       </div>
 
-                      
-                      
                       <div class="text-center" >
                         <p>I hereby certify that the above information as true and correct to the best of my
                           knowledge and belief. I also understand that any misinterpration will be considered
@@ -295,6 +303,10 @@
                          console.log("hello there I am working");
                         }
                       </script>
+
+                      
+
+                      
                     
       </form>
 

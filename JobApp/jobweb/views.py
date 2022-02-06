@@ -30,9 +30,9 @@ def createAccount(request):
         email = request.POST['email'],
         password = request.POST['password'],
         photo = request.POST['photo'],
-        #surname = request.POST['full_name'],
-        #firstname = request.POST['full_name'],
-        #middlename = request.POST['full_name'],
+        surname = request.POST['surname'],
+        first_name = request.POST['first_name'],
+        middle_name = request.POST['middle_name'],
         address = request.POST['address'],
         cellphone = request.POST['cellphone'],
         birthday = request.POST['birthday'],
@@ -72,14 +72,12 @@ def createAccount(request):
         NBI = request.POST['N_B_I'],
         signature = request.POST['signature'],
         applyingfor = request.POST['applyingfor'],
-        #job = request.POST['job'],
-        #accounttype = request.POST['account_type'],
+        job = request.POST['job'],
+        account_type = request.POST['account_type'],
         )
     #accounts.save()
     print(accounts)
-    return render(request,'html_files/Registration-Form.html')
-
-    
+    return render(request,'html_files/Registration-Form.html')    
 
 def showAccount(request):
     accounts = account_data.objects.all()
