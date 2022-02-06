@@ -30,7 +30,7 @@ def createAccount(request):
         email = request.POST['email'],
         password = request.POST['password'],
         photo = request.POST['photo'],
-        surname = request.POST['surname'],
+        last_name = request.POST['surname'],
         first_name = request.POST['first_name'],
         middle_name = request.POST['middle_name'],
         address = request.POST['address'],
