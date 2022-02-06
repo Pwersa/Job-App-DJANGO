@@ -51,8 +51,8 @@ class account_data(models.Model):
     SSS = models.CharField(verbose_name='SSS', max_length=10)
     med_record = models.CharField(verbose_name='med_record', max_length=6)
     applyingfor = models.CharField(verbose_name='applyingfor',max_length=99)
-    job = models.CharField(verbose_name='job',max_length=99, default="Applicant")
-    account_type = models.CharField(verbose_name='account_type',max_length=99, default="Applicant")
+    job = models.CharField(verbose_name='job',max_length=99, default='Applicant')
+    account_type = models.CharField(verbose_name='account_type',max_length=99, default='Applicant')
     signature = models.ImageField(verbose_name='signature',default="")
     
 
