@@ -1,5 +1,6 @@
 from ensurepip import version
 from operator import mod
+from pickle import TRUE
 from pyexpat import model
 from statistics import mode
 from tabnanny import verbose
@@ -35,6 +36,14 @@ class account_data(models.Model):
     position2 = models.CharField(verbose_name='position2',max_length=99)
     from2 = models.DateField(verbose_name='from2')
     to2 = models.DateField(verbose_name='to2')
+    ref1 = models.CharField(verbose_name='ref1',max_length=99, default="")
+    refcon1 = models.CharField(verbose_name='refcon1',max_length=99, default="")
+    refpos1 = models.CharField(verbose_name='refpos1',max_length=99, default="")
+    refcom1 = models.CharField(verbose_name='refcom1',max_length=99, default="")
+    ref2 = models.CharField(verbose_name='ref2',max_length=99, default="")
+    refcon2 = models.CharField(verbose_name='refcon2',max_length=99, default="")
+    refpos2 = models.CharField(verbose_name='refpos2',max_length=99, default="")
+    refcom2 = models.CharField(verbose_name='refcom2',max_length=99, default="")
     philhealth = models.CharField(verbose_name='philhealth', max_length=12)
     pagibig = models.CharField(verbose_name='pagibig', max_length=12)
     TIN = models.CharField(verbose_name='TIN', max_length= 9)
@@ -44,7 +53,9 @@ class account_data(models.Model):
     applyingfor = models.CharField(verbose_name='applyingfor',max_length=99)
     job = models.CharField(verbose_name='job',max_length=99)
     account_type = models.CharField(verbose_name='account_type',max_length=99)
+    signature = models.ImageField(verbose_name='signature',default="")
     
+
 class job_listing(models.Model):
     jtitle = models.CharField(primary_key = True , verbose_name='job_title', max_length=99)
     jdesc = models.TextField(verbose_name='job_description', max_length=300)

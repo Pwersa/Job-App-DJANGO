@@ -26,28 +26,28 @@ def profile(request):
 
 
 def createAccount(request):
-    accounts = account_data.objects_create(
-        email = request.POST['Email'],
-        password = request.POST['Password'],
-        photo = request.POST['formfile'],
-        surname = request.POST['Surname'],
-        firstname = request.POST['First_name'],
-        middlename = request.POST['Middle_name'],
-        address = request.POST['Address'],
+    accounts = account_data.objects.create(
+        email = request.POST['email'],
+        password = request.POST['password'],
+        photo = request.POST['photo'],
+        surname = request.POST['full_name'],
+        firstname = request.POST['full_name'],
+        middlename = request.POST['full_name'],
+        address = request.POST['address'],
         cellphone = request.POST['cellphone'],
-        birthday = request.POST['bday'],
+        birthday = request.POST['birthday'],
         bplace = request.POST['bplace'],
         civilstatus = request.POST['civilstatus'],
         citizenship = request.POST['citizenship'],
         religion = request.POST['religion'],
-        econtact = request.POST['econtact'],
-        econtactno = request.POST['e_contactno'],
+        econtact = request.POST['e_contact'],
+        econtactno = request.POST['e_no'],
         elementary = request.POST['elementary'],
-        elementarygrad = request.POST['year_elem'],
-        highschool = request.POST['hschool'],
-        highschoolgrad = request.POST['year_hs'],
+        elementarygrad = request.POST['elementary_grad'],
+        highschool = request.POST['highschool'],
+        highschoolgrad = request.POST['highschool_grad'],
         college = request.POST['college'],
-        collegegrad = request.POST['year_college'],
+        collegegrad = request.POST['college_grad'],
         company1 = request.POST['company1'],
         position1 = request.POST['position1'],
         from1 = request.POST['from1'],
@@ -56,6 +56,15 @@ def createAccount(request):
         position2 = request.POST['position2'],
         from2 = request.POST['from2'],
         to2 = request.POST['to2'],
+        philhealth = request.POST['philhealth'],
+        pagibig = request.POST['pag-ibig'],
+        TIN = request.POST['TIN'],
+        NBI = request.POST['NBI'],
+        SSS = request.POST['SSS'],
+        medrecord = request.POST['med_record'],
+        applyingfor = request.POST['applyingfor'],
+        job = request.POST['job'],
+        accounttype = request.POST['account_type'],
         ref1 = request.POST['ref1'],
         refcon1 = request.POST['refcon1'],
         refpos1 = request.POST['refpos1'],
@@ -64,18 +73,12 @@ def createAccount(request):
         refcon2 = request.POST['refcon2'],
         refpos2 = request.POST['refpos2'],
         refcom2 = request.POST['refcom2'],
-        SSS = request.POST['sss'],
-        philhealth = request.POST['philhealth'],
-        pagibig = request.POST['pag-ibig'],
-        TIN = request.POST['tin'],
-        medrecord = request.POST['med-record'],
-        NBI = request.POST['nbi'],
         signature = request.POST['signature'],
-        applyingfor = request.POST['applyingfor'],
-        job = request.POST['job'],
-        accounttype = request.POST['account_type']
         )
+    print(accounts)
     return render(request,'Registration-Form.html')
+
+    
 
 def showAccount(request):
     accounts = account_data.objects.all()
