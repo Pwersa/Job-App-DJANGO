@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Change Password</title>
+
+    </head>
+    &nbsp;
+    &nbsp;
+    <body background="/static/pictures/bg.jpg" style="text-align: center; margin-left: 450px; margin-right: 450px;" >
+        <h1>Change Password</h1>
+        
+        <form method="POST" class="container" onsubmit="check()" action="/changepassword">
+        {% csrf_token %}
+            &nbsp;
+            <input class="form-control" type="email" placeholder="Email" id="type_email" name="typeemail" required>
+            &nbsp;
+            <input class="form-control" type="password" placeholder="Current Password" id="currentpass" name="oldpass" required>
+            &nbsp;
+            <input class="form-control" type="password" placeholder="New Password" id="newpass" name="newpass" required>
+            &nbsp;
+            <input class="form-control" type="password" placeholder="Verify Password" id="verifypass" name="verifypass" required>
+            &nbsp;
+            <div>
+                <button class="btn btn-outline-info" type="submit" style="width: 200px; color: #000000">Change Password</button>
+            </div>
+            &nbsp;
+        </form>
+        <script>
+            function check(){
+                if ((document.getElementById("type_email").value == "") && (document.getElementById("currentpass").value == "") && (document.getElementById("newpass").value == "") && (document.getElementById("verifypass").value == "")){
+                    alert("Please enter credentials to continue.");
+                }
+                else if (document.getElementById("type_email").value == ""){
+                    alert("Please enter your Email to continue.");
+                }
+                else if (document.getElementById("currentpass").value == ""){
+                    alert("Please enter your Current Password to continue.");
+                }
+                else if (document.getElementById("newpass").value == ""){
+                    alert("Please enter your New Password to continue.");
+                }
+                else if (document.getElementById("verifypass").value == ""){
+                    alert("Please enter again your New Password to verify and continue.");
+                }
+                else{
+                    alert("Change Password Succesfully.");
+                    //window.location.assign("{% url 'home' %}");
+                }
+            }
+        </script>
+    </body>
+    
+</html>

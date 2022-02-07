@@ -330,26 +330,8 @@
 
         <script>
             function change_password(){
-                //var mynew_password = new_password;
-                let new_password = prompt("Changing your password can increase security.\n \n" + "Type your new password:", "Enter new password here")
-                if (new_password == "Enter new password here"){
-                    alert("Please enter a new password.");
-                }else if (new_password == ""){
-                    alert("Please enter a new password.");
-                }else if (new_password == null){
-                    alert("Changing password was canceled");
-                    return;
-                }else{
-                    let confirm_password = prompt("Confirm your new password.", "Confirm Password")
-                    if (confirm_password == new_password){
-                        alert("NOTICE: Password succesfully changed!");
-                    }else if (confirm_password == null){
-                        alert("Changing password was canceled");
-                    }
-                    else if (confirm_password != new_password){
-                        alert("Password is incorrect. Changing password has been canceled");
-                    }
-                }
+                alert("Opening Change Password");
+                location.replace("{% url 'changepass' %}");
             }
 
             function log_out(){

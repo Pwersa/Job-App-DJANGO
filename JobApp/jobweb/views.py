@@ -10,6 +10,9 @@ def home(request):
 def signup(request):
     return render(request, 'html_files/Registration-Form.html')
 
+def change_pass(request):
+    return render(request, 'html_files/changepassHR.html')
+
 def hrdashboard(request):
     return render(request, 'html_files/HRMANAGER.html')
 
@@ -25,6 +28,7 @@ def addjob(request):
 def profile(request):
     return render(request, 'html_files/User Profile.html')
 
+login_email =[]
 
 def createAccount(request):
     accounts = account_data.objects.create(
@@ -107,6 +111,7 @@ def showJobs(request):
 def login(request):
     
     check_email = request.POST['email1'],
+    check_password = request.POST['password1']
 
     mydb = mysql.connector.connect(
         host="localhost",
@@ -120,12 +125,54 @@ def login(request):
     value = (check_email)
     mycursor.execute(sql, value)
     got = mycursor.fetchone()[0]
+    
+    sql1 = "SELECT password FROM jobweb_account_data WHERE email = %s"
+    value1 = (check_email)
+    mycursor.execute(sql1, value1)
+    got1 = mycursor.fetchone()[0]
 
-    if got == "Applicant":
-        return render(request, 'html_files/Applicant-Details.html')
-    elif got == "HRManager":
-        return render(request, 'html_files/HRMANAGER.html')
-    elif got == "Employee":
-        return render(request, 'html_files/User Profile.html')
-    else:
+    if got1 != check_password:
         return render(request, 'html_files/HOMEWEBSITE.html')
+    else:
+        if got == "Applicant":
+            login_email.append(check_email)
+            return render(request, 'html_files/User Profile.html')
+        elif got == "HRManager":
+            login_email.append(check_email)
+            return render(request, 'html_files/HRMANAGER.html')
+        elif got == "Employee":
+            login_email.append(check_email)
+            return render(request, 'html_files/User Profile.html')
+        else:
+            return render(request, 'html_files/HOMEWEBSITE.html')
+
+
+def changepass1(request):
+    
+    check_email1 = request.POST['typeemail'],
+    
+    check_password = request.POST['oldpass'],
+
+    new_password = request.POST['newpass'],
+
+    verify_password = request.POST['verifypass'],
+
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="Admin123",
+        database="jobapp")
+    
+    mycursor = mydb.cursor()
+
+    sql2 = "SELECT email FROM jobweb_account_data WHERE password = %s"
+    value2 = (check_password)
+    mycursor.execute(sql2, value2)
+    got2 = mycursor.fetchone()[0]
+
+    sql3 = "UPDATE jobweb_account_data SET password = %s WHERE email = %s"
+    value3 = (new_password[0], check_email1[0])
+    mycursor.execute(sql3, value3)
+    mydb.commit()
+
+    return redirect(request, 'html_files/HOMEWEBSITE.html')

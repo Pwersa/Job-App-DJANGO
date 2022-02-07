@@ -38,6 +38,7 @@
                     <form class="d-flex">
                         <button class="btn btn-outline-info" type="button" style="width: 90px; color: #C5C6C7"; onclick="apply_now()">Sign Up</button>
                 </div>
+                &nbsp; 
             </nav>
         </div>
     </head>
@@ -201,8 +202,6 @@
                 var mailformat = /[^\s@]+@[^\s@]+\.[^\s@]+/;
                 if ((document.getElementById("password1").value == "") && (document.getElementById("email1").value == "")){
                     alert("Please enter you Email and Password.");
-                    //TEST IF HR IS WORKING
-                    location.replace("{% url 'profile' %}");
                 }
                 else if (document.getElementById("password1").value == ""){
                     alert("Please enter you Password.");
@@ -210,9 +209,8 @@
                 else if (document.getElementById("email1").value == ""){
                     alert("Please enter you Email.");
                 }
-                else{ 
-                    alert("Log In Success");
-                    window.location.assign("{% url 'signup' %}");
+                else{
+                    location.replace("{% url 'home' %}");
                 }
             }
 
