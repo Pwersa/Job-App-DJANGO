@@ -16,11 +16,22 @@ def change_pass(request):
 def hrdashboard(request):
     return render(request, 'html_files/HRMANAGER.html')
 
-def employee(request):
-    return render(request, 'html_files/Employee-Details.html')
+def emp_apm(request):
+    check_email = request.POST['user_email'],
 
-def applicant(request):
-    return render(request, 'html_files/Applicant-Details.html')
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="Admin123",
+        database="jobapp")
+
+    mycursor = mydb.cursor()
+
+    sql1 = "SELECT * FROM jobweb_account_data WHERE = %s"
+    values1 = (check_email[0])
+    mycursor.execute(sql1, values1)
+    got1 = mycursor.fetchall()
+    print(got1)
 
 def addjob(request):
     return render(request, 'html_files/Making-a-Job-Posting.html')
@@ -175,3 +186,4 @@ def changepass1(request):
     mydb.commit()
 
     return render(request, 'html_files/HRMANAGER.html')
+

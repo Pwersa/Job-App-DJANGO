@@ -82,19 +82,23 @@
                             <div class="list-group list-group-numbered" style="padding: 30px;">
                                 {% for account in accounts %}
                                 <div>
-                                    <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">{{account.last_name}}</h5>
-                                            <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                        </div>
-                                        <form method="POST" action="/emp_amp">
-                                                <p class="mb-1" style="color: #808080;" id="user_email" name="user_email">{{account.email}}</p>
-                                                <p class="mb-1" style="color: #808080;">Contact No:  {{account.cellphone}}</p>
-                                            <div style="text-align: center;">
-                                                <button class="btn btn-outline-info" type="submit" style="color: #3d3d3d; width: 150px;">View Details</button>
+                                    <form method="POST" action="/emp_amp">
+                                        <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">{{account.last_name}}</h5>
+                                                <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
                                             </div>
-                                        <form>
-                                    </a>
+                                            <div>
+                                                <p class="mb-1" style="color: #808080;" id="user_email" name="user_email">{{account.email}}</p>
+                                            </div>
+                                            <div>
+                                                <p class="mb-1" style="color: #808080;">{{account.cellphone}}</p>
+                                            </div>
+                                            <div style="text-align: center;">
+                                                <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;">View Details</button>
+                                            </div>
+                                        </a>
+                                    </form>
                                 </div>
                                 &nbsp;
                                 {% endfor %}
@@ -274,14 +278,6 @@
                 else{
                     alert("Search results by this date: " + calendar_data);
                 }
-            }
-            function view(){
-                check_email = document.getElementById='user_email';
-                if (check_email == "Email:       ")
-            }
-            function view_applicant(){
-                alert("Opening Applicant's details.");
-                window.location.assign("{% url 'applicant' %}",'_blank');
             }
             //Example data for interview details
             var applicant_name = "Juan Dela Cruz"
