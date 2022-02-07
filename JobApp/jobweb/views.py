@@ -185,5 +185,8 @@ def changepass1(request):
     mycursor.execute(sql3, value3)
     mydb.commit()
 
-    return render(request, 'html_files/HRMANAGER.html')
+    accounts = account_data.objects.all()
+    context ={'accounts': accounts}
+    
+    return render(request, 'html_files/HRMANAGER.html', context)
 
