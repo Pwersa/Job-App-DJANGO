@@ -21,6 +21,9 @@
                     <div class="navbar-nav" style="cursor: pointer">
                         <a class="nav-item nav-link active" style="color: #C5C6C7"  onclick="add_job()">Add Job Listing</a>
                     </div>
+                    <div class="navbar-nav" style="cursor: pointer">
+                        <a class="nav-item nav-link active" style="color: #C5C6C7"  onclick="delete_acc()">Delete an Account</a>
+                    </div>
 
                 </div>
                 
@@ -287,6 +290,11 @@
 
             function interview_details(){
                 alert("\n" + "=============== INTERVIEW DETAILS ===============\n" + "Name: " + applicant_name + "\n" + "Date: " + date + "\n" + "Time: " + time + "\n" + "Applying For: " + applying_for);
+            }
+
+            function delete_acc(){
+                alert("Opening delete account page.");
+                window.location.assign("{% url 'delete' %}");
             }
 
         </script>

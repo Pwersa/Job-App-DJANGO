@@ -17,7 +17,7 @@
 
         <h1>Delete an Account</h1>
         
-        <form method="POST" class="container" onsubmit="check()" action="/changepassword">
+        <form method="POST" class="container" action="/delete_acc">
         {% csrf_token %}
 
             &nbsp;
@@ -35,11 +35,5 @@
             </div>
             &nbsp;
         </form>
-        
-        <script>
-
-    
-        </script>
     </body>
-    
 </html>

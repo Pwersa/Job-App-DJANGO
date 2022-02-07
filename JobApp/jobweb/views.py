@@ -16,6 +16,9 @@ def change_pass(request):
 def hrdashboard(request):
     return render(request, 'html_files/HRMANAGER.html')
 
+def delete(request):
+    return render(request, 'html_files/delete.html')
+
 def emp_apm(request):
     check_email = request.POST['user_email'],
 
@@ -190,3 +193,23 @@ def changepass1(request):
     
     return render(request, 'html_files/HRMANAGER.html', context)
 
+def delete_acc(request):
+    delete_email = request.POST['deleteacc'],
+    
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="Admin123",
+        database="jobapp")
+    
+    mycursor = mydb.cursor()
+
+    sql = "DELETE FROM jobweb_account_data WHERE email = %s"
+    value = (delete_email)
+    mycursor.execute(sql, value)
+    mydb.commit()
+
+    accounts = account_data.objects.all()
+    context ={'accounts': accounts}
+    
+    return render(request, 'html_files/HRMANAGER.html', context)
