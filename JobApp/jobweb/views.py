@@ -165,14 +165,9 @@ def changepass1(request):
     
     mycursor = mydb.cursor()
 
-    sql2 = "SELECT email FROM jobweb_account_data WHERE password = %s"
-    value2 = (check_password)
-    mycursor.execute(sql2, value2)
-    got2 = mycursor.fetchone()[0]
-
     sql3 = "UPDATE jobweb_account_data SET password = %s WHERE email = %s"
     value3 = (new_password[0], check_email1[0])
     mycursor.execute(sql3, value3)
     mydb.commit()
 
-    return redirect(request, 'html_files/HOMEWEBSITE.html')
+    return render(request, 'html_files/HRMANAGER.html')
