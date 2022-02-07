@@ -56,6 +56,7 @@ class account_data(models.Model):
     job = models.CharField(verbose_name='job',max_length=99, default='Applicant')
     account_type = models.CharField(verbose_name='account_type',max_length=99, default='Applicant')
     signature = models.ImageField(verbose_name='signature',default="")
+    #name = last_name + first_name + middle_name
     
 
 class job_listing(models.Model):

@@ -60,96 +60,83 @@
             
 
             <table style=background-color:#1f2833; class="table table-active; container">
+                
                 <thead style="color: black;">
                     
                   <tr>
-                    <th style="color: #66fcf1; font-size: 40px;" scope="col">Personal Data</th>
+                    <th style="color: #66fcf1; font-size: 40px;" scope="col">Personal 
+                        Data</th>
                     <th style="color: #66fcf1;font-size: 40px;"  scope="col">Educational Background</th>
                     <th style="color: #66fcf1;font-size: 40px;"  scope="col">Employment Record</th>
                     <th style="color: #66fcf1;font-size: 40px;"  scope="col">Character Reference</th>
                     <th style="color: #66fcf1;font-size: 40px;"  scope="col">Government Numbers</th>
                   </tr>
                 </thead>
+                {% for account in accounts %}
                 <tbody>
-                  <tr>
                     
+                    <tr>
+                        
+                        <td style=color:#c5c6c7;>{{account.last_name}}</td>
+                        <td style=color:#c5c6c7;>{{account.elementary}}</td>
+                        <td style=color:#c5c6c7;>{{account.company1}}</td>
+                        <td style=color:#c5c6c7;>{{account.ref1}}</td>
+                        <td style= color:#c5c6c7 colspan="2" class="table-active">{{account.philhealth}}</td>
+                        
+                    </tr>
+                    <tr>
+                        <td style=color:#c5c6c7;>{{account.address}}</td>
+                        <td style=color:#c5c6c7;>{{account.elementary_grad}}</td>
+                        <td style=color:#c5c6c7;>{{account.position1}}</td>
+                        <td style=color:#c5c6c7;>{{account.refcon1}}</td>
+                        <td style= color:#c5c6c7 colspan="2" class="table-active">{{account.pagibig}}</td>
+                    </tr>
+                    <tr>
+                        <td style=color:#c5c6c7;>{{account.cellphone}}</td>
+                        <td style=color:#c5c6c7;>{{account.highschool}}</td>
+                        <td style=color:#c5c6c7;>{{account.from1}}</td>
+                        <td style=color:#c5c6c7;>{{account.refpos1}}</td>
+                        <td style= color:#c5c6c7 colspan="2" class="table-active">{{account.TIN}}</td>
+                    </tr>
+                    <tr>
+                        <td style=color:#c5c6c7;>{{account.cellphone}}</td>
+                        <td style=color:#c5c6c7;>{{account.highschool_grad}}</td>
+                        <td style=color:#c5c6c7;>{{account.company2}}</td>
+                        <td style=color:#c5c6c7;>{{account.refcom1}}</td>
+                        <td style=color:#c5c6c7;>{{account.NBI}}</td>
+                    </tr>
+                    <tr>
+                        <td style=color:#c5c6c7;>{{account.email}}</td>
+                        <td style=color:#c5c6c7;>{{account.college}}</td>
+                        <td style=color:#c5c6c7;>{{account.pos2}}</td>
+                        <td style=color:#c5c6c7;>{{account.ref2}}</td>
+                        <td style= color:#c5c6c7 colspan="2" class="table-active">{{account.med_record}}</td>
+                    </tr>
+                    <tr>
+                        <td style=color:#c5c6c7;>{{account.birthday}}</td>
+                        <td style=color:#c5c6c7;>{{account.college_grad}}</td>
+                        <td style=color:#c5c6c7;>{{account.from2}}</td>
+                        <td style=color:#c5c6c7;>{{account.refcon2}}</td>
+                        <td style=color:#c5c6c7;>{{account.SSS}}</td>
+                    </tr>
+                    <tr>
+                        <td style=color:#c5c6c7;>{{account.civilstatus}}</td>
+                        <td style=color:#c5c6c7;>{{account.refpos2}}</td>
+                        <td style= color:#c5c6c7 colspan="3" class="table-active">{{account.citizenship}}</td>
+                    </tr>
+                    <tr>
+                        
+                        <td style=color:#c5c6c7;>{{single.forever}}</td>
+                        <td style=color:#c5c6c7;>{{awards.naol}}</td>
+                        
+                        <td style= color:#c5c6c7 colspan="3" class="table-active">{{pastcom3.pas3}}</td>
+                    </tr>
                     
-                    <td style=color:#c5c6c7;>Cruz, Juan Ponce</td>
-                    <td style=color:#c5c6c7;>Dakong Paroon</td>
-                    <td style=color:#c5c6c7;>Hapini Infinity Inc.</td>
-                    <td style=color:#c5c6c7;>Melisa Ramos</td>
-                    <td style= color:#c5c6c7 colspan="2" class="table-active">PhilHealth: 1020-1121-1222</td>
-                   
-                  </tr>
-                  <tr>
-                    <td style=color:#c5c6c7;>#123 Dating Doon Imus, Cavite</td>
-                    <td style=color:#c5c6c7;>2006</td>
-                    <td style=color:#c5c6c7;>programmer</td>
-                    <td style=color:#c5c6c7;>09123698745</td>
-                    <td style= color:#c5c6c7 colspan="2" class="table-active">Pag-Ibig: 1234-5678-9100</td>
-                  </tr>
-                  <tr>
-                    <td style=color:#c5c6c7;>046-022-0044</td>
-                    <td style=color:#c5c6c7;>Ang Dating doon National Highschool</td>
-                    <td style=color:#c5c6c7;>01/01/2019 - 07/13/2019</td>
-                    <td style=color:#c5c6c7;>Manager</td>
-                    <td style= color:#c5c6c7 colspan="2" class="table-active">TIN: 123-345-567-789</td>
-                </tr>
-                <tr>
-                    <td style=color:#c5c6c7;>09123456789</td>
-                    <td style=color:#c5c6c7;>2013</td>
-                    <td style=color:#c5c6c7;>Jenlan Computer Inc.</td>
-                    <td style=color:#c5c6c7;>Hapini Infinity Inc.</td>
-                    <td style=color:#c5c6c7;>NBI: A123BCDE45-FG678910</td>
-                </tr>
-                <tr>
-                    <td style=color:#c5c6c7;>jpdelacruz123@gmail.com</td>
-                    <td style=color:#c5c6c7;>Emilio Bonifacio College</td>
-                    <td style=color:#c5c6c7;>Computer Specialist</td>
-                    <td style=color:#c5c6c7;>Abdul Muhammad</td>
-                    <td style= color:#c5c6c7 colspan="2" class="table-active">Passport:12365498</td>
-                </tr>
-                <tr>
-                    <td style=color:#c5c6c7;>26/08/1998</td>
-                    <td style=color:#c5c6c7;>2019</td>
-                    <td style=color:#c5c6c7;>08/29/2019 - 02/14/2020</td>
-                    <td style=color:#c5c6c7;>09773456789</td>
-                    <td style=color:#c5c6c7;>SSS: 69-1234567-96</td>
-                </tr>
-                <tr>
-                    <td style=color:#c5c6c7;>Imus, Cavite</td>
-                    <td style=color:#c5c6c7;>BS Computer Engineer</td>
-               
-                    <td style= color:#c5c6c7 colspan="3" class="table-active">Manager</td>
-                </tr>
-                <tr>
-                    <td style=color:#c5c6c7;>Single</td>
-                    <td style=color:#c5c6c7;>Excelllent in Building Computer</td>
-                    
-                    <td style= color:#c5c6c7 colspan="3" class="table-active">Jenlan Computer</td>
-                </tr>
-                <tr>
-                    <td style= color:#c5c6c7 colspan="5" class="table-active">Filipino</td>
-                </tr>
-                <tr>
-                    <td style= color:#c5c6c7 colspan="5" class="table-active">Roman Catholic</td>
-                    
-                </tr>
-                <tr>
-                    <td style= color:#c5c6c7 colspan="5" class="table-active">Juanita Dela Cruz</td>
-                    
-                </tr>
-                <tr>
-                    <td style= color:#c5c6c7 colspan="5" class="table-active">09987654321</td>
-                    
-
-                </tr>
-                <tr>
-                    <td style= color:#c5c6c7 colspan="5" class="table-active">Applying for: Sample Job</td>
-
-                </tr>
+                    </tr>
+                {% endfor %}
                 </tbody>
               </table>
+              
 <fieldset style="text-align: center;" class="container">
     <h4>Signature:</h4>
     <img src="/static/pictures/profile.png" alt="profile" height="100" width="200" >

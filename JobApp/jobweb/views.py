@@ -86,8 +86,8 @@ def createAccount(request):
 
 def showAccount(request):
     accounts = account_data.objects.all()
-    context ={'accounts':accounts}
-    return render(request,"account_show.html", context)
+    context ={'accounts': accounts}
+    return render(request,"html_files/User-Profile.html", context)
 
 def createJobs(request):
     joblist = job_listing.objects_create(
@@ -135,14 +135,18 @@ def login(request):
         return render(request, 'html_files/HOMEWEBSITE.html')
     else:
         if got == "Applicant":
-            login_email.append(check_email)
-            return render(request, 'html_files/User Profile.html')
+            accounts = account_data.objects.all()
+            context ={'accounts': accounts}
+            #login_email.append(check_email)
+            return render(request, 'html_files/User-Profile.html', context)
         elif got == "HRManager":
-            login_email.append(check_email)
-            return render(request, 'html_files/HRMANAGER.html')
+            accounts = account_data.objects.all()
+            context ={'accounts': accounts}
+            #login_email.append(check_email)
+            return render(request, 'html_files/HRMANAGER.html', context)
         elif got == "Employee":
             login_email.append(check_email)
-            return render(request, 'html_files/User Profile.html')
+            return render(request, 'html_files/User-Profile.html')
         else:
             return render(request, 'html_files/HOMEWEBSITE.html')
 

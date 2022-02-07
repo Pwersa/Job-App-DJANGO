@@ -76,123 +76,28 @@
                                 &nbsp;
                                 <input class="form" type="text" placeholder="Enter a Name" aria-label="name" id="enter_name">
                                 &nbsp;
-                                <select class="form" id="filter_search"  style="width: 100px;" >
-                                    <option selected>Filter:</option>
-                                    <optgroup label="-------------"></optgroup>
-                                    <option >Alphabetical (A-Z)</option>
-                                    <option>Alphabetical (Z-A)</option>
-                                    <option>Salary (Highest to Lowest)</option>
-                                </select>
-                                &nbsp;
                                 <button class="btn btn-outline-info my-2" type="button" button="submit" style="color: #000000;" onclick="search_empapp()">Search</button>        
                             </div>
 
                             <div class="list-group list-group-numbered" style="padding: 30px;">
-                                
+                                {% for account in accounts %}
                                 <div>
                                     <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
                                         <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Employee Example Name 1</h5>
+                                            <h5 class="mb-1">{{account.last_name}}</h5>
                                             <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
                                         </div>
-                                        <div>
-                                            <p class="mb-1" style="color: #808080;">Example Employee's Description</p>
-                                        </div>
-                                        <div style="text-align: center;">
-                                            <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;" onclick="view_employee()">View Details</button>
-                                        </div>
+                                        <form method="POST" action="/emp_amp">
+                                                <p class="mb-1" style="color: #808080;" id="user_email" name="user_email">{{account.email}}</p>
+                                                <p class="mb-1" style="color: #808080;">Contact No:  {{account.cellphone}}</p>
+                                            <div style="text-align: center;">
+                                                <button class="btn btn-outline-info" type="submit" style="color: #3d3d3d; width: 150px;">View Details</button>
+                                            </div>
+                                        <form>
                                     </a>
                                 </div>
                                 &nbsp;
-                                <div>
-                                    <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Applicant Example Name 2</h5>
-                                            <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                        </div>
-                                        <div>
-                                            <p class="mb-1" style="color: #808080;">Example Applicant's Description</p>
-                                        </div>
-                                        <div style="text-align: center;">
-                                            <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;" onclick="view_applicant()">View Details</button>
-                                        </div>
-                                    </a>
-                                </div>
-                                &nbsp;
-                                <div>
-                                    <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Example Name 3</h5>
-                                            <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                        </div>
-                                        <div>
-                                            <p class="mb-1" style="color: #808080;">Example Description</p>
-                                        </div>
-                                        <div style="text-align: center;">
-                                            <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;" onclick="apply_now()">View Details</button>
-                                        </div>
-                                    </a>
-                                </div>
-                                &nbsp;
-                                <div>
-                                    <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Example Name 4</h5>
-                                            <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                        </div>
-                                        <div>
-                                            <p class="mb-1" style="color: #808080;">Example Description</p>
-                                        </div>
-                                        <div style="text-align: center;">
-                                            <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;" onclick="apply_now()">View Details</button>
-                                        </div>
-                                    </a>
-                                </div>
-                                &nbsp;
-                                <div>
-                                    <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Example Name 5</h5>
-                                            <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                        </div>
-                                        <div>
-                                            <p class="mb-1" style="color: #808080;">Example Description</p>
-                                        </div>
-                                        <div style="text-align: center;">
-                                            <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;" onclick="apply_now()">View Details</button>
-                                        </div>
-                                    </a>
-                                </div>
-                                &nbsp;
-                                <div>
-                                    <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Example Name 6</h5>
-                                            <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                        </div>
-                                        <div>
-                                            <p class="mb-1" style="color: #808080;">Example Description</p>
-                                        </div>
-                                        <div style="text-align: center;">
-                                            <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;" onclick="apply_now()">View Details</button>
-                                        </div>
-                                    </a>
-                                </div>
-                                &nbsp;
-                                <div>
-                                    <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Example Name 7</h5>
-                                            <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                        </div>
-                                        <div>
-                                            <p class="mb-1" style="color: #808080;">Example Description</p>
-                                        </div>
-                                        <div style="text-align: center;">
-                                            <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;" onclick="apply_now()">View Details</button>
-                                        </div>
-                                    </a>
-                                </div>
+                                {% endfor %}
 
                             </div>
                         </div>
@@ -370,9 +275,9 @@
                     alert("Search results by this date: " + calendar_data);
                 }
             }
-            function view_employee(){
-                alert("Opening Employee's details.");
-                window.location.assign("{% url 'employee' %}",'_blank');
+            function view(){
+                check_email = document.getElementById='user_email';
+                if (check_email == "Email:       ")
             }
             function view_applicant(){
                 alert("Opening Applicant's details.");

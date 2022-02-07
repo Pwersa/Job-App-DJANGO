@@ -10,6 +10,8 @@ urlpatterns = [
     path('hrdashboard', views.hrdashboard, name='hrdashboard'),
     path('employee', views.employee, name='employee'),
     path('applicant', views.applicant, name='applicant'),
+    #path('emp_amp', views.emp_apm, name="emp_amp"),
+
     path('addjob', views.addjob, name="addjob"),
     path('profile', views.profile, name='profile'),
 
@@ -22,4 +24,6 @@ urlpatterns = [
     path('showjobs', views.showJobs),
 
     path('login', views.login),
+    path('account1', views.showAccount),
+
     ]
