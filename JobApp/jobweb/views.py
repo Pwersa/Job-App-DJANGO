@@ -5,7 +5,9 @@ from .models import job_listing
 import mysql.connector
 
 def home(request):
-    return render(request, 'html_files/HOMEWEBSITE.html')
+    joblist = job_listing.objects.all()
+    context ={'joblist': joblist}
+    return render(request,"html_files/HOMEWEBSITE.html", context)
 
 def signup(request):
     return render(request, 'html_files/Registration-Form.html')
@@ -14,7 +16,9 @@ def change_pass(request):
     return render(request, 'html_files/changepassHR.html')
 
 def hrdashboard(request):
-    return render(request, 'html_files/HRMANAGER.html')
+    accounts = account_data.objects.all()
+    context ={'accounts': accounts}
+    return render(request, 'html_files/HRMANAGER.html', context)
 
 def delete(request):
     return render(request, 'html_files/delete.html')
@@ -35,7 +39,6 @@ def emp_apm(request):
     mycursor.execute(sql1, values1)
     got1 = mycursor.fetchall()
     print(got1)
-
 
 def addjob(request):
     return render(request, 'html_files/Making-a-Job-Posting.html')
@@ -116,7 +119,7 @@ def createJobs(request):
 
 def job_show(request):
     joblist = job_listing.objects.all()
-    context ={'joblist':joblist}
+    context ={'joblist': joblist}
     return render(request,"html_files/HOMEWEBSITE.html", context)
 
 def login(request):

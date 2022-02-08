@@ -60,66 +60,50 @@
             <div class="row">
                  <div class="col-lg-10 mx-auto mb-4">
                     <div class="section-title text-center ">
-                        <h3 class="top-c-sep" id="avail1">Available Jobs</h3>
-                        <p id="avail2">Here at our website, we care about your career. Join us today!</p>
+                        <h4 class="top-c-sep" id="avail1">Here at our website, we care about your career. Join us today!</h4>
                     </div>
                 </div>
             </div>
                 
-                <div class="border" style="border-spacing: 100px; border: 10px solid transparent; margin-left: 150px; margin-right: 150px;">
+                <div class="border" style="border-spacing: 100px; border: 10px solid transparent; margin-left: 225px; margin-right: 225px;">
                     &nbsp;
                     <div style="text-align: center;">
                         <p style="font-size: 19px;"> Search a Job: 
                         &nbsp;
                         <input class="form" type="text" placeholder="Enter a Job Name" aria-label="name" id="enter_job">
                         &nbsp;
-                        <select class="form" id="civil_status"  style="width: 100px;" >
-                            <option selected>Filter:</option>
-                            <optgroup label="-------------"></optgroup>
-                            <option >Alphabetical (A-Z)</option>
-                            <option>Alphabetical (Z-A)</option>
-                            <option>Salary (Highest to Lowest)</option>
-                        </select>
-                        &nbsp;
                         <button class="btn btn-outline-info my-2" type="button" button="submit" style="color: #000000;" onclick="find()">Search</button>
 
                         <div class="list-group" style="padding: 30px;">
                             <p style="font-size: 18px; text-align: left;">List of Available Jobs</p> 
-                            {% for job in joblist %}
-                            <div>
-                                <form method="POST" action="/show_jobs">
-                                    <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1" id="job_title" name="job_title">{{job.jtitle}}</h5>
-                                            <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                        </div>
-                                        <div>
-                                            <p class="mb-1" style="color: #808080;" id="job_desc" name="job_desc">{{job.jdesc}}</p>
-                                        </div>
-                                        <div>
-                                            <p class="mb-1" style="color: #808080;">{{job.salary}}</p>
-                                        </div>
-                                        <div style="text-align: center;">
-                                            <button class="btn btn-outline-info" type="button" button="button" onclick="apply_now()" style="color: #3d3d3d; width: 150px;">Apply Now</button>
-                                        </div>
-                                    </a>
-                                </form>
-                            </div>
                             
+                            {% for job in joblist %}
+
+                            <div>
+                                <a class="list-group-item shadow-sm shadow-sm bg-white rounded">  
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1" id="job_title" name="job_title">{{job.jtitle}}</h5>
+                                        <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
+                                    </div>
+                                        <div>
+                                             <p class="mb-1" style="color: #808080;" id="job_desc" name="job_desc">{{job.jdesc}}</p>
+                                        </div>
+                                    <div>
+                                        <p class="mb-1" style="color: #808080;">{{job.salary}}</p>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <button class="btn btn-outline-info" type="button" button="button" onclick="apply_now()" style="color: #3d3d3d; width: 150px;">Apply Now</button>
+                                    </div>
+                                </a>
+                            </div>
+                            &nbsp;
                             {% endfor %}
-    
+
                         </div>
-
-                    </div>
-                    
-                    <div class="list-group" style="padding: 30px;">
-    
-                    
-
                     </div>
                 </div>
-            </div>
         </div>
+         
 
         <script>
             function login(){
