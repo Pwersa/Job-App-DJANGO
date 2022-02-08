@@ -115,7 +115,9 @@ def createJobs(request):
         salary = request.POST['salary'],
         jobreq1 = request.POST['jobreq1'],
         )
-    return render(request, 'html_files/HRMANAGER.html')
+    accounts = account_data.objects.all()
+    context ={'accounts': accounts}
+    return render(request, 'html_files/HRMANAGER.html', context)
 
 def job_show(request):
     joblist = job_listing.objects.all()
@@ -127,42 +129,47 @@ def login(request):
     check_email = request.POST['email1'],
     check_password = request.POST['password1']
 
-    mydb = mysql.connector.connect(
+    try:
+        mydb = mysql.connector.connect(
         host="localhost",
         user="root",
         password="Admin123",
         database="jobapp")
 
-    mycursor = mydb.cursor()
+        mycursor = mydb.cursor()
 
-    sql = "SELECT account_type FROM jobweb_account_data WHERE email = %s"
-    value = (check_email)
-    mycursor.execute(sql, value)
-    got = mycursor.fetchone()[0]
+        sql = "SELECT account_type FROM jobweb_account_data WHERE email = %s"
+        value = (check_email)
+        mycursor.execute(sql, value)
+        got = mycursor.fetchone()[0]
     
-    sql1 = "SELECT password FROM jobweb_account_data WHERE email = %s"
-    value1 = (check_email)
-    mycursor.execute(sql1, value1)
-    got1 = mycursor.fetchone()[0]
+        sql1 = "SELECT password FROM jobweb_account_data WHERE email = %s"
+        value1 = (check_email)
+        mycursor.execute(sql1, value1)
+        got1 = mycursor.fetchone()[0]
 
-    if got1 != check_password:
-        return render(request, 'html_files/HOMEWEBSITE.html')
-    else:
-        if got == "Applicant":
-            accounts = account_data.objects.all()
-            context ={'accounts': accounts}
-            #login_email.append(check_email)
-            return render(request, 'html_files/User-Profile.html', context)
-        elif got == "HRManager":
-            accounts = account_data.objects.all()
-            context ={'accounts': accounts}
-            #login_email.append(check_email)
-            return render(request, 'html_files/HRMANAGER.html', context)
-        elif got == "Employee":
-            login_email.append(check_email)
-            return render(request, 'html_files/User-Profile.html')
-        else:
+        if got1 != check_password:
             return render(request, 'html_files/HOMEWEBSITE.html')
+        else:
+            if got == "Applicant":
+                accounts = account_data.objects.all()
+                context ={'accounts': accounts}
+                #login_email.append(check_email)
+                return render(request, 'html_files/User-Profile.html', context)
+            elif got == "HRManager":
+                accounts = account_data.objects.all()
+                context ={'accounts': accounts}
+                #login_email.append(check_email)
+                return render(request, 'html_files/HRMANAGER.html', context)
+            elif got == "Employee":
+                login_email.append(check_email)
+                return render(request, 'html_files/User-Profile.html')
+            else:
+                return render(request, 'html_files/HOMEWEBSITE.html')
+    except:
+        return render(request, 'html_files/HOMEWEBSITE.html')
+
+        
 
 
 def changepass1(request):
@@ -211,6 +218,26 @@ def delete_acc(request):
 
     accounts = account_data.objects.all()
     context ={'accounts': accounts}
-    
+   
     return render(request, 'html_files/HRMANAGER.html', context)
 
+def delete_job(request):
+    delete_job1 = request.POST['deletejob'],
+    
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="Admin123",
+        database="jobapp")
+    
+    mycursor = mydb.cursor()
+
+    sql = "DELETE FROM jobweb_job_listing WHERE jtitle = %s"
+    value = (delete_job1)
+    mycursor.execute(sql, value)
+    mydb.commit()
+
+    accounts = account_data.objects.all()
+    context ={'accounts': accounts}
+   
+    return render(request, 'html_files/HRMANAGER.html', context)

@@ -146,13 +146,13 @@
                     </div>
                     
                     <div class="col-md-3">
-                      <label for="from1" class="form-label">From</label>
-                      <input type="date" class="form-control" id="from1" name="from1">
+                      <label for="from1" class="form-label" >From</label>
+                      <input type="text" pattern="[0-9]{4}" class="form-control" id="from1" name="from1">
                     </div>
 
                     <div class="col-md-3">
                       <label for="to1" class="form-label" >To</label>
-                      <input type="date" class="form-control" id="to1" name="to1">
+                      <input type="text" pattern="[0-9]{4}" class="form-control" id="to1" name="to1">
                     </div>
 
                     <div class="col-md-3">
@@ -167,12 +167,12 @@
                     
                     <div class="col-md-3">
                       <label for="from2" class="form-label" >From</label>
-                      <input type="date" class="form-control" id="from2" name="from2">
+                      <input type="text" pattern="[0-9]{4}" class="form-control" id="from2" name="from2">
                     </div>
 
                     <div class="col-md-3">
                       <label for="to2" class="form-label" >To</label>
-                      <input type="date" class="form-control" id="to2" name="to2">
+                      <input type="text" pattern="[0-9]{4}" class="form-control" id="to2" name="to2">
                     </div>
 
                     <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;">Character Reference</div>
@@ -298,14 +298,10 @@
                          //event.preventDefault();
                          window.alert("Success! You may now login at the homepage");
                          location.replace("{% url 'home' %}");
-                         console.log("hello there I am working");
                         }
                       </script>
 
-                      
-
-                      
-                    
+                                          
       </form>
 
           

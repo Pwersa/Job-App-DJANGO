@@ -65,7 +65,7 @@
                 </div>
                 <div class="input-group">
                     <span class="input-group-text" style="font-weight: bold;">Salary: ₱</span>
-                    <input type="number" class="form-control" id="salary" name="salary" min="1" required>
+                    <input type="number" pattern="[0-9]{11}" class="form-control" id="salary" name="salary" min="1" required>
                     <span class="input-group-text">.00</span>
                 </div>
                 <div class="col-md-12" style="text-align: center;">
@@ -75,18 +75,21 @@
         </div>
         <div class="container mt-3 p-3">
             <h1 class=" p-4 mb-3 text-center" style="font-weight: bolder; background-color: #1f2833; color: #66fcf1;">Delete a Job</h1>
-            <form class="row g-3" style="color: #000;">
-                <div class="container">
-                    <select id="del_job" class="form-select">
-                        <option selected>Example Job 1</option>
-                        <option>Example Job 2</option>
-                        <option>Example Job 3</option>
-                        <option>Example Job 4</option>
-                        <option>Example Job 5</option>
-                    </select>
-                </div>
-                <div class="col-md-12" style="text-align: center;">
-                    <button type="submit" style="font-weight: bold;" class="btn btn-primary" onclick="deleteJob()">Delete!</button>
+
+            <form class="row g-3" style="color: #000;" method="POST" action="/delete_job">
+            {% csrf_token %}
+                <div>
+                    <div class="container">
+
+                        &nbsp;
+                        <label for="deleteacc" class="form-label" >Enter Name of Job To Be Deleted</label>
+                        <input class="form-control" type="text" placeholder="Job" id="deleteacc" name="deletejob" required>
+                        &nbsp;
+
+                    </div>
+                    <div class="col-md-12" style="text-align: center;">
+                        <button type="submit" style="font-weight: bold;" class="btn btn-primary" onclick="deleteJob()">Delete!</button>
+                    </div>
                 </div>
             </form>
         </div>   
@@ -124,7 +127,7 @@
             }
         }
         function deleteJob() {
-            event.preventDefault();
+            //event.preventDefault();
             var result = "" ;
             if (confirm("Do you want to Proceed?")) {
                 result = 1;
