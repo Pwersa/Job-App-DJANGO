@@ -12,14 +12,16 @@
     <body background="/static/pictures/bg.jpg">
         <div class="container mt-3">
             <h1 class=" p-4 mb-3 text-center" style="font-weight: bolder; background-color: #1f2833; color: #66fcf1;">Make a Job</h1>
-            <form class="row g-3" style="color: #000;">
+            <form class="row g-3" style="color: #000;" method="POST" action="createJobs">
+            {% csrf_token %}
+
                 <div class="col-md-12">
                     <label for="jobtitle" class="form-label"style="font-weight: bold;">Job Title:</label>
-                    <input type="text" class="form-control" id="job_title" required>
+                    <input type="text" class="form-control" id="job_title" name="job_title" required>
                 </div>
                 <div class="col-md-12">
                     <label for="jobdescription" class="form-label" style="font-weight: bold;">Job Description:</label>
-                    <textarea class="form-control" id="job_description" rows="4" required></textarea>
+                    <textarea class="form-control" id="job_description" name="job_description" rows="4" required></textarea>
                 </div>
                 <div class="col-md-12 d">
                     <div>
@@ -40,6 +42,8 @@
                         <input type="radio" class="form-check-input" id="radio3" name="jobreq1" value="Atleast College Graduate">
                         <label class="form-check-label" for="radio3">Atleast College Graduate</label>
                     </div>
+
+
                     <hr>
                     <div>
                         <label for="jobrequirement2" class="form-label">Character Reference Needed:</label>
@@ -56,10 +60,12 @@
                         <input type="radio" class="form-check-input" id="radio6" name="jobreq2" value="Atleast 2 Reference Needed">
                         <label class="form-check-label" for="radio6">Atleast 2 Reference Needed</label>
                     </div>
+
+
                 </div>
                 <div class="input-group">
                     <span class="input-group-text" style="font-weight: bold;">Salary: ₱</span>
-                    <input type="number" class="form-control" id="salary" min="1" required>
+                    <input type="number" class="form-control" id="salary" name="salary" min="1" required>
                     <span class="input-group-text">.00</span>
                 </div>
                 <div class="col-md-12" style="text-align: center;">
@@ -88,7 +94,7 @@
 
     <script>
         function postJob() {
-            event.preventDefault();
+            //event.preventDefault();
             if ((document.getElementById("job_title").value == "") && 
             (document.getElementById("job_description").value == "") &&
             (document.getElementById("salary").value == "")) {

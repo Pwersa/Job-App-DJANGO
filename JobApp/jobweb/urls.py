@@ -25,4 +25,6 @@ urlpatterns = [
     path('login', views.login),
     path('account1', views.showAccount),
 
+    path('createJobs', views.createJobs, name='createJobs')
+
     ]

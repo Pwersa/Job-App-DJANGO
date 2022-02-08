@@ -96,7 +96,7 @@ def createAccount(request):
         )
     #accounts.save()
     print(accounts)
-    return render(request,'html_files/Registration-Form.html')    
+    return render(request,'html_files/HOMEWEBSITE.html')    
 
 def showAccount(request):
     accounts = account_data.objects.all()
@@ -104,18 +104,14 @@ def showAccount(request):
     return render(request,"html_files/User-Profile.html", context)
 
 def createJobs(request):
-    joblist = job_listing.objects_create(
-        jobtitle = request.Post['jobtitle'],
-        jdesc = request.Post['jdesc'],
-        nodipl = request.Post['no_dipl'],
-        hsgrad = request.Post['hs_grad'],
-        colgrad = request.Post['col_grad'],
-        nochar = request.Post['no_char'],
-        charref1 = request.Post['char_ref1'],
-        charref2 = request.Post['char_ref2'],
-        salary = request.Post['salary'],
+    joblist = job_listing.objects.create(
+        jtitle = request.POST['job_title'],
+        jdesc = request.POST['job_description'],
+        jobreq2 = request.POST['jobreq2'],
+        salary = request.POST['salary'],
+        jobreq1 = request.POST['jobreq1'],
         )
-    return render(request,'jobs_index.html')
+    return render(request, 'html_files/HRMANAGER.html')
 
 def showJobs(request):
     joblist = job_listing.objects.all()
@@ -213,3 +209,4 @@ def delete_acc(request):
     context ={'accounts': accounts}
     
     return render(request, 'html_files/HRMANAGER.html', context)
+
