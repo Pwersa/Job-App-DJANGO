@@ -60,10 +60,10 @@ class account_data(models.Model):
     
 
 class job_listing(models.Model):
-    jtitle = models.CharField(primary_key = True , verbose_name='job_title', max_length=99)
-    jdesc = models.TextField(verbose_name='job_description', max_length=300)
-    jobreq1 = models.CharField(verbose_name='job requirement 1', default="No Diploma Needed", max_length=99)
-    jobreq2 = models.CharField(verbose_name='job requirement 2', default="No Reference Needed" , max_length=99)
+    jtitle = models.CharField(primary_key = True , verbose_name='jtitle', max_length=99)
+    jdesc = models.TextField(verbose_name='jdesc', max_length=300)
+    jobreq1 = models.CharField(verbose_name='jobreq1', default="No Diploma Needed", max_length=99)
+    jobreq2 = models.CharField(verbose_name='jobreq2', default="No Reference Needed" , max_length=99)
     salary = models.PositiveIntegerField(verbose_name='salary')
 
 class interview(models.Model):

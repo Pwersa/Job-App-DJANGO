@@ -20,7 +20,7 @@ urlpatterns = [
     path('showacc', views.showAccount),
 
     path('createjobs', views.createJobs),
-    path('showjobs', views.showJobs),
+    path('show_jobs', views.job_show),
 
     path('login', views.login),
     path('account1', views.showAccount),

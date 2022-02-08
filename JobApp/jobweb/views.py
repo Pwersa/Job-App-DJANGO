@@ -36,6 +36,7 @@ def emp_apm(request):
     got1 = mycursor.fetchall()
     print(got1)
 
+
 def addjob(request):
     return render(request, 'html_files/Making-a-Job-Posting.html')
 
@@ -113,10 +114,10 @@ def createJobs(request):
         )
     return render(request, 'html_files/HRMANAGER.html')
 
-def showJobs(request):
+def job_show(request):
     joblist = job_listing.objects.all()
     context ={'joblist':joblist}
-    return render(request,"jobs_show.html", context)
+    return render(request,"html_files/HOMEWEBSITE.html", context)
 
 def login(request):
     

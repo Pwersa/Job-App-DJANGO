@@ -83,114 +83,38 @@
                         &nbsp;
                         <button class="btn btn-outline-info my-2" type="button" button="submit" style="color: #000000;" onclick="find()">Search</button>
 
+                        <div class="list-group" style="padding: 30px;">
+                            <p style="font-size: 18px; text-align: left;">List of Available Jobs</p> 
+                            {% for job in joblist %}
+                            <div>
+                                <form method="POST" action="/show_jobs">
+                                    <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1" id="job_title" name="job_title">{{job.jtitle}}</h5>
+                                            <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
+                                        </div>
+                                        <div>
+                                            <p class="mb-1" style="color: #808080;" id="job_desc" name="job_desc">{{job.jdesc}}</p>
+                                        </div>
+                                        <div>
+                                            <p class="mb-1" style="color: #808080;">{{job.salary}}</p>
+                                        </div>
+                                        <div style="text-align: center;">
+                                            <button class="btn btn-outline-info" type="button" button="button" onclick="apply_now()" style="color: #3d3d3d; width: 150px;">Apply Now</button>
+                                        </div>
+                                    </a>
+                                </form>
+                            </div>
+                            
+                            {% endfor %}
+    
+                        </div>
+
                     </div>
                     
                     <div class="list-group" style="padding: 30px;">
-                    <p style="font-size: 18px; text-align: left;">List of Available Jobs: 7</p> 
-                        <div>
-                            <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Example Job Name 1</h5>
-                                    <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                </div>
-                                <div>
-                                    <p class="mb-1" style="color: #808080;">- Example Job Description</p>
-                                </div>
-                                <div style="text-align: center;">
-                                    <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;" onclick="apply_now()">Apply Now</button>
-                                </div>
-                            </a>
-                        </div>
-                        &nbsp;
-                        <div>
-                            <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Example Job Name 2</h5>
-                                    <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                </div>
-                                <div>
-                                    <p class="mb-1" style="color: #808080;">- Example Job Description</p>
-                                </div>
-                                <div style="text-align: center;">
-                                    <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;" onclick="apply_now()">Apply Now</button>
-                                </div>
-                            </a>
-                        </div>
-                        &nbsp;
-                        <div>
-                            <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Example Job Name 3</h5>
-                                    <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                </div>
-                                <div>
-                                    <p class="mb-1" style="color: #808080;">- Example Job Description</p>
-                                </div>
-                                <div style="text-align: center;">
-                                    <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;" onclick="apply_now()">Apply Now</button>
-                                </div>
-                            </a>
-                        </div>
-                        &nbsp;
-                        <div>
-                            <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Example Job Name 4</h5>
-                                    <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                </div>
-                                <div>
-                                    <p class="mb-1" style="color: #808080;">- Example Job Description</p>
-                                </div>
-                                <div style="text-align: center;">
-                                    <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;" onclick="apply_now()">Apply Now</button>
-                                </div>
-                            </a>
-                        </div>
-                        &nbsp;
-                        <div>
-                            <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Example Job Name 5</h5>
-                                    <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                </div>
-                                <div>
-                                    <p class="mb-1" style="color: #808080;">- Example Job Description</p>
-                                </div>
-                                <div style="text-align: center;">
-                                    <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;" onclick="apply_now()">Apply Now</button>
-                                </div>
-                            </a>
-                        </div>
-                        &nbsp;
-                        <div>
-                            <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Example Job Name 6</h5>
-                                    <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                </div>
-                                <div>
-                                    <p class="mb-1" style="color: #808080;">- Example Job Description</p>
-                                </div>
-                                <div style="text-align: center;">
-                                    <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;" onclick="apply_now()">Apply Now</button>
-                                </div>
-                            </a>
-                        </div>
-                        &nbsp;
-                        <div>
-                            <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Example Job Name 7</h5>
-                                    <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                </div>
-                                <div>
-                                    <p class="mb-1" style="color: #808080;">- Example Job Description</p>
-                                </div>
-                                <div style="text-align: center;">
-                                    <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;" onclick="apply_now()">Apply Now</button>
-                                </div>
-                            </a>
-                        </div>
+    
+                    
 
                     </div>
                 </div>
