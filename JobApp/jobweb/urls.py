@@ -13,20 +13,13 @@ urlpatterns = [
     path('delete_acc', views.delete_acc, name="delete_acc"),
     path('addjob', views.addjob, name="addjob"),
     path('profile', views.profile, name='profile'),
-
     path('changepassword', views.changepass1),
-    path('admin/', admin.site.urls),
     path('createacc', views.createAccount),
     path('showacc', views.showAccount),
-
     path('createjobs', views.createJobs),
     path('show_jobs', views.job_show),
-
     path('login', views.login),
     path('account1', views.showAccount),
-
     path('createJobs', views.createJobs, name='createJobs'),
-
-    path('delete_job', views.delete_job, name='delete_job'),
-
+    path('delete_job', views.delete_jobs, name='delete_job'),
     ]

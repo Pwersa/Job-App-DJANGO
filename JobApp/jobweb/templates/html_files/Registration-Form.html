@@ -7,12 +7,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
+    
+
     <body class="row g-3", background="/static/pictures/bg.jpg" >
       <div class="fs-1 p-4 mb-2 fw-bold text-center" style="background-color: #1f2833; color: #66fcf1">Registration Form</div>
+      
+      {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %} style="text-align: center; color: red" >{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+
       <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e; color: #000000">Account Details</div>
 
       
-      <form method="POST" class="row g-4" onsubmit="SubmitData()" action="/createacc">
+      <form method="POST" class="row g-4" action="/createacc">
         {% csrf_token %}
         <div class="col-md-4">
           <label for="Email" class="form-label">Email (This Will Be Your Login)</label>
@@ -26,7 +37,7 @@
 
         <div class="col-md-4">
           <label for="Password2" class="form-label" >Confirm Password</label>
-          <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" id="Password2" required>
+          <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" id="Password2" name="password1" required>
         </div>
 
         <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e; color: #000000">Personal Data</div>
@@ -294,17 +305,18 @@
                       </div>
 
                       <script>
-                        function SubmitData() {
-                         //event.preventDefault();
-                         window.alert("Success! You may now login at the homepage");
-                         location.replace("{% url 'home' %}");
-                        }
                       </script>
 
                                           
       </form>
 
-          
+      {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+        <a{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</a>
+        {% endfor %}
+      </ul>
+      {% endif %}
                     
     </body>  
     
