@@ -1,15 +1,16 @@
+import email
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import account_data
-from .models import job_listing
+from .models import account_registration
 import mysql.connector
 from django.contrib import messages
 
 
 def home(request):
-    joblist = job_listing.objects.all()
-    context ={'joblist': joblist}
-    return render(request,"html_files/HOMEWEBSITE.html", context)
+    return render(request,"html_files/HOMEWEBSITE.html")
+
+def completeInfo(request):
+    return render(request, 'html_files/Registration-Form-Part-2.html')
 
 def signup(request):
     return render(request, 'html_files/Registration-Form.html')
@@ -18,7 +19,7 @@ def change_pass(request):
     return render(request, 'html_files/changepassHR.html')
 
 def hrdashboard(request):
-    accounts = account_data.objects.all()
+    accounts = account_registration.objects.all()
     context ={'accounts': accounts}
     return render(request, 'html_files/HRMANAGER.html', context)
 
@@ -123,7 +124,7 @@ def createJobs(request):
         salary = request.POST['salary'],
         jobreq1 = request.POST['jobreq1'],
         )
-    
+
     accounts = account_data.objects.all()
     context ={'accounts': accounts}
     return render(request, 'html_files/HRMANAGER.html', context)
@@ -135,8 +136,12 @@ def job_show(request):
 
 def login(request):
     
+    placeholder = []
+
     check_email = request.POST['email1'],
     check_password = request.POST['password1']
+
+    placeholder.append(check_email[0])
 
     try:
         mydb = mysql.connector.connect(
@@ -162,8 +167,8 @@ def login(request):
 
         else:
             if got == "Applicant":
-                accounts = account_data.objects.all()
-                context ={'accounts': accounts}
+                account = account_data.objects.filter(email=placeholder[0])
+                context ={'accounts': account}
                 return render(request, 'html_files/User-Profile.html', context)
 
             elif got == "HRManager":
@@ -172,7 +177,9 @@ def login(request):
                 return render(request, 'html_files/HRMANAGER.html', context)
 
             elif got == "Employee":
-                return render(request, 'html_files/User-Profile.html')
+                account = account_data.objects.filter(email=placeholder[0])
+                context ={'accounts': account}
+                return render(request, 'html_files/User-Profile.html', context)
 
             else:
                 return render(request, 'html_files/HOMEWEBSITE.html')
