@@ -22,54 +22,45 @@
 
       <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e; color: #000000">Account Details</div>
 
-      
-      <form method="POST" class="row g-4" action="/createacc">
+      {% load crispy_forms_tags %}  
+
+      <form method="POST" class="row g-4">
         {% csrf_token %}
+        
+        
         <div class="col-md-4">
-          <label for="Email" class="form-label">Email (This Will Be Your Login)</label>
-          <input class="form-control" type="email"  id="Email" name="email" required>
+          {{form.email|as_crispy_field}}
         </div>
-
         <div class="col-md-4">
-          <label for="Password" class="form-label" >Password (1 A-Z, 1 no. and > 8 char)</label>
-          <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" id="Password" name="password" required>
+          {{form.password1|as_crispy_field}}
         </div>
-
         <div class="col-md-4">
-          <label for="Password2" class="form-label" >Confirm Password</label>
-          <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" id="Password2" name="password1" required>
+          {{form.password2|as_crispy_field}}
         </div>
-
         <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e; color: #000000">Personal Data</div>
         
             <div class="col-md-3">
-              <label for="formFile" class="form-label" >Upload Photo</label>
-              <input class="form-control" type="file" id="formFile" name="photo" required>
+              {{form.photo|as_crispy_field}}
             </div>
 
             <div class="col-md-3">
-              <label for="Surname" class="form-label"  >Surname</label>
-              <input type="text" class="form-control" id="Surname" name="surname" required>
+              {{form.last_name|as_crispy_field}}
             </div>
 
             <div class="col-md-3">
-              <label for="First_name" class="form-label" >First Name</label>
-              <input type="text" class="form-control" id="First_name" name="first_name" required>
+              {{form.first_name|as_crispy_field}}
             </div>
 
             <div class="col-md-3">
-                <label for="Middle_name" class="form-label" >Middle Name</label>
-                <input type="text" class="form-control" id="Middle_name" name="middle_name" required>
+              {{form.middle_name|as_crispy_field}}
             </div>
 
             <div class="col-md-6">
-              <label for="Address" class="form-label" >Address</label>
-              <input type="text" class="form-control" id="Address" name="address" required>
+              {{form.address|as_crispy_field}}
             </div>
 
             <div class="col-md-3">
-              <label for="cellphone." class="form-label" >Cellphone No.</label>
-              <input type="text" pattern="[0-9]{11}" class="form-control" id="cellphone" name="cellphone" required>
+              {{form.cellphone|as_crispy_field}}
             </div>
             
               <div class="col-md-3">
@@ -78,18 +69,10 @@
               </div>
 
                     
-                    <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;">Position And Signature</div>
-                      
-                     
-                            <div>
-                              <label for="applyingfor" class="form-label" >Applying For</label>
-                              <select id="applyingfor" class="form-select" name="applyingfor">
-                                <option selected>IT Specialist</option>
-                                <option>Junior Engineer</option>
-                                <option>HR</option>
-                              </select>
+                    <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;">Position And Signature</div>                          
+                          <div>
+                            {{form.applyingfor|as_crispy_field}}
                           </div>
-                    
 
                       <div class="col-md-4">
                         <label for="job" class="form-label"></label>

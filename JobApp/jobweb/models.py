@@ -1,26 +1,27 @@
-from ensurepip import version
-from operator import mod
-from pickle import TRUE
-from pyexpat import model
-from statistics import mode
-from tabnanny import verbose
 from django.db import models
+#from django.contrib.auth.models import AbstractUser 
 
 # Create your models here.
 
 class account_registration(models.Model):
-    email = models.EmailField(primary_key = True, verbose_name='email')
-    password = models.CharField(verbose_name='password', max_length=20)
-    photo = models.ImageField(verbose_name='photo')
+
+    
+    applyingfor1 = [('Choice1', 'Website Developersss')]
+
+
+    email = models.EmailField(primary_key = True, verbose_name='email', unique=True)
+    password1 = models.CharField(verbose_name='password1', max_length=20,)
+    password2 = models.CharField(verbose_name='password2', max_length=20,)
+    photo = models.ImageField(verbose_name='photo', blank=True, null=True)
     first_name = models.CharField(verbose_name='first_name' ,max_length=99, default="")
     middle_name = models.CharField(verbose_name='middle_name' ,max_length=99, default="")
     last_name = models.CharField(verbose_name='last_name' ,max_length=99, default="")
     address = models.CharField(verbose_name='address' ,max_length=99)
     cellphone = models.CharField(verbose_name='cellphone' ,max_length=11)
-    birthday = models.DateField(verbose_name='birthday')
-    applyingfor = models.CharField(verbose_name='applyingfor',max_length=99)
+    birthday = models.DateField(verbose_name='birthday',)
+    applyingfor = models.CharField(verbose_name='applyingfor',max_length=99, default="", choices=applyingfor1)
     job = models.CharField(verbose_name='job',max_length=99, default='Applicant')
-    account_type = models.CharField(verbose_name='account_type',max_length=99, default='Applicant')
+    account_type = models.CharField(verbose_name='account_type',max_length=99)
 
 class other_info(models.Model):
     email = models.ForeignKey(account_registration, primary_key=True, on_delete=models.CASCADE, default="user@email.com")
