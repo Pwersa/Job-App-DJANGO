@@ -1,11 +1,21 @@
 from django.contrib import admin
 from django.urls import path
 from . import views 
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
+######################### Active  ##########################################
     path('', views.home, name='home'),
     path('home', views.home, name='home'),
+    path('login', views.login),
+    path('re_login', views.re_login),
     path('signup', views.signup, name='signup'),
+    path('signup1', views.signup1, name='signup1'),
+    path('complete_info', views.complete_info, name='complete_info'),
+    path('user_profile', views.user_profile, name='user_profile'),
+
+############################  Inactive  ####################################
     path('change_password', views.change_pass, name='changepass'),
     path('hrdashboard', views.hrdashboard, name='hrdashboard'),
     path('delete', views.delete, name="delete"),
@@ -16,9 +26,12 @@ urlpatterns = [
     path('showacc', views.showAccount),
     path('createjobs', views.createJobs),
     path('show_jobs', views.job_show),
-    path('login', views.login),
     path('account1', views.showAccount),
     path('createJobs', views.createJobs, name='createJobs'),
     path('delete_job', views.delete_jobs, name='delete_job'),
-    path('complete_info', views.completeInfo, name='complete_info'),
-    ]
+
+############################# DEBUG ########################################
+    path('home_debug', views.home_debug, name='home_debug'),
+
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    

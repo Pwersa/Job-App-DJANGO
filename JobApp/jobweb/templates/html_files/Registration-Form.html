@@ -9,25 +9,15 @@
 
     
 
-    <body class="row g-3", background="/static/pictures/bg.jpg" >
+    <body class="row g-3", background="/static/pictures/bg.jpg" style="margin-left: 50px; margin-right: 50px; ">
       <div class="fs-1 p-4 mb-2 fw-bold text-center" style="background-color: #1f2833; color: #66fcf1">Registration Form</div>
-      
-      {% if messages %}
-      <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %} style="text-align: center; color: red" >{{ message }}</li>
-        {% endfor %}
-      </ul>
-      {% endif %}
-
+    
       <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e; color: #000000">Account Details</div>
 
       {% load crispy_forms_tags %}  
 
-      <form method="POST" class="row g-4">
-        {% csrf_token %}
-        
-        
+      <form method="POST" enctype="multipart/form-data" class="row g-4">
+        {% csrf_token %}  
         <div class="col-md-4">
           {{form.email|as_crispy_field}}
         </div>

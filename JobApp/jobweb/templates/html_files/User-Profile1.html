@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <title>User Profile</title>
+</head>
+
+<body background="/static/pictures/bg.jpg">
+    <div>
+        <h1 style="color:#66fcf1;text-align: center;font-size: 35px; background-color: #1f2833;font-weight: bold;" class="p-4">Welcome Applicant/Employee</h1>
+    </div>
+    <br>
+    {% for data in info %}
+    <div class="row d-flex justify-content-center">
+        <div class="col-lg-3 ">
+            <div class="card text-center shadow p-3 mb-5 bg-white rounded" style="width: 20rem;">                       
+                <div class="card-body">
+                    <div class="profile-pic-div">
+                        <img src="/static/pictures/image.jpg" id="photo" class="img-thumbnail rounded-circle">
+                        <input type="file" id="file">
+                    </div>
+                      <br> 
+                      <h5 class="card-title">{{data.first_name}} {{data.last_name}}</h5>
+                      <p class="card-text">" {{data.account_type}} "</p>
+                      <hr>
+                      <div class="card-body">
+                        Status
+                      </div>
+                      <ul class="list-group list-group-flush">
+                          <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                              <h6 class="mb-0">Applying For:</h6>
+                              <span class="text-secondary">Pending</span>
+                          </li>
+                          <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                              <h6 class="mb-0">Interview:</h6>
+                              <span class="text-secondary">Pending</span>
+                          </li>
+                          <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                              <h6 class="mb-0">Verdict:</h6>
+                              <span class="text-secondary">Pending</span>
+                          </li>
+                          <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                              <h6 class="mb-0">Requirements:</h6>
+                              <span class="text-secondary">Pending</span>
+                          </li>
+                      </ul>
+
+                      <hr>
+
+                      <a href="#" class="btn btn-outline-info" style="width: 90px; color: #000000" onclick="logout()">Log out</a>
+                      
+                </div>  
+            </div> 
+        </div> 
+
+
+        <div class="col-lg-6">
+            <div class="card shadow p-3 mb-5 bg-white rounded">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Email:</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{data.email}}
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Contact #:</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{data.cellphone}}
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Civil Status:</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {Placeholder}
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Birthday:</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{data.birthday}}
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Address:</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{data.address}}
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h6 class="mb-0">Signature:</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {Placeholder}
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row" style="text-align: center;">
+                        <div class="col-sm-12">
+                            <a class="btn btn-outline-info" style="width: 170px; color: #000000" href="#">Edit Information</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    
+
+    <script>
+        function logout(){
+            alert("Logging out")
+            window.location.replace("{% url 'home' %}");}
+    </script>
+
+</body>

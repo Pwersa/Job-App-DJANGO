@@ -10,7 +10,7 @@
         
         <title>Home</title>
         <div>
-            <nav class="navbar navbar-expand-sm style" style="background: #1F2833;">
+            <nav class="navbar navbar-expand-sm style" style="background: #1F2833; ">
                 <div class="container-fluid">
                   <a class="navbar-brand" style="font-weight: bold; font-size: x-large; color: #66fcf1;">Welcome to our Job Website</a>
                 </div>
@@ -42,118 +42,77 @@
             </nav>
         </div>
     </head>
-    &nbsp;       
+    &nbsp;  
+
+
+<body background="/static/pictures/bg.jpg">
     
-    <style>
-        .list-group{
-            max-height: 750px;
-            margin-bottom: 10px;
-            overflow:scroll;
-            -webkit-overflow-scrolling: touch;
-            text-align: left;
+
+    <div class="container-fluid">
+        {% for jobs in job %}
+        <div class="card shadow p-3 mb-4 bg-white rounded" style="margin-left: 200px; margin-right: 200px;">
+            
+            <div class="row" style="margin-top: 5px; margin-left: 10px;"> 
+                <div class="col-lg-2">
+                    <img class="card-img-top" src="/static/pictures/joblist_icon.png" alt="Card image cap">
+                </div>
+                    <div class="col-lg-10">
+                        <h5 class="card-title"> &nbsp;&nbsp;JOB TITLE:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{jobs.jtitle}}</h5>
+                        <p>&nbsp;&nbsp;&nbsp; JOB DESCRIPTION: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{jobs.jdesc}}</p>
+                        <p>&nbsp;&nbsp;&nbsp; JOB REQUIREMENTS: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{jobs.jobreq1}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{jobs.jobreq2}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;AVERAGE SALARY:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{jobs.salary}}</p>
+                        <a class="btn btn-outline-info" style="margin-left: 600px; margin-bottom: 5px;" onclick="apply_now()">Apply Now!</a>
+                    </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <script>
+        function login(){
+            var mailformat = /[^\s@]+@[^\s@]+\.[^\s@]+/;
+            if ((document.getElementById("password1").value == "") && (document.getElementById("email1").value == "")){
+                alert("Please enter you Email and Password.");
+            }
+            else if (document.getElementById("password1").value == ""){
+                alert("Please enter you Password.");
+            }
+            else if (document.getElementById("email1").value == ""){
+                alert("Please enter you Email.");
+            }
         }
 
-    </style>
-
-    <body background="/static/pictures/bg.jpg" style="height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;">
-        <div class="container-fluid">
-            <div class="row">
-                 <div class="col-lg-10 mx-auto mb-4">
-                    <div class="section-title text-center ">
-                        <h4 class="top-c-sep" id="avail1">Here at our website, we care about your career. Join us today!</h4>
-                    </div>
-                </div>
-            </div>
-                
-                <div class="border" style="border-spacing: 100px; border: 10px solid transparent; margin-left: 225px; margin-right: 225px;">
-                    &nbsp;
-                    <div style="text-align: center;">
-                        <p style="font-size: 19px;"> Search a Job: 
-                        &nbsp;
-                        <input class="form" type="text" placeholder="Enter a Job Name" aria-label="name" id="enter_job">
-                        &nbsp;
-                        <button class="btn btn-outline-info my-2" type="button" button="submit" style="color: #000000;" onclick="find()">Search</button>
-
-                        <div class="list-group" style="padding: 30px;">
-                            <p style="font-size: 18px; text-align: left;">List of Available Jobs</p> 
-                            
-                            {% for job in joblist %}
-
-                            <div>
-                                <a class="list-group-item shadow-sm shadow-sm bg-white rounded">  
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1" id="job_title" name="job_title">{{job.jtitle}}</h5>
-                                        <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                    </div>
-                                        <div>
-                                             <p class="mb-1" style="color: #808080;" id="job_desc" name="job_desc">{{job.jdesc}}</p>
-                                        </div>
-                                    <div>
-                                        <p class="mb-1" style="color: #808080;">{{job.salary}}</p>
-                                    </div>
-                                    <div style="text-align: center;">
-                                        <button class="btn btn-outline-info" type="button" button="button" onclick="apply_now()" style="color: #3d3d3d; width: 150px;">Apply Now</button>
-                                    </div>
-                                </a>
-                            </div>
-                            &nbsp;
-                            {% endfor %}
-
-                        </div>
-                    </div>
-                </div>
-        </div>
-        
-
-        <script>
-            function login(){
-                var mailformat = /[^\s@]+@[^\s@]+\.[^\s@]+/;
-                if ((document.getElementById("password1").value == "") && (document.getElementById("email1").value == "")){
-                    alert("Please enter you Email and Password.");
-                }
-                else if (document.getElementById("password1").value == ""){
-                    alert("Please enter you Password.");
-                }
-                else if (document.getElementById("email1").value == ""){
-                    alert("Please enter you Email.");
-                }
-                else{
-                    location.replace("{% url 'home' %}");
-                }
+        function find(){
+            var job_name = enter_job.value;
+            if (document.getElementById("enter_job").value == ""){
+            alert("Please enter a Job Name to search.");
             }
-
-            function find(){
-                var job_name = enter_job.value;
-                if (document.getElementById("enter_job").value == ""){
-                alert("Please enter a Job Name to search.");
-                }
-                else if (document.getElementById("civil_status").value == "Alphabetical (A-Z)"){
-                    alert("Make list A to Z and " + "Search the job: " + job_name);
-                }
-                else if (document.getElementById("civil_status").value == "Alphabetical (Z-A)"){
-                    alert("Make list A to Z" + "Search the job: " + job_name);
-                }
-                else if (document.getElementById("civil_status").value == "Salary (Highest to Lowest)"){
-                    alert("List with highest salary to lowest salary" + "Search the job: " + job_name);
-                }
-                
-                else{
-                    alert("Search the job: " + job_name);
-                }
-
+            else if (document.getElementById("civil_status").value == "Alphabetical (A-Z)"){
+                alert("Make list A to Z and " + "Search the job: " + job_name);
             }
-
-            function apply_now(){
-                if (confirm("You are now redirecting to Registration Form, click OK to continue.") == true) {
-                    window.location.assign("{% url 'signup' %}");
-                } else {
-                    alert("You canceled the request.")
-                }
+            else if (document.getElementById("civil_status").value == "Alphabetical (Z-A)"){
+                alert("Make list A to Z" + "Search the job: " + job_name);
+            }
+            else if (document.getElementById("civil_status").value == "Salary (Highest to Lowest)"){
+                alert("List with highest salary to lowest salary" + "Search the job: " + job_name);
             }
             
-        </script>
+            else{
+                alert("Search the job: " + job_name);
+            }
 
+        }
+
+        function apply_now(){
+            if (confirm("You are now redirecting to Registration Form, click OK to continue.") == true) {
+                window.location.assign("{% url 'signup' %}");
+            } else {
+                alert("You canceled the request.")
+            }
+        }
         
-    </body>
+    </script>
+</body>
 
-</html>
