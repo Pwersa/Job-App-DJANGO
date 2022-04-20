@@ -13,7 +13,6 @@ from django.views.decorators.cache import cache_control
 user_email = []
 user_account_type = []
 
-
 def home(request):
     user_email.clear()
     user_account_type.clear()
@@ -57,15 +56,19 @@ def re_login(request):
 
 def signup(request):
     form = first_registration()
+    
     if request.method == "POST":
         form = first_registration(request.POST, request.FILES)
         if form.is_valid():
             position = request.POST.get('job')
             form.instance.account_type = position
             form.save()
-            return redirect ('signup')
 
-    context = {'form':form}
+            data1 = job_listing.objects.all()
+            context1 = {'job': data1}
+            return render(request, 'html_files/HOMEWEBSITE.html', context1)
+
+    context = {'form': form}
     return render(request, 'html_files/Registration-Form.html', context)
 
 def signup1(request):
@@ -80,7 +83,7 @@ def user_profile(request):
     return render(request, 'html_files/User-Profile1.html', context)
 
 
-################################### INACTICVE ############################################
+################################### INACTIVE ############################################
 
 def change_pass(request):
     return render(request, 'html_files/changepassHR.html')
@@ -93,9 +96,6 @@ def delete(request):
 
 def addjob(request):
     return render(request, 'html_files/Making-a-Job-Posting.html')
-
-def profile(request):
-    return render(request, 'html_files/User Profile.html')
 
 def showAccount(request):
     return render(request,"html_files/User-Profile1.html")
@@ -122,3 +122,19 @@ def home_debug(request):
     data = job_listing.objects.all()
     context = {'job': data}
     return render(request, 'html_files/HOMEWEBSITE-DEBUG.html', context)
+
+def hrdashboard_debug(request):
+    account = account_registration.objects.all()
+    context = {'account': account}
+    return render(request, 'html_files/HRMANAGER-DEBUG.html', context)
+
+def delete_account(request):
+    if request.method == "POST":
+        delete = request.POST['email']
+        account_registration.objects.filter(email=delete).delete()
+        print(delete)
+        return redirect('hrdashboard_debug')
+    else:
+        return redirect('hrdashboard_debug')
+
+

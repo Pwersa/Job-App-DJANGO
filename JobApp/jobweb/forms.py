@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
 from .models import account_registration
-from django import forms
+
 
 class first_registration(ModelForm):
 
@@ -11,13 +11,14 @@ class first_registration(ModelForm):
         model = account_registration 
         #fields = ['email', 'password1', 'password2', 'photo', 'first_name', 'middle_name', 'last_name', 'address', 'cellphone', 'birthday']
         fields = '__all__' 
+
         widgets = {'password1': forms.PasswordInput(), 'password2': forms.PasswordInput()}
         labels = {'email': 'Email (This Will Be Your Login)',
                 'password1': 'Password',
                 'password2': 'Confirm your Password',
                 'photo': 'Upload Photo',
                 'last_name': 'Surname',
-                'first_name': 'Last Name',
+                'first_name': 'First Name',
                 'middle_name': 'Middle Name',
                 'address': 'Address',
                 'cellphone': 'Cellphone Number',

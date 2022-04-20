@@ -16,9 +16,6 @@
                 &nbsp; &nbsp; &nbsp;
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav" style="cursor: pointer">
-                        <a class="nav-item nav-link active" style="color: #C5C6C7"; onclick="window.location.reload();">Home</a>
-                    </div>
-                    <div class="navbar-nav" style="cursor: pointer">
                         <a class="nav-item nav-link active" style="color: #C5C6C7"  onclick="add_job()">Add Job Listing</a>
                     </div>
                     <div class="navbar-nav" style="cursor: pointer">
@@ -40,207 +37,102 @@
             </nav>
         </div>
     </head>
-
-    <style>
-        .list-group{
-            max-height: 500px;
-            margin-bottom: 10px;
-            overflow:scroll;
-            -webkit-overflow-scrolling: touch;
-            text-align: left;
-                    }
-        .background{
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-        .border border-info{
-            color: cyan;
-            border-width: 100px;
-        }
-        .border{
-            margin: 10px;
-        }
-    </style>
     
-    <body background="/static/pictures/bg.jpg" style="height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;">
-        &nbsp; &nbsp;
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6" >
+    <body>
+        <div class="card shadow bg-white rounded" style="margin: 20px 100px; width: 1165px; position: fixed;">
+            <img src="/static/pictures/bg.jpg" class="card-img" style="max-height: 590px;">
+               
+                <div style="position: fixed;">
+                    <div class="card-header" style="width: 1165px; font-size: 30px; text-align: center;">Manage Employees/Applicants</div>
+                    &nbsp;
+
                     <div style="text-align: center;">
-                        <h1 class="border border-info" style="background-color: #45A29E;">
-                            EMPLOYEES / APPLICANTS   
-                        </h1>
-                        <div class="border border-info " style="border-spacing: 100px;">
-                            &nbsp;
-                            <div style="text-align: center;">
-                                <p> Enter Name: 
-                                &nbsp;
-                                <input class="form" type="text" placeholder="Enter a Name" aria-label="name" id="enter_name">
-                                &nbsp;
-                                <button class="btn btn-outline-info my-2" type="button" button="submit" style="color: #000000;" onclick="search_empapp()">Search</button>        
-                            </div>
-
-                            <div class="list-group list-group-numbered" style="padding: 30px;">
-                                {% for account in accounts %}
-                                <div>
-                                    <form method="POST" action="/emp_amp">
-                                        <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                            <div class="d-flex w-100 justify-content-between">
-                                                <h5 class="mb-1">{{account.last_name}}</h5>
-                                                <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                            </div>
-                                            <div>
-                                                <p class="mb-1" style="color: #808080;" id="user_email" name="user_email">{{account.email}}</p>
-                                            </div>
-                                            <div>
-                                                <p class="mb-1" style="color: #808080;">{{account.cellphone}}</p>
-                                            </div>
-                                            <div style="text-align: center;">
-                                                <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;">View Details</button>
-                                            </div>
-                                        </a>
-                                    </form>
-                                </div>
-                                &nbsp;
-                                {% endfor %}
-
-                            </div>
+                        <div class="btn-group">
+                            Sort the table by:  &nbsp; &nbsp;
+                            <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer; color:black">
+                                  Options
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" onclick="sortTable(0)">Name</a></li>
+                                <li><a class="dropdown-item" onclick="sortTable(1)">Applying For</a></li>
+                                <li><a class="dropdown-item" onclick="sortTable(2)">Interview Date</a></li>
+                            </ul>
                         </div>
+                        &nbsp;
                     </div>
-                </div>
-                
-                <div class="col-lg-6" >
-                    <div style="text-align: center;" >
-                        <h1 class="border border-info" style="background-color: #45A29E;" >
-                            INTERVIEWS    
-                        </h1>
-                        <div class="border border-info border-end">
-                            &nbsp;
-                            <p>
-                                Search a date: 
-                                &nbsp;
-                                <input type="date" id="calendar">
-                                &nbsp;
-                                <button class="btn btn-outline-info my-2" type="button" button="submit" style="color: #000000;" onclick="search_date()">Search</button>
-                            </p>
+                    &nbsp;
+    
+                        
+                    <table class="table-responsive" style="width: 1164px; position: fixed; margin-bottom: 10px;font-size: 15x; background-color: #000000;">
                             
-                            <div class="list-group list-group-numbered" style="padding: 30px;">
-                                <div>
-                                    <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Example Interview 1</h5>
-                                            <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                        </div>
-                                        <div>
-                                            <p class="mb-1" style="color: #808080;">Example Information</p>
-                                        </div>
-                                        <div style="text-align: center;">
-                                            <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;" onclick="interview_details()">View Details</button>
-                                        </div>
-                                    </a>
-                                </div>
-                                &nbsp;
-                                <div>
-                                    <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Example Interview 2</h5>
-                                            <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                        </div>
-                                        <div>
-                                            <p class="mb-1" style="color: #808080;">Example Information</p>
-                                        </div>
-                                        <div style="text-align: center;">
-                                            <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;" onclick="interview_details()">View Details</button>
-                                        </div>
-                                    </a>
-                                </div>
-                                &nbsp;
-                                <div>
-                                    <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Example Interview 3</h5>
-                                            <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                        </div>
-                                        <div>
-                                            <p class="mb-1" style="color: #808080;">Example Information</p>
-                                        </div>
-                                        <div style="text-align: center;">
-                                            <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;" onclick="interview_details()">View Details</button>
-                                        </div>
-                                    </a>
-                                </div>
-                                &nbsp;
-                                <div>
-                                    <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Example Interview 4</h5>
-                                            <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                        </div>
-                                        <div>
-                                            <p class="mb-1" style="color: #808080;">Example Information</p>
-                                        </div>
-                                        <div style="text-align: center;">
-                                            <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;" onclick="interview_details()">View Details</button>
-                                        </div>
-                                    </a>
-                                </div>
-                                &nbsp;
-                                <div>
-                                    <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Example Interview 5</h5>
-                                            <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                        </div>
-                                        <div>
-                                            <p class="mb-1" style="color: #808080;">Example Information</p>
-                                        </div>
-                                        <div style="text-align: center;">
-                                            <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;" onclick="interview_details()">View Details</button>
-                                        </div>
-                                    </a>
-                                </div>
-                                &nbsp;
-                                <div>
-                                    <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Example Interview 6</h5>
-                                            <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                        </div>
-                                        <div>
-                                            <p class="mb-1" style="color: #808080;">Example Information</p>
-                                        </div>
-                                        <div style="text-align: center;">
-                                            <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;" onclick="interview_details()">View Details</button>
-                                        </div>
-                                    </a>
-                                </div>
-                                &nbsp;
-                                <div>
-                                    <a class="list-group-item shadow-sm shadow-sm bg-white rounded">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Example Interview 7</h5>
-                                            <small><span class="badge bg-dark" style="color: #66fcf1;">New</span></small>
-                                        </div>
-                                        <div>
-                                            <p class="mb-1" style="color: #808080;">Example Information</p>
-                                        </div>
-                                        <div style="text-align: center;">
-                                            <button class="btn btn-outline-info" type="button" button="submit" style="color: #3d3d3d; width: 150px;" onclick="interview_details()">View Details</button>
-                                        </div>
-                                    </a>
-                                </div>
-                                &nbsp;
-                                
-                            </div>
-                        </div>
+                        <thead class="table" background="/static/pictures/bg.jpg" src="/static/pictures/bg.jpg">
+                            <th scope="col" style="width: 80px;"></th>
+                            <th scope="col" style="width: 165px;">Name</th>
+                            <th scope="col" style="width: 200px;">Email</th>
+                            <th scope="col" style="width: 130px;">Cellphone</th>
+                            <th scope="col" style="width: 125px;">Applying For</th>
+                            <th scope="col" style="width: 120px;">Account Type</th>
+                            <th scope="col">Interview Date</th>
+                            <th scope="col"></th>
+                            
+                        </thead>
+                        
+                    </table>
+                
+
+                    <div class="table-responsive" style="margin: 26px 80px; max-height: 410px; overflow: auto; -webkit-overflow-scrolling: touch;">
+                        <table class="table" id="account_table">
+                            
+                            
+
+                            
+                                <tbody>
+                                    {% for accounts in account %}
+                                        <tr>
+                                            <td>{{accounts.first_name}} {{accounts.last_name}}</td>
+                                            <td>{{accounts.email}}</td>
+                                            <td>{{accounts.cellphone}}</td>
+                                            <td>Web App Developer</td>
+                                            <td>{{accounts.account_type}}</td>
+                                            <td>1234/56/78 00:00 AM</td>
+                                            
+                                            <td style="text-align: center;">
+                                                <div class="btn-group">
+                                                    <form method="POST" action="/delete_account"> 
+                                                        {% csrf_token %}
+                                                        <input class="form-control" type="hidden" id="email" name="email" value="{{accounts.email}}"> 
+                                                        
+                                                        <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="color: #000000;">
+                                                                Manage
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-end">
+                                                            <li><a class="dropdown-item" onclick="" style="cursor: pointer">View Account</a></li>
+                                                            <li><a class="dropdown-item"  style="cursor: pointer">Set an Interview</a></li>
+                                                            <li><button class="dropdown-item" button="submit" onclick="delete_account()" style="cursor: pointer; color: red;">Delete</button></li>
+                                                        </ul>
+                                                    </form>
+                                                </div>
+                                                &nbsp;
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            
+                        </table>
                     </div>
                 </div>
-            </div>
         </div>
 
+
+
         <script>
+            function delete_account(){
+                if (confirm("Are you sure you want to delete this account?") == true) {
+                window.location.assign("{% url 'delete_account' %}");
+            } else {
+                alert("Deleting the account canceled")
+            }
+            }
             function change_password(){
                 alert("Opening Change Password");
                 location.replace("{% url 'changepass' %}");
@@ -248,53 +140,71 @@
 
             function log_out(){
                 alert("You've logged out.");
-                location.replace("{% url 'home' %}");
+                window.location.replace("{% url 'home' %}");
             }
             
             function add_job(){
                 window.location.assign("{% url 'addjob' %}");
             }
 
-            function search_empapp(){
-                var name_enter = enter_name.value;
-                if (document.getElementById("enter_name").value == ""){
-                    alert("Please enter a Name to search.");
-                }
-                else if (document.getElementById("filter_search").value == "Alphabetical (A-Z)"){
-                    alert("Make list A to Z and " + "Search the name: " + name_enter);
-                }
-                else if (document.getElementById("filter_search").value == "Alphabetical (Z-A)"){
-                    alert("Make list A to Z and " + "Search the name: " + name_enter);
-                }
-                else if (document.getElementById("filter_search").value == "Salary (Highest to Lowest)"){
-                    alert("List with highest salary to lowest salary " + "Search the name: " + name_enter);
-                }
-                else{
-                    alert("Search the Name: " + name_enter);
-                }
-            }
-
-            function search_date(){
-                var calendar_data = calendar.value;
-                if (document.getElementById("calendar").value == "")
-                    alert("Please select a date.");
-                else{
-                    alert("Search results by this date: " + calendar_data);
-                }
-            }
-            //Example data for interview details
-            var applicant_name = "Juan Dela Cruz"
-            var date = "February 14, 2000"
-            var time = "1:00 PM"
-            var applying_for = "Web Developer"
-
-            function interview_details(){
-                alert("\n" + "=============== INTERVIEW DETAILS ===============\n" + "Name: " + applicant_name + "\n" + "Date: " + date + "\n" + "Time: " + time + "\n" + "Applying For: " + applying_for);
-            }
-
             function delete_acc(){
                 alert("Opening delete account page.");
                 window.location.assign("{% url 'delete' %}");
+            }
+
+            function sortTable(n) {
+                var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+                table = document.getElementById("account_table");
+                switching = true;
+                // Set the sorting direction to ascending:
+                dir = "asc";
+                /* Make a loop that will continue until
+                no switching has been done: */
+                while (switching) {
+                    // Start by saying: no switching is done:
+                    switching = false;
+                    rows = table.rows;
+                    /* Loop through all table rows (except the
+                    first, which contains table headers): */
+                    for (i = 1; i < (rows.length - 1); i++) {
+                    // Start by saying there should be no switching:
+                    shouldSwitch = false;
+                    /* Get the two elements you want to compare,
+                    one from current row and one from the next: */
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                    /* Check if the two rows should switch place,
+                    based on the direction, asc or desc: */
+                    if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        // If so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                        }
+                    } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        // If so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                        }
+                    }
+                    }
+                    if (shouldSwitch) {
+                    /* If a switch has been marked, make the switch
+                    and mark that a switch has been done: */
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    // Each time a switch is done, increase this count by 1:
+                    switchcount ++;
+                    } else {
+                    /* If no switching has been done AND the direction is "asc",
+                    set the direction to "desc" and run the while loop again. */
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                    }
+                }
             }
 
         </script>
