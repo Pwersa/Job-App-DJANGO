@@ -46,7 +46,7 @@
     
 <body background="/static/pictures/bg.jpg" >
     {% if messages %}
-    <ul class="messages" style="font-style: italic; text-align: center;">
+    <ul class="messages" style="font-style: italic; color: #66fcf1; text-align: center;">
     {% for message in messages %}
         <h4{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h4>
     {% endfor %}

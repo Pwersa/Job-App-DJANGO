@@ -39,7 +39,7 @@
     </head>
     
     <body>
-        <div class="card shadow-lg bg-white rounded" style="margin: 20px 100px; width: 1165px; position: fixed;">
+        <div class="card shadow bg-white rounded" style="margin: 20px 100px; width: 1165px; position: fixed;">
             <img src="/static/pictures/bg.jpg" class="card-img" style="max-height: 590px;">
                
                 <div style="position: fixed;">
@@ -53,9 +53,9 @@
                                   Options
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item">Name</a></li>
-                                <li><a class="dropdown-item">Applying For</a></li>
-                                <li><a class="dropdown-item">Interview Date</a></li>
+                                <li><a class="dropdown-item" onclick="sortTable(0)">Name</a></li>
+                                <li><a class="dropdown-item" onclick="sortTable(1)">Applying For</a></li>
+                                <li><a class="dropdown-item" onclick="sortTable(2)">Interview Date</a></li>
                             </ul>
                         </div>
                         &nbsp;
@@ -68,7 +68,7 @@
                         <thead class="table" background="/static/pictures/bg.jpg" src="/static/pictures/bg.jpg">
                             <th scope="col" style="width: 80px;"></th>
                             <th scope="col" style="width: 165px;">Name</th>
-                            <th scope="col" style="width: 180px;">Email</th>
+                            <th scope="col" style="width: 200px;">Email</th>
                             <th scope="col" style="width: 130px;">Cellphone</th>
                             <th scope="col" style="width: 125px;">Applying For</th>
                             <th scope="col" style="width: 120px;">Account Type</th>
@@ -98,7 +98,7 @@
                                             
                                             <td style="text-align: center;">
                                                 <div class="btn-group">
-                                                    <form method="POST" action="/manage_account" onsubmit="confirm('Are you sure you want to do that?');"> 
+                                                    <form method="POST" action="/delete_account"> 
                                                         {% csrf_token %}
                                                         <input class="form-control" type="hidden" id="email" name="email" value="{{accounts.email}}"> 
                                                         
@@ -106,9 +106,9 @@
                                                                 Manage
                                                         </button>
                                                         <ul class="dropdown-menu dropdown-menu-end">
-                                                            <li><button class="dropdown-item" button="submit" style="cursor: pointer;" name="View Account">View Account</button></li>
-                                                            <li><button class="dropdown-item" button="submit" style="cursor: pointer;" name="Set an Interview">Set an Interview</button></li>
-                                                            <li><button class="dropdown-item" button="submit" style="cursor: pointer; color: red;" name="Delete">Delete</button></li>
+                                                            <li><a class="dropdown-item" onclick="" style="cursor: pointer">View Account</a></li>
+                                                            <li><a class="dropdown-item"  style="cursor: pointer">Set an Interview</a></li>
+                                                            <li><button class="dropdown-item" button="submit" onclick="delete_account()" style="cursor: pointer; color: red;">Delete</button></li>
                                                         </ul>
                                                     </form>
                                                 </div>
@@ -126,6 +126,13 @@
 
 
         <script>
+            function delete_account(){
+                if (confirm("Are you sure you want to delete this account?") == true) {
+                window.location.assign("{% url 'delete_account' %}");
+            } else {
+                alert("Deleting the account canceled")
+            }
+            }
             function change_password(){
                 alert("Opening Change Password");
                 location.replace("{% url 'changepass' %}");
@@ -143,6 +150,61 @@
             function delete_acc(){
                 alert("Opening delete account page.");
                 window.location.assign("{% url 'delete' %}");
+            }
+
+            function sortTable(n) {
+                var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+                table = document.getElementById("account_table");
+                switching = true;
+                // Set the sorting direction to ascending:
+                dir = "asc";
+                /* Make a loop that will continue until
+                no switching has been done: */
+                while (switching) {
+                    // Start by saying: no switching is done:
+                    switching = false;
+                    rows = table.rows;
+                    /* Loop through all table rows (except the
+                    first, which contains table headers): */
+                    for (i = 1; i < (rows.length - 1); i++) {
+                    // Start by saying there should be no switching:
+                    shouldSwitch = false;
+                    /* Get the two elements you want to compare,
+                    one from current row and one from the next: */
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                    /* Check if the two rows should switch place,
+                    based on the direction, asc or desc: */
+                    if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        // If so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                        }
+                    } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        // If so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                        }
+                    }
+                    }
+                    if (shouldSwitch) {
+                    /* If a switch has been marked, make the switch
+                    and mark that a switch has been done: */
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    // Each time a switch is done, increase this count by 1:
+                    switchcount ++;
+                    } else {
+                    /* If no switching has been done AND the direction is "asc",
+                    set the direction to "desc" and run the while loop again. */
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                    }
+                }
             }
 
         </script>

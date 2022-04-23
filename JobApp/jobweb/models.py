@@ -1,5 +1,6 @@
 from django.db import models
 from django import forms
+from django.contrib.auth.models import UserManager
 
 #from django.contrib.auth.models import AbstractUser 
 
@@ -12,7 +13,7 @@ class account_registration(models.Model):
     email = models.EmailField(primary_key = True, verbose_name='email', unique=True)
     password1 = models.CharField(verbose_name='password1', max_length=20,)
     password2 = models.CharField(verbose_name='password2', max_length=20,)
-    photo = models.ImageField(verbose_name='photo', null=True, blank=True, upload_to="images/")
+    photo = models.ImageField(verbose_name='photo', null=True, upload_to="images/")
     first_name = models.CharField(verbose_name='first_name' ,max_length=99, default="")
     middle_name = models.CharField(verbose_name='middle_name' ,max_length=99, default="")
     last_name = models.CharField(verbose_name='last_name' ,max_length=99, default="")
@@ -23,6 +24,13 @@ class account_registration(models.Model):
     job = models.CharField(verbose_name='job',max_length=99, default='Applicant')
     account_type = models.CharField(verbose_name='account_type',max_length=99)
     account_complete = models.BooleanField(verbose_name='account_complete', default=False)
+
+    #USERNAME_FIELD = 'email'
+    #REQUIRED_FIELDS = [email, password1]
+    #is_anonymous = False
+    #is_authenticated = True
+
+    #objects = UserManager()
 
 class other_info(models.Model):
     email = models.ForeignKey(account_registration, primary_key=True, on_delete=models.CASCADE, default="user@email.com")

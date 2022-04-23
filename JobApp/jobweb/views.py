@@ -1,12 +1,13 @@
+#from django.http import HttpResponse
+#import mysql.connector
+#from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-import mysql.connector
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
 from .forms import first_registration
 from .models import *
 from django.views.decorators.cache import cache_control
-
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 ######################## ACTIVE #########################
 
@@ -49,9 +50,9 @@ def login(request):
         return render(request, 'html_files/HRMANAGER.html', context)
     
 def re_login(request):
-    if request.method=='POST' and 'later' in request.POST:
+    if request.method =='POST' and 'later' in request.POST:
         return redirect('user_profile')
-    if request.method=='POST' and 'continue' in request.POST:
+    if request.method =='POST' and 'continue' in request.POST:
         return redirect ('signup1')
 
 def signup(request):
@@ -90,6 +91,7 @@ def user_profile(request):
     return render(request, 'html_files/User-Profile1.html', context)
 
 
+
 ################################### INACTIVE ############################################
 
 def change_pass(request):
@@ -104,8 +106,6 @@ def delete(request):
 def addjob(request):
     return render(request, 'html_files/Making-a-Job-Posting.html')
 
-def showAccount(request):
-    return render(request,"html_files/User-Profile1.html")
 
 def createJobs(request):
     return render(request, 'html_files/HRMANAGER.html')
@@ -125,7 +125,7 @@ def delete_jobs(request):
 
 ################################### DEBUG ############################################
 
-def home_debug(request):
+#def home_debug(request):
     data = job_listing.objects.all()
     context = {'job': data}
     return render(request, 'html_files/HOMEWEBSITE-DEBUG.html', context)
@@ -135,13 +135,40 @@ def hrdashboard_debug(request):
     context = {'account': account}
     return render(request, 'html_files/HRMANAGER-DEBUG.html', context)
 
-def delete_account(request):
-    if request.method == "POST":
-        delete = request.POST['email']
-        account_registration.objects.filter(email=delete).delete()
-        print(delete)
+def manage_account(request):
+    print("MANAGE")
+    account_email = request.POST['email']
+
+    if request.method == "POST" and 'Delete' in request.POST:
+        account_registration.objects.filter(email=account_email).delete()
+        print("DELETE")
         return redirect('hrdashboard_debug')
+
+    if request.method == "POST" and 'View Account' in request.POST:
+        account_view = account_registration.objects.filter(email=account_email)
+        context = {'info': account_view}
+        print("VIEW")
+        return render(request, 'html_files/User-Profile1.html', context)
+        
+    if request.method == "POST" and 'Set an Interview' in request.POST:
+        print("INTERVIERW")
+        return redirect('hrdashboard_debug')
+
+def logout(request):
+    logout()
+    return redirect('home')
+
+#def applicant(request):
+    user_account = account_registration.objects.filter(email=email)
+    account_completion = account_registration.objects.filter(email=email).values_list('account_complete').first()
+    print("Pass6")
+    if account_completion == True:
+        print("Pass7")
+        context = {'info': user_account}
+        return render(request, 'html_files/User-Profile1.html', context)
     else:
-        return redirect('hrdashboard_debug')
+        print("Pass8")
+        context = {'info': user_account}
+        return render(request, 'html_files/Finish-Registration.html', context)
 
 
