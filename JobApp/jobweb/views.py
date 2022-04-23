@@ -56,17 +56,24 @@ def re_login(request):
 
 def signup(request):
     form = first_registration()
-    
+
     if request.method == "POST":
         form = first_registration(request.POST, request.FILES)
-        if form.is_valid():
-            position = request.POST.get('job')
-            form.instance.account_type = position
-            form.save()
 
-            data1 = job_listing.objects.all()
-            context1 = {'job': data1}
-            return render(request, 'html_files/HOMEWEBSITE.html', context1)
+        if form.is_valid():
+            password_first = form.cleaned_data.get("password1")
+            password_confirm = form.cleaned_data.get("password2")
+
+            if password_confirm == password_first:
+                position = request.POST.get('job')
+                form.instance.account_type = position
+                form.save()
+                messages.success(request, 'Account successfully created!')
+                return redirect('home')
+
+            else:
+                messages.warning(request, 'ERROR: Password do not match.')
+                return redirect('signup')
 
     context = {'form': form}
     return render(request, 'html_files/Registration-Form.html', context)

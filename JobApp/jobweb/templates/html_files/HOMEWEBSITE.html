@@ -14,7 +14,6 @@
                 <div class="container-fluid">
                   <a class="navbar-brand" style="font-weight: bold; font-size: x-large; color: #66fcf1;">Welcome to our Job Website</a>
                 </div>
-
                 <div>
                     <form class="d-flex" method="POST" action="/login">
                         {% csrf_token %}
@@ -44,9 +43,15 @@
     </head>
     &nbsp;  
 
-
-<body background="/static/pictures/bg.jpg">
     
+<body background="/static/pictures/bg.jpg" >
+    {% if messages %}
+    <ul class="messages" style="font-style: italic; text-align: center;">
+    {% for message in messages %}
+        <h4{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h4>
+    {% endfor %}
+    </ul>
+    {% endif %}
 
     <div class="container-fluid">
         {% for jobs in job %}

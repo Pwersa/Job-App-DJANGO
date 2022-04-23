@@ -16,7 +16,7 @@ class first_registration(ModelForm):
         labels = {'email': 'Email (This Will Be Your Login)',
                 'password1': 'Password',
                 'password2': 'Confirm your Password',
-                'photo': 'Upload Photo',
+                'photo': 'Upload 1x1 Photo',
                 'last_name': 'Surname',
                 'first_name': 'First Name',
                 'middle_name': 'Middle Name',
