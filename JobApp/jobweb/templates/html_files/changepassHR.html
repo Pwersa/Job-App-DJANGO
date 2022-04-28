@@ -19,8 +19,6 @@
         <form method="POST" class="container" onsubmit="check()" action="/changepassword">
         {% csrf_token %}
             &nbsp;
-            <input class="form-control" type="email" placeholder="Email" id="type_email" name="typeemail" required>
-            &nbsp;
             <input class="form-control" type="password" placeholder="Current Password" id="currentpass" name="oldpass" required>
             &nbsp;
             <input class="form-control" type="password" placeholder="New Password" id="newpass" name="newpass" required>

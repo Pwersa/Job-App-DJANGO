@@ -22,6 +22,7 @@ class account_registration(models.Model):
     birthday = models.DateField(verbose_name='birthday',)
     applyingfor = models.CharField(verbose_name='applyingfor',max_length=99, default="", choices=applyingfor1)
     job = models.CharField(verbose_name='job',max_length=99, default='Applicant')
+    employment_status = models.CharField(verbose_name='job',max_length=99, default='Not yet Employed')
     account_type = models.CharField(verbose_name='account_type',max_length=99)
     account_complete = models.BooleanField(verbose_name='account_complete', default=False)
 

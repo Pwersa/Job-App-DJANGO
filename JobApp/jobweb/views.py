@@ -3,7 +3,7 @@
 #from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import first_registration
+from .forms import *
 from .models import *
 from django.views.decorators.cache import cache_control
 from django.contrib.auth import authenticate, login, logout
@@ -46,7 +46,7 @@ def login(request):
     elif data1[0] == 'HRManager':
         data3 = account_registration.objects.all()
         #data4 = interview.objects.all()
-        context = {'info': data3}
+        context = {'account': data3}
         return render(request, 'html_files/HRMANAGER.html', context)
     
 def re_login(request):
@@ -78,6 +78,11 @@ def signup(request):
 
     context = {'form': form}
     return render(request, 'html_files/Registration-Form.html', context)
+
+def hrdashboard(request):
+    account = account_registration.objects.all()
+    context = {'account': account}
+    return render(request, 'html_files/HRMANAGER.html', context)
 
 def signup1(request):
     return render(request, 'html_files/Registration-Form-Part-2.html')
@@ -122,6 +127,10 @@ def delete_acc(request):
 def delete_jobs(request):
     return render(request, 'html_files/HRMANAGER.html')
 
+def logout(request):
+    logout()
+    return redirect('home')
+
 
 ################################### DEBUG ############################################
 
@@ -130,45 +139,77 @@ def delete_jobs(request):
     context = {'job': data}
     return render(request, 'html_files/HOMEWEBSITE-DEBUG.html', context)
 
-def hrdashboard_debug(request):
-    account = account_registration.objects.all()
-    context = {'account': account}
-    return render(request, 'html_files/HRMANAGER-DEBUG.html', context)
-
 def manage_account(request):
     print("MANAGE")
     account_email = request.POST['email']
+    account_email_type = request.POST['account_type']
 
     if request.method == "POST" and 'Delete' in request.POST:
         account_registration.objects.filter(email=account_email).delete()
         print("DELETE")
-        return redirect('hrdashboard_debug')
+        return redirect('hrdashboard')
 
     if request.method == "POST" and 'View Account' in request.POST:
-        account_view = account_registration.objects.filter(email=account_email)
-        context = {'info': account_view}
-        print("VIEW")
-        return render(request, 'html_files/User-Profile1.html', context)
+
+        if account_email_type == "Applicant":
+            account_view = account_registration.objects.filter(email=account_email)
+            context = {'info': account_view}
+            print("VIEW Applicant")
+            return render(request, 'html_files/User-Profile1-Applicant.html', context)
+
+        elif account_email_type == "Employee":
+            account_view = account_registration.objects.filter(email=account_email)
+            context = {'info': account_view}
+            print("VIEW Employee")
+            return render(request, 'html_files/User-Profile1-Employee.html', context)
+
+        else:
+            return redirect('hrdashboard')
         
     if request.method == "POST" and 'Set an Interview' in request.POST:
         print("INTERVIERW")
-        return redirect('hrdashboard_debug')
+        return redirect('hrdashboard')
 
-def logout(request):
-    logout()
-    return redirect('home')
+def change_employment(request):
+    email = request.POST.get('account_email')
 
-#def applicant(request):
-    user_account = account_registration.objects.filter(email=email)
-    account_completion = account_registration.objects.filter(email=email).values_list('account_complete').first()
-    print("Pass6")
-    if account_completion == True:
-        print("Pass7")
-        context = {'info': user_account}
-        return render(request, 'html_files/User-Profile1.html', context)
+    if request.method == "POST" and "Full Time" in request.POST:
+        account_registration.objects.filter(email=email).update(employment_status="Full Time Worker")
+        account = account_registration.objects.all()
+        context = {'account': account}
+        return render(request, 'html_files/HRMANAGER.html', context)
+
+    elif request.method == "POST" and "Part Time" in request.POST:
+        account_registration.objects.filter(email=email).update(employment_status="Part Time Worker")
+        account = account_registration.objects.all()
+        context = {'account': account}
+        return render(request, 'html_files/HRMANAGER.html', context)
+
+    elif request.method == "POST" and "On Leave" in request.POST:
+        account_registration.objects.filter(email=email).update(employment_status="On Vacation")
+        account = account_registration.objects.all()
+        context = {'account': account}
+        return render(request, 'html_files/HRMANAGER.html', context)
+
+    elif request.method == "POST" and "Resigned" in request.POST:
+        account_registration.objects.filter(email=email).update(employment_status="Resigned")
+        account = account_registration.objects.all()
+        context = {'account': account}
+        return render(request, 'html_files/HRMANAGER.html', context)
+
+    elif request.method == "POST" and "Fired" in request.POST:
+        account_registration.objects.filter(email=email).update(employment_status="Fired")
+        account = account_registration.objects.all()
+        context = {'account': account}
+        return render(request, 'html_files/HRMANAGER.html', context)
+
+    elif request.method == "POST" and "Retired" in request.POST:
+        account_registration.objects.filter(email=email).update(employment_status="Retired")
+        account = account_registration.objects.all()
+        context = {'account': account}
+        return render(request, 'html_files/HRMANAGER.html', context)
+
     else:
-        print("Pass8")
-        context = {'info': user_account}
-        return render(request, 'html_files/Finish-Registration.html', context)
+        return redirect('change_employment')
 
 
