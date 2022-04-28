@@ -37,24 +37,26 @@
     
     <body class="col-lg-auto">
         <div class="card shadow-lg bg-white rounded" style="margin: 20px 100px; width: 1165px; position: fixed;">
-            <img src="/static/pictures/bg.jpg" class="card-img" style="max-height: 590px;">
+            <img src="/static/pictures/bg.jpg" class="card-img" style="max-height: 620px;">
                
                 <div style="position: fixed;">
                     <div class="card-header" style="width: 1165px; font-size: 30px; text-align: center;">Manage Employees/Applicants</div>
                     &nbsp;
 
                     <div style="text-align: center;">
-                        <div class="btn-group">
-                            Sort the table by:  &nbsp; &nbsp;
-                            <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer; color:black">
-                                  Options
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item">Name</a></li>
-                                <li><a class="dropdown-item">Applying For</a></li>
-                                <li><a class="dropdown-item">Interview Date</a></li>
-                            </ul>
-                        </div>
+                        <form method="POST" action="/sort_list">
+                            {% csrf_token %}
+                            <div class="btn-group dropdown">
+                                <button class="btn btn-outline-info dropdown-toggle" type="submit" button="submit" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="color: #000000">
+                                Sort the list by:
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><button class="dropdown-item" button="submit" name="Name" value="Name" >Name (Ascending)</button></li>
+                                    <li><button class="dropdown-item" button="submit" name="Emp_App" value="Emp_App" >Employee/Applicant (Ascending)</button></li>
+                                    <li><button class="dropdown-item" button="submit" name="Date" value="Date" >Interview Date (Ascending)</button></li>
+                                </ul>
+                            </div>
+                        </form>
                         &nbsp;
                     </div>
                      
@@ -81,9 +83,9 @@
                                             <td>{{accounts.first_name}} {{accounts.last_name}}</td>
                                             <td>{{accounts.email}}</td>
                                             <td>{{accounts.cellphone}}</td>
-                                            <td>Web App Developer</td>
+                                            <td>{{accounts.applyingfor}}</td>
                                             <td>{{accounts.account_type}}</td>
-                                            <td>1234/56/78 00:00 AM</td>
+                                            <td>{Placeholder}</td>
                                             
                                             <td style="text-align: center;">
                                                 <div class="btn-group">
@@ -97,7 +99,6 @@
                                                         </button>
                                                         <ul class="dropdown-menu dropdown-menu-end">
                                                             <li><button class="dropdown-item" button="submit" style="cursor: pointer;" name="View Account" value="View Account">View Account</button></li>
-                                                            <li><button class="dropdown-item" button="submit" style="cursor: pointer;" name="Set an Interview" value="Set an Interview">Set an Interview</button></li>
                                                             <li><button class="dropdown-item" button="submit" style="cursor: pointer; color: red;" name="Delete" value="Delete">Delete</button></li>
                                                         </ul>
                                                     </form>

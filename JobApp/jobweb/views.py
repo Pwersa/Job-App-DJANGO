@@ -84,60 +84,24 @@ def hrdashboard(request):
     context = {'account': account}
     return render(request, 'html_files/HRMANAGER.html', context)
 
-def signup1(request):
-    return render(request, 'html_files/Registration-Form-Part-2.html')
+def sort_list(request):
+    if request.method == "POST" and "Name" in request.POST:
+        account = account_registration.objects.order_by('first_name')
+        context = {'account': account}
+        return render(request, 'html_files/HRMANAGER.html', context)
 
-def complete_info(request):
-    return render(request, 'html_files/Finish-Registration.html')
+    elif request.method == "POST" and "Emp_App" in request.POST:
+        account = account_registration.objects.order_by('account_type')
+        context = {'account': account}
+        return render(request, 'html_files/HRMANAGER.html', context)
+    
+    elif request.method == "POST" and "Date" in request.POST:
+        account = account_registration.objects.order_by('interview')
+        context = {'account': account}
+        return render(request, 'html_files/HRMANAGER.html', context)
 
-def user_profile(request):
-    data = account_registration.objects.filter(email=user_email[0])
-    context = {'info': data}
-    return render(request, 'html_files/User-Profile1.html', context)
-
-
-
-################################### INACTIVE ############################################
-
-def change_pass(request):
-    return render(request, 'html_files/changepassHR.html')
-
-def hrdashboard(request):
-    return render(request, 'html_files/HRMANAGER.html')
-
-def delete(request):
-    return render(request, 'html_files/delete.html')
-
-def addjob(request):
-    return render(request, 'html_files/Making-a-Job-Posting.html')
-
-
-def createJobs(request):
-    return render(request, 'html_files/HRMANAGER.html')
-
-def job_show(request):
-    return render(request,"html_files/HOMEWEBSITE.html")
-
-def changepass1(request):
-    return render(request, 'html_files/HRMANAGER.html')
-
-def delete_acc(request):
-    return render(request, 'html_files/HRMANAGER.html')
-
-def delete_jobs(request):
-    return render(request, 'html_files/HRMANAGER.html')
-
-def logout(request):
-    logout()
-    return redirect('home')
-
-
-################################### DEBUG ############################################
-
-#def home_debug(request):
-    data = job_listing.objects.all()
-    context = {'job': data}
-    return render(request, 'html_files/HOMEWEBSITE-DEBUG.html', context)
+    else:
+        return redirect('sort_list')
 
 def manage_account(request):
     print("MANAGE")
@@ -149,7 +113,7 @@ def manage_account(request):
         print("DELETE")
         return redirect('hrdashboard')
 
-    if request.method == "POST" and 'View Account' in request.POST:
+    elif request.method == "POST" and 'View Account' in request.POST:
 
         if account_email_type == "Applicant":
             account_view = account_registration.objects.filter(email=account_email)
@@ -165,10 +129,20 @@ def manage_account(request):
 
         else:
             return redirect('hrdashboard')
-        
-    if request.method == "POST" and 'Set an Interview' in request.POST:
-        print("INTERVIERW")
-        return redirect('hrdashboard')
+
+def signup1(request):
+    return render(request, 'html_files/Registration-Form-Part-2.html')
+
+def complete_info(request):
+    return render(request, 'html_files/Finish-Registration.html')
+
+def user_profile(request):
+    data = account_registration.objects.filter(email=user_email[0])
+    context = {'info': data}
+    return render(request, 'html_files/User-Profile1.html', context)
+
+def set_interview(request):
+    return redirect('set_interview')
 
 def change_employment(request):
     email = request.POST.get('account_email')
@@ -211,5 +185,47 @@ def change_employment(request):
 
     else:
         return redirect('change_employment')
+
+
+
+################################### INACTIVE ############################################
+
+def change_pass(request):
+    return render(request, 'html_files/changepassHR.html')
+
+def delete(request):
+    return render(request, 'html_files/delete.html')
+
+def addjob(request):
+    return render(request, 'html_files/Making-a-Job-Posting.html')
+
+
+def createJobs(request):
+    return render(request, 'html_files/HRMANAGER.html')
+
+def job_show(request):
+    return render(request,"html_files/HOMEWEBSITE.html")
+
+def changepass1(request):
+    return render(request, 'html_files/HRMANAGER.html')
+
+def delete_acc(request):
+    return render(request, 'html_files/HRMANAGER.html')
+
+def delete_jobs(request):
+    return render(request, 'html_files/HRMANAGER.html')
+
+def logout(request):
+    logout()
+    return redirect('home')
+
+
+################################### DEBUG ############################################
+
+
+
+ 
+
+
 
 

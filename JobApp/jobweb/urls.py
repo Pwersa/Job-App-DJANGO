@@ -22,6 +22,9 @@ urlpatterns = [
     path('hrdashboard', views.hrdashboard, name='hrdashboard'),
     path('manage_account', views.manage_account, name='manage_account'),
     path('change_employment', views.change_employment, name='change_employment'),
+    path('sort_list', views.sort_list, name='sort_list'),
+    path('set_interview', views.set_interview, name="set_interview"),
+
 ############################  UNUSED  ####################################
     path('change_password', views.change_pass, name='changepass'),
     path('delete', views.delete, name="delete"),
