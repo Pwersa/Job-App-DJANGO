@@ -65,7 +65,7 @@
                             <form method="POST" action="{% url 'set_interview' data.pk %}">
                                 {% csrf_token %}
                                 <input type="hidden" name="example" id="example" value="NAKUHA MO NA PRE">
-                                <h6><input type="date class="form-control"  id="interview_date" name="interview_date" >Set a date for interview</h6>
+                                <h6><input type="date" class="form-control"  id="interview_date" name="interview_date" >Set a date for interview</h6>
                                 <button class="btn btn-outline-info" button="submit" style="color: black;">Set Interview</button>
                             </form>
                             
