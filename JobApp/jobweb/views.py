@@ -1,6 +1,7 @@
 #from django.http import HttpResponse
 #import mysql.connector
 #from django.contrib.auth.forms import UserCreationForm
+from queue import Empty
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import *
@@ -121,18 +122,20 @@ def complete_info(request):
 
 
 def set_interview(request, email_id):
-    if request.method == "POST":
-        get_date_time = request.POST.get('interview_date')
-        update_date_time = interview.objects.get(email_id=email_id)
-        update_date_time.date_time = get_date_time
-        update_date_time.save()
-        print("SET DATE:", get_date_time )
-        user_account = account_registration.objects.filter(email=email_id)
-        context = {'info': user_account}
-        return render(request, 'html_files/User-Profile1-Applicant.html', context)
-
+    get_date_time = request.POST.get('interview_date')
+    
+    if get_date_time is not "":
+        if request.method == "POST":
+            update_date_time = interview.objects.get(email_id=email_id)
+            update_date_time.date_time = get_date_time
+            update_date_time.save()
+            print("SET DATE:", get_date_time )
+            user_account = account_registration.objects.filter(email=email_id)
+            messages.success(request, 'Interview date was added.')
+            context = {'info': user_account}
+            return render(request, 'html_files/User-Profile1-Applicant.html', context)
     else:
-        print("EKIS")
+        messages.success(request, 'No interview date was added.')
         user_account = account_registration.objects.filter(email=email_id)
         context = {'info': user_account}
         return render(request, 'html_files/User-Profile1-Applicant.html', context)
