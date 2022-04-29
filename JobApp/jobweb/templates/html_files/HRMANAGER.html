@@ -89,8 +89,6 @@
                                             
                                             <td style="text-align: center;">
                                                 <div class="btn-group">
-                                                    <form method="POST" action="/manage_account"> 
-                                                        {% csrf_token %}
                                                         <input class="form-control" type="hidden" id="email" name="email" value="{{accounts.email}}"> 
                                                         <input class="form-control" type="hidden" id="account_type" name="account_type" value="{{accounts.account_type}}">
 
@@ -98,10 +96,10 @@
                                                                 Manage
                                                         </button>
                                                         <ul class="dropdown-menu dropdown-menu-end">
-                                                            <li><button class="dropdown-item" button="submit" style="cursor: pointer;" name="View Account" value="View Account">View Account</button></li>
+                                                            <li><a class="dropdown-item" button="submit" style="cursor: pointer;" name="View Account" value="View Account" href="{% url 'manage_account' accounts.pk %}">View Account</a></li>
                                                             <li><button class="dropdown-item" button="submit" style="cursor: pointer; color: red;" name="Delete" value="Delete">Delete</button></li>
                                                         </ul>
-                                                    </form>
+                                                    
                                                 </div>
                                                 &nbsp;
                                             </td>

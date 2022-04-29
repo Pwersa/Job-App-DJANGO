@@ -11,19 +11,19 @@ urlpatterns = [
     path('home', views.home, name='home'),
 
     path('login', views.login),
-    path('re_login', views.re_login),
+    path('re_login/<str:email>', views.re_login, name='re_login'),
     path('logout', views.logout, name='logout'),
 
     path('signup', views.signup, name='signup'),
     path('signup1', views.signup1, name='signup1'),
     path('complete_info', views.complete_info, name='complete_info'),
-    path('user_profile', views.user_profile, name='user_profile'),
+    #path('user_profile', views.user_profile, name='user_profile'),
 
     path('hrdashboard', views.hrdashboard, name='hrdashboard'),
-    path('manage_account', views.manage_account, name='manage_account'),
+    path('manage_account/<str:email>', views.manage_account, name='manage_account'),
     path('change_employment', views.change_employment, name='change_employment'),
     path('sort_list', views.sort_list, name='sort_list'),
-    path('set_interview', views.set_interview, name="set_interview"),
+    path('set_interview/<str:email_id>', views.set_interview, name="set_interview"),
 
 ############################  UNUSED  ####################################
     path('change_password', views.change_pass, name='changepass'),

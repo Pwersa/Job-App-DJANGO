@@ -10,8 +10,8 @@
 {% for data in info %}
 <body background="/static/pictures/bg.jpg" style="margin: auto">
     <br> <br> <br>
-    <form method="POST" action="/re_login">
-          
+    
+        
         <div class="row justify-content-center">
             <div class="card text-center shadow p-3 mb-5 bg-white rounded" style="width: 20rem;">                       
                 <div class="card-body">
@@ -19,17 +19,19 @@
                         <img src="{{data.photo.url}}" id="photo" class="img-thumbnail rounded-circle">
                     </div>
                         <br> 
+                        <input type="hidden" name="user_email" id="user_email" value="{{data.email}}">
                         <h4 class="card-title">{{data.first_name}} {{data.last_name}}</h4>
                         <p class="card-text" style="font-weight: bold;">{{data.email}}</p>
                         <p class="card-text" style="font-weight: bold;">{{data.account_type}}</p>
                         <p class="card-text">Complete now your Registration</p>
-                        {% csrf_token %}
-                        <input class="btn btn-outline-info" type="submit" name="later" value="Later">
-                        <input class="btn btn-outline-info" type="submit" name="continue" value="Continue">
+
+                        <a class="btn btn-outline-info" type="submit" name="Later" value="Later" href="{% url 're_login' data.pk %}">Later</a>
+                        <a class="btn btn-outline-info" type="submit" name="Continue" value="Continue" href="{% url 're_login' data.pk %}">Continue</a>
+                  
                         
                 </div>  
             </div> 
         </div>
-    </form>
+    
 </body>
 {% endfor %}

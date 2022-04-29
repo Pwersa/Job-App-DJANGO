@@ -9,51 +9,50 @@ from django.views.decorators.cache import cache_control
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
+
+
 ######################## ACTIVE #########################
 
-user_email = []
-user_account_type = []
-
 def home(request):
-    user_email.clear()
-    user_account_type.clear()
     data = job_listing.objects.all()
     context = {'job': data}
     return render(request, 'html_files/HOMEWEBSITE.html', context)
 
 def login(request):
-    
-    check_email = request.POST['email1']
+    check_email = request.POST.get('email1')
     data = account_registration.objects.filter(email=check_email)
-    data1 = account_registration.objects.filter(email=check_email).values_list('account_type').first()
-    data2 = account_registration.objects.filter(email=check_email).values_list('account_complete').first()
+    data1 = account_registration.objects.filter(email=check_email).values_list('account_type', flat=True).first()
+    data2 = account_registration.objects.filter(email=check_email).values_list('account_complete', flat=True).first()
 
-    user_email.append(check_email)
-    user_account_type.append(data2[0])
-
-    if data1[0] == 'Applicant':
-        if data2[0] == 'True':
+    print("data1" , data)
+    print(data1)
+    print(data2)
+    
+    if data1 == 'Applicant':
+        if data2 == 'True':
             context = {'info': data}
             return render(request, 'html_files/User-Profile1.html', context)
         else: 
             context = {'info': data}
             return render(request, 'html_files/Finish-Registration.html', context)
 
-    elif data1[0] == 'Employee':
+    elif data1 == 'Employee':
         context = {'info': data}
         return render(request, 'html_files/Employee-Details.html', context)
 
-    elif data1[0] == 'HRManager':
+    elif data1 == 'HRManager':
         data3 = account_registration.objects.all()
         #data4 = interview.objects.all()
         context = {'account': data3}
         return render(request, 'html_files/HRMANAGER.html', context)
     
-def re_login(request):
-    if request.method =='POST' and 'later' in request.POST:
-        return redirect('user_profile')
-    if request.method =='POST' and 'continue' in request.POST:
-        return redirect ('signup1')
+    else:
+        return redirect('home')
+    
+def re_login(request, email):
+    user_account = account_registration.objects.filter(email=email)
+    context = {'info': user_account}
+    return render(request, 'html_files/User-Profile1.html', context)
 
 def signup(request):
     form = first_registration()
@@ -103,32 +102,16 @@ def sort_list(request):
     else:
         return redirect('sort_list')
 
-def manage_account(request):
-    print("MANAGE")
-    account_email = request.POST['email']
-    account_email_type = request.POST['account_type']
+def manage_account(request, email):
+    user_account = account_registration.objects.filter(email=email)
+    data1 = account_registration.objects.filter(email=email).values_list('account_type', flat=True).first()
 
-    if request.method == "POST" and 'Delete' in request.POST:
-        account_registration.objects.filter(email=account_email).delete()
-        print("DELETE")
-        return redirect('hrdashboard')
-
-    elif request.method == "POST" and 'View Account' in request.POST:
-
-        if account_email_type == "Applicant":
-            account_view = account_registration.objects.filter(email=account_email)
-            context = {'info': account_view}
-            print("VIEW Applicant")
-            return render(request, 'html_files/User-Profile1-Applicant.html', context)
-
-        elif account_email_type == "Employee":
-            account_view = account_registration.objects.filter(email=account_email)
-            context = {'info': account_view}
-            print("VIEW Employee")
-            return render(request, 'html_files/User-Profile1-Employee.html', context)
-
-        else:
-            return redirect('hrdashboard')
+    if data1 == "Applicant":
+        context = {'info': user_account}
+        return render(request, 'html_files/User-Profile1-Applicant.html', context)
+    elif data1 == "Employee":
+        context = {'info': user_account}
+        return render(request, 'html_files/User-Profile1-Employee.html', context)
 
 def signup1(request):
     return render(request, 'html_files/Registration-Form-Part-2.html')
@@ -136,13 +119,23 @@ def signup1(request):
 def complete_info(request):
     return render(request, 'html_files/Finish-Registration.html')
 
-def user_profile(request):
-    data = account_registration.objects.filter(email=user_email[0])
-    context = {'info': data}
-    return render(request, 'html_files/User-Profile1.html', context)
 
-def set_interview(request):
-    return redirect('set_interview')
+def set_interview(request, email_id):
+    if request.method == "POST":
+        get_date_time = request.POST.get('interview_date')
+        update_date_time = interview.objects.get(email_id=email_id)
+        update_date_time.date_time = get_date_time
+        update_date_time.save()
+        print("SET DATE:", get_date_time )
+        user_account = account_registration.objects.filter(email=email_id)
+        context = {'info': user_account}
+        return render(request, 'html_files/User-Profile1-Applicant.html', context)
+
+    else:
+        print("EKIS")
+        user_account = account_registration.objects.filter(email=email_id)
+        context = {'info': user_account}
+        return render(request, 'html_files/User-Profile1-Applicant.html', context)
 
 def change_employment(request):
     email = request.POST.get('account_email')
