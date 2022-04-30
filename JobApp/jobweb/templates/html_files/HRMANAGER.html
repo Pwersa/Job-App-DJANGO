@@ -35,7 +35,7 @@
         </div>
     </head>
     
-    <body class="col-lg-auto">
+    <body class="col-lg-auto"  background="/static/pictures/bg.jpg" src="/static/pictures/bg.jpg">
         <br>
         {% if messages %}
         <ul class="messages" style="font-style: italic; color: #66fcf1; text-align: center;">
@@ -44,11 +44,10 @@
         {% endfor %}
         </ul>
         {% endif %}
-        <div class="card shadow-lg bg-white rounded" style="margin: 20px 100px; width: 1165px; position: fixed;">
-            <img src="/static/pictures/bg.jpg" class="card-img" style="max-height: 620px;">
+        
                
-                <div style="position: fixed;">
-                    <div class="card-header" style="width: 1165px; font-size: 30px; text-align: center;">Manage Employees/Applicants</div>
+                <div class="card-img-overlay" style="position:relative">
+                    <div class="card-header" style= "font-size: 30px; text-align: center;">Manage Employees/Applicants</div>
                     &nbsp;
 
                     <div style="text-align: center;">
@@ -123,8 +122,7 @@
                             
                         </table>
                     </div>
-                </div>
-        </div>
+            
 
 
 
