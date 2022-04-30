@@ -83,5 +83,5 @@ class interview(models.Model):
     name = models.CharField(verbose_name='name' ,max_length=99, null=True)
     jitle = models.ForeignKey(job_listing, verbose_name='jtitle',max_length=99, null=True, on_delete=models.CASCADE, default="job title")
     date_time =  models.DateTimeField(verbose_name='date_time', null=True)
-
+    ### Comment used only for updating repository in Github
 
