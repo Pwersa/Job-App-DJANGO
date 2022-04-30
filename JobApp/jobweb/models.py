@@ -80,8 +80,8 @@ class job_listing(models.Model):
 
 class interview(models.Model):
     email = models.ForeignKey(account_registration, primary_key=True, on_delete=models.CASCADE, default="user@email.com")
-    name = models.CharField(verbose_name='name' ,max_length=99)
-    jitle = models.ForeignKey(job_listing, verbose_name='jtitle',max_length=99, on_delete=models.CASCADE, default="job title")
-    date_time =  models.DateField(verbose_name='date_time')
+    name = models.CharField(verbose_name='name' ,max_length=99, null=True)
+    jitle = models.ForeignKey(job_listing, verbose_name='jtitle',max_length=99, null=True, on_delete=models.CASCADE, default="job title")
+    date_time =  models.DateTimeField(verbose_name='date_time', null=True)
 
 
