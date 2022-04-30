@@ -24,7 +24,6 @@ class account_registration(models.Model):
     job = models.CharField(verbose_name='job',max_length=99, default='Applicant')
     employment_status = models.CharField(verbose_name='job',max_length=99, default='Not yet Employed')
     account_type = models.CharField(verbose_name='account_type',max_length=99)
-    account_complete = models.BooleanField(verbose_name='account_complete', default=False)
 
     #USERNAME_FIELD = 'email'
     #REQUIRED_FIELDS = [email, password1]

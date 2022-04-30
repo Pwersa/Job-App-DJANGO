@@ -17,19 +17,23 @@ def login(request):
     check_email = request.POST.get('email1')
     data = account_registration.objects.filter(email=check_email)
     data1 = account_registration.objects.filter(email=check_email).values_list('account_type', flat=True).first()
-    data2 = account_registration.objects.filter(email=check_email).values_list('account_complete', flat=True).first()
+    #data2 = account_registration.objects.filter(email=check_email).values_list('account_complete', flat=True).first()
 
     print("data1" , data)
     print(data1)
-    print(data2)
+    #print(data2)
     
-    if data1 == 'Applicant':
-        if data2 == 'True':
-            context = {'info': data}
-            return render(request, 'html_files/User-Profile1.html', context)
-        else: 
-            context = {'info': data}
-            return render(request, 'html_files/Finish-Registration.html', context)
+    if data1 == 'Applicant Level 1':
+        context = {'info': data}
+        return render(request, 'html_files/Finish-Registration.html', context)
+    
+    elif data1 == 'Applicant Level 2':
+        context = {'info': data}
+        return render(request, 'html_files/Finish-Registration.html', context)
+
+    elif data1 == 'Applicant Level 3':
+        context = {'info': data}
+        return render(request, 'html_files/Finish-Registration.html', context)
 
     elif data1 == 'Employee':
         context = {'info': data}
@@ -98,9 +102,14 @@ def manage_account(request, email):
     user_account = account_registration.objects.filter(email=email)
     data1 = account_registration.objects.filter(email=email).values_list('account_type', flat=True).first()
 
-    if data1 == "Applicant":
+    if data1 == "Applicant Level 1":
         context = {'info': user_account}
         return render(request, 'html_files/User-Profile1-Applicant.html', context)
+
+    elif data1 == "Applicant Level 2":
+        context = {'info': user_account}
+        return render(request, 'html_files/User-Profile1-Applicant.html', context)
+
     elif data1 == "Employee":
         context = {'info': user_account}
         return render(request, 'html_files/User-Profile1-Employee.html', context)
@@ -228,9 +237,10 @@ def logout(request):
 ################################### DEBUG ############################################
 
 
-
- 
-
-
-
-
+def applicant_hired_reject(request, email):
+    if request.method == "POST" and "Hire" in request.POST:
+        account_registration.objects.filter(email=email).update(account_type="Employee")
+        messages.success(request, 'Applicant Successfully Hired!')
+        account = account_registration.objects.all()
+        context = {'account': account}
+        return render(request, 'html_files/HRMANAGER.html', context)

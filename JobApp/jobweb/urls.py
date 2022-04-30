@@ -24,7 +24,7 @@ urlpatterns = [
     path('change_employment', views.change_employment, name='change_employment'),
     path('sort_list', views.sort_list, name='sort_list'),
     path('set_interview/<str:email_id>', views.set_interview, name="set_interview"),
-
+    path('applicant_hired_reject/<str:email>', views.applicant_hired_reject, name='applicant_hired_reject'),
 ############################  UNUSED  ####################################
     path('change_password', views.change_pass, name='changepass'),
     path('delete', views.delete, name="delete"),
