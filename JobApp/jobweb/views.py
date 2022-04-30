@@ -11,13 +11,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 
-
 ######################## ACTIVE #########################
-
-def home(request):
-    data = job_listing.objects.all()
-    context = {'job': data}
-    return render(request, 'html_files/HOMEWEBSITE.html', context)
 
 def login(request):
     check_email = request.POST.get('email1')
@@ -79,10 +73,7 @@ def signup(request):
     context = {'form': form}
     return render(request, 'html_files/Registration-Form.html', context)
 
-def hrdashboard(request):
-    account = account_registration.objects.all()
-    context = {'account': account}
-    return render(request, 'html_files/HRMANAGER.html', context)
+
 
 def sort_list(request):
     if request.method == "POST" and "Name" in request.POST:
@@ -114,6 +105,9 @@ def manage_account(request, email):
         context = {'info': user_account}
         return render(request, 'html_files/User-Profile1-Employee.html', context)
 
+    elif data1 == "HRManager":  
+        return redirect('hrdashboard')
+
 def signup1(request):
     return render(request, 'html_files/Registration-Form-Part-2.html')
 
@@ -130,10 +124,15 @@ def set_interview(request, email_id):
             update_date_time.date_time = get_date_time
             update_date_time.save()
             print("SET DATE:", get_date_time )
-            user_account = account_registration.objects.filter(email=email_id)
+
+            
+            account = account_registration.objects.all()
+            user_interview = interview.objects.filter(email_id=email_id)
             messages.success(request, 'Interview date was added.')
-            context = {'info': user_account}
-            return render(request, 'html_files/User-Profile1-Applicant.html', context)
+
+            context = {'account': account, 'user_interview' : user_interview}
+            
+            return render(request, 'html_files/HRMANAGER.html', context)
     else:
         messages.success(request, 'No interview date was added.')
         user_account = account_registration.objects.filter(email=email_id)
@@ -182,7 +181,17 @@ def change_employment(request):
     else:
         return redirect('change_employment')
 
+################################### REDIRECTS ############################################
 
+def home(request):
+    data = job_listing.objects.all()
+    context = {'job': data}
+    return render(request, 'html_files/HOMEWEBSITE.html', context)
+
+def hrdashboard(request):
+    account = account_registration.objects.all()
+    context = {'account': account}
+    return render(request, 'html_files/HRMANAGER.html', context)
 
 ################################### INACTIVE ############################################
 

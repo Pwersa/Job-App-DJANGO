@@ -36,6 +36,14 @@
     </head>
     
     <body class="col-lg-auto">
+        <br>
+        {% if messages %}
+        <ul class="messages" style="font-style: italic; color: #66fcf1; text-align: center;">
+        {% for message in messages %}
+        <h4{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h4>
+        {% endfor %}
+        </ul>
+        {% endif %}
         <div class="card shadow-lg bg-white rounded" style="margin: 20px 100px; width: 1165px; position: fixed;">
             <img src="/static/pictures/bg.jpg" class="card-img" style="max-height: 620px;">
                
@@ -64,7 +72,7 @@
                     <div class="table-responsive" style=" max-height: 460px; overflow: auto; -webkit-overflow-scrolling: touch; text-align: center;">
                         <table class="table" id="account_table">
                             <thead class="table" background="/static/pictures/bg.jpg" src="/static/pictures/bg.jpg">
-
+                                <th scope="col"></th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Cellphone</th>
@@ -78,33 +86,39 @@
 
                             
                                 <tbody>
+                                    
                                     {% for accounts in account %}
+                                    
                                         <tr>
+                                            <td>{{ forloop.counter }}</td>
                                             <td>{{accounts.first_name}} {{accounts.last_name}}</td>
                                             <td>{{accounts.email}}</td>
                                             <td>{{accounts.cellphone}}</td>
                                             <td>{{accounts.applyingfor}}</td>
                                             <td>{{accounts.account_type}}</td>
-                                            <td>{Placeholder}</td>
-                                            
                                             <td style="text-align: center;">
                                                 <div class="btn-group">
-                                                        <input class="form-control" type="hidden" id="email" name="email" value="{{accounts.email}}"> 
-                                                        <input class="form-control" type="hidden" id="account_type" name="account_type" value="{{accounts.account_type}}">
+                                                    <input class="form-control" type="hidden" id="email" name="email" value="{{accounts.email}}"> 
+                                                    <input class="form-control" type="hidden" id="account_type" name="account_type" value="{{accounts.account_type}}">
 
-                                                        <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="color: #000000;">
+                                                    <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="color: #000000;">
                                                                 Manage
-                                                        </button>
-                                                        <ul class="dropdown-menu dropdown-menu-end">
-                                                            <li><a class="dropdown-item" button="submit" style="cursor: pointer;" name="View Account" value="View Account" href="{% url 'manage_account' accounts.pk %}">View Account</a></li>
-                                                            <li><button class="dropdown-item" button="submit" style="cursor: pointer; color: red;" name="Delete" value="Delete">Delete</button></li>
-                                                        </ul>
-                                                    
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-end">
+                                                        <li><a class="dropdown-item" button="submit" style="cursor: pointer;" name="View Account" value="View Account" href="{% url 'manage_account' accounts.pk %}">View Account</a></li>
+                                                        <li><button class="dropdown-item" button="submit" style="cursor: pointer; color: red;" name="Delete" value="Delete">Delete</button></li>
+                                                    </ul>   
                                                 </div>
                                                 &nbsp;
                                             </td>
                                         </tr>
+
                                     {% endfor %}
+
+                                    {% for user_interviews in user_interview %}
+                                        <td>{{user_interviews.date_time}}</td>
+                                    {% endfor %}
+                                    
                                 </tbody>
                             
                         </table>
