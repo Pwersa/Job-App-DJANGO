@@ -148,41 +148,46 @@ def set_interview(request, email_id):
         context = {'info': user_account}
         return render(request, 'html_files/User-Profile1-Applicant.html', context)
 
-def change_employment(request):
-    email = request.POST.get('account_email')
+def change_employment(request, email):
 
     if request.method == "POST" and "Full Time" in request.POST:
         account_registration.objects.filter(email=email).update(employment_status="Full Time Worker")
+        messages.success(request, 'Employment was updated on account: ' + email)
         account = account_registration.objects.all()
         context = {'account': account}
         return render(request, 'html_files/HRMANAGER.html', context)
 
     elif request.method == "POST" and "Part Time" in request.POST:
         account_registration.objects.filter(email=email).update(employment_status="Part Time Worker")
+        messages.success(request, 'Employment was updated on account: ' + email)
         account = account_registration.objects.all()
         context = {'account': account}
         return render(request, 'html_files/HRMANAGER.html', context)
 
     elif request.method == "POST" and "On Leave" in request.POST:
         account_registration.objects.filter(email=email).update(employment_status="On Vacation")
+        messages.success(request, 'Employment was updated on account: ' + email)
         account = account_registration.objects.all()
         context = {'account': account}
         return render(request, 'html_files/HRMANAGER.html', context)
 
     elif request.method == "POST" and "Resigned" in request.POST:
         account_registration.objects.filter(email=email).update(employment_status="Resigned")
+        messages.success(request, 'Employment was updated on account: ' + email)
         account = account_registration.objects.all()
         context = {'account': account}
         return render(request, 'html_files/HRMANAGER.html', context)
 
     elif request.method == "POST" and "Fired" in request.POST:
         account_registration.objects.filter(email=email).update(employment_status="Fired")
+        messages.success(request, 'Employment was updated on account: ' + email)
         account = account_registration.objects.all()
         context = {'account': account}
         return render(request, 'html_files/HRMANAGER.html', context)
 
     elif request.method == "POST" and "Retired" in request.POST:
         account_registration.objects.filter(email=email).update(employment_status="Retired")
+        messages.success(request, 'Employment was updated on account: ' + email)
         account = account_registration.objects.all()
         context = {'account': account}
         return render(request, 'html_files/HRMANAGER.html', context)

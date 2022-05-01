@@ -21,7 +21,7 @@ urlpatterns = [
 
     path('hrdashboard', views.hrdashboard, name='hrdashboard'),
     path('manage_account/<str:email>', views.manage_account, name='manage_account'),
-    path('change_employment', views.change_employment, name='change_employment'),
+    path('change_employment/<str:email>', views.change_employment, name='change_employment'),
     path('sort_list', views.sort_list, name='sort_list'),
     path('set_interview/<str:email_id>', views.set_interview, name="set_interview"),
     path('applicant_hired_reject/<str:email>', views.applicant_hired_reject, name='applicant_hired_reject'),

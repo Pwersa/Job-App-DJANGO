@@ -43,7 +43,7 @@
                             <p class="text-secondary">{{data.applyingfor}}</p>
                             &nbsp; 
                            
-                            <form method="POST" action="/change_employment">
+                            <form method="POST" action="{% url 'change_employment' data.pk %}">
                                 {% csrf_token %}
                                 <input type="hidden" name="account_email" id="email" value="{{data.email}}">
                                 <div class="btn-group dropup">
