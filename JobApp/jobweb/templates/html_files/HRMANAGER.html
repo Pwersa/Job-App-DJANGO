@@ -81,13 +81,8 @@
                                 <th scope="col">Tools</th>
                                 
                             </thead>
-                            
-
-                            
-                                <tbody>
-                                    
-                                    {% for accounts in account %}
-                                    
+                                <tbody>    
+                                    {% for accounts, user_interviews in zippedItems %}
                                         <tr>
                                             <td>{{ forloop.counter }}</td>
                                             <td>{{accounts.first_name}} {{accounts.last_name}}</td>
@@ -95,11 +90,12 @@
                                             <td>{{accounts.cellphone}}</td>
                                             <td>{{accounts.applyingfor}}</td>
                                             <td>{{accounts.account_type}}</td>
+                                            <td>{{user_interviews.date_time}}</td>
+                                               
                                             <td style="text-align: center;">
                                                 <div class="btn-group">
                                                     <input class="form-control" type="hidden" id="email" name="email" value="{{accounts.email}}"> 
                                                     <input class="form-control" type="hidden" id="account_type" name="account_type" value="{{accounts.account_type}}">
-
                                                     <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="color: #000000;">
                                                                 Manage
                                                     </button>
@@ -108,23 +104,13 @@
                                                         <li><button class="dropdown-item" button="submit" style="cursor: pointer; color: red;" name="Delete" value="Delete">Delete</button></li>
                                                     </ul>   
                                                 </div>
-                                                &nbsp;
+                                                &nbsp;       
                                             </td>
-                                        </tr>
-
+                                        </tr>      
                                     {% endfor %}
-
-                                    {% for user_interviews in user_interview %}
-                                        <td>{{user_interviews.date_time}}</td>
-                                    {% endfor %}
-                                    
                                 </tbody>
-                            
                         </table>
                     </div>
-            
-
-
 
         <script>
             function change_password(){

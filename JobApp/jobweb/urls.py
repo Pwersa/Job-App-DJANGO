@@ -19,7 +19,7 @@ urlpatterns = [
     path('complete_info', views.complete_info, name='complete_info'),
     #path('user_profile', views.user_profile, name='user_profile'),
 
-    path('hrdashboard', views.hrdashboard, name='hrdashboard'),
+    path('hrdashboard/<str:email_id>', views.hrdashboard, name='hrdashboard'),
     path('manage_account/<str:email>', views.manage_account, name='manage_account'),
     path('change_employment/<str:email>', views.change_employment, name='change_employment'),
     path('sort_list', views.sort_list, name='sort_list'),

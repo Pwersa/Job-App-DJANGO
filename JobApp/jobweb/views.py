@@ -125,6 +125,7 @@ def complete_info(request):
 
 
 def set_interview(request, email_id):
+
     get_date_time = request.POST.get('interview_date')
     
     if get_date_time is not "":
@@ -134,14 +135,14 @@ def set_interview(request, email_id):
             update_date_time.save()
             print("SET DATE:", get_date_time )
 
-            
             account = account_registration.objects.all()
-            user_interview = interview.objects.filter(email_id=email_id)
-            messages.success(request, 'Interview date was added.')
+            user_interview = interview.objects.values('date_time')
+            zippedItems = zip(account, user_interview)
 
-            context = {'account': account, 'user_interview' : user_interview}
+            messages.success(request, 'Interview date was added.')
+            context1 = {'zippedItems': zippedItems}
+            return render(request, 'html_files/HRMANAGER.html', context1)
             
-            return render(request, 'html_files/HRMANAGER.html', context)
     else:
         messages.success(request, 'No interview date was added.')
         user_account = account_registration.objects.filter(email=email_id)
