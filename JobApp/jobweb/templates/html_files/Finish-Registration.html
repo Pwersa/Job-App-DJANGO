@@ -25,9 +25,12 @@
                         <p class="card-text" style="font-weight: bold;">{{data.account_type}}</p>
                         <p class="card-text">Complete now your Registration</p>
 
-                        <a class="btn btn-outline-info" type="submit" name="Later" value="Later" href="{% url 're_login' data.pk %}">Later</a>
-                        <a class="btn btn-outline-info" type="submit" name="Continue" value="Continue" href="{% url 're_login' data.pk %}">Continue</a>
-                  
+                        <form method="POST" action="{% url 're_login' data.pk %}">
+                            {% csrf_token %}
+                            <button class="btn btn-outline-info" button="submit" name="Later" value="Later">Later</button>
+                            &nbsp;
+                            <button class="btn btn-outline-info" button="submit" name="Continue" value="Continue">Continue</buton>
+                        </form>
                         
                 </div>  
             </div> 

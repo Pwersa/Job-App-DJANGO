@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User 
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
-from .models import account_registration
+from .models import *
 
 
 class first_registration(ModelForm):
@@ -26,3 +26,9 @@ class first_registration(ModelForm):
                 'applyingfor': 'Applying For:'
                 }
 
+
+class second_registration(ModelForm):
+    class Meta:
+        model = other_info
+        #fields = ['email', 'password1', 'password2', 'photo', 'first_name', 'middle_name', 'last_name', 'address', 'cellphone', 'birthday']
+        fields = '__all__'

@@ -51,9 +51,25 @@ def login(request):
         return redirect('home')
     
 def re_login(request, email):
-    user_account = account_registration.objects.filter(email=email)
-    context = {'info': user_account}
-    return render(request, 'html_files/User-Profile1.html', context)
+    if request.method == 'POST' and 'Later' in request.POST:
+        user_account = account_registration.objects.filter(email=email)
+        context = {'info': user_account}
+        return render(request, 'html_files/User-Profile1.html', context)
+
+    elif request.method == 'POST' and 'Continue' in request.POST:
+        form = second_registration()
+
+        if request.method == "POST":
+            form = second_registration(request.POST, request.FILES)
+            if form.is_valid():
+                    form.save()
+
+            else:
+                context = {'form': form}
+                return render(request, 'html_files/Registration-Form-Part-2.html', context)
+        
+        context = {'form': form}
+        return render(request, 'html_files/Registration-Form-Part-2.html', context)
 
 def signup(request):
     form = first_registration()
@@ -78,7 +94,6 @@ def signup(request):
 
     context = {'form': form}
     return render(request, 'html_files/Registration-Form.html', context)
-
 
 
 def sort_list(request):
@@ -188,6 +203,14 @@ def change_employment(request, email):
     else:
         return redirect('change_employment')
 
+def applicant_hired_reject(request, email):
+    if request.method == "POST" and "Hire" in request.POST:
+        account_registration.objects.filter(email=email).update(account_type="Employee")
+        messages.success(request, 'Applicant Successfully Hired!')
+        account = account_registration.objects.all()
+        context = {'account': account}
+        return render(request, 'html_files/HRMANAGER.html', context)
+
 ################################### REDIRECTS ############################################
 
 def home(request):
@@ -235,10 +258,3 @@ def logout(request):
 ################################### DEBUG ############################################
 
 
-def applicant_hired_reject(request, email):
-    if request.method == "POST" and "Hire" in request.POST:
-        account_registration.objects.filter(email=email).update(account_type="Employee")
-        messages.success(request, 'Applicant Successfully Hired!')
-        account = account_registration.objects.all()
-        context = {'account': account}
-        return render(request, 'html_files/HRMANAGER.html', context)

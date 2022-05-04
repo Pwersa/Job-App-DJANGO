@@ -25,13 +25,6 @@ class account_registration(models.Model):
     employment_status = models.CharField(verbose_name='job',max_length=99, default='Not yet Employed')
     account_type = models.CharField(verbose_name='account_type',max_length=99)
 
-    #USERNAME_FIELD = 'email'
-    #REQUIRED_FIELDS = [email, password1]
-    #is_anonymous = False
-    #is_authenticated = True
-
-    #objects = UserManager()
-
 class other_info(models.Model):
     email = models.ForeignKey(account_registration, primary_key=True, on_delete=models.CASCADE, default="user@email.com")
     bplace = models.CharField(verbose_name='bplace' ,max_length=99)
@@ -79,10 +72,6 @@ class job_listing(models.Model):
 
 class interview(models.Model):
     email = models.ForeignKey(account_registration, primary_key=True, on_delete=models.CASCADE, default="user@email.com")
-    first_name = models.CharField(verbose_name='first_name' ,max_length=99, default="", null=True)
-    middle_name = models.CharField(verbose_name='middle_name' ,max_length=99, default="", null=True)
-    last_name = models.CharField(verbose_name='last_name' ,max_length=99, default="", null=True)
+    name = models.CharField(verbose_name='name' ,max_length=99, null=True)
     jitle = models.ForeignKey(job_listing, verbose_name='jtitle',max_length=99, null=True, on_delete=models.CASCADE, default="job title")
     date_time =  models.DateTimeField(verbose_name='date_time', null=True)
-   
-
