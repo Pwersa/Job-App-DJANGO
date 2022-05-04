@@ -41,7 +41,7 @@
                 
                     
         
-                    <div class="card-header" style= "font-size: 30px; text-align: center;">Manage Employees/Applicants</div>
+                    <div class="card-header" style= "font-weight: bold ;font-size: 30px; text-align: center;">Manage Employees/Applicants</div>
                     &nbsp;
                     {% if messages %}
                     <ul class="messages" style="font-style: italic; text-align: center;">
@@ -59,8 +59,6 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li><button class="dropdown-item" button="submit" name="Name" value="Name" >Name (Ascending)</button></li>
-                                    <li><button class="dropdown-item" button="submit" name="Emp_App" value="Emp_App" >Employee/Applicant (Ascending)</button></li>
-                                    <li><button class="dropdown-item" button="submit" name="Date" value="Date" >Interview Date (Ascending)</button></li>
                                 </ul>
                             </div>
                         </form>
@@ -68,7 +66,7 @@
                     </div>
                      
 
-                    <div class="table-responsive" style=" max-height: 460px; overflow: auto; -webkit-overflow-scrolling: touch; text-align: center;">
+                    <div class="table-responsive" style=" margin-left: 10px; margin-right: 10px;  max-height: 465px; overflow: auto; -webkit-overflow-scrolling: touch; text-align: center;">
                         <table class="table" id="account_table">
                             <thead class="table" background="/static/pictures/bg.jpg" src="/static/pictures/bg.jpg">
                                 <th scope="col"></th>
@@ -90,7 +88,12 @@
                                             <td>{{accounts.cellphone}}</td>
                                             <td>{{accounts.applyingfor}}</td>
                                             <td>{{accounts.account_type}}</td>
-                                            <td>{{user_interviews.date_time}}</td>
+
+                                            {% if user_interviews.date_time is None %}                                            
+                                                <td>No Date set</td>
+                                            {% else %}
+                                                <td>{{user_interviews.date_time}}</td>
+                                            {% endif %}
                                                
                                             <td style="text-align: center;">
                                                 <div class="btn-group">

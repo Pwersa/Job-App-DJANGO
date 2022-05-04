@@ -40,10 +40,12 @@ def login(request):
         return render(request, 'html_files/Employee-Details.html', context)
 
     elif data1 == 'HRManager':
-        data3 = account_registration.objects.all()
-        #data4 = interview.objects.all()
-        context = {'account': data3}
-        return render(request, 'html_files/HRMANAGER.html', context)
+        account = account_registration.objects.all()
+        user_interview = interview.objects.values('date_time')
+        zippedItems = zip(account, user_interview)
+
+        context1 = {'zippedItems': zippedItems}
+        return render(request, 'html_files/HRMANAGER.html', context1)
     
     else:
         return redirect('home')
@@ -81,22 +83,13 @@ def signup(request):
 
 def sort_list(request):
     if request.method == "POST" and "Name" in request.POST:
+        
         account = account_registration.objects.order_by('first_name')
-        context = {'account': account}
-        return render(request, 'html_files/HRMANAGER.html', context)
+        user_interview = interview.objects.order_by('first_name')
+        zippedItems = zip(account, user_interview)
 
-    elif request.method == "POST" and "Emp_App" in request.POST:
-        account = account_registration.objects.order_by('account_type')
-        context = {'account': account}
-        return render(request, 'html_files/HRMANAGER.html', context)
-    
-    elif request.method == "POST" and "Date" in request.POST:
-        account = account_registration.objects.order_by('interview')
-        context = {'account': account}
-        return render(request, 'html_files/HRMANAGER.html', context)
-
-    else:
-        return redirect('sort_list')
+        context1 = {'zippedItems': zippedItems}
+        return render(request, 'html_files/HRMANAGER.html', context1)
 
 def manage_account(request, email):
     user_account = account_registration.objects.filter(email=email)
@@ -137,8 +130,7 @@ def set_interview(request, email_id):
 
             account = account_registration.objects.all()
             user_interview = interview.objects.values('date_time')
-            zippedItems = zip(account, user_interview)
-
+            zippedItems = zip(account, user_interview)    
             messages.success(request, 'Interview date was added.')
             context1 = {'zippedItems': zippedItems}
             return render(request, 'html_files/HRMANAGER.html', context1)
