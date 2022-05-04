@@ -79,7 +79,9 @@ class job_listing(models.Model):
 
 class interview(models.Model):
     email = models.ForeignKey(account_registration, primary_key=True, on_delete=models.CASCADE, default="user@email.com")
-    name = models.CharField(verbose_name='name' ,max_length=99, null=True)
+    first_name = models.CharField(verbose_name='first_name' ,max_length=99, default="")
+    middle_name = models.CharField(verbose_name='middle_name' ,max_length=99, default="")
+    last_name = models.CharField(verbose_name='last_name' ,max_length=99, default="")
     jitle = models.ForeignKey(job_listing, verbose_name='jtitle',max_length=99, null=True, on_delete=models.CASCADE, default="job title")
     date_time =  models.DateTimeField(verbose_name='date_time', null=True)
     ### Comment used only for updating repository in Github
