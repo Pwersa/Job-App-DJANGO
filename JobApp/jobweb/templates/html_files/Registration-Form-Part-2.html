@@ -49,6 +49,10 @@
                 {{form.e_no|as_crispy_field}}
               </div>
 
+              <div class="col-md-3">
+                {{form.signature|as_crispy_field}}
+              </div>
+              
         <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e; color: #000000">Educational Background</div>
         
                 <div class="col-md-6">
@@ -56,145 +60,146 @@
                 </div>
 
                 <div class="col-md-6">
-                  {{form.elementary|as_crispy_field}}
+                  {{form.elementary_grad|as_crispy_field}}
                 </div>
 
                 <div class="col-md-6">
-                  {{form.elementary|as_crispy_field}}
+                  {{form.highschool|as_crispy_field}}
                 </div>
 
                 <div class="col-md-6">
-                  {{form.elementary|as_crispy_field}}
+                  {{form.highschool_grad|as_crispy_field}}
                 </div>
                 
                 <div class="col-md-6">
-                  {{form.elementary|as_crispy_field}}
+                  {{form.college|as_crispy_field}}
                 </div>
   
                 <div class="col-md-6">
-                  {{form.elementary|as_crispy_field}}
+                  {{form.college_grad|as_crispy_field}}
                 </div>
 
                   <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e;">Employment Record</div>
                   
 
                     <div class="col-md-3">
-                      {{form.elementary|as_crispy_field}}
+                      {{form.company1|as_crispy_field}}
                     </div>
 
                     <div class="col-md-3">
-                      {{form.elementary|as_crispy_field}}
+                      {{form.position1|as_crispy_field}}
                     </div>
                     
                     <div class="col-md-3">
-                      {{form.elementary|as_crispy_field}}
+                      {{form.from1|as_crispy_field}}
                     </div>
 
                     <div class="col-md-3">
-                      {{form.elementary|as_crispy_field}}
+                      {{form.to1|as_crispy_field}}
                     </div>
 
                     <div class="col-md-3">
-                      {{form.elementary|as_crispy_field}}
+                      {{form.company2|as_crispy_field}}
                     </div>
 
                     <div class="col-md-3">
-                      {{form.elementary|as_crispy_field}}
+                      {{form.position2|as_crispy_field}}
                     </div>
                     
                     <div class="col-md-3">
-                      {{form.elementary|as_crispy_field}}
+                      {{form.from2|as_crispy_field}}
                     </div>
 
                     <div class="col-md-3">
-                      {{form.elementary|as_crispy_field}}
+                      {{form.to2|as_crispy_field}}
                     </div>
 
                     <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;">Character Reference</div>
                   
 
                     <div class="col-md-3">
-                      {{form.elementary|as_crispy_field}}
+                      {{form.ref1|as_crispy_field}}
                     </div>
                     
                     <div class="col-md-3">
-                      {{form.elementary|as_crispy_field}}
+                      {{form.refcon1|as_crispy_field}}
                     </div>
 
                     <div class="col-md-3">
-                      {{form.elementary|as_crispy_field}}
+                      {{form.refpos1|as_crispy_field}}
                     </div>
 
                     <div class="col-md-3">
-                      {{form.elementary|as_crispy_field}}
+                      {{form.refcom1|as_crispy_field}}
                     </div>
 
                     <div class="col-md-3">
-                      {{form.elementary|as_crispy_field}}
+                      {{form.ref2|as_crispy_field}}
                     </div>
                     
                     <div class="col-md-3">
-                      {{form.elementary|as_crispy_field}}
+                      {{form.refcon2|as_crispy_field}}
                     </div>
 
                     <div class="col-md-3">
-                      {{form.elementary|as_crispy_field}}
+                      {{form.refpos2|as_crispy_field}}
                     </div>
 
                     <div class="col-md-3">
-                      {{form.elementary|as_crispy_field}}
+                      {{form.refcom2|as_crispy_field}}
                     </div>
 
                     <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;">Government Numbers</div>
                   
 
                     <div class="col-md-4">
-                      {{form.elementary|as_crispy_field}}
+                      {{form.philhealth|as_crispy_field}}
                     </div>
 
                     <div class="col-md-4">
-                      {{form.elementary|as_crispy_field}}
+                      {{form.pagibig|as_crispy_field}}
                     </div>
 
                     <div class="col-md-4">
-                      {{form.elementary|as_crispy_field}}
+                      {{form.TIN|as_crispy_field}}
                     </div>
 
                     <div class="col-md-4">
-                      {{form.elementary|as_crispy_field}}
+                      {{form.NBI|as_crispy_field}}
                     </div>
 
                     <div class="col-md-4">
-                      {{form.elementary|as_crispy_field}}
+                      {{form.SSS|as_crispy_field}}
                     </div>
 
                     <div class="col-md-4">
-                      {{form.elementary|as_crispy_field}}
+                      {{form.med_record|as_crispy_field}}
                     </div>
                     
-                    <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;">Position And Signature</div>
+                    <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;">Remarks</div>
                       
-                    {{form.elementary|as_crispy_field}}
-
-                      <div class="col-md-4">
-                        <label for="job" class="form-label"></label>
-                        <input class="form-control" type="hidden"  id="job" name="job" value="Applicant" >
-                      </div>
-
-                      <div class="col-md-4">
-                        <label for="accounttype" class="form-label"></label>
-                        <input class="form-control" type="hidden"  id="accounttype" name="account_type" value="Applicant Level 2" >
-                      </div>
-
-                      <div class="d-grid p-3 gap-2 d-md-block text-center">
-                        <button class="btn btn-primary te" type="submit" >Submit</button>
-                      </div>
-
                       <div class="text-center" >
                         <p>I hereby certify that the above information as true and correct to the best of my
                           knowledge and belief. I also understand that any misinterpration will be considered
                           reason for withdrawal of an offer or subsequent dismissal if employed.</p>
+                          <button class="btn btn-primary te" type="submit">Submit Details</button>
                       </div>
+
+                    <div class="col-md-4">
+                      <label for="job" class="form-label"></label>
+                      <input class="form-control" type="hidden"  id="job" name="job" value="Applicant" >
+                    </div>
+
+                    <div class="col-md-4">
+                      <label for="accounttype" class="form-label"></label>
+                      <input class="form-control" type="hidden"  id="accounttype" name="account_type" value="Applicant Level 2" >
+                    </div>
+
+
+                        
+                    
+
+                      
 
                       <script>
                       </script>

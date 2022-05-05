@@ -27,8 +27,10 @@ class account_registration(models.Model):
 
 class other_info(models.Model):
 
-    citizenship_options = [('Single', 'Single'), ('Married', 'Married'), ('Widowed', 'Widowed'),
-                            ('Student', 'Student'), ('Senior Citizen', 'Senior Citizen')]
+    citizenship_options = [('Single', 'Single'), 
+                            ('Married', 'Married'), 
+                            ('Widowed', 'Widowed'),
+                            ]
 
     email = models.ForeignKey(account_registration, primary_key=True, on_delete=models.CASCADE, default="user@email.com")
     bplace = models.CharField(verbose_name='bplace' ,max_length=99)
