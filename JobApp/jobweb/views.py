@@ -57,6 +57,7 @@ def re_login(request, email):
         return render(request, 'html_files/User-Profile1.html', context)
 
     elif request.method == 'POST' and 'Continue' in request.POST:
+
         form = second_registration()
 
         if request.method == "POST":
@@ -68,7 +69,7 @@ def re_login(request, email):
                 context = {'form': form}
                 return render(request, 'html_files/Registration-Form-Part-2.html', context)
         
-        context = {'form': form}
+        context = {'form2': form}
         return render(request, 'html_files/Registration-Form-Part-2.html', context)
 
 def signup(request):

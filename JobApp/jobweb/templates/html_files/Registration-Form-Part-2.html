@@ -19,206 +19,162 @@
         {% endfor %}
       </ul>
       {% endif %}
-  
+
       <form method="POST" class="row g-4" action="/createacc">
         {% csrf_token %}
         <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e; color: #000000">Personal Data</div>
-
+              
+              {% load crispy_forms_tags %}  
               <div class="col-md-3">
-                <label for="bplace" class="form-label" >Birthplace</label>
-                <input type="text" class="form-control" id="bplace" name="bplace" required>
+                {{form.bplace|as_crispy_field}}
               </div>
             
               <div class="col-md-3">
-                <label for="civilstatus" class="form-label" >Civil Status</label>
-                <select id="civilstatus" class="form-select" name="civilstatus" required>
-                  <option selected>Single</option>
-                  <option>Married</option>
-                  <option>Widowed</option>
-                </select>
+                {{form.civilstatus|as_crispy_field}}
               </div>
 
               <div class="col-md-3">
-                <label for="citizenship" class="form-label" >Citizenship</label>
-                <input type="text" class="form-control" id="citizenship" name="citizenship" required="true">
+                {{form.citizenship|as_crispy_field}}
               </div>
 
               <div class="col-md-3">
-                <label for="religion" class="form-label" >Religion</label>
-                <input type="text" class="form-control" id="religion" name="religion" required>
+                {{form.religion|as_crispy_field}}
               </div>
 
               <div class="col-md-3">
-                <label for="econtact" class="form-label" >Emergency Contact</label>
-                <input type="text" class="form-control" id="econtact" name="emer_cont" required>
+                {{form.e_contact|as_crispy_field}}
               </div>
 
               <div class="col-md-3">
-                <label for="econtact_no" class="form-label">Emergency Contact No.</label>
-                <input type="text" pattern="[0-9]{11}" class="form-control" id="econtact_no" name="emer_contno" required>
+                {{form.e_no|as_crispy_field}}
               </div>
 
         <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e; color: #000000">Educational Background</div>
         
                 <div class="col-md-6">
-                  <label for="elementary" class="form-label" >Elementary</label>
-                  <input type="text" class="form-control" id="elementary" name="elementary">
+                  {{form.elementary|as_crispy_field}}
                 </div>
 
                 <div class="col-md-6">
-                  <label for="year_elem" class="form-label" > Year Graduated</label>
-                  <input type="text" pattern="[0-9]{4}" class="form-control" id="year_elem" name="elementary_grad">
+                  {{form.elementary|as_crispy_field}}
                 </div>
 
                 <div class="col-md-6">
-                  <label for="hschool" class="form-label" >Highschool</label>
-                  <input type="text" class="form-control" id="hschool" name="highschool">
+                  {{form.elementary|as_crispy_field}}
                 </div>
 
                 <div class="col-md-6">
-                  <label for="year_hs" class="form-label" >Year Graduated</label>
-                  <input type="text" pattern="[0-9]{4}" class="form-control" id="year_hs" name="highschool_grad">
+                  {{form.elementary|as_crispy_field}}
                 </div>
                 
                 <div class="col-md-6">
-                    <label for="college" class="form-label" >College</label>
-                    <input type="text" class="form-control" id="college" name="college" >
-                  </div>
+                  {{form.elementary|as_crispy_field}}
+                </div>
   
-                  <div class="col-md-6">
-                    <label for="year_college" class="form-label" >Year Graduated</label>
-                    <input type="text" pattern="[0-9]{4}" class="form-control" id="year_college" name="college_grad" >
-                  </div>
+                <div class="col-md-6">
+                  {{form.elementary|as_crispy_field}}
+                </div>
 
                   <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e;">Employment Record</div>
                   
 
                     <div class="col-md-3">
-                      <label for="company1" class="form-label" >Company Name</label>
-                      <input type="text" class="form-control" id="company1" name="company1">
+                      {{form.elementary|as_crispy_field}}
                     </div>
 
                     <div class="col-md-3">
-                      <label for="position1" class="form-label" >Position</label>
-                      <input type="text" class="form-control" id="position1" name="position1">
+                      {{form.elementary|as_crispy_field}}
                     </div>
                     
                     <div class="col-md-3">
-                      <label for="from1" class="form-label" >From</label>
-                      <input type="text" pattern="[0-9]{4}" class="form-control" id="from1" name="from1">
+                      {{form.elementary|as_crispy_field}}
                     </div>
 
                     <div class="col-md-3">
-                      <label for="to1" class="form-label" >To</label>
-                      <input type="text" pattern="[0-9]{4}" class="form-control" id="to1" name="to1">
+                      {{form.elementary|as_crispy_field}}
                     </div>
 
                     <div class="col-md-3">
-                      <label for="company2" class="form-label">Company Name</label>
-                      <input type="text" class="form-control" id="company2" name="company2">
+                      {{form.elementary|as_crispy_field}}
                     </div>
 
                     <div class="col-md-3">
-                      <label for="position2" class="form-label" >Position</label>
-                      <input type="text" class="form-control" id="position2" name="position2">
+                      {{form.elementary|as_crispy_field}}
                     </div>
                     
                     <div class="col-md-3">
-                      <label for="from2" class="form-label" >From</label>
-                      <input type="text" pattern="[0-9]{4}" class="form-control" id="from2" name="from2">
+                      {{form.elementary|as_crispy_field}}
                     </div>
 
                     <div class="col-md-3">
-                      <label for="to2" class="form-label" >To</label>
-                      <input type="text" pattern="[0-9]{4}" class="form-control" id="to2" name="to2">
+                      {{form.elementary|as_crispy_field}}
                     </div>
 
                     <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;">Character Reference</div>
                   
 
                     <div class="col-md-3">
-                      <label for="ref1" class="form-label" >Name</label>
-                      <input type="text" class="form-control" id="ref1" name="ref1">
+                      {{form.elementary|as_crispy_field}}
                     </div>
                     
                     <div class="col-md-3">
-                      <label for="refcon1" class="form-label" >Contact No.</label>
-                      <input type="text" pattern="[0-9]{11}" class="form-control" id="refcon1" name="refcon1">
+                      {{form.elementary|as_crispy_field}}
                     </div>
 
                     <div class="col-md-3">
-                      <label for="refpos1" class="form-label" >Position</label>
-                      <input type="text" class="form-control" id="refpos1" name="refpos1">
+                      {{form.elementary|as_crispy_field}}
                     </div>
 
                     <div class="col-md-3">
-                      <label for="refcom1" class="form-label" >Company</label>
-                      <input type="text" class="form-control" id="refcom1" name="refcom1">
+                      {{form.elementary|as_crispy_field}}
                     </div>
 
                     <div class="col-md-3">
-                      <label for="ref2" class="form-label" >Name</label>
-                      <input type="text" class="form-control" id="ref2" name="ref2">
+                      {{form.elementary|as_crispy_field}}
                     </div>
                     
                     <div class="col-md-3">
-                      <label for="refcon2" class="form-label" >Contact No.</label>
-                      <input type="text" pattern="[0-9]{11}" class="form-control" id="refcon2" name="refcon2">
+                      {{form.elementary|as_crispy_field}}
                     </div>
 
                     <div class="col-md-3">
-                      <label for="refpos2" class="form-label" >Position</label>
-                      <input type="text" class="form-control" id="refpos2" name="refpos2">
+                      {{form.elementary|as_crispy_field}}
                     </div>
 
                     <div class="col-md-3">
-                      <label for="refcom2" class="form-label" >Company</label>
-                      <input type="text" class="form-control" id="refcom2" name="refcom2">
+                      {{form.elementary|as_crispy_field}}
                     </div>
 
                     <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;">Government Numbers</div>
                   
 
                     <div class="col-md-4">
-                      <label for="sss" class="form-label" >SSS</label>
-                      <input type="text" pattern="[0-9]{10}" class="form-control" id="sss" name="S_S_S" required>
+                      {{form.elementary|as_crispy_field}}
                     </div>
 
                     <div class="col-md-4">
-                      <label for="philhealth" class="form-label" >Philhealth</label>
-                      <input type="text" pattern="[0-9]{12}" class="form-control" id="philhealth" name="philhealth" required>
+                      {{form.elementary|as_crispy_field}}
                     </div>
 
                     <div class="col-md-4">
-                      <label for="pag-ibig" class="form-label" >Pag-ibig</label>
-                      <input type="text" pattern="[0-9]{12}" class="form-control" id="pagibig" name="pag-ibig" required>
+                      {{form.elementary|as_crispy_field}}
                     </div>
 
                     <div class="col-md-4">
-                      <label for="tin" class="form-label" >TIN</label>
-                      <input type="text" pattern="[0-9]{9}" class="form-control" id="tin" name="T_I_N" required>
+                      {{form.elementary|as_crispy_field}}
                     </div>
 
                     <div class="col-md-4">
-                      <label for="med-record" class="form-label" >Medical Record Slip</label>
-                      <input type="text" pattern="[0-9]{6}" class="form-control" id="med-record" name="med_record" required>
+                      {{form.elementary|as_crispy_field}}
                     </div>
 
                     <div class="col-md-4">
-                      <label for="nbi" class="form-label" > NBI</label>
-                      <input type="text" pattern="[0-9]{6}" class="form-control" id="nbi" name="N_B_I" required>
+                      {{form.elementary|as_crispy_field}}
                     </div>
                     
                     <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;">Position And Signature</div>
                       
-                      <div class="container">
-                        <div class="row">
-                          <div class="col">
-                            <div>
-                              <label for="signature" class="form-label" >Upload Signature</label>
-                              <input class="form-control" type="file" id="signature" name="signature" required>
-                          </div>
-                      
+                    {{form.elementary|as_crispy_field}}
 
                       <div class="col-md-4">
                         <label for="job" class="form-label"></label>
@@ -227,7 +183,7 @@
 
                       <div class="col-md-4">
                         <label for="accounttype" class="form-label"></label>
-                        <input class="form-control" type="hidden"  id="accounttype" name="account_type" value="Applicant" >
+                        <input class="form-control" type="hidden"  id="accounttype" name="account_type" value="Applicant Level 2" >
                       </div>
 
                       <div class="d-grid p-3 gap-2 d-md-block text-center">
@@ -245,7 +201,6 @@
 
                                           
       </form>
-
       {% if messages %}
       <ul class="messages">
         {% for message in messages %}

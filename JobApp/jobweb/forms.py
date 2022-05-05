@@ -26,9 +26,44 @@ class first_registration(ModelForm):
                 'applyingfor': 'Applying For:'
                 }
 
-
 class second_registration(ModelForm):
     class Meta:
         model = other_info
-        #fields = ['email', 'password1', 'password2', 'photo', 'first_name', 'middle_name', 'last_name', 'address', 'cellphone', 'birthday']
+        #fields = ['bplace']
         fields = '__all__'
+        labels = {'bplace': 'Birthplace',
+                'civilstatus': 'Civil Status',
+                'citizenship': 'Citizenship',
+                'religion': 'Religion',
+                'e_contact':'Emergency Contact Person',
+                'e_no':'Emergency Contact #',
+                'elementary':'Elementary School',
+                'elementary_grad':'Year Graduated',
+                'highschool':'High School',
+                'highschool_grad':'Year Graduated',
+                'college':'College',
+                'college_grad':'Year Graduated',
+                'company1':'First Company',
+                'position1':'Position in the Company',
+                'from1':'',
+                'to1':'',
+                'company2':'Second Company',
+                'position2':'Position in the Company',
+                'from2':'',
+                'to2':'',
+                'ref1':'Reference Person',
+                'refcon1':'Contact #',
+                'refpos1':'Person Position',
+                'refcom1':'',
+                'ref2':'Reference Person',
+                'refcon2':'Contact #',
+                'refpos2':'Person Position',
+                'refcom2':'',
+                'philhealth':'Philhealth ID',
+                'pagibig':'Pag-ibig ID',
+                'TIN':'Tin Number',
+                'NBI':'NBI Clearance',
+                'SSS':'SSS ID',
+                'med_record':'Medical Record',
+                'signature':'Signature (Picture)',
+                }
