@@ -11,13 +11,13 @@ urlpatterns = [
     path('home', views.home, name='home'),
 
     path('login', views.login),
-    path('re_login/<str:email>', views.re_login, name='re_login'),
+    #path('re_login/<str:email>', views.re_login, name='re_login'),
     path('logout', views.logout, name='logout'),
 
     path('signup', views.signup, name='signup'),
-    path('signup1', views.signup1, name='signup1'),
+    path('signup1/<str:email>', views.signup1, name='signup1'),
     path('complete_info', views.complete_info, name='complete_info'),
-    #path('user_profile', views.user_profile, name='user_profile'),
+    path('user_profile', views.user_profile, name='user_profile'),
 
     path('hrdashboard/<str:email_id>', views.hrdashboard, name='hrdashboard'),
     path('manage_account/<str:email>', views.manage_account, name='manage_account'),

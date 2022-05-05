@@ -49,28 +49,6 @@ def login(request):
     
     else:
         return redirect('home')
-    
-def re_login(request, email):
-    if request.method == 'POST' and 'Later' in request.POST:
-        user_account = account_registration.objects.filter(email=email)
-        context = {'info': user_account}
-        return render(request, 'html_files/User-Profile1.html', context)
-
-    elif request.method == 'POST' and 'Continue' in request.POST:
-
-        form = second_registration()
-
-        if request.method == "POST":
-            form = second_registration(request.POST, request.FILES)
-            if form.is_valid():
-                    form.save()
-
-            else:
-                context = {'form': form}
-                return render(request, 'html_files/Registration-Form-Part-2.html', context)
-        
-        context = {'form2': form}
-        return render(request, 'html_files/Registration-Form-Part-2.html', context)
 
 def signup(request):
     form = first_registration()
@@ -79,6 +57,7 @@ def signup(request):
         form = first_registration(request.POST, request.FILES)
 
         if form.is_valid():
+            email = form.cleaned_data.get("email")
             password_first = form.cleaned_data.get("password1")
             password_confirm = form.cleaned_data.get("password2")
 
@@ -86,6 +65,7 @@ def signup(request):
                 position = request.POST.get('job')
                 form.instance.account_type = position
                 form.save()
+                
                 messages.success(request, 'Account successfully created!')
                 return redirect('home')
 
@@ -96,6 +76,28 @@ def signup(request):
     context = {'form': form}
     return render(request, 'html_files/Registration-Form.html', context)
 
+def signup1(request, email):  
+    form1 = second_registration()
+
+    if request.method == "POST":
+        form1 = second_registration(request.POST, request.FILES)
+
+        if form1.is_valid():
+            form1.save()
+            
+            account_registration.objects.filter(email=email).update(account_type='Applicant Level 2')
+            info1 = account_registration.objects.filter(email=email)
+            info2 = other_info.objects.filter(email_id=email)
+
+            zippedItems = zip(info1, info2)
+            context1 = {'info': zippedItems}
+            return render(request, 'html_files/User-Profile1.html', context1)
+
+        else:
+            return redirect('signup1')
+        
+    context = {'form': form1}
+    return render(request, 'html_files/Registration-Form-Part-2.html', context)
 
 def sort_list(request):
     if request.method == "POST" and "Name" in request.POST:
@@ -125,9 +127,6 @@ def manage_account(request, email):
 
     elif data1 == "HRManager":  
         return redirect('hrdashboard')
-
-def signup1(request):
-    return render(request, 'html_files/Registration-Form-Part-2.html')
 
 def complete_info(request):
     return render(request, 'html_files/Finish-Registration.html')
@@ -223,6 +222,11 @@ def hrdashboard(request):
     account = account_registration.objects.all()
     context = {'account': account}
     return render(request, 'html_files/HRMANAGER.html', context)
+
+def user_profile(request, email):
+    user_account = account_registration.objects.filter(email=email)
+    context = {'info': user_account}
+    return render(request, 'html_files/User-Profile1.html', context)
 
 ################################### INACTIVE ############################################
 

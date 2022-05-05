@@ -11,7 +11,7 @@
 
     <body class="row g-3", background="/static/pictures/bg.jpg" >
       <div class="fs-1 p-4 mb-2 fw-bold text-center" style="background-color: #1f2833; color: #66fcf1">Complete Your Information</div>
-      
+     
       {% if messages %}
       <ul class="messages">
         {% for message in messages %}
@@ -20,11 +20,15 @@
       </ul>
       {% endif %}
 
-      <form method="POST" class="row g-4" action="/createacc">
+      <form method="POST" class="row g-4">
         {% csrf_token %}
         <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e; color: #000000">Personal Data</div>
               
               {% load crispy_forms_tags %}  
+              <div class="col-md-3" type="hidden">
+                {{form.email|as_crispy_field}}
+              </div>
+
               <div class="col-md-3">
                 {{form.bplace|as_crispy_field}}
               </div>
@@ -182,8 +186,11 @@
                         <p>I hereby certify that the above information as true and correct to the best of my
                           knowledge and belief. I also understand that any misinterpration will be considered
                           reason for withdrawal of an offer or subsequent dismissal if employed.</p>
-                          <button class="btn btn-primary te" type="submit">Submit Details</button>
+                          <button class="btn btn-primary te" type="submit" button="submit">Submit Details</button>
+                          
                       </div>
+                    
+                     
 
                     <div class="col-md-4">
                       <label for="job" class="form-label"></label>
@@ -192,7 +199,7 @@
 
                     <div class="col-md-4">
                       <label for="accounttype" class="form-label"></label>
-                      <input class="form-control" type="hidden"  id="accounttype" name="account_type" value="Applicant Level 2" >
+                      <input class="form-control" type="hidden" id="accounttype" name="update_account_type" value="Applicant Level 2" >
                     </div>
 
 
