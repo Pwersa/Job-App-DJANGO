@@ -8,15 +8,14 @@ from .forms import *
 from .models import *
 from django.views.decorators.cache import cache_control
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
 
 
 ######################## ACTIVE #########################
 
 def login(request):
     check_email = request.POST.get('email1')
-    data = account_registration.objects.filter(email=check_email)
-    data1 = account_registration.objects.filter(email=check_email).values_list('account_type', flat=True).first()
+    data = account_registration.objects.filter(username=check_email)
+    data1 = account_registration.objects.filter(username=check_email).values_list('account_type', flat=True).first()
     #data2 = account_registration.objects.filter(email=check_email).values_list('account_complete', flat=True).first()
 
     print("data1" , data)
@@ -57,22 +56,24 @@ def signup(request):
         form = first_registration(request.POST, request.FILES)
 
         if form.is_valid():
-            email = form.cleaned_data.get("email")
+            #email = form.cleaned_data.get("email")
             password_first = form.cleaned_data.get("password1")
             password_confirm = form.cleaned_data.get("password2")
 
             if password_confirm == password_first:
                 position = request.POST.get('job')
                 form.instance.account_type = position
+                
                 form.save()
                 
                 messages.success(request, 'Account successfully created!')
                 return redirect('home')
 
             else:
+                
                 messages.warning(request, 'ERROR: Password do not match.')
                 return redirect('signup')
-
+    print(form.errors)
     context = {'form': form}
     return render(request, 'html_files/Registration-Form.html', context)
 
@@ -85,9 +86,9 @@ def signup1(request, email):
         if form1.is_valid():
             form1.save()
             
-            account_registration.objects.filter(email=email).update(account_type='Applicant Level 2')
-            info1 = account_registration.objects.filter(email=email)
-            info2 = other_info.objects.filter(email_id=email)
+            account_registration.objects.filter(username=email).update(account_type='Applicant Level 2')
+            info1 = account_registration.objects.filter(username=email)
+            info2 = other_info.objects.filter(username=email)
 
             zippedItems = zip(info1, info2)
             context1 = {'info': zippedItems}
@@ -136,7 +137,7 @@ def set_interview(request, email_id):
 
     get_date_time = request.POST.get('interview_date')
     
-    if get_date_time is not "":
+    if get_date_time != "":
         if request.method == "POST":
             update_date_time = interview.objects.get(email_id=email_id)
             update_date_time.date_time = get_date_time
@@ -224,7 +225,7 @@ def hrdashboard(request):
     return render(request, 'html_files/HRMANAGER.html', context)
 
 def user_profile(request, email):
-    user_account = account_registration.objects.filter(email=email)
+    user_account = account_registration.objects.filter(username=email)
     context = {'info': user_account}
     return render(request, 'html_files/User-Profile1.html', context)
 

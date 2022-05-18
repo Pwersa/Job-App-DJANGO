@@ -140,4 +140,4 @@ AUTHENTICATION_BACKENDS = (
     'guardian.backends.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
-#AUTH_USER_MODEL = 'jobweb.account_registration'
+AUTH_USER_MODEL = 'jobweb.account_registration'

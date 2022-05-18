@@ -5,17 +5,18 @@ from django.forms import ModelForm
 from .models import *
 
 
-class first_registration(ModelForm):
+class first_registration(UserCreationForm):
 
     class Meta:
         model = account_registration 
-        #fields = ['email', 'password1', 'password2', 'photo', 'first_name', 'middle_name', 'last_name', 'address', 'cellphone', 'birthday']
-        fields = '__all__' 
+        fields = ['username', 'password1', 'password2', 'photo', 'first_name', 'middle_name', 'last_name', 'address', 'cellphone', 'birthday',
+                'applyingfor', 'job', 'employment_status', 'account_type']
+        #fields = '__all__' 
 
-        widgets = {'password1': forms.PasswordInput(), 'password2': forms.PasswordInput()}
-        labels = {'email': 'Email (This Will Be Your Login)',
-                'password1': 'Password',
-                'password2': 'Confirm your Password',
+        widgets = {'password': forms.PasswordInput(), 'password1': forms.PasswordInput()}
+        labels = {'username': 'Email (This Will Be Your Username for Login)',
+                'password': 'Password',
+                'password1': 'Confirm your Password',
                 'photo': 'Upload 1x1 Photo',
                 'last_name': 'Surname',
                 'first_name': 'First Name',
@@ -26,7 +27,7 @@ class first_registration(ModelForm):
                 'applyingfor': 'Applying For:'
                 }
 
-class second_registration(ModelForm):
+class second_registration(UserCreationForm):
     class Meta:
         model = other_info
         #fields = ['bplace']

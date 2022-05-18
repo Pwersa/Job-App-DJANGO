@@ -2,18 +2,17 @@ from django.db import models
 from django import forms
 from django.contrib.auth.models import UserManager
 from pkg_resources import require
-
-#from django.contrib.auth.models import AbstractUser 
+from django.contrib.auth.models import AbstractUser 
 
 # Create your models here.
 
-class account_registration(models.Model):
+class account_registration(AbstractUser):
     
     applyingfor1 = [('Choice1', 'Website Developersss')]
 
-    email = models.EmailField(primary_key = True, verbose_name='email', unique=True)
-    password1 = models.CharField(verbose_name='password1', max_length=20,)
-    password2 = models.CharField(verbose_name='password2', max_length=20,)
+    username = models.EmailField(primary_key=True, verbose_name='username', unique=True, default="")
+    password1 = models.CharField(verbose_name='password1', max_length=20, default="")
+    password2 = models.CharField(verbose_name='password2', max_length=20, default="")
     photo = models.ImageField(verbose_name='photo', null=True, upload_to="images/")
     first_name = models.CharField(verbose_name='first_name' ,max_length=99, default="")
     middle_name = models.CharField(verbose_name='middle_name' ,max_length=99, default="")
@@ -33,7 +32,7 @@ class other_info(models.Model):
                             ('Widowed', 'Widowed'),
                             ]
 
-    email = models.ForeignKey(account_registration, primary_key=True, on_delete=models.CASCADE, default="user@email.com",)
+    username = models.ForeignKey(account_registration, primary_key=True, on_delete=models.CASCADE, default="")
     bplace = models.CharField(verbose_name='bplace' ,max_length=99, null=True)
     civilstatus = models.CharField(verbose_name='civilstatus' ,max_length=99, null=True, choices=citizenship_options)
     citizenship = models.CharField(verbose_name='citizenship' ,max_length=99, null=True)
@@ -69,6 +68,8 @@ class other_info(models.Model):
     SSS = models.CharField(verbose_name='SSS', max_length=99, null=True)
     med_record = models.CharField(verbose_name='med_record', max_length=6, null=True)
     signature = models.ImageField(verbose_name='signature', default="", blank=True, null=True)
+
+    USERNAME_FIELD = 'username'
     
 class job_listing(models.Model):
     jtitle = models.CharField(primary_key = True , verbose_name='jtitle', max_length=99)
@@ -78,7 +79,7 @@ class job_listing(models.Model):
     salary = models.PositiveIntegerField(verbose_name='salary')
 
 class interview(models.Model):
-    email = models.ForeignKey(account_registration, primary_key=True, on_delete=models.CASCADE, default="user@email.com")
+    username = models.ForeignKey(account_registration, primary_key=True, on_delete=models.CASCADE, default="")
     first_name = models.CharField(verbose_name='first_name' ,max_length=99, default="", null=True)
     middle_name = models.CharField(verbose_name='middle_name' ,max_length=99, default="", null=True)
     last_name = models.CharField(verbose_name='last_name' ,max_length=99, default="", null=True)
