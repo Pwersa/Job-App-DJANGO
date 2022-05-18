@@ -5,6 +5,7 @@ from django.forms import ModelForm
 from .models import *
 
 
+
 class first_registration(UserCreationForm):
 
     class Meta:
@@ -15,8 +16,6 @@ class first_registration(UserCreationForm):
 
         widgets = {'password': forms.PasswordInput(), 'password1': forms.PasswordInput()}
         labels = {'username': 'Email (This Will Be Your Username for Login)',
-                'password': 'Password',
-                'password1': 'Confirm your Password',
                 'photo': 'Upload 1x1 Photo',
                 'last_name': 'Surname',
                 'first_name': 'First Name',
@@ -26,8 +25,8 @@ class first_registration(UserCreationForm):
                 'birthday': 'Birthday',
                 'applyingfor': 'Applying For:'
                 }
-
-class second_registration(UserCreationForm):
+ 
+class second_registration(ModelForm):
     class Meta:
         model = other_info
         #fields = ['bplace']

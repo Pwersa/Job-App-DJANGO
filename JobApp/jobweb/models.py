@@ -1,8 +1,5 @@
 from django.db import models
-from django import forms
-from django.contrib.auth.models import UserManager
-from pkg_resources import require
-from django.contrib.auth.models import AbstractUser 
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
@@ -24,6 +21,8 @@ class account_registration(AbstractUser):
     job = models.CharField(verbose_name='job',max_length=99, default='Applicant')
     employment_status = models.CharField(verbose_name='job',max_length=99, default='Not yet Employed')
     account_type = models.CharField(verbose_name='account_type',max_length=99)
+
+    USERNAME_FIELD = 'username'
 
 class other_info(models.Model):
 

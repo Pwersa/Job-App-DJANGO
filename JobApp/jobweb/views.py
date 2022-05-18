@@ -1,7 +1,3 @@
-#from django.http import HttpResponse
-#import mysql.connector
-#from django.contrib.auth.forms import UserCreationForm
-from queue import Empty
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import *
@@ -9,45 +5,56 @@ from .models import *
 from django.views.decorators.cache import cache_control
 from django.contrib.auth import authenticate, login, logout
 
-
 ######################## ACTIVE #########################
 
 def login(request):
-    check_email = request.POST.get('email1')
-    data = account_registration.objects.filter(username=check_email)
-    data1 = account_registration.objects.filter(username=check_email).values_list('account_type', flat=True).first()
-    #data2 = account_registration.objects.filter(email=check_email).values_list('account_complete', flat=True).first()
+    if request.method == "POST":
+        check_email = request.POST['email1']
+        check_password = request.POST['password1']
 
-    print("data1" , data)
-    print(data1)
-    #print(data2)
-    
-    if data1 == 'Applicant Level 1':
-        context = {'info': data}
-        return render(request, 'html_files/Finish-Registration.html', context)
-    
-    elif data1 == 'Applicant Level 2':
-        context = {'info': data}
-        return render(request, 'html_files/Finish-Registration.html', context)
+        user = authenticate(request, username=check_email, password=check_password)
+        
+        data = account_registration.objects.filter(username=check_email)
+        data1 = account_registration.objects.filter(username=check_email).values_list('account_type', flat=True).first()
+        #data2 = account_registration.objects.filter(email=check_email).values_list('account_complete', flat=True).first()
 
-    elif data1 == 'Applicant Level 3':
-        context = {'info': data}
-        return render(request, 'html_files/Finish-Registration.html', context)
+        print("data1" , data)
+        print(data1)
+        #print(data2)
+        if user is not None:
 
-    elif data1 == 'Employee':
-        context = {'info': data}
-        return render(request, 'html_files/Employee-Details.html', context)
+            if data1 == 'Applicant Level 1':
+                login(request, user)
+                context = {'info': data}
+                return render(request, 'html_files/Finish-Registration.html', context)
+            
+            elif data1 == 'Applicant Level 2':
+                context = {'info': data}
+                return render(request, 'html_files/Finish-Registration.html', context)
 
-    elif data1 == 'HRManager':
-        account = account_registration.objects.all()
-        user_interview = interview.objects.values('date_time')
-        zippedItems = zip(account, user_interview)
+            elif data1 == 'Applicant Level 3':
+                context = {'info': data}
+                return render(request, 'html_files/Finish-Registration.html', context)
 
-        context1 = {'zippedItems': zippedItems}
-        return render(request, 'html_files/HRMANAGER.html', context1)
-    
+            elif data1 == 'Employee':
+                context = {'info': data}
+                return render(request, 'html_files/Employee-Details.html', context)
+
+            elif data1 == 'HRManager':
+                account = account_registration.objects.all()
+                user_interview = interview.objects.values('date_time')
+                zippedItems = zip(account, user_interview)
+
+                context1 = {'zippedItems': zippedItems}
+                return render(request, 'html_files/HRMANAGER.html', context1)
+            
+            else:
+                return redirect('home')
+        
+        else:
+            return redirect('home')
     else:
-        return redirect('home')
+            return redirect('home')
 
 def signup(request):
     form = first_registration()
@@ -215,6 +222,7 @@ def applicant_hired_reject(request, email):
 ################################### REDIRECTS ############################################
 
 def home(request):
+    
     data = job_listing.objects.all()
     context = {'job': data}
     return render(request, 'html_files/HOMEWEBSITE.html', context)
