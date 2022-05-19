@@ -4,8 +4,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
 from .models import *
 
-
-
 class first_registration(UserCreationForm):
 
     class Meta:

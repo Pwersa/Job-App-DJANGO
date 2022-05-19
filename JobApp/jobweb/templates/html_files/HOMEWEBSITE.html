@@ -15,14 +15,14 @@
                   <a class="navbar-brand" style="font-weight: bold; font-size: x-large; color: #66fcf1;">Welcome to our Job Website</a>
                 </div>
                 <div>
-                    <form class="d-flex" method="POST" action="/login">
+                    <form class="d-flex" method="POST" action="/login_user">
                         {% csrf_token %}
                         <div>
-                            <input class="form-control me-2" type="email" placeholder="Email" aria-label="Search" style="width: 200px;" id="email1" name="email1">
+                            <input class="form-control me-2" type="email" placeholder="Email" aria-label="Search" style="width: 200px;" id="username" name="username">
                         </div>
 
                         <div>
-                            <input class="form-control me-2" type="password" placeholder="Password" aria-label="Search" style="width: 200px;" id="password1" name="password1" required>
+                            <input class="form-control me-2" type="password" placeholder="Password" aria-label="Search" style="width: 200px;" id="password" name="password" required>
                         </div>
 
                         <div>

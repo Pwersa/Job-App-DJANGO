@@ -4,18 +4,20 @@ from .forms import *
 from .models import *
 from django.views.decorators.cache import cache_control
 from django.contrib.auth import authenticate, login, logout
+from django.apps import apps
 
 ######################## ACTIVE #########################
 
-def login(request):
+def login_user(request):
     if request.method == "POST":
-        check_email = request.POST['email1']
-        check_password = request.POST['password1']
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-        user = authenticate(request, username=check_email, password=check_password)
+        apps.get_model('jobweb', 'account_registration', require_ready=True)
+        user = authenticate(request, username=username, password=password)
         
-        data = account_registration.objects.filter(username=check_email)
-        data1 = account_registration.objects.filter(username=check_email).values_list('account_type', flat=True).first()
+        data = account_registration.objects.filter(username=username)
+        data1 = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
         #data2 = account_registration.objects.filter(email=check_email).values_list('account_complete', flat=True).first()
 
         print("data1" , data)
