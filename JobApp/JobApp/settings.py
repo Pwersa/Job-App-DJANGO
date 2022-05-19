@@ -87,6 +87,7 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': 'Admin123',
         'HOST': 'localhost',
+        'OPTIONS': {"init_command": "SET foreign_key_checks = 0;",},
     }
 }
 

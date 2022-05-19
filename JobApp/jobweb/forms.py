@@ -27,8 +27,10 @@ class first_registration(UserCreationForm):
 class second_registration(ModelForm):
     class Meta:
         model = other_info
-        #fields = ['bplace']
-        fields = '__all__'
+        fields = ['bplace', 'civilstatus', 'citizenship', 'religion', 'e_contact', 'e_no', 'elementary', 'elementary_grad', 'highschool', 'highschool_grad', 'college', 'college_grad', 
+                'company1', 'position1', 'from1', 'to1', 'company2', 'position2', 'from2', 'to2', 'ref1', 'refcon1', 'refpos1', 'refcom1', 'ref2', 'refcon2', 'refpos2', 'refcom2', 'philhealth', 'pagibig', 
+                'TIN', 'NBI', 'SSS', 'med_record', 'signature', ]
+        #fields = '__all__'
         labels = {'bplace': 'Birthplace',
                 'civilstatus': 'Civil Status',
                 'citizenship': 'Citizenship',
