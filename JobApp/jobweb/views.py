@@ -70,6 +70,16 @@ def login_user(request):
                 context2 = {'hr_account': hr_account}
                 return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
             
+            elif data1 == 'Rejected':
+                login(request, user)
+                info1 = account_registration.objects.filter(username=username)
+                info2 = other_info.objects.filter(username=username)
+                info3 = interview.objects.filter(username=username)
+
+                zippedItems = zip(info1, info2, info3)
+                context1 = {'info': zippedItems}
+                return render(request, 'html_files/User-Profile1.html', context1)
+            
             else:
                 return redirect('home')
         
