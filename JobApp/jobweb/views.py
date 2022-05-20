@@ -79,6 +79,16 @@ def login_user(request):
                 zippedItems = zip(info1, info2, info3)
                 context1 = {'info': zippedItems}
                 return render(request, 'html_files/User-Profile1.html', context1)
+
+            elif data1 == 'Retired':
+                login(request, user)
+                info1 = account_registration.objects.filter(username=username)
+                info2 = other_info.objects.filter(username=username)
+                info3 = interview.objects.filter(username=username)
+
+                zippedItems = zip(info1, info2, info3)
+                context1 = {'info': zippedItems}
+                return render(request, 'html_files/User-Profile1.html', context1)
             
             else:
                 return redirect('home')
@@ -258,8 +268,13 @@ def manage_account(request, username):
         return render(request, 'html_files/User-Profile1-Applicant.html', context1)
 
     elif data1 == "Employee":
-        context = {'info': user_account}
-        return render(request, 'html_files/User-Profile1-Employee.html', context)
+        info1 = account_registration.objects.filter(username=username)
+        info2 = other_info.objects.filter(username_id=username)
+        info3 = interview.objects.filter(username_id=username)
+
+        zippedItems = zip(info1, info2, info3)
+        context1 = {'info': zippedItems}
+        return render(request, 'html_files/User-Profile1-Employee.html', context1)
 
     elif data1 == "Rejected":
         info1 = account_registration.objects.filter(username=username)
@@ -269,6 +284,15 @@ def manage_account(request, username):
         zippedItems = zip(info1, info2, info3)
         context1 = {'info': zippedItems}
         return render(request, 'html_files/User-Profile1-Applicant.html', context1)
+
+    elif data1 == "Retired":
+        info1 = account_registration.objects.filter(username=username)
+        info2 = other_info.objects.filter(username_id=username)
+        info3 = interview.objects.filter(username_id=username)
+
+        zippedItems = zip(info1, info2, info3)
+        context1 = {'info': zippedItems}
+        return render(request, 'html_files/User-Profile1-Employee.html', context1)
 
     elif data1 == "HRManager":  
         return redirect('hrdashboard')
@@ -306,44 +330,66 @@ def change_employment(request, username):
     if request.method == "POST" and "Full Time" in request.POST:
         account_registration.objects.filter(username=username).update(employment_status="Full Time Worker")
         messages.success(request, 'Employment was updated on account: ' + username)
+
         account = account_registration.objects.all()
-        context = {'account': account}
-        return render(request, 'html_files/HRMANAGER.html', context)
+        user_interview = interview.objects.values('date_time')
+        hr_account = account_registration.objects.filter(username=username)
+
+        zippedItems = zip(account, user_interview)
+        return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
 
     elif request.method == "POST" and "Part Time" in request.POST:
         account_registration.objects.filter(username=username).update(employment_status="Part Time Worker")
         messages.success(request, 'Employment was updated on account: ' + username)
         account = account_registration.objects.all()
-        context = {'account': account}
-        return render(request, 'html_files/HRMANAGER.html', context)
+        user_interview = interview.objects.values('date_time')
+        hr_account = account_registration.objects.filter(username=username)
+        
+        zippedItems = zip(account, user_interview)
+        return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
 
     elif request.method == "POST" and "On Leave" in request.POST:
         account_registration.objects.filter(username=username).update(employment_status="On Vacation")
         messages.success(request, 'Employment was updated on account: ' + username)
         account = account_registration.objects.all()
-        context = {'account': account}
-        return render(request, 'html_files/HRMANAGER.html', context)
+        user_interview = interview.objects.values('date_time')
+        hr_account = account_registration.objects.filter(username=username)
+        
+        zippedItems = zip(account, user_interview)
+        return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
 
     elif request.method == "POST" and "Resigned" in request.POST:
         account_registration.objects.filter(username=username).update(employment_status="Resigned")
         messages.success(request, 'Employment was updated on account: ' + username)
-        account = account_registration.objects.all()
-        context = {'account': account}
-        return render(request, 'html_files/HRMANAGER.html', context)
+        aaccount = account_registration.objects.all()
+        user_interview = interview.objects.values('date_time')
+        hr_account = account_registration.objects.filter(username=username)
+        
+        zippedItems = zip(account, user_interview)
+        return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
 
     elif request.method == "POST" and "Fired" in request.POST:
         account_registration.objects.filter(username=username).update(employment_status="Fired")
         messages.success(request, 'Employment was updated on account: ' + username)
         account = account_registration.objects.all()
-        context = {'account': account}
-        return render(request, 'html_files/HRMANAGER.html', context)
+        user_interview = interview.objects.values('date_time')
+        hr_account = account_registration.objects.filter(username=username)
+        
+        zippedItems = zip(account, user_interview)
+        return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
 
     elif request.method == "POST" and "Retired" in request.POST:
         account_registration.objects.filter(username=username).update(employment_status="Retired")
+        account_registration.objects.filter(username=username).update(account_type="Retired")
+        account_registration.objects.filter(username=username).update(applyingfor="Retired")
+
         messages.success(request, 'Employment was updated on account: ' + username)
         account = account_registration.objects.all()
-        context = {'account': account}
-        return render(request, 'html_files/HRMANAGER.html', context)
+        user_interview = interview.objects.values('date_time')
+        hr_account = account_registration.objects.filter(username=username)
+        
+        zippedItems = zip(account, user_interview)
+        return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
 
     else:
         return redirect('change_employment')
@@ -470,6 +516,20 @@ def requirements(request, username):
         data = other_info.objects.filter(username_id=username)
         context1 = {'check': data}
         return render(request, 'html_files/Requirements.html', context1)
+
+def delete_account(request, username):
+    account_registration.objects.filter(username=username).delete()
+    interview.objects.filter(username=username).delete()
+    other_info.objects.filter(username=username).delete()
+
+    messages.success(request, 'Account successfully DELETED.')
+    account = account_registration.objects.all()
+    user_interview = interview.objects.values('date_time')
+    hr_account = account_registration.objects.filter(username=username)
+        
+    zippedItems = zip(account, user_interview)
+    return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
+
 
 def logout_user(request):
     logout(request)

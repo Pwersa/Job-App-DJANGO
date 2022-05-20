@@ -98,7 +98,7 @@
                             <h6 class="mb-0">Requirements:</h6>
                             <span class="text-secondary">Already satisfied</span>
                         </li>
-                        
+
                         {% endif %}
                         
                     </ul>
@@ -129,10 +129,10 @@
                     {% if data.account_type == 'Rejected' %}
                     <ul class="list-group list-group-flush ">
                         <li class="list-group-item d-flex justify-content-center flex-wrap">
-                            <form method="POST" action="{% url 'applicant_hired_reject' data.pk %}">
+                            <form method="POST" action="{% url 'delete_account' data.pk %}">
                                 {% csrf_token %}
                               
-                                <button class="btn btn-outline-error" button="submit" style="color: red;" name="Hire" id="Hire" value="Hired">Delete Account</button>
+                                <button class="btn btn-outline-error" button="submit" style="color: red;" name="Hire">Delete Account</button>
                                 &nbsp; 
                             </form>
                         </li>

@@ -30,6 +30,7 @@ urlpatterns = [
     path('applicant_hired_reject/<str:username>', views.applicant_hired_reject, name='applicant_hired_reject'),
 
     path('change_password/<str:username>', views.change_password, name='change_password'),
+    path('delete_account/<str:username>', views.delete_account, name='delete_account'),
     
     
 ############################  UNUSED  ####################################
