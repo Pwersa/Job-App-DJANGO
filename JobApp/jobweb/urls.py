@@ -11,29 +11,32 @@ urlpatterns = [
     path('home', views.home, name='home'),
 
     path('login_user', views.login_user),
-    #path('re_login/<str:email>', views.re_login, name='re_login'),
-    path('logout', views.logout, name='logout'),
+    #path('re_login/<str:username>', views.re_login, name='re_login'),
+    path('logout_user', views.logout_user, name='logout_user'),
 
     path('signup', views.signup, name='signup'),
-    path('signup1/<str:email>', views.signup1, name='signup1'),
+    path('signup1/<str:username>', views.signup1, name='signup1'),
     path('complete_info', views.complete_info, name='complete_info'),
-    path('user_profile/<str:email>', views.user_profile, name='user_profile'),
+    path('user_profile/<str:username>', views.user_profile, name='user_profile'),
+    path('requirements/<str:username>', views.requirements, name='requirements'),
+    path('requirements_satisfied/<str:username_id>', views.requirements_satisfied, name='requirements_satisfied'),
+    path('returntoprofile/<str:username>', views.returntoprofile, name='returntoprofile'),
 
-    path('hrdashboard/<str:email_id>', views.hrdashboard, name='hrdashboard'),
-    path('manage_account/<str:email>', views.manage_account, name='manage_account'),
-    path('change_employment/<str:email>', views.change_employment, name='change_employment'),
+    path('hrdashboard/<str:username_id>', views.hrdashboard, name='hrdashboard'),
+    path('manage_account/<str:username>', views.manage_account, name='manage_account'),
+    path('change_employment/<str:username>', views.change_employment, name='change_employment'),
     path('sort_list', views.sort_list, name='sort_list'),
-    path('set_interview/<str:email_id>', views.set_interview, name="set_interview"),
-    path('applicant_hired_reject/<str:email>', views.applicant_hired_reject, name='applicant_hired_reject'),
+    path('set_interview/<str:username_id>', views.set_interview, name="set_interview"),
+    path('applicant_hired_reject/<str:username>', views.applicant_hired_reject, name='applicant_hired_reject'),
+
+    path('change_password/<str:username>', views.change_password, name='change_password'),
+    
+    
 ############################  UNUSED  ####################################
-    path('change_password', views.change_pass, name='changepass'),
+    
     path('delete', views.delete, name="delete"),
     path('delete_acc', views.delete_acc, name="delete_acc"),
     path('addjob', views.addjob, name="addjob"),
-    path('changepassword', views.changepass1),
-    path('createjobs', views.createJobs),
-    path('show_jobs', views.job_show),
-    path('createJobs', views.createJobs, name='createJobs'),
     path('delete_job', views.delete_jobs, name='delete_job'),
 
 ############################# DEBUG ########################################

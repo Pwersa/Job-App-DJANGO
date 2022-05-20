@@ -20,15 +20,16 @@
       </ul>
       {% endif %}
 
-      <form method="POST" class="row g-4">
+      <form method="POST" enctype="multipart/form-data" class="row g-4">
         {% csrf_token %}
+        <div style="text-align: center;">
+          <strong style="font-size: 22px;">Note: </strong> 
+          <small style="font-size: 15px; font-weight: bold ;color: red;">Labels with asterisk(*) is required to fill upon.</small>
+        </div>
+        
         <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e; color: #000000">Personal Data</div>
               
               {% load crispy_forms_tags %}  
-              <div class="col-md-3" type="hidden">
-                
-              </div>
-
               <div class="col-md-3">
                 {{form.bplace|as_crispy_field}}
               </div>
@@ -153,7 +154,7 @@
                       {{form.refcom2|as_crispy_field}}
                     </div>
 
-                    <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;">Government Numbers</div>
+                    <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;">Government Numbers (Optional, to fill up later. Fill up now if have one)</div>
                   
 
                     <div class="col-md-4">
@@ -169,11 +170,11 @@
                     </div>
 
                     <div class="col-md-4">
-                      {{form.NBI|as_crispy_field}}
+                      {{form.SSS|as_crispy_field}}
                     </div>
 
                     <div class="col-md-4">
-                      {{form.SSS|as_crispy_field}}
+                      {{form.NBI|as_crispy_field}}
                     </div>
 
                     <div class="col-md-4">
@@ -200,27 +201,7 @@
                     <div class="col-md-4">
                       <label for="accounttype" class="form-label"></label>
                       <input class="form-control" type="hidden" id="accounttype" name="update_account_type" value="Applicant Level 2" >
-                    </div>
-
-
-                        
-                    
-
-                      
-
-                      <script>
-                      </script>
-
-                                          
-      </form>
-      {% if messages %}
-      <ul class="messages">
-        {% for message in messages %}
-        <a{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</a>
-        {% endfor %}
-      </ul>
-      {% endif %}
-                    
+                    </div>                                  
+      </form>        
     </body>  
-    
 </html>

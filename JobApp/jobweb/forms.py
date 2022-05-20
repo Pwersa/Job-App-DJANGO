@@ -36,7 +36,7 @@ class second_registration(ModelForm):
                 'citizenship': 'Citizenship',
                 'religion': 'Religion',
                 'e_contact':'Emergency Contact Person',
-                'e_no':'Emergency Contact #',
+                'e_no':'Emergency Contact No.',
                 'elementary':'Elementary School',
                 'elementary_grad':'Year Graduated',
                 'highschool':'High School',
@@ -67,3 +67,10 @@ class second_registration(ModelForm):
                 'med_record':'Medical Record',
                 'signature':'Signature (Picture)',
                 }
+
+class update_password(UserCreationForm):
+
+    class Meta:
+        model = account_registration 
+        fields = [ 'password1', 'password2']
+        #fields = '__all__'

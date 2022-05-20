@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+
+<body class="row g-3", background="/static/pictures/bg.jpg">
+    <div class="fs-1 p-4 mb-2 fw-bold text-center" style="background-color: #1f2833; color: #66fcf1">Requirements</div>
+
+    <div style="text-align: center;">
+        <strong style="font-size: 22px;">Note: </strong> 
+        <small style="font-size: 15px; font-weight: bold ;color: red;">Please check if all requirements are satisfied.</small>
+    </div>
+    
+    <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;">Government Numbers</div>
+        <center>
+            {% for data1 in check %} 
+            
+            <form method="POST" action="{% url 'requirements_satisfied' data1.pk %}">
+                {% csrf_token %}
+                
+                {% if data1.philhealth is None %}
+                    <div class="col-md-4">
+                        <label for="philhealth" class="form-label">Philhealth (12-digits)*</label>
+                        <input type="text" pattern="[0-9]{12}" class="form-control" id="philhealth" name="philhealth" required>
+                    </div>
+                {% else %}
+                    <label for="philhealth" class="form-label">Philhealth already satisfied.</label>
+
+                {% endif %} 
+                {% if data1.pagibig is None %}
+                    <div class="col-md-4">
+                        <label for="philhealth" class="form-label" >Pag-Ibig (12-digits)*</label>
+                        <input type="text" pattern="[0-9]{12}" class="form-control" id="pagibig" name="pagibig" required>
+                    </div>
+                {% else %}
+                    <label for="philhealth" class="form-label">Pag-Ibig already satisfied.</label>
+
+                {% endif %}
+                {% if data1.TIN is None %}
+                    <div class="col-md-4">
+                        <label for="philhealth" class="form-label" >TIN No. (9-digits)*</label>
+                        <input type="text" pattern="[0-9]{9}" class="form-control" id="TIN" name="TIN" required>
+                    </div>
+                {% else %}
+                    <label for="philhealth" class="form-label">TIN Number already satisfied.</label>
+
+                {% endif %}
+                {% if data1.SSS is None %}
+                    <div class="col-md-4">
+                        <label for="philhealth" class="form-label" >SSS No. (10-digits)*</label>
+                        <input type="text" pattern="[0-9]{10}" class="form-control" id="SSS" name="SSS" required>
+                    </div>
+                {% else %}
+                    <label for="philhealth" class="form-label">SSS Number already satisfied</label>
+
+                {% endif %}
+                {% if data1.NBI is None %}
+                    <div class="col-md-4">
+                        <label for="philhealth" class="form-label" >NBI (6-digits)* </label>
+                        <input type="text" pattern="[0-9]{6}" class="form-control" id="NBI" name="NBI" required>
+                    </div>
+                {% else %}
+                    <label for="philhealth" class="form-label">NBI Number already satisfied.</label>
+
+                {% endif %}
+                {% if data1.med_record is None %}
+                    <div class="col-md-4">
+                        <label for="philhealth" class="form-label">Medical Record (6-digits)*</label>
+                        <input type="text" pattern="[0-9]{6}" class="form-control" id="medical" name="medical" required>
+                    </div>
+                {% else %}
+                    <label for="philhealth" class="form-label">Medical Record already satisfied.</label>
+
+                {% endif %}
+                &nbsp;
+                {% if data1.med_record is None %}
+                    <div class="text-center" >
+                        <button class="btn btn-primary te" type="submit" >Submit Requirements</button>
+                    </div>
+                {% else %}
+                    <div class="text-center" >
+                        <a class="btn btn-primary" button="submit" style="cursor: pointer;" href="{% url 'returntoprofile' data1.pk %}">Go back</a>
+                    </div>
+                {% endif %}  
+                
+            </form>
+            {% endfor %}
+        </center>
+    <div class="col-md-4">
+      <label for="accounttype" class="form-label"></label>
+      <input class="form-control" type="hidden" id="accounttype" name="update_account_type" value="Applicant Level 2" >
+    </div>     
+</body>
