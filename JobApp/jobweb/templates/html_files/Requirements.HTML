@@ -15,77 +15,61 @@
         <small style="font-size: 15px; font-weight: bold ;color: red;">Please check if all requirements are satisfied.</small>
     </div>
     
-    <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;">Government Numbers</div>
+    
         <center>
+            <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;">Government Numbers</div>
+            <br>
+
             {% for data1 in check %} 
             
             <form method="POST" action="{% url 'requirements_satisfied' data1.pk %}">
                 {% csrf_token %}
                 
-                {% if data1.philhealth is None %}
-                    <div class="col-md-4">
-                        <label for="philhealth" class="form-label">Philhealth (12-digits)*</label>
-                        <input type="text" pattern="[0-9]{12}" class="form-control" id="philhealth" name="philhealth" required>
-                    </div>
-                {% else %}
-                    <label for="philhealth" class="form-label">Philhealth already satisfied.</label>
+                <div class="col-md-4">
+                    <label for="philhealth" class="form-label">Philhealth (12-digits)*</label>
+                    <input type="text" pattern="[0-9]{12}" class="form-control" id="philhealth" name="philhealth" required>
+                </div>
 
-                {% endif %} 
-                {% if data1.pagibig is None %}
-                    <div class="col-md-4">
-                        <label for="philhealth" class="form-label" >Pag-Ibig (12-digits)*</label>
-                        <input type="text" pattern="[0-9]{12}" class="form-control" id="pagibig" name="pagibig" required>
-                    </div>
-                {% else %}
-                    <label for="philhealth" class="form-label">Pag-Ibig already satisfied.</label>
+                <br>
 
-                {% endif %}
-                {% if data1.TIN is None %}
-                    <div class="col-md-4">
-                        <label for="philhealth" class="form-label" >TIN No. (9-digits)*</label>
-                        <input type="text" pattern="[0-9]{9}" class="form-control" id="TIN" name="TIN" required>
-                    </div>
-                {% else %}
-                    <label for="philhealth" class="form-label">TIN Number already satisfied.</label>
+                <div class="col-md-4">
+                    <label for="philhealth" class="form-label" >Pag-Ibig (12-digits)*</label>
+                    <input type="text" pattern="[0-9]{12}" class="form-control" id="pagibig" name="pagibig" required>
+                </div>
 
-                {% endif %}
-                {% if data1.SSS is None %}
-                    <div class="col-md-4">
-                        <label for="philhealth" class="form-label" >SSS No. (10-digits)*</label>
-                        <input type="text" pattern="[0-9]{10}" class="form-control" id="SSS" name="SSS" required>
-                    </div>
-                {% else %}
-                    <label for="philhealth" class="form-label">SSS Number already satisfied</label>
+                <br>
+                
+                <div class="col-md-4">
+                    <label for="philhealth" class="form-label" >TIN No. (9-digits)*</label>
+                    <input type="text" pattern="[0-9]{9}" class="form-control" id="TIN" name="TIN" required>
+                </div>
 
-                {% endif %}
-                {% if data1.NBI is None %}
-                    <div class="col-md-4">
-                        <label for="philhealth" class="form-label" >NBI (6-digits)* </label>
-                        <input type="text" pattern="[0-9]{6}" class="form-control" id="NBI" name="NBI" required>
-                    </div>
-                {% else %}
-                    <label for="philhealth" class="form-label">NBI Number already satisfied.</label>
+                <br>
+                
+                <div class="col-md-4">
+                    <label for="philhealth" class="form-label" >SSS No. (10-digits)*</label>
+                    <input type="text" pattern="[0-9]{10}" class="form-control" id="SSS" name="SSS" required>
+                </div>
 
-                {% endif %}
-                {% if data1.med_record is None %}
-                    <div class="col-md-4">
-                        <label for="philhealth" class="form-label">Medical Record (6-digits)*</label>
-                        <input type="text" pattern="[0-9]{6}" class="form-control" id="medical" name="medical" required>
-                    </div>
-                {% else %}
-                    <label for="philhealth" class="form-label">Medical Record already satisfied.</label>
+                <br>
+            
+                <div class="col-md-4">
+                    <label for="philhealth" class="form-label" >NBI (6-digits)* </label>
+                    <input type="text" pattern="[0-9]{6}" class="form-control" id="NBI" name="NBI" required>
+                </div>
 
-                {% endif %}
-                &nbsp;
-                {% if data1.med_record is None %}
-                    <div class="text-center" >
-                        <button class="btn btn-primary te" type="submit" >Submit Requirements</button>
-                    </div>
-                {% else %}
-                    <div class="text-center" >
-                        <a class="btn btn-primary" button="submit" style="cursor: pointer;" href="{% url 'returntoprofile' data1.pk %}">Go back</a>
-                    </div>
-                {% endif %}  
+                <br>
+                
+                <div class="col-md-4">
+                    <label for="philhealth" class="form-label">Medical Record (6-digits)*</label>
+                    <input type="text" pattern="[0-9]{6}" class="form-control" id="medical" name="medical" required>
+                </div>
+                
+                <br>
+                
+                <div class="text-center" >
+                    <button class="btn btn-primary te" type="submit" >Submit Requirements</button>
+                </div>
                 
             </form>
             {% endfor %}

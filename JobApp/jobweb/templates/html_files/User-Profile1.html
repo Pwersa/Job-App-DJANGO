@@ -13,7 +13,7 @@
         <h1 style="color:#66fcf1;text-align: center;font-size: 35px; background-color: #1f2833;font-weight: bold;" class="p-4">Welcome {{data.first_name}} {{data.last_name}}</h1>
     </div>
     <br>
-    
+
     {% if messages %}
     <ul class="messages" style="font-style: italic; color: #000000; text-align: center;">
     {% for message in messages %}
@@ -215,12 +215,25 @@
                         </div>
                     </div>
                     <hr>
+                    
+                    {% if data.account_type == 'Applicant Level 1' %}
+
+                    <div class="row" style="text-align: center;">
+                        <div class="col-sm-12">
+                            <a class="btn btn-outline-info" style="width: 250px; color: #000000" href="{% url 'signup1' data.pk %}">Finish Account Registration</a>
+                        </div>
+                    </div>
+
+                    {% else %}
 
                     <div class="row" style="text-align: center;">
                         <div class="col-sm-12">
                             <a class="btn btn-outline-info" style="width: 170px; color: #000000" href="#">Edit Information</a>
                         </div>
                     </div>
+
+                    {% endif %}
+
                 </div>
             </div>
         </div>

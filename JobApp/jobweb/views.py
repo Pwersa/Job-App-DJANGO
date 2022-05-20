@@ -163,6 +163,7 @@ def signup1(request, username):
             info2 = other_info.objects.filter(username=username)
             info3 = interview.objects.filter(username=username)
 
+            messages.success(request, 'Registration Complete.')
             zippedItems = zip(info1, info2, info3)
             context1 = {'info': zippedItems}
             return render(request, 'html_files/User-Profile1.html', context1)
@@ -191,7 +192,8 @@ def requirements_satisfied(request, username_id):
         info1 = account_registration.objects.filter(username=username_id)
         info2 = other_info.objects.filter(username_id=username_id)
         info3 = interview.objects.filter(username_id=username_id)
-
+        
+        messages.success(request, 'Requirements successfully submitted.')
         zippedItems = zip(info1, info2, info3)
         context1 = {'info': zippedItems}
         return render(request, 'html_files/User-Profile1.html', context1)
