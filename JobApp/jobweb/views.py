@@ -174,6 +174,7 @@ def signup1(request, username):
     return render(request, 'html_files/Registration-Form-Part-2.html', context)
 
 def requirements_satisfied(request, username_id):
+    
     if request.method == "POST":
         update_philhealth = request.POST.get('philhealth')
         update_pagibig = request.POST.get('pagibig')
@@ -194,6 +195,8 @@ def requirements_satisfied(request, username_id):
         zippedItems = zip(info1, info2, info3)
         context1 = {'info': zippedItems}
         return render(request, 'html_files/User-Profile1.html', context1)
+            
+
 
 def sort_list(request):
     if request.method == "POST" and "Name" in request.POST:
@@ -365,9 +368,18 @@ def returntoprofile(request, username):
     return render(request, 'html_files/User-Profile1.html', context1)
 
 def requirements(request, username):
-    data = other_info.objects.filter(username_id=username)
-    context1 = {'check': data}
-    return render(request, 'html_files/Requirements.html', context1)
+    data1 = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
+    print('@@@@@@@@@@@@@')
+    print(data1)
+
+    if data1 == 'Applicant Level 1':
+        messages.error(request, 'Please finish registration before submitting requirements.')
+        return redirect('user_profile', username=username)
+
+    else:
+        data = other_info.objects.filter(username_id=username)
+        context1 = {'check': data}
+        return render(request, 'html_files/Requirements.html', context1)
 
 def logout_user(request):
     logout(request)
