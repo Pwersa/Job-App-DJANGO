@@ -26,10 +26,16 @@
                     Tools
                     </button>
                     &nbsp; &nbsp; 
+
+                    {% for db in hr_account %}
+
                     <ul class="dropdown-menu dropdown-menu dropdown-menu-end">
-                        <button class="dropdown-item" onclick="log_out()"> Log Out </button>
-                        <button class="dropdown-item" onclick="change_password()"> Change Password </button>
+                        <a class="dropdown-item" href="{% url 'logout_user' %}"> Log Out </a>
+                        <a class="dropdown-item" href="{% url 'change_password' db.pk %}"> Change Password </a>
                     </ul>
+
+                    {% endfor %}
+
                 </div>
             </nav>
         </div>
@@ -84,7 +90,7 @@
                                         <tr>
                                             <td>{{ forloop.counter }}</td>
                                             <td>{{accounts.first_name}} {{accounts.last_name}}</td>
-                                            <td>{{accounts.email}}</td>
+                                            <td>{{accounts.username}}</td>
                                             <td>{{accounts.cellphone}}</td>
                                             <td>{{accounts.applyingfor}}</td>
                                             <td>{{accounts.account_type}}</td>
@@ -95,6 +101,11 @@
                                                 <td>{{user_interviews.date_time}}</td>
                                             {% endif %}
                                                
+                                            {% if accounts.account_type == 'HRManager' %}
+                                                <td style="text-align: center;">
+                                                  
+                                                </td>
+                                            {% else %}
                                             <td style="text-align: center;">
                                                 <div class="btn-group">
                                                     <input class="form-control" type="hidden" id="email" name="email" value="{{accounts.email}}"> 
@@ -109,6 +120,8 @@
                                                 </div>
                                                 &nbsp;       
                                             </td>
+                                            {% endif %}
+
                                         </tr>      
                                     {% endfor %}
                                 </tbody>
@@ -116,16 +129,6 @@
                     </div>
 
         <script>
-            function change_password(){
-                alert("Opening Change Password");
-                location.replace("{% url 'changepass' %}");
-            }
-
-            function log_out(){
-                alert("You've logged out.");
-                window.location.replace("{% url 'home' %}");
-            }
-            
             function add_job(){
                 window.location.assign("{% url 'addjob' %}");
             }

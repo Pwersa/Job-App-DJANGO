@@ -63,10 +63,12 @@ def login_user(request):
                 login(request, user)
                 account = account_registration.objects.all()
                 user_interview = interview.objects.values('date_time')
-                zippedItems = zip(account, user_interview)
+                hr_account = account_registration.objects.filter(username=username)
 
+                zippedItems = zip(account, user_interview)
                 context1 = {'zippedItems': zippedItems}
-                return render(request, 'html_files/HRMANAGER.html', context1)
+                context2 = {'hr_account': hr_account}
+                return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
             
             else:
                 return redirect('home')
@@ -87,12 +89,16 @@ def signup(request):
             password_first = form.cleaned_data.get("password1")
             password_confirm = form.cleaned_data.get("password2")
 
+            first = form.cleaned_data.get('first_name')
+            last = form.cleaned_data.get('last_name')
+            middle = form.cleaned_data.get('middle_name')
+
             if password_confirm == password_first:
                 position = request.POST.get('job')
                 form.instance.account_type = position
 
                 other_info.objects.create(username_id=username)
-                interview.objects.create(username_id=username)
+                interview.objects.create(username_id=username, first_name=first, middle_name=middle, last_name=last)
 
                 form.save()
 
@@ -215,16 +221,44 @@ def manage_account(request, username):
     data1 = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
 
     if data1 == "Applicant Level 1":
-        context = {'info': user_account}
-        return render(request, 'html_files/User-Profile1-Applicant.html', context)
+        info1 = account_registration.objects.filter(username=username)
+        info2 = other_info.objects.filter(username_id=username)
+        info3 = interview.objects.filter(username_id=username)
+
+        zippedItems = zip(info1, info2, info3)
+        context1 = {'info': zippedItems}
+        return render(request, 'html_files/User-Profile1.html-Applicant', context1)
 
     elif data1 == "Applicant Level 2":
-        context = {'info': user_account}
-        return render(request, 'html_files/User-Profile1-Applicant.html', context)
+        info1 = account_registration.objects.filter(username=username)
+        info2 = other_info.objects.filter(username_id=username)
+        info3 = interview.objects.filter(username_id=username)
+
+        zippedItems = zip(info1, info2, info3)
+        context1 = {'info': zippedItems}
+        return render(request, 'html_files/User-Profile1-Applicant.html', context1)
+
+    elif data1 == "Applicant Level 3":
+        info1 = account_registration.objects.filter(username=username)
+        info2 = other_info.objects.filter(username_id=username)
+        info3 = interview.objects.filter(username_id=username)
+
+        zippedItems = zip(info1, info2, info3)
+        context1 = {'info': zippedItems}
+        return render(request, 'html_files/User-Profile1-Applicant.html', context1)
 
     elif data1 == "Employee":
         context = {'info': user_account}
         return render(request, 'html_files/User-Profile1-Employee.html', context)
+
+    elif data1 == "Rejected":
+        info1 = account_registration.objects.filter(username=username)
+        info2 = other_info.objects.filter(username_id=username)
+        info3 = interview.objects.filter(username_id=username)
+
+        zippedItems = zip(info1, info2, info3)
+        context1 = {'info': zippedItems}
+        return render(request, 'html_files/User-Profile1-Applicant.html', context1)
 
     elif data1 == "HRManager":  
         return redirect('hrdashboard')
@@ -305,12 +339,40 @@ def change_employment(request, username):
         return redirect('change_employment')
 
 def applicant_hired_reject(request, username):
+    check_type = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
     if request.method == "POST" and "Hire" in request.POST:
-        account_registration.objects.filter(username=username).update(account_type="Employee")
-        messages.success(request, 'Applicant Successfully Hired!')
+        if check_type == 'Applicant Level 1':
+            messages.error(request, 'Aplicant not fully registered.')
+            return redirect('manage_account', username=username)
+
+        elif check_type == 'Applicant Level 2':
+            messages.error(request, 'Aplicant not submitted requirements.')
+            return redirect('manage_account', username=username)
+
+        elif check_type == 'Applicant Level 3':
+            account_registration.objects.filter(username=username).update(account_type="Employee")
+            messages.success(request, 'Applicant Successfully Hired!')
+            account = account_registration.objects.all()
+            user_interview = interview.objects.values('date_time')
+            hr_account = account_registration.objects.filter(username=username)
+
+            zippedItems = zip(account, user_interview)
+            context1 = {'zippedItems': zippedItems}
+            context2 = {'hr_account': hr_account}
+            return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
+
+    if request.method == "POST" and "Reject" in request.POST:
+        account_registration.objects.filter(username=username).update(account_type="Rejected")
+
+        messages.success(request, 'Applicant succesfully Rejected.')
         account = account_registration.objects.all()
-        context = {'account': account}
-        return render(request, 'html_files/HRMANAGER.html', context)
+        user_interview = interview.objects.values('date_time')
+        hr_account = account_registration.objects.filter(username=username)
+
+        zippedItems = zip(account, user_interview)
+        context1 = {'zippedItems': zippedItems}
+        context2 = {'hr_account': hr_account}
+        return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
 
 
 def change_password(request, username):
@@ -329,9 +391,22 @@ def change_password(request, username):
             info2 = other_info.objects.filter(username_id=username)
             info3 = interview.objects.filter(username_id=username)
 
-            zippedItems = zip(info1, info2, info3)
-            context1 = {'info': zippedItems}
-            return render(request, 'html_files/User-Profile1.html', context1)
+            check_type = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
+            
+            if check_type == 'HRManager':
+                account = account_registration.objects.all()
+                user_interview = interview.objects.values('date_time')
+                hr_account = account_registration.objects.filter(username=username)
+                messages.success(request, 'Password changed successfully.')
+                zippedItems = zip(account, user_interview)
+                context1 = {'zippedItems': zippedItems}
+                return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
+
+            else:
+                messages.success(request, 'Password changed successfully.')
+                zippedItems = zip(info1, info2, info3)
+                context1 = {'info': zippedItems}
+                return render(request, 'html_files/User-Profile1.html', context1)
 
         else:
             return redirect('change_password', username=username)
