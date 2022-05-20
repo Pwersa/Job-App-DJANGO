@@ -20,6 +20,7 @@
     <div>
         <h1 style="color:#66fcf1;text-align: center;font-size: 35px; background-color: #1f2833;font-weight: bold;" class="p-4">View Account Applicant</h1>
     </div>
+    
     <br>
 
     {% if messages %}
@@ -53,17 +54,55 @@
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">Interview:</h6>
-                            <span class="text-secondary">{Placeholder}</span>
+                            <span class="text-secondary">{{data2.date_time}}</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                            <h6 class="mb-0">Verdict:</h6>
-                            <span class="text-secondary">{Placeholder}</span>
-                        </li>
+                        
+                        {% if data1.philhealth is None %}
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">Requirements:</h6>
-                            <span class="text-secondary">{Placeholder}</span>
+                            <span class="text-secondary">Pending Submission</span>
+                        </li> 
+                        
+                        {% elif data1.pabigib is None %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0">Requirements:</h6>
+                            <span class="text-secondary">Pending Submission</span>
                         </li>
+                        
+                        {% elif data1.TIN is None %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0">Requirements:</h6>
+                            <span class="text-secondary">Pending Submission</span>
+                        </li>
+                        
+                        {% elif data1.NBI is None %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0">Requirements:</h6>
+                            <span class="text-secondary">Pending Submission</span>
+                        </li>
+                        
+                        {% elif data1.SSS is None %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0">Requirements:</h6>
+                            <span class="text-secondary">Pending Submission</span>
+                        </li>
+                        
+                        {% elif data1.med_record is None %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0">Requirements:</h6>
+                            <span class="text-secondary">Pending Submission</span>
+                        </li>
+                        
+                        {% else %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0">Requirements:</h6>
+                            <span class="text-secondary">Already satisfied</span>
+                        </li>
+                        
+                        {% endif %}
+                        
                     </ul>
+                    
                     <hr>
                     
                     <ul class="list-group list-group-flush ">
@@ -85,7 +124,20 @@
                     </ul>
 
                     <hr>
+                    
 
+                    {% if data.account_type == 'Rejected' %}
+                    <ul class="list-group list-group-flush ">
+                        <li class="list-group-item d-flex justify-content-center flex-wrap">
+                            <form method="POST" action="{% url 'applicant_hired_reject' data.pk %}">
+                                {% csrf_token %}
+                              
+                                <button class="btn btn-outline-error" button="submit" style="color: red;" name="Hire" id="Hire" value="Hired">Delete Account</button>
+                                &nbsp; 
+                            </form>
+                        </li>
+                    </ul>
+                    {% else %}
                     <ul class="list-group list-group-flush ">
                         <li class="list-group-item d-flex justify-content-center flex-wrap">
                             <form method="POST" action="{% url 'applicant_hired_reject' data.pk %}">
@@ -98,6 +150,7 @@
                             
                         </li>
                     </ul>
+                    {% endif %}
 
 
                 </div>  
@@ -234,24 +287,6 @@
                         </div>
                     </div>
                     <hr>
-                    
-                    {% if data.account_type == 'Applicant Level 1' %}
-
-                    <div class="row" style="text-align: center;">
-                        <div class="col-sm-12">
-                            <a class="btn btn-outline-info" style="width: 250px; color: #000000" href="{% url 'signup1' data.pk %}">Finish Account Registration</a>
-                        </div>
-                    </div>
-
-                    {% else %}
-
-                    <div class="row" style="text-align: center;">
-                        <div class="col-sm-12">
-                            <a class="btn btn-outline-info" style="width: 170px; color: #000000" href="#">Edit Information</a>
-                        </div>
-                    </div>
-
-                    {% endif %}
 
                 </div>
             </div>

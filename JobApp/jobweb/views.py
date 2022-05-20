@@ -237,7 +237,7 @@ def manage_account(request, username):
 
         zippedItems = zip(info1, info2, info3)
         context1 = {'info': zippedItems}
-        return render(request, 'html_files/User-Profile1.html-Applicant', context1)
+        return render(request, 'html_files/User-Profile1-Applicant.html', context1)
 
     elif data1 == "Applicant Level 2":
         info1 = account_registration.objects.filter(username=username)
@@ -352,16 +352,19 @@ def applicant_hired_reject(request, username):
     check_type = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
     if request.method == "POST" and "Hire" in request.POST:
         if check_type == 'Applicant Level 1':
-            messages.error(request, 'Aplicant not fully registered.')
+            messages.error(request, 'Applicant not fully registered.')
             return redirect('manage_account', username=username)
 
         elif check_type == 'Applicant Level 2':
-            messages.error(request, 'Aplicant not submitted requirements.')
+            messages.error(request, 'Applicant not submitted requirements.')
             return redirect('manage_account', username=username)
 
         elif check_type == 'Applicant Level 3':
             account_registration.objects.filter(username=username).update(account_type="Employee")
+            interview.objects.filter(username=username).update(date_time=None)
             messages.success(request, 'Applicant Successfully Hired!')
+
+
             account = account_registration.objects.all()
             user_interview = interview.objects.values('date_time')
             hr_account = account_registration.objects.filter(username=username)
