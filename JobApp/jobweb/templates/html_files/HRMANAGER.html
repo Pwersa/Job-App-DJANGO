@@ -115,7 +115,7 @@
                                                     </button>
                                                     <ul class="dropdown-menu dropdown-menu-end">
                                                         <li><a class="dropdown-item" button="submit" style="cursor: pointer;" name="View Account" value="View Account" href="{% url 'manage_account' accounts.pk %}">View Account</a></li>
-                                                        <li><button class="dropdown-item" button="submit" style="cursor: pointer; color: red;" name="Delete" value="Delete">Delete</button></li>
+                                                        <li><a class="dropdown-item" button="submit" style="cursor: pointer; color: red;" name="Delete" value="Delete" href="{% url 'delete_account' accounts.pk %}">Delete</a></li>
                                                     </ul>   
                                                 </div>
                                                 &nbsp;       

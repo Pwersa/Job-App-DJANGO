@@ -8,6 +8,8 @@ from django.contrib.auth.models import User
 
 ######################## ACTIVE #########################
 
+hr_account_login_email = []
+
 def login_user(request):
     if request.method == "POST":
         username = request.POST.get('username')
@@ -61,9 +63,11 @@ def login_user(request):
 
             elif data1 == 'HRManager':
                 login(request, user)
+                hr_account_login_email.append(username)
+                print(hr_account_login_email[0])
                 account = account_registration.objects.all()
                 user_interview = interview.objects.values('date_time')
-                hr_account = account_registration.objects.filter(username=username)
+                hr_account = account_registration.objects.filter(username=hr_account_login_email[0])
 
                 zippedItems = zip(account, user_interview)
                 context1 = {'zippedItems': zippedItems}
@@ -96,7 +100,7 @@ def login_user(request):
         else:
             return redirect('home')
     else:
-            return redirect('home')
+        return redirect('home')
 
 def signup(request):
     form = first_registration()
@@ -333,7 +337,7 @@ def change_employment(request, username):
 
         account = account_registration.objects.all()
         user_interview = interview.objects.values('date_time')
-        hr_account = account_registration.objects.filter(username=username)
+        hr_account = account_registration.objects.filter(username=hr_account_login_email[0])
 
         zippedItems = zip(account, user_interview)
         return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
@@ -343,7 +347,7 @@ def change_employment(request, username):
         messages.success(request, 'Employment was updated on account: ' + username)
         account = account_registration.objects.all()
         user_interview = interview.objects.values('date_time')
-        hr_account = account_registration.objects.filter(username=username)
+        hr_account = account_registration.objects.filter(username=hr_account_login_email[0])
         
         zippedItems = zip(account, user_interview)
         return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
@@ -353,7 +357,7 @@ def change_employment(request, username):
         messages.success(request, 'Employment was updated on account: ' + username)
         account = account_registration.objects.all()
         user_interview = interview.objects.values('date_time')
-        hr_account = account_registration.objects.filter(username=username)
+        hr_account = account_registration.objects.filter(username=hr_account_login_email[0])
         
         zippedItems = zip(account, user_interview)
         return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
@@ -363,7 +367,7 @@ def change_employment(request, username):
         messages.success(request, 'Employment was updated on account: ' + username)
         aaccount = account_registration.objects.all()
         user_interview = interview.objects.values('date_time')
-        hr_account = account_registration.objects.filter(username=username)
+        hr_account = account_registration.objects.filter(username=hr_account_login_email[0])
         
         zippedItems = zip(account, user_interview)
         return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
@@ -373,7 +377,7 @@ def change_employment(request, username):
         messages.success(request, 'Employment was updated on account: ' + username)
         account = account_registration.objects.all()
         user_interview = interview.objects.values('date_time')
-        hr_account = account_registration.objects.filter(username=username)
+        hr_account = account_registration.objects.filter(username=hr_account_login_email[0])
         
         zippedItems = zip(account, user_interview)
         return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
@@ -386,7 +390,7 @@ def change_employment(request, username):
         messages.success(request, 'Employment was updated on account: ' + username)
         account = account_registration.objects.all()
         user_interview = interview.objects.values('date_time')
-        hr_account = account_registration.objects.filter(username=username)
+        hr_account = account_registration.objects.filter(username=hr_account_login_email[0])
         
         zippedItems = zip(account, user_interview)
         return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
@@ -413,7 +417,7 @@ def applicant_hired_reject(request, username):
 
             account = account_registration.objects.all()
             user_interview = interview.objects.values('date_time')
-            hr_account = account_registration.objects.filter(username=username)
+            hr_account = account_registration.objects.filter(username=hr_account_login_email[0])
 
             zippedItems = zip(account, user_interview)
             context1 = {'zippedItems': zippedItems}
@@ -426,7 +430,7 @@ def applicant_hired_reject(request, username):
         messages.success(request, 'Applicant succesfully Rejected.')
         account = account_registration.objects.all()
         user_interview = interview.objects.values('date_time')
-        hr_account = account_registration.objects.filter(username=username)
+        hr_account = account_registration.objects.filter(username=hr_account_login_email[0])
 
         zippedItems = zip(account, user_interview)
         context1 = {'zippedItems': zippedItems}
@@ -455,7 +459,7 @@ def change_password(request, username):
             if check_type == 'HRManager':
                 account = account_registration.objects.all()
                 user_interview = interview.objects.values('date_time')
-                hr_account = account_registration.objects.filter(username=username)
+                hr_account = account_registration.objects.filter(username=hr_account_login_email[0])
                 messages.success(request, 'Password changed successfully.')
                 zippedItems = zip(account, user_interview)
                 context1 = {'zippedItems': zippedItems}
@@ -525,7 +529,7 @@ def delete_account(request, username):
     messages.success(request, 'Account successfully DELETED.')
     account = account_registration.objects.all()
     user_interview = interview.objects.values('date_time')
-    hr_account = account_registration.objects.filter(username=username)
+    hr_account = account_registration.objects.filter(username=hr_account_login_email[0])
         
     zippedItems = zip(account, user_interview)
     return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
@@ -533,6 +537,7 @@ def delete_account(request, username):
 
 def logout_user(request):
     logout(request)
+    hr_account_login_email.clear()
     return redirect('home')
 
 ################################### INACTIVE ############################################
