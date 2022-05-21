@@ -6,37 +6,38 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     
-######################### Active  ##########################################
+######################## WEBSITE ###########################
+
     path('', views.home, name='home'),
     path('home', views.home, name='home'),
-
     path('login_user', views.login_user),
-    #path('re_login/<str:username>', views.re_login, name='re_login'),
     path('logout_user', views.logout_user, name='logout_user'),
-
     path('signup', views.signup, name='signup'),
     path('signup1/<str:username>', views.signup1, name='signup1'),
-    path('complete_info', views.complete_info, name='complete_info'),
+
+########################### APPLICANT//EMPLOYEE ###########################
+
     path('user_profile/<str:username>', views.user_profile, name='user_profile'),
+    path('returntoprofile/<str:username>', views.returntoprofile, name='returntoprofile'),
     path('requirements/<str:username>', views.requirements, name='requirements'),
     path('requirements_satisfied/<str:username_id>', views.requirements_satisfied, name='requirements_satisfied'),
-    path('returntoprofile/<str:username>', views.returntoprofile, name='returntoprofile'),
+    
+######################## HR MANAGER ###########################
 
     path('hrdashboard/<str:username_id>', views.hrdashboard, name='hrdashboard'),
+    path('delete_account/<str:username>', views.delete_account, name='delete_account'),
     path('manage_account/<str:username>', views.manage_account, name='manage_account'),
-    path('change_employment/<str:username>', views.change_employment, name='change_employment'),
     path('sort_list', views.sort_list, name='sort_list'),
     path('set_interview/<str:username_id>', views.set_interview, name="set_interview"),
+    path('change_employment/<str:username>', views.change_employment, name='change_employment'),
     path('applicant_hired_reject/<str:username>', views.applicant_hired_reject, name='applicant_hired_reject'),
 
+######################## GLOBAL ###########################
+
     path('change_password/<str:username>', views.change_password, name='change_password'),
-    path('delete_account/<str:username>', views.delete_account, name='delete_account'),
-    
     
 ############################  UNUSED  ####################################
-    
-    path('delete', views.delete, name="delete"),
-    path('delete_acc', views.delete_acc, name="delete_acc"),
+
     path('addjob', views.addjob, name="addjob"),
     path('delete_job', views.delete_jobs, name='delete_job'),
 

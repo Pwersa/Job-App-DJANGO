@@ -5,8 +5,9 @@ from .models import *
 from django.views.decorators.cache import cache_control
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
-######################## ACTIVE #########################
+######################## WEBSITE ###########################
 
 hr_account_login_email = []
 
@@ -101,6 +102,11 @@ def login_user(request):
             return redirect('home')
     else:
         return redirect('home')
+
+def logout_user(request):
+    logout(request)
+    hr_account_login_email.clear()
+    return redirect('home')
 
 def signup(request):
     form = first_registration()
@@ -204,8 +210,46 @@ def signup1(request, username):
     context = {'form': form1}
     return render(request, 'html_files/Registration-Form-Part-2.html', context)
 
+########################### APPLICANT//EMPLOYEE ###########################
+
+@login_required(login_url='login_user')
+def user_profile(request, username):
+    info1 = account_registration.objects.filter(username=username)
+    info2 = other_info.objects.filter(username_id=username)
+    info3 = interview.objects.filter(username_id=username)
+
+    zippedItems = zip(info1, info2, info3)
+    context1 = {'info': zippedItems}
+    return render(request, 'html_files/User-Profile1.html', context1)
+
+
+@login_required(login_url='login_user')
+def returntoprofile(request, username):
+    info1 = account_registration.objects.filter(username=username)
+    info2 = other_info.objects.filter(username_id=username)
+    info3 = interview.objects.filter(username_id=username)
+
+    zippedItems = zip(info1, info2, info3)
+    context1 = {'info': zippedItems}
+    return render(request, 'html_files/User-Profile1.html', context1)
+
+@login_required(login_url='login_user')
+def requirements(request, username):
+    data1 = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
+    print('@@@@@@@@@@@@@')
+    print(data1)
+
+    if data1 == 'Applicant Level 1':
+        messages.error(request, 'Please finish registration before submitting requirements.')
+        return redirect('user_profile', username=username)
+
+    else:
+        data = other_info.objects.filter(username_id=username)
+        context1 = {'check': data}
+        return render(request, 'html_files/Requirements.html', context1)
+
+@login_required(login_url='login_user')
 def requirements_satisfied(request, username_id):
-    
     if request.method == "POST":
         update_philhealth = request.POST.get('philhealth')
         update_pagibig = request.POST.get('pagibig')
@@ -227,19 +271,24 @@ def requirements_satisfied(request, username_id):
         zippedItems = zip(info1, info2, info3)
         context1 = {'info': zippedItems}
         return render(request, 'html_files/User-Profile1.html', context1)
-            
 
+########################### HR MANAGER ###########################
 
-def sort_list(request):
-    if request.method == "POST" and "Name" in request.POST:
+@login_required(login_url='login_user')
+def delete_account(request, username):
+    account_registration.objects.filter(username=username).delete()
+    interview.objects.filter(username=username).delete()
+    other_info.objects.filter(username=username).delete()
+
+    messages.success(request, 'Account successfully DELETED.')
+    account = account_registration.objects.all()
+    user_interview = interview.objects.values('date_time')
+    hr_account = account_registration.objects.filter(username=hr_account_login_email[0])
         
-        account = account_registration.objects.order_by('first_name')
-        user_interview = interview.objects.order_by('first_name')
-        zippedItems = zip(account, user_interview)
+    zippedItems = zip(account, user_interview)
+    return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
 
-        context1 = {'zippedItems': zippedItems}
-        return render(request, 'html_files/HRMANAGER.html', context1)
-
+@login_required(login_url='login_user')
 def manage_account(request, username):
     user_account = account_registration.objects.filter(username=username)
     data1 = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
@@ -300,13 +349,20 @@ def manage_account(request, username):
 
     elif data1 == "HRManager":  
         return redirect('hrdashboard')
+    
+@login_required(login_url='login_user')
+def sort_list(request):
+    if request.method == "POST" and "Name" in request.POST:
+        
+        account = account_registration.objects.order_by('first_name')
+        user_interview = interview.objects.order_by('first_name')
+        zippedItems = zip(account, user_interview)
 
-def complete_info(request):
-    return render(request, 'html_files/Finish-Registration.html')
+        context1 = {'zippedItems': zippedItems}
+        return render(request, 'html_files/HRMANAGER.html', context1)
 
-
+@login_required(login_url='login_user')
 def set_interview(request, username_id):
-
     get_date_time = request.POST.get('interview_date')
     
     if get_date_time != "":
@@ -329,6 +385,7 @@ def set_interview(request, username_id):
         context = {'info': user_account}
         return render(request, 'html_files/User-Profile1-Applicant.html', context)
 
+@login_required(login_url='login_user')
 def change_employment(request, username):
 
     if request.method == "POST" and "Full Time" in request.POST:
@@ -398,6 +455,7 @@ def change_employment(request, username):
     else:
         return redirect('change_employment')
 
+@login_required(login_url='login_user')
 def applicant_hired_reject(request, username):
     check_type = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
     if request.method == "POST" and "Hire" in request.POST:
@@ -437,7 +495,9 @@ def applicant_hired_reject(request, username):
         context2 = {'hr_account': hr_account}
         return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
 
+########################### GENERAL ###########################
 
+@login_required(login_url='login_user')
 def change_password(request, username):
     form = update_password()
     
@@ -484,78 +544,20 @@ def home(request):
     context = {'job': data}
     return render(request, 'html_files/HOMEWEBSITE.html', context)
 
+@login_required(login_url='login_user')
 def hrdashboard(request):
     account = account_registration.objects.all()
     context = {'account': account}
     return render(request, 'html_files/HRMANAGER.html', context)
 
-def user_profile(request, username):
-    info1 = account_registration.objects.filter(username=username)
-    info2 = other_info.objects.filter(username_id=username)
-    info3 = interview.objects.filter(username_id=username)
-
-    zippedItems = zip(info1, info2, info3)
-    context1 = {'info': zippedItems}
-    return render(request, 'html_files/User-Profile1.html', context1)
-
-def returntoprofile(request, username):
-    info1 = account_registration.objects.filter(username=username)
-    info2 = other_info.objects.filter(username_id=username)
-    info3 = interview.objects.filter(username_id=username)
-
-    zippedItems = zip(info1, info2, info3)
-    context1 = {'info': zippedItems}
-    return render(request, 'html_files/User-Profile1.html', context1)
-
-def requirements(request, username):
-    data1 = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
-    print('@@@@@@@@@@@@@')
-    print(data1)
-
-    if data1 == 'Applicant Level 1':
-        messages.error(request, 'Please finish registration before submitting requirements.')
-        return redirect('user_profile', username=username)
-
-    else:
-        data = other_info.objects.filter(username_id=username)
-        context1 = {'check': data}
-        return render(request, 'html_files/Requirements.html', context1)
-
-def delete_account(request, username):
-    account_registration.objects.filter(username=username).delete()
-    interview.objects.filter(username=username).delete()
-    other_info.objects.filter(username=username).delete()
-
-    messages.success(request, 'Account successfully DELETED.')
-    account = account_registration.objects.all()
-    user_interview = interview.objects.values('date_time')
-    hr_account = account_registration.objects.filter(username=hr_account_login_email[0])
-        
-    zippedItems = zip(account, user_interview)
-    return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
-
-
-def logout_user(request):
-    logout(request)
-    hr_account_login_email.clear()
-    return redirect('home')
 
 ################################### INACTIVE ############################################
-
-
-def delete(request):
-    return render(request, 'html_files/delete.html')
 
 def addjob(request):
     return render(request, 'html_files/Making-a-Job-Posting.html')
 
-def delete_acc(request):
-    return render(request, 'html_files/HRMANAGER.html')
-
 def delete_jobs(request):
     return render(request, 'html_files/HRMANAGER.html')
-
-
 
 ################################### DEBUG ############################################
 
