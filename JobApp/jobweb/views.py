@@ -512,7 +512,7 @@ def hrdashboard(request):
 
 ################################### INACTIVE ############################################
 
-def addjob(request):
+def create_job_listing(request):
     return render(request, 'html_files/Making-a-Job-Posting.html')
 
 def delete_jobs(request):

@@ -156,7 +156,8 @@
                 </div>  
             </div> 
         </div> 
-        <div class="col-lg-6" style="margin-left: 10px;">
+
+        <div class="col-lg-6 " style="margin-left: 10px;">
             <div class="card shadow p-3 mb-5 bg-white rounded">
                 <div class="card-body list-group list-group-flush" style="margin-left: 20px;">
                     <div class="row">
@@ -166,10 +167,10 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-3">
-                            <h6 class="mb-0">Email/Username:</h6>
+                        <div class="col-lg-4">
+                            <h6>Email/Username:</h6>
                         </div>
-                        <div class="col-sm-9 text-secondary">
+                        <div class="col-lg-6  text-secondary">
                             {{data.username}}
                         </div>
                     </div>
@@ -177,10 +178,10 @@
                     <hr>
 
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-lg-4">
                             <h6 class="mb-0">Contact #:</h6>
                         </div>
-                        <div class="col-sm-9 text-secondary">
+                        <div class="col-lg-6  text-secondary">
                             {{data.cellphone}}
                         </div>
                     </div>
@@ -188,21 +189,27 @@
                     <hr>
 
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-lg-4">
                             <h6 class="mb-0">Civil Status:</h6>
                         </div>
-                        <div class="col-sm-9 text-secondary">
-                            {{data1.civilstatus}}
+                        <div class="col-lg-6  text-secondary">
+
+                            {% if data1.civilstatus is None %}
+                                User did not specified
+                            {% else %}
+                                {{data1.civilstatus}}
+                            {% endif %} 
+
                         </div>
                     </div>
 
                     <hr>
 
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-lg-4">
                             <h6 class="mb-0">Birthday:</h6>
                         </div>
-                        <div class="col-sm-9 text-secondary">
+                        <div class="col-lg-6  text-secondary">
                             {{data.birthday}}
                         </div>
                     </div>
@@ -210,10 +217,10 @@
                     <hr>
 
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-lg-4">
                             <h6 class="mb-0">Address:</h6>
                         </div>
-                        <div class="col-sm-9 text-secondary">
+                        <div class="col-lg-8 text-secondary">
                             {{data.address}}
                         </div>
                     </div>
@@ -221,23 +228,101 @@
                     <hr>
 
                     <div class="row">
-                        <div class="col-sm-3">
-                            <h6 class="mb-0">Graduated From (College):</h6>
+                        <div class="col-lg-4">
+                            <h6 class="mb-0">Educational Background:</h6>
                         </div>
-                        <div class="col-sm-9 text-secondary">
-                            {{data1.college}}
-                        </div>
+                            <div class="col-lg-6  text-secondary">
+                                Click <u type="button"  data-toggle="modal" data-target="#exampleModalCenter_1">
+                                     here
+                                </u> to show
+                                <div class="modal fade" id="exampleModalCenter_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Educational Background of {{data.first_name}} {{data.last_name}} </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                        <div class="modal-body" style="text-align: center; font-size: 18px;" >
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <h6 class="mb-0">Elementary School:</h6>
+                                                </div>
+                                                <div class="col-lg-6  text-secondary">
+                                                    {{data1.elementary}} - {{data1.elementary_grad}}
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <h6 class="mb-0">Highschool:</h6>
+                                                </div>
+                                                <div class="col-lg-6  text-secondary">
+                                                    {{data1.highschool}} - {{data1.highschool_grad}}
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <h6 class="mb-0">College:</h6>
+                                                </div>
+                                                <div class="col-lg-6  text-secondary">
+                                                    {{data1.college}} - {{data1.college}}
+                                                </div>
+                                            </div>
+                                         
+                                         
+                                            
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
 
                     <hr>
 
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-lg-4">
                             <h6 class="mb-0">Signature:</h6>
                         </div>
-                        <div class="col-sm-9 text-secondary">
-                            {{data1.signature}}
+                        {% if data1.signature == 'No photo' %}
+                        <div class="col-lg-6  text-secondary">
+                            None
                         </div>
+                        {% else %}
+                            <div class="col-lg-6  text-secondary">
+                                Click <u type="button"  data-toggle="modal" data-target="#exampleModalCenter">
+                                    here
+                               </u> to show
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Signature of {{data.first_name}} {{data.last_name}} </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="profile-pic-div">
+                                                <img src="{{data1.signature.url}}" id="photo" class="img-thumbnail">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endif %}
+
                     </div>
 
                     <hr>
@@ -249,44 +334,73 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-lg-4">
                             <h6 class="mb-0">Philhealth:</h6>
                         </div>
-                        <div class="col-sm-9 text-secondary">
+                        <div class="col-lg-6  text-secondary">
                             {{data1.philhealth}}
                         </div>
                     </div>
                     <hr>
 
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-lg-4">
                             <h6 class="mb-0">Pag-Ibig:</h6>
                         </div>
-                        <div class="col-sm-9 text-secondary">
+                        <div class="col-lg-6  text-secondary">
                             {{data1.pagibig}}
                         </div>
                     </div>
                     <hr>
 
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-lg-4">
                             <h6 class="mb-0">SSS:</h6>
                         </div>
-                        <div class="col-sm-9 text-secondary">
+                        <div class="col-lg-6  text-secondary">
                             {{data1.SSS}}
                         </div>
                     </div>
                     <hr>
 
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-lg-4">
                             <h6 class="mb-0">NBI:</h6>
                         </div>
-                        <div class="col-sm-9 text-secondary">
+                        <div class="col-lg-6  text-secondary">
                             {{data1.NBI}}
                         </div>
                     </div>
                     <hr>
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <h6 class="mb-0">TIN:</h6>
+                        </div>
+                        <div class="col-lg-6  text-secondary">
+                            {{data1.TIN}}
+                        </div>
+                    </div>
+                    <hr>
+                    
+                    {% if data.account_type == 'Employee' %}
+
+                    <div class="row" style="text-align: center;">
+                        <div class="col-sm-12">
+                            <a class="btn btn-outline-info" style="width: 250px; color: #000000" href="#">Print Employee's Information</a>
+                        </div>
+                    </div>
+
+                    {% else %}
+
+                    <div class="row" style="text-align: center;">
+                        <div class="col-sm-12">
+                            <a class="btn btn-outline-info" style="width: 250px; color: #000000" href="#">Print Applicant's Information</a>
+                        </div>
+                    </div>
+
+
+                    {% endif %}
 
                 </div>
             </div>

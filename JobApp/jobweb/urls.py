@@ -38,7 +38,7 @@ urlpatterns = [
     
 ############################  UNUSED  ####################################
 
-    path('addjob', views.addjob, name="addjob"),
+    path('create_job_listing/<str:username>', views.create_job_listing, name="create_job_listing"),
     path('delete_job', views.delete_jobs, name='delete_job'),
 
 ############################# DEBUG ########################################

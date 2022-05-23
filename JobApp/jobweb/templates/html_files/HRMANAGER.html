@@ -6,7 +6,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        {% for db in hr_account %}
         <title>HR Dashboard</title>
 
         <div class="col-lg-auto">
@@ -16,7 +16,7 @@
                 &nbsp; &nbsp; &nbsp;
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav" style="cursor: pointer">
-                        <a class="nav-item nav-link active" style="color: #C5C6C7"  onclick="add_job()">Add Job Listing</a>
+                        <a class="nav-item nav-link active" style="color: #C5C6C7" href="#">Add Job Listing</a>
                     </div>
 
                 </div>
@@ -27,7 +27,7 @@
                     </button>
                     &nbsp; &nbsp; 
 
-                    {% for db in hr_account %}
+                    
 
                     <ul class="dropdown-menu dropdown-menu dropdown-menu-end">
                         <a class="dropdown-item" href="{% url 'logout_user' %}"> Log Out </a>
@@ -141,12 +141,5 @@
                                 </tbody>
                         </table>
                     </div>
-
-        <script>
-            function add_job(){
-                window.location.assign("{% url 'addjob' %}");
-            }
-        </script>
-        
     </body>
 </html>
