@@ -1,10 +1,11 @@
 from django import forms 
 from django.contrib.auth.models import User 
 from django.contrib.auth.forms import UserCreationForm
-from django.forms import ModelForm
+from django.forms import ModelForm, ModelChoiceField
 from .models import *
 
 class first_registration(UserCreationForm):
+    applyingfor = ModelChoiceField(queryset=job_listing.objects.all())
 
     class Meta:
         model = account_registration 

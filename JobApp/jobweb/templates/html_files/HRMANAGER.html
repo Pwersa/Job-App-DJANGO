@@ -79,8 +79,8 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Cellphone</th>
+                                <th scope="col">Account Type</th>
                                 <th scope="col">Applying For</th>
-                                <th scope="col" style="width: 120px;">Account Type</th>
                                 <th scope="col">Interview Date</th>
                                 <th scope="col">Tools</th>
                                 
@@ -92,18 +92,32 @@
                                             <td>{{accounts.first_name}} {{accounts.last_name}}</td>
                                             <td>{{accounts.username}}</td>
                                             <td>{{accounts.cellphone}}</td>
-                                            <td>{{accounts.applyingfor}}</td>
                                             <td>{{accounts.account_type}}</td>
-
-                                            {% if user_interviews.date_time is None %}                                            
-                                                <td>No Date set</td>
+                                            
+                                            {% if accounts.account_type == 'HRManager' %}
+                                                <td></td>
+                                                <td></td>
                                             {% else %}
+                                                <td>{{accounts.applyingfor}}</td>
                                                 <td>{{user_interviews.date_time}}</td>
                                             {% endif %}
+
+
                                                
                                             {% if accounts.account_type == 'HRManager' %}
                                                 <td style="text-align: center;">
-                                                  
+                                                    <div class="btn-group">
+                                                        <input class="form-control" type="hidden" id="email" name="email" value="{{accounts.email}}"> 
+                                                        <input class="form-control" type="hidden" id="account_type" name="account_type" value="{{accounts.account_type}}">
+                                                        <button type="button" class="btn btn-outline-disabled dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="color: #000000;" disabled>
+                                                                    Manage
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-end">
+                                                            <li><a class="dropdown-item" button="submit" style="cursor: pointer;" name="View Account" value="View Account" href="{% url 'manage_account' accounts.pk %}">View Account</a></li>
+                                                            <li><a class="dropdown-item" button="submit" style="cursor: pointer; color: red;" name="Delete" value="Delete" href="{% url 'delete_account' accounts.pk %}">Delete</a></li>
+                                                        </ul>   
+                                                    </div>
+                                                    &nbsp;       
                                                 </td>
                                             {% else %}
                                             <td style="text-align: center;">
@@ -132,12 +146,6 @@
             function add_job(){
                 window.location.assign("{% url 'addjob' %}");
             }
-
-            function delete_acc(){
-                alert("Opening delete account page.");
-                window.location.assign("{% url 'delete' %}");
-            }
-
         </script>
         
     </body>

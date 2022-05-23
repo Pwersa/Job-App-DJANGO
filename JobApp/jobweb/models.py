@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -11,7 +12,7 @@ class account_registration(AbstractUser):
     username = models.EmailField(primary_key=True, verbose_name='username', unique=True, default="")
     password1 = models.CharField(verbose_name='password1', max_length=20, default="")
     password2 = models.CharField(verbose_name='password2', max_length=20, default="")
-    photo = models.ImageField(verbose_name='photo', null=True, upload_to="images/")
+    photo = models.ImageField(verbose_name='photo', null=True, upload_to="picture/")
     first_name = models.CharField(verbose_name='first_name' ,max_length=99, default="")
     middle_name = models.CharField(verbose_name='middle_name' ,max_length=99, default="")
     last_name = models.CharField(verbose_name='last_name' ,max_length=99, default="")
@@ -50,7 +51,7 @@ class other_info(models.Model):
     from1 = models.CharField(verbose_name='from_1' ,max_length=99, null=True)
     to1 = models.CharField(verbose_name='to_1' ,max_length=99, null=True)
     company2 = models.CharField(verbose_name='company2',max_length=99, null=True, blank=True)
-    position2 = models.CharField(verbose_name='position2', max_length=99, blank=True)
+    position2 = models.CharField(verbose_name='position2', max_length=99, null=True, blank=True)
     from2 = models.CharField(verbose_name='from_2' ,max_length=99,  null=True, blank=True)
     to2 = models.CharField(verbose_name='to_2' ,max_length=99, null=True, blank=True)
     ref1 = models.CharField(verbose_name='ref1',max_length=99, null=True)
@@ -67,7 +68,7 @@ class other_info(models.Model):
     NBI = models.CharField(verbose_name='NBI', max_length=99, null=True, blank=True)
     SSS = models.CharField(verbose_name='SSS', max_length=99, null=True, blank=True)
     med_record = models.CharField(verbose_name='med_record', max_length=6, null=True, blank=True)
-    signature = models.ImageField(verbose_name='signature', null=True)
+    signature = models.ImageField(verbose_name='signature', null=True, default="No photo", upload_to="signature/")
 
     USERNAME_FIELD = 'username'
     

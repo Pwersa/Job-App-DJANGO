@@ -142,56 +142,15 @@ def signup(request):
     context = {'form': form}
     return render(request, 'html_files/Registration-Form.html', context)
 
-def signup1(request, username):  
-    form1 = second_registration()
+def signup1(request, username):
+    profile = other_info.objects.get(username=username)
+    form1 = second_registration(instance=profile)
 
     if request.method == "POST":
-        form1 = second_registration(request.POST, request.FILES)
-
+        form1 = second_registration(request.POST, request.FILES, instance=profile)
+        
         if form1.is_valid():
-
-            update_birthplace = form1.cleaned_data.get("bplace")
-            update_civilstatus = form1.cleaned_data.get("civilstatus")
-            update_citizenship = form1.cleaned_data.get("citizenship")
-            update_religion = form1.cleaned_data.get("religion")
-            update_e_contact = form1.cleaned_data.get("e_contact")
-            update_e_no = form1.cleaned_data.get("e_no")
-            update_elementary = form1.cleaned_data.get("elementary")
-            update_elementary_grad = form1.cleaned_data.get("elementary_grad")
-            update_highschool = form1.cleaned_data.get("highschool")
-            update_highschool_grad = form1.cleaned_data.get("highschool_grad")
-            update_college = form1.cleaned_data.get("college")
-            update_college_grad = form1.cleaned_data.get("college_grad")
-            update_company1 = form1.cleaned_data.get("company1")
-            update_position1 = form1.cleaned_data.get("position1")
-            update_from1 = form1.cleaned_data.get("from1")
-            update_to1 = form1.cleaned_data.get("to1")
-            update_company2 = form1.cleaned_data.get("company2")
-            update_position2 = form1.cleaned_data.get("position2")
-            update_from2 = form1.cleaned_data.get("from2")
-            update_to2 = form1.cleaned_data.get("to2")
-            update_ref1 = form1.cleaned_data.get("ref1")
-            update_refcon1 = form1.cleaned_data.get("refcon1")
-            update_refpos1 = form1.cleaned_data.get("refpos1")
-            update_refcom1 = form1.cleaned_data.get("refcom1")
-            update_ref2 = form1.cleaned_data.get("ref2")
-            update_refcon2 = form1.cleaned_data.get("refcon2")
-            update_refpos2 = form1.cleaned_data.get("refpos2")
-            update_refcom2 = form1.cleaned_data.get("refcom2")
-            update_philhealth = form1.cleaned_data.get("philhealth")
-            update_pagibig = form1.cleaned_data.get("pagibig")
-            update_TIN = form1.cleaned_data.get("TIN")
-            update_NBI = form1.cleaned_data.get("NBI")
-            update_SSS = form1.cleaned_data.get("SSS")
-            update_med_record = form1.cleaned_data.get("med_record")
-            update_signature = form1.cleaned_data.get("bplsignaturece")
-
-            other_info.objects.filter(username=username).update(bplace=update_birthplace, civilstatus=update_civilstatus, citizenship=update_citizenship, religion=update_religion, e_contact=update_e_contact, e_no=update_e_no,
-                                                            elementary=update_elementary, elementary_grad=update_elementary_grad, highschool=update_highschool, highschool_grad=update_highschool_grad, college=update_college, college_grad=update_college_grad,
-                                                            company1=update_company1, position1=update_position1, from1=update_from1, to1=update_to1, company2=update_company2, position2=update_position2, from2=update_from2, to2=update_to2, ref1=update_ref1,
-                                                            refcon1=update_refcon1, refpos1=update_refpos1, refcom1=update_refcom1, ref2=update_ref2, refcon2=update_refcon2, refpos2=update_refpos2, refcom2=update_refcom2, philhealth=update_philhealth, pagibig=update_pagibig,
-                                                            TIN=update_TIN, NBI=update_NBI, SSS=update_SSS, med_record=update_med_record, signature=update_signature)
-
+            form1.save()
             #other_info.objects.filter(username_id=username).update(form1.save())
     
             account_registration.objects.filter(username=username).update(account_type='Applicant Level 2')
@@ -212,7 +171,7 @@ def signup1(request, username):
 
 ########################### APPLICANT//EMPLOYEE ###########################
 
-@login_required(login_url='login_user')
+@login_required(login_url='/login_user')
 def user_profile(request, username):
     info1 = account_registration.objects.filter(username=username)
     info2 = other_info.objects.filter(username_id=username)
@@ -223,7 +182,7 @@ def user_profile(request, username):
     return render(request, 'html_files/User-Profile1.html', context1)
 
 
-@login_required(login_url='login_user')
+@login_required(login_url='/login_user')
 def returntoprofile(request, username):
     info1 = account_registration.objects.filter(username=username)
     info2 = other_info.objects.filter(username_id=username)
@@ -233,7 +192,7 @@ def returntoprofile(request, username):
     context1 = {'info': zippedItems}
     return render(request, 'html_files/User-Profile1.html', context1)
 
-@login_required(login_url='login_user')
+@login_required(login_url='/login_user')
 def requirements(request, username):
     data1 = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
     print('@@@@@@@@@@@@@')
@@ -248,7 +207,7 @@ def requirements(request, username):
         context1 = {'check': data}
         return render(request, 'html_files/Requirements.html', context1)
 
-@login_required(login_url='login_user')
+@login_required(login_url='/login_user')
 def requirements_satisfied(request, username_id):
     if request.method == "POST":
         update_philhealth = request.POST.get('philhealth')
@@ -274,7 +233,7 @@ def requirements_satisfied(request, username_id):
 
 ########################### HR MANAGER ###########################
 
-@login_required(login_url='login_user')
+@login_required(login_url='/login_user')
 def delete_account(request, username):
     account_registration.objects.filter(username=username).delete()
     interview.objects.filter(username=username).delete()
@@ -288,7 +247,7 @@ def delete_account(request, username):
     zippedItems = zip(account, user_interview)
     return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
 
-@login_required(login_url='login_user')
+@login_required(login_url='/login_user')
 def manage_account(request, username):
     user_account = account_registration.objects.filter(username=username)
     data1 = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
@@ -350,7 +309,7 @@ def manage_account(request, username):
     elif data1 == "HRManager":  
         return redirect('hrdashboard')
     
-@login_required(login_url='login_user')
+@login_required(login_url='/login_user')
 def sort_list(request):
     if request.method == "POST" and "Name" in request.POST:
         
@@ -361,7 +320,7 @@ def sort_list(request):
         context1 = {'zippedItems': zippedItems}
         return render(request, 'html_files/HRMANAGER.html', context1)
 
-@login_required(login_url='login_user')
+@login_required(login_url='/login_user')
 def set_interview(request, username_id):
     get_date_time = request.POST.get('interview_date')
     
@@ -385,7 +344,7 @@ def set_interview(request, username_id):
         context = {'info': user_account}
         return render(request, 'html_files/User-Profile1-Applicant.html', context)
 
-@login_required(login_url='login_user')
+@login_required(login_url='/login_user')
 def change_employment(request, username):
 
     if request.method == "POST" and "Full Time" in request.POST:
@@ -455,7 +414,7 @@ def change_employment(request, username):
     else:
         return redirect('change_employment')
 
-@login_required(login_url='login_user')
+@login_required(login_url='/login_user')
 def applicant_hired_reject(request, username):
     check_type = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
     if request.method == "POST" and "Hire" in request.POST:
@@ -497,7 +456,7 @@ def applicant_hired_reject(request, username):
 
 ########################### GENERAL ###########################
 
-@login_required(login_url='login_user')
+@login_required(login_url='/login_user')
 def change_password(request, username):
     form = update_password()
     
@@ -544,7 +503,7 @@ def home(request):
     context = {'job': data}
     return render(request, 'html_files/HOMEWEBSITE.html', context)
 
-@login_required(login_url='login_user')
+@login_required(login_url='/login_user')
 def hrdashboard(request):
     account = account_registration.objects.all()
     context = {'account': account}
