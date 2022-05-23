@@ -499,8 +499,8 @@ def change_password(request, username):
 ################################### REDIRECTS ############################################
 
 def home(request):
-    data = job_listing.objects.all()
-    context = {'job': data}
+    asd = job_listing.objects.all()
+    context = { 'job' : asd }
     return render(request, 'html_files/HOMEWEBSITE.html', context)
 
 @login_required(login_url='/login_user')
@@ -509,11 +509,13 @@ def hrdashboard(request):
     context = {'account': account}
     return render(request, 'html_files/HRMANAGER.html', context)
 
+@login_required(login_url='/login_user')
+def add_job(request, username):
+    user = account_registration.objects.get(username=username)
+    context = {'user':user}
+    return render(request, 'html_files/Making-a-Job-Posting.html', context)
 
 ################################### INACTIVE ############################################
-
-def create_job_listing(request):
-    return render(request, 'html_files/Making-a-Job-Posting.html')
 
 def delete_jobs(request):
     return render(request, 'html_files/HRMANAGER.html')

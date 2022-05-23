@@ -7,7 +7,7 @@ from django.contrib.auth.models import AbstractUser
 
 class account_registration(AbstractUser):
     
-    applyingfor1 = [('Choice1', 'Website Developersss')]
+    #applyingfor1 = [('Choice1', 'Please select here')]
 
     username = models.EmailField(primary_key=True, verbose_name='username', unique=True, default="")
     password1 = models.CharField(verbose_name='password1', max_length=20, default="")
@@ -18,8 +18,8 @@ class account_registration(AbstractUser):
     last_name = models.CharField(verbose_name='last_name' ,max_length=99, default="")
     address = models.CharField(verbose_name='address' ,max_length=99)
     cellphone = models.CharField(verbose_name='cellphone' ,max_length=11)
-    birthday = models.DateField(verbose_name='birthday', null=True,  blank=False)
-    applyingfor = models.CharField(verbose_name='applyingfor',max_length=99, default="", choices=applyingfor1)
+    birthday = models.DateField(verbose_name='birthday', null=True, blank=False)
+    applyingfor = models.CharField(verbose_name='applyingfor',max_length=99, default="")
     job = models.CharField(verbose_name='job',max_length=99, default='Applicant')
     employment_status = models.CharField(verbose_name='job',max_length=99, default='Not yet Employed')
     account_type = models.CharField(verbose_name='account_type',max_length=99)
@@ -73,7 +73,7 @@ class other_info(models.Model):
     USERNAME_FIELD = 'username'
     
 class job_listing(models.Model):
-    jtitle = models.CharField(primary_key = True , verbose_name='jtitle', max_length=99)
+    jtitle = models.CharField(primary_key = True, verbose_name='jtitle', max_length=99)
     jdesc = models.TextField(verbose_name='jdesc', max_length=300)
     jobreq1 = models.CharField(verbose_name='jobreq1', default="No Diploma Needed", max_length=99)
     jobreq2 = models.CharField(verbose_name='jobreq2', default="No Reference Needed" , max_length=99)

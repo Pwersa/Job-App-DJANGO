@@ -31,14 +31,16 @@ urlpatterns = [
     path('set_interview/<str:username_id>', views.set_interview, name="set_interview"),
     path('change_employment/<str:username>', views.change_employment, name='change_employment'),
     path('applicant_hired_reject/<str:username>', views.applicant_hired_reject, name='applicant_hired_reject'),
+    path('add_job/<str:username>', views.add_job, name='add_job'),
 
+    
 ######################## GLOBAL ###########################
 
     path('change_password/<str:username>', views.change_password, name='change_password'),
     
 ############################  UNUSED  ####################################
 
-    path('create_job_listing/<str:username>', views.create_job_listing, name="create_job_listing"),
+    #path('addjob', views.addjob, name="addjob"),
     path('delete_job', views.delete_jobs, name='delete_job'),
 
 ############################# DEBUG ########################################
