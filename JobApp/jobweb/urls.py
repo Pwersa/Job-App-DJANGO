@@ -33,7 +33,12 @@ urlpatterns = [
     path('applicant_hired_reject/<str:username>', views.applicant_hired_reject, name='applicant_hired_reject'),
     path('add_job/<str:username>', views.add_job, name='add_job'),
 
-    
+######################## REDIRECTS ###########################
+
+    path('applicant_level1/<str:username>', views.applicant_level1, name='applicant_level1'),
+
+
+
 ######################## GLOBAL ###########################
 
     path('change_password/<str:username>', views.change_password, name='change_password'),
