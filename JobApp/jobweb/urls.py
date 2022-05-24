@@ -21,10 +21,12 @@ urlpatterns = [
     path('returntoprofile/<str:username>', views.returntoprofile, name='returntoprofile'),
     path('requirements/<str:username>', views.requirements, name='requirements'),
     path('requirements_satisfied/<str:username_id>', views.requirements_satisfied, name='requirements_satisfied'),
+    path('rejected_user/<str:username>', views.rejected_user, name='rejected_user'),
+    path('retired_user/<str:username>', views.retired_user, name='retired_user'),
     
 ######################## HR MANAGER ###########################
 
-    path('hrdashboard/<str:username_id>', views.hrdashboard, name='hrdashboard'),
+    path('hrdashboard/<str:username>', views.hrdashboard, name='hrdashboard'),
     path('delete_account/<str:username>', views.delete_account, name='delete_account'),
     path('manage_account/<str:username>', views.manage_account, name='manage_account'),
     path('sort_list', views.sort_list, name='sort_list'),
@@ -36,8 +38,7 @@ urlpatterns = [
 ######################## REDIRECTS ###########################
 
     path('applicant_level1/<str:username>', views.applicant_level1, name='applicant_level1'),
-
-
+    path('applicant_level_2_3_employee/<str:username>', views.applicant_level_2_3_employee, name='applicant_level_2_3_employee'),
 
 ######################## GLOBAL ###########################
 
