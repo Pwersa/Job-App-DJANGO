@@ -23,13 +23,8 @@ def login_user(request):
         
         data = account_registration.objects.filter(username=username)
         data1 = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
-        #data2 = account_registration.objects.filter(username=check_username).values_list('account_complete', flat=True).first()
-
-        print("data1" , data)
-        print(data1)
-        #print(data2)
+ 
         if user is not None:
-
             if data1 == 'Applicant Level 1':
                 login(request, user)
                 return redirect('applicant_level1', username=username)
@@ -57,13 +52,10 @@ def login_user(request):
             elif data1 == 'Retired':
                 login(request, user)
                 return redirect('retired_user', username=username)
-                info1 = account_registration.objects.filter(username=username)
-                info2 = other_info.objects.filter(username=username)
-                info3 = interview.objects.filter(username=username)
 
-                zippedItems = zip(info1, info2, info3)
-                context1 = {'info': zippedItems}
-                return render(request, 'html_files/User-Profile1.html', context1)
+            elif data1 == 'Terminate':
+                login(request, user)
+                return redirect('terminated_user', username=username)
             
             else:
                 return redirect('home')
@@ -75,6 +67,7 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
+    messages.success(request, 'Logged out successfully.')
     hr_account_login_email.clear()
     return redirect('home')
 
@@ -181,7 +174,7 @@ def returntoprofile(request, username):
 
 @login_required(login_url='/login_user')
 def requirements(request, username):
-    if request.user.is_authenticated and request.user.account_type == "Applicant Level 1" or request.user.is_authenticated and request.user.account_type == "Applicant Level 3" or request.user.is_authenticated and request.user.account_type == "Employee":
+    if request.user.is_authenticated and request.user.account_type == "Applicant Level 1" or request.user.is_authenticated and request.user.account_type == "Applicant Level 2" or request.user.is_authenticated and request.user.account_type == "Applicant Level 3" or request.user.is_authenticated and request.user.account_type == "Employee":
         data1 = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
         print('@@@@@@@@@@@@@')
         print(data1)
@@ -312,8 +305,16 @@ def manage_account(request, username):
             context1 = {'info': zippedItems}
             return render(request, 'html_files/User-Profile1-Employee.html', context1)
 
-        elif data1 == "HRManager":  
-            return redirect('hrdashboard')
+        elif data1 == "Terminate":
+            info1 = account_registration.objects.filter(username=username)
+            info2 = other_info.objects.filter(username_id=username)
+            info3 = interview.objects.filter(username_id=username)
+
+            zippedItems = zip(info1, info2, info3)
+            context1 = {'info': zippedItems}
+            return render(request, 'html_files/User-Profile1-Applicant.html', context1)
+
+
    
     else:
         hr_account_login_email.clear()
@@ -435,6 +436,34 @@ def change_employment(request, username):
             zippedItems = zip(account, user_interview)
             return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
 
+        elif request.method == "POST" and "Terminate" in request.POST:
+            account_registration.objects.filter(username=username).update(employment_status="Terminate")
+            account_registration.objects.filter(username=username).update(account_type="Terminate")
+            account_registration.objects.filter(username=username).update(applyingfor="Terminate")
+
+            messages.success(request, 'Employment was Terminated.' + username)
+            account = account_registration.objects.all()
+            user_interview = interview.objects.values('date_time')
+            hr_account = account_registration.objects.filter(username=hr_account_login_email[0])
+            
+            zippedItems = zip(account, user_interview)
+            return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
+            
+        elif request.method == "POST" and "Promoted" in request.POST:
+            account_registration.objects.filter(username=username).update(employment_status="HRManager")
+            account_registration.objects.filter(username=username).update(account_type="HRManager")
+            account_registration.objects.filter(username=username).update(applyingfor="HRManager")
+
+            messages.success(request, 'Employment Account was Promoted.' + username)
+            account = account_registration.objects.all()
+            user_interview = interview.objects.values('date_time')
+            hr_account = account_registration.objects.filter(username=hr_account_login_email[0])
+            
+            zippedItems = zip(account, user_interview)
+            return render(request, 'html_files/HRMANAGER.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
+
+            Promoted
+
         else:
             return redirect('change_employment')
             
@@ -447,7 +476,7 @@ def change_employment(request, username):
 def applicant_hired_reject(request, username):
     if request.user.is_authenticated and request.user.account_type == "HRManager":
         check_type = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
-        
+
         if request.method == "POST" and "Hire" in request.POST:
             if check_type == 'Applicant Level 1':
                 messages.error(request, 'Applicant not fully registered.')
@@ -458,6 +487,12 @@ def applicant_hired_reject(request, username):
                 return redirect('manage_account', username=username)
 
             elif check_type == 'Applicant Level 3':
+                update_job = account_registration.objects.filter(username=username).values_list('applyingfor', flat=True).first()
+
+                account_registration.objects.filter(username=username).update(job=update_job)
+
+                account_registration.objects.filter(username=username).update(applyingfor='')
+
                 account_registration.objects.filter(username=username).update(account_type="Employee")
                 interview.objects.filter(username=username).update(date_time=None)
                 messages.success(request, 'Applicant Successfully Hired!')
@@ -613,6 +648,21 @@ def rejected_user(request, username):
 
 def retired_user(request, username):
     if request.user.is_authenticated and request.user.account_type == "Retired":
+        info1 = account_registration.objects.filter(username=username)
+        info2 = other_info.objects.filter(username=username)
+        info3 = interview.objects.filter(username=username)
+
+        zippedItems = zip(info1, info2, info3)
+        context1 = {'info': zippedItems}
+        return render(request, 'html_files/User-Profile1.html', context1)
+        
+    else:
+        hr_account_login_email.clear()
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
+        return redirect('home')
+
+def terminated_user(request, username):
+    if request.user.is_authenticated and request.user.account_type == "Terminate":
         info1 = account_registration.objects.filter(username=username)
         info2 = other_info.objects.filter(username=username)
         info3 = interview.objects.filter(username=username)

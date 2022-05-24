@@ -40,7 +40,45 @@
                       <h5 class="card-title">{{data.first_name}} {{data.last_name}}</h5>
                       <p class="card-text">{{data.account_type}}</p>
                       <hr>
-                      &nbsp;
+                    
+
+                    {% if data.account_type == 'Employee' %}
+                    <ul class="list-group list-group-flush ">
+                        <li class="list-group-item d-flex justify-content-center flex-wrap">
+                            <h6 class="mb-0">Employment Status:</h6>
+                            &nbsp;
+                            <p class="text-secondary"> {{data.employment_status}}</p>
+                            &nbsp; 
+                            <h6 class="mb-0">Currently working as:</h6>
+                            &nbsp;
+                            <p class="text-secondary">{{data.applyingfor}}</p>
+                        </li>
+                    </ul>
+
+                    {% elif data.account_type == 'Retired' %}
+                    <ul class="list-group list-group-flush ">
+                        <li class="list-group-item d-flex justify-content-center flex-wrap">
+                            <h6 class="mb-0">Employment Status:</h6>
+                            &nbsp;
+                            <p class="text-secondary"> {{data.employment_status}}</p>
+                            &nbsp; 
+                            <h6 class="mb-0">Currently working as:</h6>
+                            &nbsp;
+                            <p class="text-secondary">{{data.applyingfor}}</p>
+                        </li>
+                    </ul>
+                    <hr>
+
+                    {% elif data.account_type == 'Rejected' %}
+                    
+                    <!-- LOG OUT BUTTON ONLY -->
+
+                    {% elif data.account_type == 'Terminate' %}
+
+                    <!-- LOG OUT BUTTON ONLY -->
+
+                    {% else %}
+
                     <div class="card-title" style="font-weight: bold">
                         Status
                     </div>
@@ -77,10 +115,18 @@
                     </ul>
                     &nbsp;
                     <hr>
+                    {% endif %}
                     
 
-                    {% if data.account_type == 'Retired' or 'Rejected' %}
-                        <a href="{% url 'logout_user' %}" class="btn btn-outline-info" style="width: 90px; color: #000000">Log out</a>
+                    {% if data.account_type == 'Rejected' %}
+                    <a href="{% url 'logout_user' %}" class="btn btn-outline-info" style="width: 90px; color: #000000">Log out</a>
+                    
+                    {% elif data.account_type == 'Retired' %}
+                    <a href="{% url 'logout_user' %}" class="btn btn-outline-info" style="width: 90px; color: #000000">Log out</a>
+
+                    {% elif data.account_type == 'Terminate' %}
+                    <a href="{% url 'logout_user' %}" class="btn btn-outline-info" style="width: 90px; color: #000000">Log out</a>
+
                     
                     {% else %}
                     <div class="card-title" style="font-weight: bold">

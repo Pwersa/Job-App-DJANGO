@@ -79,6 +79,7 @@
                                 <th scope="col">Email</th>
                                 <th scope="col">Cellphone</th>
                                 <th scope="col">Account Type</th>
+                                <th scope="col">Employee Job</th>
                                 <th scope="col">Applying For</th>
                                 <th scope="col">Interview Date</th>
                                 <th scope="col">Tools</th>
@@ -92,10 +93,20 @@
                                             <td>{{accounts.username}}</td>
                                             <td>{{accounts.cellphone}}</td>
                                             <td>{{accounts.account_type}}</td>
-                                            
+
+                                            {% if accounts.account_type == 'Employee' %}  
+                                            <td>{{accounts.job}}</td>
+                                            {% else %}
+                                            <td></td>
+                                            {% endif %}
+
+
                                             {% if accounts.account_type == 'HRManager' %}
                                                 <td></td>
                                                 <td></td>
+                                            {% elif accounts.account_type == 'Employee' %}
+                                            <td></td>
+                                            <td></td>
                                             {% else %}
                                                 <td>{{accounts.applyingfor}}</td>
                                                 <td>{{user_interviews.date_time}}</td>

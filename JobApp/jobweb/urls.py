@@ -23,10 +23,11 @@ urlpatterns = [
     path('requirements_satisfied/<str:username_id>', views.requirements_satisfied, name='requirements_satisfied'),
     path('rejected_user/<str:username>', views.rejected_user, name='rejected_user'),
     path('retired_user/<str:username>', views.retired_user, name='retired_user'),
+    path('terminated_user/<str:username>', views.terminated_user, name='terminated_user'),
     
 ######################## HR MANAGER ###########################
 
-    path('hrdashboard/<str:username>', views.hrdashboard, name='hrdashboard'),
+    path('hrdashboard', views.hrdashboard, name='hrdashboard'),
     path('delete_account/<str:username>', views.delete_account, name='delete_account'),
     path('manage_account/<str:username>', views.manage_account, name='manage_account'),
     path('sort_list', views.sort_list, name='sort_list'),

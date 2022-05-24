@@ -54,6 +54,20 @@
                             </form>
                         </li>
                     </ul>
+
+                    {% elif data.account_type == 'Terminate' %}
+                    <ul class="list-group list-group-flush ">
+                        <li class="list-group-item d-flex justify-content-center flex-wrap">
+                            <form method="POST" action="{% url 'delete_account' data.pk %}">
+                                {% csrf_token %}
+                                  
+                                <button class="btn btn-outline-error" button="submit" style="color: red;" name="Hire">Delete Account</button>
+                                &nbsp; 
+                            </form>
+                        </li>
+                    </ul>
+
+
                     {% else %}
 
                         <div class="card-title" style="font-weight: bold">
