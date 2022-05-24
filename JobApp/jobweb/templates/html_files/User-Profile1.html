@@ -77,7 +77,12 @@
                     </ul>
                     &nbsp;
                     <hr>
+                    
 
+                    {% if data.account_type == 'Retired' or 'Rejected' %}
+                        <a href="{% url 'logout_user' %}" class="btn btn-outline-info" style="width: 90px; color: #000000">Log out</a>
+                    
+                    {% else %}
                     <div class="card-title" style="font-weight: bold">
                         Quick Account Settings:
                     </div>
@@ -85,6 +90,8 @@
                     <a href="{% url 'change_password' data.pk %}" class="btn btn-outline-info" style="width: 170px; color: #000000; margin-bottom: 10px;">Change Password</a>
                     <br>
                     <a href="{% url 'logout_user' %}" class="btn btn-outline-info" style="width: 90px; color: #000000">Log out</a>
+
+                    {% endif %}
 
                 </div>  
             </div> 
@@ -226,7 +233,7 @@
                         </div>
                         {% if data1.signature == 'No photo' %}
                         <div class="col-lg-6  text-secondary">
-                            None
+                            Applicant did not upload
                         </div>
                         {% else %}
                             <div class="col-lg-6  text-secondary">
@@ -321,7 +328,15 @@
 
                     <div class="row" style="text-align: center;">
                         <div class="col-sm-12">
-                            <a class="btn btn-outline-info" style="width: 250px; color: #000000" href="{% url 'signup1' data.pk %}">Finish Account Registration</a>
+                            <a class="btn btn-outline-info" style="width: 250px; color: #000000" href="{% url 'signup1' data.pk %}">Finish my Account Registration</a>
+                        </div>
+                    </div>
+
+                    {% elif data.account_type == 'Rejected' or 'Retired' %}
+
+                    <div class="row" style="text-align: center;">
+                        <div class="col-sm-12">
+                            <a class="btn btn-outline-info" style="width: 210px; color: #000000" href="#">Print my Informations</a>
                         </div>
                     </div>
 
@@ -329,7 +344,7 @@
 
                     <div class="row" style="text-align: center;">
                         <div class="col-sm-12">
-                            <a class="btn btn-outline-info" style="width: 170px; color: #000000" href="#">Edit Information</a>
+                            <a class="btn btn-outline-info" style="width: 170px; color: #000000" href="#">Edit my Information</a>
                         </div>
                     </div>
 
