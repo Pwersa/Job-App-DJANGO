@@ -7,12 +7,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
-    </head>
+        <title>Create Job Listing</title>
 
+    </head>
+    
+    {% for users in user %}
     <body background="/static/pictures/bg.jpg">
         <div class="container mt-3">
             <h1 class=" p-4 mb-3 text-center" style="font-weight: bolder; background-color: #1f2833; color: #66fcf1;">Make a Job</h1>
-            <form class="row g-3" style="color: #000;" method="POST" action="addjob">
+            <form class="row g-3" style="color: #000;" method="POST" action="{% url 'list_job' users.pk %}">
             {% csrf_token %}
 
                 <div class="col-md-12">
@@ -68,15 +71,15 @@
                     <input type="number" pattern="[0-9]{11}" class="form-control" id="salary" name="salary" min="1" required>
                     <span class="input-group-text">.00</span>
                 </div>
-                <div class="col-md-12" style="text-align: center;">
-                    <button type="submit" style="font-weight: bold;" class="btn btn-primary" onclick="postJob()">POST!</button>
+                <div style="text-align: center;">
+                    <button class="btn btn-primary col-lg-2" type="submit" style="font-weight: bold;color: white;" >POST!</button>
                 </div>
             </form>
         </div>
         <div class="container mt-3 p-3">
             <h1 class=" p-4 mb-3 text-center" style="font-weight: bolder; background-color: #1f2833; color: #66fcf1;">Delete a Job</h1>
 
-            <form class="row g-3" style="color: #000;" method="POST" action="/delete_job">
+            <form class="row g-3" style="color: #000;" method="POST" action="{% url 'delete_job' users.pk %}">
             {% csrf_token %}
                 <div>
                     <div class="container">
@@ -88,57 +91,11 @@
 
                     </div>
                     <div class="col-md-12" style="text-align: center;">
-                        <button type="submit" style="font-weight: bold;" class="btn btn-primary" onclick="deleteJob()">Delete!</button>
+                        <button class="btn btn-primary col-lg-2" type="submit" style="font-weight: bold;color: white;">Delete!</button>
                     </div>
                 </div>
             </form>
         </div>   
     </body>
-
-    <script>
-        function postJob() {
-            //event.preventDefault();
-            if ((document.getElementById("job_title").value == "") && 
-            (document.getElementById("job_description").value == "") &&
-            (document.getElementById("salary").value == "")) {
-                alert("Please Fill up the forms.");
-            }
-            else if (document.getElementById("job_title").value == "") {
-                alert("Please Input the Job Title.");
-            }
-            else if (document.getElementById("job_description").value == "") {
-                 alert("Please Input the Job Description.");
-            }
-            else if (document.getElementById("salary").value == "") {
-                alert("Please Input the Salary.");
-            }
-            else {
-                var result = "" ;
-                if (confirm("Do you want to Proceed?")) {
-                    result = 1;
-                }
-                else {
-                    result = 0;
-                }
-                if (result == 1) {
-                    alert(document.getElementById("job_title").value +" "+ "Has Been Added!");
-                    location.replace("{% url 'hrdashboard' %}")
-                }
-            }
-        }
-        function deleteJob() {
-            //event.preventDefault();
-            var result = "" ;
-            if (confirm("Do you want to Proceed?")) {
-                result = 1;
-            }
-            else {
-                result = 0;
-            }
-            if (result == 1) {
-                window.alert(document.getElementById("del_job").value +" "+ "Has Been Deleted");
-                location.replace("{% url 'hrdashboard' %}");
-            }
-        }
-    </script>
+    {% endfor %}
 </html>

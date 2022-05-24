@@ -27,7 +27,7 @@ urlpatterns = [
     
 ######################## HR MANAGER ###########################
 
-    path('hrdashboard', views.hrdashboard, name='hrdashboard'),
+    path('hrdashboard/<str:username>', views.hrdashboard, name='hrdashboard'),
     path('delete_account/<str:username>', views.delete_account, name='delete_account'),
     path('manage_account/<str:username>', views.manage_account, name='manage_account'),
     path('sort_list', views.sort_list, name='sort_list'),
@@ -35,6 +35,8 @@ urlpatterns = [
     path('change_employment/<str:username>', views.change_employment, name='change_employment'),
     path('applicant_hired_reject/<str:username>', views.applicant_hired_reject, name='applicant_hired_reject'),
     path('add_job/<str:username>', views.add_job, name='add_job'),
+    path('list_job/<str:username>', views.list_job, name='list_job'),
+    path('delete_job/<str:username>', views.delete_job, name='delete_job'),
 
 ######################## REDIRECTS ###########################
 
@@ -44,11 +46,6 @@ urlpatterns = [
 ######################## GLOBAL ###########################
 
     path('change_password/<str:username>', views.change_password, name='change_password'),
-    
-############################  UNUSED  ####################################
-
-    #path('addjob', views.addjob, name="addjob"),
-    path('delete_job', views.delete_jobs, name='delete_job'),
 
 ############################# DEBUG ########################################
     #path('home_debug', views.home_debug, name='home_debug'),

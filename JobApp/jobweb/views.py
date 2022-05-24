@@ -570,14 +570,16 @@ def change_password(request, username):
 @login_required(login_url='/login_user')
 def add_job(request, username):
     if request.user.is_authenticated and request.user.account_type == "HRManager":
-        user = account_registration.objects.get(username=username)
-        context = {'user':user}
+        user = account_registration.objects.filter(username=username)
+        context = {'user' : user}
         return render(request, 'html_files/Making-a-Job-Posting.html', context)
             
     else:
         hr_account_login_email.clear()
         messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('home')
+
+
 
 ################################### REDIRECTS ############################################
 def home(request):
@@ -677,10 +679,41 @@ def terminated_user(request, username):
         return redirect('home')
 
 ################################### In progress ############################################
-
-def delete_jobs(request):
+def list_job(request,username):
+    print('TEST @@@@@@@@')
     if request.user.is_authenticated and request.user.account_type == "HRManager":
-        return render(request, 'html_files/HRMANAGER.html')
+        print('TEST 1')
+        if request.method == "POST":
+            print('TEST 2')
+            job_title = request.POST['job_title']
+            job_desc = request.POST['job_description']
+            job_req = request.POST['jobreq1']
+            job_req2 = request.POST['jobreq2']
+            work_pay = request.POST['salary']
+            print('TEST 3')
+
+            job_listing.objects.create(jtitle=job_title, jdesc=job_desc, jobreq1=job_req, jobreq2=job_req2, salary=work_pay)
+
+            print('TEST 4')
+            messages.success(request, 'Job is ADDED successfully.')
+            return redirect('hrdashboard', username=username)
+            
+
+    else:
+        hr_account_login_email.clear()
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
+        return redirect('home')
+
+def delete_job(request, username):
+    if request.user.is_authenticated and request.user.account_type == "HRManager":
+        if request.method == "POST":
+
+            job_name = request.POST['deletejob']
+
+            job_listing.objects.filter(jtitle=job_name).delete()
+
+            messages.success(request, 'Job is DELETED succesfully.')
+            return redirect('hrdashboard', username=username)
             
     else:
         hr_account_login_email.clear()
