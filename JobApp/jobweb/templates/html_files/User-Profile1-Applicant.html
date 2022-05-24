@@ -42,11 +42,25 @@
                         <h5 class="card-title">{{data.first_name}} {{data.last_name}}</h5>
                         <p class="card-text">{{data.account_type}}</p>
                         <hr>
+
+                    {% if data.account_type == 'Rejected' %}
+                    <ul class="list-group list-group-flush ">
+                        <li class="list-group-item d-flex justify-content-center flex-wrap">
+                            <form method="POST" action="{% url 'delete_account' data.pk %}">
+                                {% csrf_token %}
+                                  
+                                <button class="btn btn-outline-error" button="submit" style="color: red;" name="Hire">Delete Account</button>
+                                &nbsp; 
+                            </form>
+                        </li>
+                    </ul>
+                    {% else %}
+
                         <div class="card-title" style="font-weight: bold">
                         Status
                         </div>
                     
-
+                    
                     <ul class="list-group list-group-flush ">
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0">Applying For:</h6>
@@ -100,11 +114,9 @@
                         </li>
 
                         {% endif %}
-                        
+                    
                     </ul>
-                    
                     <hr>
-                    
                     <ul class="list-group list-group-flush ">
                         <li class="list-group-item d-flex justify-content-center flex-wrap">
                             
@@ -125,19 +137,6 @@
 
                     <hr>
                     
-
-                    {% if data.account_type == 'Rejected' %}
-                    <ul class="list-group list-group-flush ">
-                        <li class="list-group-item d-flex justify-content-center flex-wrap">
-                            <form method="POST" action="{% url 'delete_account' data.pk %}">
-                                {% csrf_token %}
-                              
-                                <button class="btn btn-outline-error" button="submit" style="color: red;" name="Hire">Delete Account</button>
-                                &nbsp; 
-                            </form>
-                        </li>
-                    </ul>
-                    {% else %}
                     <ul class="list-group list-group-flush ">
                         <li class="list-group-item d-flex justify-content-center flex-wrap">
                             <form method="POST" action="{% url 'applicant_hired_reject' data.pk %}">
@@ -383,11 +382,11 @@
                     </div>
                     <hr>
                     
-                    {% if data.account_type == 'Employee' %}
+                    {% if data.account_type == 'Rejected' %}
 
                     <div class="row" style="text-align: center;">
                         <div class="col-sm-12">
-                            <a class="btn btn-outline-info" style="width: 250px; color: #000000" href="#">Print Employee's Information</a>
+                            <a class="btn btn-outline-info" style="width: 250px; color: #000000" >END OF INFORMATIONS</a>
                         </div>
                     </div>
 
@@ -398,7 +397,6 @@
                             <a class="btn btn-outline-info" style="width: 250px; color: #000000" href="#">Print Applicant's Information</a>
                         </div>
                     </div>
-
 
                     {% endif %}
 

@@ -447,6 +447,7 @@ def change_employment(request, username):
 def applicant_hired_reject(request, username):
     if request.user.is_authenticated and request.user.account_type == "HRManager":
         check_type = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
+        
         if request.method == "POST" and "Hire" in request.POST:
             if check_type == 'Applicant Level 1':
                 messages.error(request, 'Applicant not fully registered.')
