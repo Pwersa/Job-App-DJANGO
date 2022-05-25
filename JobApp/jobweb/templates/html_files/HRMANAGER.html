@@ -49,12 +49,13 @@
                     <div class="card-header" style= "font-weight: bold ;font-size: 30px; text-align: center;">Manage Employees/Applicants</div>
                     &nbsp;
                     {% if messages %}
-                    <ul class="messages" style="font-style: italic; text-align: center;">
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert" style="margin-left: 300px; margin-right: 300px; text-align: center; font-size: 22px;">
                     {% for message in messages %}
-                    <h4{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h4>
+                        <strong{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</strong>
                     {% endfor %}
-                    </ul>
+                    </div>
                     {% endif %}
+                    
                     <div style="text-align: center;">
                         <form method="POST" action="/sort_list">
                             {% csrf_token %}
@@ -151,5 +152,16 @@
                                 </tbody>
                         </table>
                     </div>
+
+        <script>
+        
+            $('#myAlert').ready(function() {
+                setTimeout(function() {
+                    $(".alert").alert('close');
+                    }, 5000);
+            }); 
+
+        </script>          
+         
     </body>
 </html>

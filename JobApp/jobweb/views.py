@@ -43,6 +43,7 @@ def login_user(request):
 
             elif data1 == 'HRManager':
                 login(request, user)
+                hr_account_login_email.append(username)
                 return redirect('hrdashboard', username=username)
             
             elif data1 == 'Rejected':
@@ -590,7 +591,7 @@ def home(request):
 @login_required(login_url='/login_user')
 def hrdashboard(request, username):
     if request.user.is_authenticated and request.user.account_type == "HRManager":
-        hr_account_login_email.append(username)
+        
         print(hr_account_login_email[0])
         account = account_registration.objects.all()
         user_interview = interview.objects.values('date_time')
