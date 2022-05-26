@@ -107,6 +107,7 @@ def signup(request):
     return render(request, 'html_files/Registration-Form.html', context)
 
 def signup1(request, username):
+    
     if request.user.is_authenticated and request.user.account_type == "Applicant Level 1":
         profile = other_info.objects.get(username=username)
         form1 = second_registration(instance=profile)
@@ -590,6 +591,7 @@ def home(request):
 
 @login_required(login_url='/login_user')
 def hrdashboard(request, username):
+    
     if request.user.is_authenticated and request.user.account_type == "HRManager":
         
         print(hr_account_login_email[0])
@@ -609,6 +611,7 @@ def hrdashboard(request, username):
 
 @login_required(login_url='/login_user')
 def applicant_level1(request, username):
+
     if request.user.is_authenticated and request.user.account_type == "Applicant Level 1":
         data = account_registration.objects.filter(username=username)
         context = {'info': data}
