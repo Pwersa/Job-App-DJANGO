@@ -197,7 +197,7 @@ def requirements(request, username):
 
 @login_required(login_url='/login_user')
 def requirements_satisfied(request, username_id):
-    if request.user.is_authenticated and request.user.account_type == "Applicant Level 1" or request.user.is_authenticated and request.user.account_type == "Applicant Level 3" or request.user.is_authenticated and request.user.account_type == "Employee":
+    if request.user.is_authenticated and request.user.account_type == "Applicant Level 1" or request.user.is_authenticated and request.user.account_type == "Applicant Level 2" or request.user.is_authenticated and request.user.account_type == "Applicant Level 3" or request.user.is_authenticated and request.user.account_type == "Employee":
         if request.method == "POST":
             update_philhealth = request.POST.get('philhealth')
             update_pagibig = request.POST.get('pagibig')
