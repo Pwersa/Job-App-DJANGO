@@ -75,3 +75,9 @@ class update_password(UserCreationForm):
         model = account_registration 
         fields = [ 'password1', 'password2']
         #fields = '__all__'
+
+class jobs_listed(UserCreationForm):
+    class Meta:
+        model = job_listing 
+        fields = ['jtitle']
+        #fields = '__all__'

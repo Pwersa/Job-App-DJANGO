@@ -79,6 +79,7 @@
         <div class="container mt-3 p-3">
             <h1 class=" p-4 mb-3 text-center" style="font-weight: bolder; background-color: #1f2833; color: #66fcf1;">Delete a Job</h1>
 
+          
             <form class="row g-3" style="color: #000;" method="POST" action="{% url 'delete_job' users.pk %}">
             {% csrf_token %}
                 <div>
@@ -95,6 +96,8 @@
                     </div>
                 </div>
             </form>
+
+         
         </div>   
     </body>
     {% endfor %}
