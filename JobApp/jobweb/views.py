@@ -13,7 +13,6 @@ from django.contrib.auth.decorators import login_required
 hr_account_login_email = []
 #login_authorization = []
 
-
 def login_user(request):
     if request.method == "POST":
         username = request.POST.get('username')
@@ -713,6 +712,7 @@ def applicant_level1(request, username):
         messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
         return redirect('home')
 
+@login_required(login_url='/login_user')
 def applicant_level_2_3_employee(request, username, verified_user):
     if request.user.verified_user == True and request.user.username == username and request.user.is_authenticated and request.user.account_type == "Applicant Level 2" or request.user.verified_user == True and request.user.username == username and request.user.is_authenticated and request.user.account_type == "Applicant Level 3" or request.user.verified_user == True and request.user.username == username and request.user.verified_user == True and request.user.is_authenticated and request.user.account_type == "Employee":
         info1 = account_registration.objects.filter(username=username)
@@ -728,6 +728,7 @@ def applicant_level_2_3_employee(request, username, verified_user):
         messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
         return redirect('home')
 
+@login_required(login_url='/login_user')
 def rejected_user(request, username):
     if request.user.username==username and request.user.is_authenticated and request.user.account_type == "Rejected":
         info1 = account_registration.objects.filter(username=username)
@@ -743,6 +744,7 @@ def rejected_user(request, username):
         messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
         return redirect('home')
 
+@login_required(login_url='/login_user')
 def retired_user(request, username):
     if request.user.username==username and request.user.is_authenticated and request.user.account_type == "Retired":
         info1 = account_registration.objects.filter(username=username)
@@ -758,6 +760,7 @@ def retired_user(request, username):
         messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
         return redirect('home')
 
+@login_required(login_url='/login_user')
 def terminated_user(request, username):
     if request.user.username==username and request.user.is_authenticated and request.user.account_type == "Terminate":
         info1 = account_registration.objects.filter(username=username)
@@ -773,6 +776,7 @@ def terminated_user(request, username):
         messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
         return redirect('home')
 
+@login_required(login_url='/login_user')
 def list_job(request,username, verified_user):
     if request.user.username==username and request.user.verified_user == True and request.user.username == username and request.user.is_authenticated and request.user.account_type == "HRManager":
         print('TEST 1')
@@ -796,6 +800,7 @@ def list_job(request,username, verified_user):
         messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
         return redirect('home')
 
+@login_required(login_url='/login_user')
 def delete_job(request, username, verified_user):
     if request.user.username==username and request.user.is_authenticated and request.user.account_type == "HRManager":
         if request.method == "POST":
@@ -847,6 +852,5 @@ def print_data_employee(request, username):
     zippedItems = zip(info1, info2, info3)
     context1 = {'info': zippedItems}
     return render(request, 'html_files/User-Profile1-Employee.html', context1)
+
 ################################### DEBUG ############################################
-
-
