@@ -146,7 +146,7 @@ def signup1(request, username, verified_user):
 
     else:
         hr_account_login_email.clear()
-        messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
 
 ########################### APPLICANT//EMPLOYEE ###########################
@@ -164,7 +164,7 @@ def user_profile(request, username, verified_user):
 
     else:
         hr_account_login_email.clear()
-        messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
 
 @login_required(login_url='/login_user')
@@ -180,7 +180,7 @@ def returntoprofile(request, username):
             
     else:
         hr_account_login_email.clear()
-        messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
 
 @login_required(login_url='/login_user')
@@ -199,7 +199,7 @@ def requirements(request, username, verified_user):
             
     else:
         hr_account_login_email.clear()
-        messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
 
 @login_required(login_url='/login_user')
@@ -229,7 +229,7 @@ def requirements_satisfied(request, username_id):
             
     else:
         hr_account_login_email.clear()
-        messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
 
 ########################### HR MANAGER ###########################
@@ -297,7 +297,7 @@ def delete_account(request, username, verified_user):
        
     else:
         hr_account_login_email.clear()
-        messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
 
 @login_required(login_url='/login_user')
@@ -371,7 +371,7 @@ def manage_account(request, username, verified_user):
 
     else:
         hr_account_login_email.clear()
-        messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
     
 @login_required(login_url='/login_user')
@@ -388,7 +388,7 @@ def sort_list(request):
             
     else:
         hr_account_login_email.clear()
-        messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
 
 @login_required(login_url='/login_user')
@@ -475,7 +475,7 @@ def set_interview(request, username_id, verified_user):
 
     else:
         hr_account_login_email.clear()
-        messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
 
 @login_required(login_url='/login_user')
@@ -539,7 +539,7 @@ def change_employment(request, username, verified_user):
             
     else:
         hr_account_login_email.clear()
-        messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
 
 @login_required(login_url='/login_user')
@@ -620,7 +620,7 @@ def applicant_hired_reject(request, username, verified_user):
             
     else:
         hr_account_login_email.clear()
-        messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
 
 ########################### GENERAL ###########################
@@ -674,7 +674,7 @@ def manage_joblisting(request, username, verified_user):
             
     else:
         hr_account_login_email.clear()
-        messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
 
 ################################### REDIRECTS ############################################
@@ -696,7 +696,7 @@ def hrdashboard(request, username, verified_user):
             
     else:
         hr_account_login_email.clear()
-        messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
 
 @login_required(login_url='/login_user')
@@ -708,7 +708,7 @@ def applicant_level1(request, username):
             
     else:
         hr_account_login_email.clear()
-        messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
 
 @login_required(login_url='/login_user')
@@ -724,7 +724,7 @@ def applicant_level_2_3_employee(request, username, verified_user):
 
     else:
         hr_account_login_email.clear()
-        messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
 
 @login_required(login_url='/login_user')
@@ -740,7 +740,7 @@ def rejected_user(request, username):
         
     else:
         hr_account_login_email.clear()
-        messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
 
 @login_required(login_url='/login_user')
@@ -756,7 +756,7 @@ def retired_user(request, username):
         
     else:
         hr_account_login_email.clear()
-        messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
 
 @login_required(login_url='/login_user')
@@ -772,7 +772,7 @@ def terminated_user(request, username):
         
     else:
         hr_account_login_email.clear()
-        messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
 
 @login_required(login_url='/login_user')
@@ -796,7 +796,7 @@ def list_job(request,username, verified_user):
 
     else:
         hr_account_login_email.clear()
-        messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
 
 @login_required(login_url='/login_user')
@@ -818,7 +818,7 @@ def delete_job(request, username, verified_user):
                 return redirect('manage_joblisting', username=username, verified_user=verified_user)
     else:
         hr_account_login_email.clear()
-        messages.warning(request, 'You have been logged out because of accessing unauthenticated page. Please log in again.')
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
 
 ################################### In progress ############################################
