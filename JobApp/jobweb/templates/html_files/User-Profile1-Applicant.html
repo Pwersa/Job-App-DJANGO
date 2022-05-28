@@ -46,7 +46,7 @@
                     {% if data.account_type == 'Rejected' %}
                     <ul class="list-group list-group-flush ">
                         <li class="list-group-item d-flex justify-content-center flex-wrap">
-                            <form method="POST" action="{% url 'delete_account' data.pk %}">
+                            <form method="POST" action="{% url 'delete_account' data.pk data.verified_user %}">
                                 {% csrf_token %}
                                   
                                 <button class="btn btn-outline-error" button="submit" style="color: red;" name="Hire">Delete Account</button>
@@ -58,7 +58,7 @@
                     {% elif data.account_type == 'Terminate' %}
                     <ul class="list-group list-group-flush ">
                         <li class="list-group-item d-flex justify-content-center flex-wrap">
-                            <form method="POST" action="{% url 'delete_account' data.pk %}">
+                            <form method="POST" action="{% url 'delete_account' data.pk data.verified_user %}">
                                 {% csrf_token %}
                                   
                                 <button class="btn btn-outline-error" button="submit" style="color: red;" name="Hire">Delete Account</button>
@@ -139,7 +139,7 @@
                             &nbsp;
                             <p class="text-secondary"> {{data.employment_status}}</p>
                             &nbsp; 
-                            <form method="POST" action="{% url 'set_interview' data.pk %}">
+                            <form method="POST" action="{% url 'set_interview' data.pk data.verified_user %}">
                                 {% csrf_token %}
                             
                                 <h6><input type="datetime-local" class="form-control"  id="interview_date" name="interview_date" >Set a date for interview</h6>
@@ -153,7 +153,7 @@
                     
                     <ul class="list-group list-group-flush ">
                         <li class="list-group-item d-flex justify-content-center flex-wrap">
-                            <form method="POST" action="{% url 'applicant_hired_reject' data.pk %}">
+                            <form method="POST" action="{% url 'applicant_hired_reject' data.pk data.verified_user %}">
                                 {% csrf_token %}
                               
                                 <button class="btn btn-outline-info" button="submit" style="color: black;" name="Hire" id="Hire" value="Hired">Hire</button>
@@ -395,24 +395,12 @@
                         </div>
                     </div>
                     <hr>
-                    
-                    {% if data.account_type == 'Rejected' %}
 
                     <div class="row" style="text-align: center;">
                         <div class="col-sm-12">
-                            <a class="btn btn-outline-info" style="width: 250px; color: #000000" >END OF INFORMATIONS</a>
+                            <a class="btn btn-outline-info" style="width: 250px; color: #000000" href="{% url 'print_data_applicant' data.pk %}">Print Applicant's Information</a>
                         </div>
                     </div>
-
-                    {% else %}
-
-                    <div class="row" style="text-align: center;">
-                        <div class="col-sm-12">
-                            <a class="btn btn-outline-info" style="width: 250px; color: #000000" href="#">Print Applicant's Information</a>
-                        </div>
-                    </div>
-
-                    {% endif %}
 
                 </div>
             </div>

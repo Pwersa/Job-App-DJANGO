@@ -103,7 +103,7 @@
                         {% if data.account_type == 'Applicant Level 2' or 'Applicant Level 3' %}
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">Requirements:</h6>
-                                <a href="{% url 'requirements' data.pk %}" style="color: #000000">Submit now</a>
+                                <a href="{% url 'requirements' data.pk data.verified_user %}" style="color: #000000">Submit now</a>
                             </li>
 
                         {% else %}
@@ -132,7 +132,7 @@
                     <div class="card-title" style="font-weight: bold">
                         Quick Account Settings:
                     </div>
-                    <a href="{% url 'change_password' data.pk %}" class="btn btn-outline-info" style="width: 170px; color: #000000; margin-bottom: 10px;">Change Password</a>
+                    <a href="{% url 'change_password' data.pk data.verified_user %}" class="btn btn-outline-info" style="width: 170px; color: #000000; margin-bottom: 10px;">Change Password</a>
                     <br>
                     <a href="{% url 'logout_user' %}" class="btn btn-outline-info" style="width: 90px; color: #000000">Log out</a>
 
@@ -373,7 +373,7 @@
 
                     <div class="row" style="text-align: center;">
                         <div class="col-sm-12">
-                            <a class="btn btn-outline-info" style="width: 250px; color: #000000" href="{% url 'signup1' data.pk %}">Finish my Account Registration</a>
+                            <a class="btn btn-outline-info" style="width: 250px; color: #000000" href="{% url 'signup1' data.pk data.verified_user %}">Finish my Account Registration</a>
                         </div>
                     </div>
 
@@ -381,7 +381,7 @@
 
                     <div class="row" style="text-align: center;">
                         <div class="col-sm-12">
-                            <a class="btn btn-outline-info" style="width: 210px; color: #000000" href="#">Print my Informations</a>
+                            <a class="btn btn-outline-info" style="width: 210px; color: #000000" href="{% url 'print_data' data.pk %}">Print my Informations</a>
                         </div>
                     </div>
 

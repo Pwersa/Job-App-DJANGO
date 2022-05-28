@@ -14,14 +14,6 @@
 
     <body class="row g-3", background="/static/pictures/bg.jpg" >
       <div class="fs-1 p-4 mb-2 fw-bold text-center" style="background-color: #1f2833; color: #66fcf1">Complete Your Information</div>
-     
-      {% if messages %}
-      <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %} style="text-align: center; color: red" >{{ message }}</li>
-        {% endfor %}
-      </ul>
-      {% endif %}
 
       <form method="POST" enctype="multipart/form-data" class="row g-4">
         {% csrf_token %}

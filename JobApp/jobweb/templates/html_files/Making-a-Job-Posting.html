@@ -14,8 +14,17 @@
     {% for users in user %}
     <body background="/static/pictures/bg.jpg">
         <div class="container mt-3">
+
+            {% if messages %}
+            <div class="alert alert-primary alert-dismissible fade show" role="alert" style="margin-left: 300px; margin-right: 300px; text-align: center; font-size: 22px;">
+            {% for message in messages %}
+                <strong{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</strong>
+            {% endfor %}
+            </div>
+            {% endif %}
+
             <h1 class=" p-4 mb-3 text-center" style="font-weight: bolder; background-color: #1f2833; color: #66fcf1;">Make a Job</h1>
-            <form class="row g-3" style="color: #000;" method="POST" action="{% url 'list_job' users.pk %}">
+            <form class="row g-3" style="color: #000;" method="POST" action="{% url 'list_job' users.pk users.verified_user %}">
             {% csrf_token %}
 
                 <div class="col-md-12">
@@ -80,26 +89,16 @@
             <h1 class=" p-4 mb-3 text-center" style="font-weight: bolder; background-color: #1f2833; color: #66fcf1;">Delete a Job</h1>
 
           
-            <form class="row g-3" style="color: #000;" method="POST" action="{% url 'delete_job' users.pk %}">
+            <form class="row g-3" style="color: #000;" method="POST" action="{% url 'delete_job' users.pk users.verified_user %}">
             {% csrf_token %}
                 <div>
                     <div class="container">
-
-                        &nbsp;
-                        {% if messages %}
-                        <div class="alert alert-primary alert-dismissible fade show" role="alert" style="margin-left: 300px; margin-right: 300px; text-align: center; font-size: 22px;">
-                        {% for message in messages %}
-                            <strong{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</strong>
-                        {% endfor %}
-                        </div>
-                        {% endif %}
-
-                        <label for="deleteacc" class="form-label" >Enter Name of Job To Be Deleted</label>
+                    
+                        <label for="deleteacc" class="form-label" style="font-weight: bold;">Enter Name of Job To Be Deleted (Case Sensitive):</label>
+                        
                         <input class="form-control" type="text" placeholder="Job" id="deleteacc" name="deletejob" required>
+                      
                         &nbsp;
-
-                        
-                        
 
                     </div>
                     <div class="col-md-12" style="text-align: center;">
@@ -109,7 +108,15 @@
             </form>
 
          
-        </div>   
+        </div>
+        <script>
+            $('#myAlert').ready(function() {
+            setTimeout(function() {
+                $(".alert").alert('close');
+                }, 5000);
+        });
+
+        </script>
     </body>
     {% endfor %}
 </html>
