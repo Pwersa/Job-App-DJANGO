@@ -43,7 +43,6 @@ urlpatterns = [
     path('applicant_level1/<str:username>/not_verified', views.applicant_level1, name='applicant_level1'),
     path('applicant_level_2_3_employee/<str:username>/verified_user?=<str:verified_user>', views.applicant_level_2_3_employee, name='applicant_level_2_3_employee'),
     
-
 ######################## GLOBAL ###########################
 
     path('print_data/<str:username>/', views.print_data, name='print_data'),

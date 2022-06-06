@@ -1,12 +1,10 @@
-from email import message
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import *
 from .models import *
-from django.views.decorators.cache import cache_control
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 
 ######################## WEBSITE ###########################
 
@@ -414,6 +412,13 @@ def set_interview(request, username_id, verified_user):
                     update_date_time.date_time = get_date_time
                     update_date_time.save()
 
+                    send_mail(
+                        'Interview', #SUBJECT
+                        'Your interview date was updated.', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username_id], #TO
+                    )
+
                     messages.success(request, 'Interview date was added.')
                     return redirect('hrdashboard', username=hr_account_login_email[0], verified_user=True)
 
@@ -422,6 +427,13 @@ def set_interview(request, username_id, verified_user):
                     update_date_time.date_time = get_date_time
                     update_date_time.save()
 
+                    send_mail(
+                        'Interview', #SUBJECT
+                        'Your interview date was updated.', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username_id], #TO
+                    )
+
                     messages.success(request, 'Interview date was added.')
                     return redirect('hrdashboard', username=hr_account_login_email[0], verified_user=True)
 
@@ -429,6 +441,13 @@ def set_interview(request, username_id, verified_user):
                     update_date_time = interview.objects.get(username=username_id)
                     update_date_time.date_time = get_date_time
                     update_date_time.save()
+
+                    send_mail(
+                        'Interview', #SUBJECT
+                        'Your interview date was updated.', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username_id], #TO
+                    )
 
                     messages.success(request, 'Interview date was added.')
                     return redirect('hrdashboard', username=hr_account_login_email[0], verified_user=True)
