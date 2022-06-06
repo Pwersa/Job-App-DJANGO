@@ -576,6 +576,14 @@ def applicant_hired_reject(request, username, verified_user):
                 return redirect('manage_account', username=username, verified_user=verified_user)
 
             elif check_type == 'Applicant Level 3':
+
+                send_mail(
+                        'HIRED!!!', #SUBJECT
+                        'You are now Hired in the Company', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
+
                 update_job = account_registration.objects.filter(username=username).values_list('applyingfor', flat=True).first()
                 account_registration.objects.filter(username=username).update(job=update_job)
                 account_registration.objects.filter(username=username).update(applyingfor='')
@@ -590,48 +598,112 @@ def applicant_hired_reject(request, username, verified_user):
             data2 = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
             print(data2)
             if data2 == 'Applicant Level 1':
+
+                send_mail(
+                        'Application Rejected', #SUBJECT
+                        'Thank you for applying at our website.', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
+
                 account_registration.objects.filter(username=username).update(account_type="Rejected")
                 account_registration.objects.filter(username=username).update(applyingfor="")
                 messages.success(request, 'Applicant succesfully Rejected.')
                 return redirect('hrdashboard', username=hr_account_login_email[0], verified_user=True)
 
             if data2 == 'Applicant Level 2':
+
+                send_mail(
+                        'Application Rejected', #SUBJECT
+                        'Thank you for applying at our website.', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
+
                 account_registration.objects.filter(username=username).update(account_type="Rejected")
                 account_registration.objects.filter(username=username).update(applyingfor="")
                 messages.success(request, 'Applicant succesfully Rejected.')
                 return redirect('hrdashboard', username=hr_account_login_email[0], verified_user=True)
 
             if data2 == 'Applicant Level 3':
+
+                send_mail(
+                        'Application Rejected', #SUBJECT
+                        'Thank you for applying at our website.', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
+
                 account_registration.objects.filter(username=username).update(account_type="Rejected")
                 account_registration.objects.filter(username=username).update(applyingfor="")
                 messages.success(request, 'Applicant succesfully Rejected.')
                 return redirect('hrdashboard', username=hr_account_login_email[0], verified_user=verified_user)
             
             if data2 == 'Employee':
+
+                send_mail(
+                        'Application Rejected', #SUBJECT
+                        'Thank you for applying at our website.', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
+
                 account_registration.objects.filter(username=username).update(account_type="Rejected")
                 account_registration.objects.filter(username=username).update(applyingfor="")
                 messages.success(request, 'Applicant succesfully Rejected.')
                 return redirect('hrdashboard', username=hr_account_login_email[0], verified_user=verified_user)
 
             if data2 == 'Rejected':
+
+                send_mail(
+                        'Application Rejected', #SUBJECT
+                        'Thank you for applying at our website.', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
+
                 account_registration.objects.filter(username=username).update(account_type="Rejected")
                 account_registration.objects.filter(username=username).update(applyingfor="")
                 messages.success(request, 'Applicant succesfully Rejected.')
                 return redirect('hrdashboard', username=hr_account_login_email[0], verified_user=True)
 
             if data2 == 'Retired':
+
+                send_mail(
+                        'Application Rejected', #SUBJECT
+                        'Thank you for applying at our website.', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
+
                 account_registration.objects.filter(username=username).update(account_type="Rejected")
                 account_registration.objects.filter(username=username).update(applyingfor="")
                 messages.success(request, 'Applicant succesfully Rejected.')
                 return redirect('hrdashboard', username=hr_account_login_email[0], verified_user=True)
 
             if data2 == 'Terminate':
+
+                send_mail(
+                        'Application Rejected', #SUBJECT
+                        'Thank you for applying at our website.', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
+
                 account_registration.objects.filter(username=username).update(account_type="Rejected")
                 account_registration.objects.filter(username=username).update(applyingfor="")
                 messages.success(request, 'Applicant succesfully Rejected.')
                 return redirect('hrdashboard', username=hr_account_login_email[0], verified_user=True)
 
             else:
+
+                send_mail(
+                        'Application Rejected', #SUBJECT
+                        'Thank you for applying at our website.', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
+                    
                 account_registration.objects.filter(username=username).update(account_type="Rejected")
                 account_registration.objects.filter(username=username).update(applyingfor="")
                 messages.success(request, 'Applicant succesfully Rejected.')
