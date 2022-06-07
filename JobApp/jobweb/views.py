@@ -32,42 +32,42 @@ def login_user(request):
         if user is not None:
             if data1 == 'Applicant Level 1':
                 login(request, user)
-                messages.info(request, 'Log in successful')
+                messages.info(request, 'Log in successful.')
                 return redirect('applicant_level1', username=username)
             
             elif data1 == 'Applicant Level 2':
                 login(request, user)
-                messages.info(request, 'Log in successful')
+                messages.info(request, 'Log in successful.')
                 return redirect('applicant_level_2_3_employee', username=username, verified_user=data2)
                 
             elif data1 == 'Applicant Level 3':
                 login(request, user)
-                messages.info(request, 'Log in successful')
+                messages.info(request, 'Log in successful.')
                 return redirect('applicant_level_2_3_employee', username=username, verified_user=data2)
 
             elif data1 == 'Employee':
                 login(request, user)
-                messages.info(request, 'Log in successful')
+                messages.info(request, 'Log in successful.')
                 return redirect('applicant_level_2_3_employee', username=username, verified_user=data2)
 
             elif data1 == 'HRManager':
                 login(request, user)
-                messages.info(request, 'Log in successful')
-                return redirect('hrdashboard', username=request.user.username, verified_user=data2)
+                messages.info(request, 'Log in successful.')
+                return redirect('hrdashboard', username=username, verified_user=data2)
             
             elif data1 == 'Rejected':
                 login(request, user)
-                messages.info(request, 'Log in successful')
+                messages.info(request, 'Log in successful.')
                 return redirect('rejected_user', username=username)
        
             elif data1 == 'Retired':
                 login(request, user)
-                messages.info(request, 'Log in successful')
+                messages.info(request, 'Log in successful.')
                 return redirect('retired_user', username=username)
 
             elif data1 == 'Terminate':
                 login(request, user)
-                messages.info(request, 'Log in successful')
+                messages.info(request, 'Log in successful.')
                 return redirect('terminated_user', username=username)
             
             else:
@@ -119,7 +119,7 @@ def signup(request):
     return render(request, 'html_files/Registration-Form.html', context)
 
 def signup1(request, username, verified_user):
-    if request.user.username == username and request.user.is_authenticated and request.user.account_type == "Applicant Level 1" and request.user.verified_user == False:
+    if request.user.is_authenticated and request.user.account_type == "Applicant Level 1" and request.user.verified_user == False:
         profile = other_info.objects.get(username=username)
         form1 = second_registration(instance=profile)
 
@@ -154,7 +154,7 @@ def signup1(request, username, verified_user):
 
 @login_required(login_url='/login_user')
 def user_profile(request, username, verified_user):
-    if request.user.username == username and request.user.verified_user == False and request.user.is_authenticated and request.user.account_type == "Applicant Level 1" or request.user.username == username and request.user.is_authenticated and request.user.account_type == "Applicant Level 3" or request.user.username == username and request.user.is_authenticated and request.user.account_type == "Employee":
+    if request.user.verified_user == False and request.user.is_authenticated and request.user.account_type == "Applicant Level 1" or request.user.is_authenticated and request.user.account_type == "Applicant Level 3" or request.user.is_authenticated and request.user.account_type == "Employee":
         info1 = account_registration.objects.filter(username=username)
         info2 = other_info.objects.filter(username_id=username)
         info3 = interview.objects.filter(username_id=username)
@@ -169,7 +169,7 @@ def user_profile(request, username, verified_user):
 
 @login_required(login_url='/login_user')
 def returntoprofile(request, username):
-    if request.user.username == username and request.user.is_authenticated and request.user.account_type == "Applicant Level 1" or request.user.username == username and request.user.is_authenticated and request.user.account_type == "Applicant Level 3" or request.user.username == username and request.user.is_authenticated and request.user.account_type == "Employee":
+    if request.user.is_authenticated and request.user.account_type == "Applicant Level 1" or request.user.is_authenticated and request.user.account_type == "Applicant Level 3" or request.user.is_authenticated and request.user.account_type == "Employee":
         info1 = account_registration.objects.filter(username=username)
         info2 = other_info.objects.filter(username_id=username)
         info3 = interview.objects.filter(username_id=username)
@@ -229,7 +229,7 @@ def terminated_user(request, username):
 
 @login_required(login_url='/login_user')
 def requirements(request, username, verified_user):
-    if request.user.username == username and request.user.verified_user == False and request.user.is_authenticated and request.user.account_type == "Applicant Level 1" or request.user.username == username and request.user.is_authenticated and request.user.account_type == "Applicant Level 2" or request.user.username == username and request.user.is_authenticated and request.user.account_type == "Applicant Level 3" or request.user.username == username and request.user.is_authenticated and request.user.account_type == "Employee":
+    if request.user.verified_user == False and request.user.is_authenticated and request.user.account_type == "Applicant Level 1" or request.user.is_authenticated and request.user.account_type == "Applicant Level 2" or request.user.is_authenticated and request.user.account_type == "Applicant Level 3" or request.user.is_authenticated and request.user.account_type == "Employee":
         data1 = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
 
         if data1 == 'Applicant Level 1':
@@ -274,7 +274,7 @@ def requirements_satisfied(request, username_id):
 
 @login_required(login_url='/login_user')
 def applicant_level1(request, username):
-    if request.user.is_authenticated and request.user.account_type == "Applicant Level 1" and request.user.username == username and request.user.verified_user == False:
+    if request.user.is_authenticated and request.user.account_type == "Applicant Level 1" and request.user.verified_user == False:
         data = account_registration.objects.filter(username=username)
         context = {'info': data}
         return render(request, 'html_files/Finish-Registration.html', context)
@@ -285,7 +285,7 @@ def applicant_level1(request, username):
 
 @login_required(login_url='/login_user')
 def applicant_level_2_3_employee(request, username, verified_user):
-    if request.user.verified_user == True and request.user.username == username and request.user.is_authenticated and request.user.account_type == "Applicant Level 2" or request.user.verified_user == True and request.user.username == username and request.user.is_authenticated and request.user.account_type == "Applicant Level 3" or request.user.verified_user == True and request.user.username == username and request.user.verified_user == True and request.user.is_authenticated and request.user.account_type == "Employee":
+    if request.user.verified_user == True and request.user.is_authenticated and request.user.account_type == "Applicant Level 2" or request.user.verified_user == True and request.user.is_authenticated and request.user.account_type == "Applicant Level 3" or request.user.verified_user == True and request.user.verified_user == True and request.user.is_authenticated and request.user.account_type == "Employee":
         info1 = account_registration.objects.filter(username=username)
         info2 = other_info.objects.filter(username=username)
         info3 = interview.objects.filter(username=username)
@@ -304,7 +304,7 @@ def applicant_level_2_3_employee(request, username, verified_user):
 
 @login_required(login_url='/login_user')
 def hrdashboard(request, username, verified_user):
-    if request.user.username == username and request.user.verified_user == True and request.user.is_authenticated and request.user.account_type == "HRManager":
+    if request.user.verified_user == True and request.user.is_authenticated and request.user.account_type == "HRManager":
         account = account_registration.objects.all()
         user_interview = interview.objects.values('date_time')
         hr_account = account_registration.objects.filter(username=request.user.username)
@@ -318,7 +318,7 @@ def hrdashboard(request, username, verified_user):
 
 @login_required(login_url='/login_user')
 def delete_account(request, username, verified_user):
-    if request.user.username == username and request.user.is_authenticated and request.user.account_type == "HRManager":
+    if request.user.is_authenticated and request.user.account_type == "HRManager":
         data2 = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
 
         if data2 == 'Applicant Level 1':
@@ -439,7 +439,7 @@ def delete_account(request, username, verified_user):
 
 @login_required(login_url='/login_user')
 def manage_account(request, username, verified_user):
-    if request.user.username == username and request.user.is_authenticated and request.user.account_type == "HRManager":
+    if request.user.is_authenticated and request.user.account_type == "HRManager":
         user_account = account_registration.objects.filter(username=username)
         data1 = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
 
@@ -528,7 +528,7 @@ def sort_list(request):
 
 @login_required(login_url='/login_user')
 def set_interview(request, username_id, verified_user):
-    if request.user.username == username_id and request.user.is_authenticated and request.user.account_type == "HRManager":
+    if request.user.is_authenticated and request.user.account_type == "HRManager":
         get_date_time = request.POST.get('interview_date')
         data2 = account_registration.objects.filter(username=username_id).values_list('account_type', flat=True).first()
         
@@ -603,7 +603,7 @@ def set_interview(request, username_id, verified_user):
 
 @login_required(login_url='/login_user')
 def change_employment(request, username, verified_user):
-    if request.user.username == username and request.user.is_authenticated and request.user.account_type == "HRManager":
+    if request.user.is_authenticated and request.user.account_type == "HRManager":
 
         if request.method == "POST" and "Full Time" in request.POST:
             account_registration.objects.filter(username=username).update(employment_status="Full Time Worker")
@@ -715,7 +715,7 @@ def change_employment(request, username, verified_user):
 
 @login_required(login_url='/login_user')
 def applicant_hired_reject(request, username, verified_user):
-    if request.user.username == username and request.user.is_authenticated and request.user.account_type == "HRManager":
+    if request.user.is_authenticated and request.user.account_type == "HRManager":
         check_type = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
 
         if request.method == "POST" and "Hire" in request.POST:
@@ -815,7 +815,7 @@ def manage_joblisting(request, username, verified_user):
 
 @login_required(login_url='/login_user')
 def list_job(request, username, verified_user):
-    if request.user.username == username and request.user.verified_user == True and request.user.username == username and request.user.is_authenticated and request.user.account_type == "HRManager":
+    if request.user.verified_user == True and request.user.is_authenticated and request.user.account_type == "HRManager":
         print('TEST 1')
         if request.method == "POST":
             print('TEST 2')
@@ -838,7 +838,7 @@ def list_job(request, username, verified_user):
 
 @login_required(login_url='/login_user')
 def delete_job(request, username, verified_user):
-    if request.user.username == username and request.user.is_authenticated and request.user.account_type == "HRManager":
+    if request.user.is_authenticated and request.user.account_type == "HRManager":
         if request.method == "POST":
 
             job_name = request.POST['deletejob']
@@ -858,6 +858,7 @@ def delete_job(request, username, verified_user):
 
 
 ###################################################### GENERAL ######################################################
+
 
 @login_required(login_url='/login_user')
 def change_password(request, username, verified_user):
