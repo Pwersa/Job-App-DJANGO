@@ -281,6 +281,14 @@ def delete_account(request, username, verified_user):
             interview.objects.filter(username=username).delete()
             other_info.objects.filter(username=username).delete()
             messages.success(request, 'Account succesfully Deleted.')
+
+            send_mail(
+                        'Account Deleted.', #SUBJECT
+                        'We would like you inform you that your account has been deleted from our website Job Web App, thank you for understanding', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
+
             return redirect('hrdashboard', username=request.user.username, verified_user=True)
 
         elif data2 == 'Applicant Level 2':
@@ -288,6 +296,14 @@ def delete_account(request, username, verified_user):
             interview.objects.filter(username=username).delete()
             other_info.objects.filter(username=username).delete()
             messages.success(request, 'Account succesfully Deleted.')
+
+            send_mail(
+                        'Account Deleted.', #SUBJECT
+                        'We would like you inform you that your account has been deleted from our website Job Web App, thank you for understanding', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
+
             return redirect('hrdashboard', username=request.user.username, verified_user=True)
 
         elif data2 == 'Applicant Level 3':
@@ -295,6 +311,14 @@ def delete_account(request, username, verified_user):
             interview.objects.filter(username=username).delete()
             other_info.objects.filter(username=username).delete()
             messages.success(request, 'Account succesfully Deleted.')
+
+            send_mail(
+                        'Account Deleted.', #SUBJECT
+                        'We would like you inform you that your account has been deleted from our website Job Web App, thank you for understanding', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
+
             return redirect('hrdashboard', username=request.user.username, verified_user=True)
 
         elif data2 == 'Employee':
@@ -302,6 +326,14 @@ def delete_account(request, username, verified_user):
             interview.objects.filter(username=username).delete()
             other_info.objects.filter(username=username).delete()
             messages.success(request, 'Account succesfully Deleted.')
+
+            send_mail(
+                        'Account Deleted.', #SUBJECT
+                        'We would like you inform you that your account has been deleted from our website Job Web App, thank you for understanding', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
+
             return redirect('hrdashboard', username=request.user.username, verified_user=True)
 
         elif data2 == 'Terminate':
@@ -309,6 +341,14 @@ def delete_account(request, username, verified_user):
             interview.objects.filter(username=username).delete()
             other_info.objects.filter(username=username).delete()
             messages.success(request, 'Account succesfully Deleted.')
+
+            send_mail(
+                        'Account Deleted.', #SUBJECT
+                        'We would like you inform you that your account has been deleted from our website Job Web App, thank you for understanding', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
+
             return redirect('hrdashboard', username=request.user.username, verified_user=True)
 
         elif data2 == 'Retired':
@@ -316,6 +356,14 @@ def delete_account(request, username, verified_user):
             interview.objects.filter(username=username).delete()
             other_info.objects.filter(username=username).delete()
             messages.success(request, 'Account succesfully Deleted.')
+
+            send_mail(
+                        'Account Deleted.', #SUBJECT
+                        'We would like you inform you that your account has been deleted from our website Job Web App, thank you for understanding', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
+
             return redirect('hrdashboard', username=request.user.username, verified_user=True)
 
         elif data2 == 'Rejected':
@@ -323,6 +371,14 @@ def delete_account(request, username, verified_user):
             interview.objects.filter(username=username).delete()
             other_info.objects.filter(username=username).delete()
             messages.success(request, 'Account succesfully Deleted.')
+
+            send_mail(
+                        'Account Deleted.', #SUBJECT
+                        'We would like you inform you that your account has been deleted from our website Job Web App, thank you for understanding', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
+                    
             return redirect('hrdashboard', username=request.user.username, verified_user=True)
 
         else:
