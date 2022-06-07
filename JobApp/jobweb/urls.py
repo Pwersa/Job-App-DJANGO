@@ -21,6 +21,8 @@ urlpatterns = [
     path('returntoprofile/<str:username>', views.returntoprofile, name='returntoprofile'),
     path('requirements/<str:username>/verified_user?=<str:verified_user>', views.requirements, name='requirements'),
     path('requirements_satisfied/<str:username_id>', views.requirements_satisfied, name='requirements_satisfied'),
+    path('applicant_level1/<str:username>/not_verified', views.applicant_level1, name='applicant_level1'),
+    path('applicant_level_2_3_employee/<str:username>/verified_user?=<str:verified_user>', views.applicant_level_2_3_employee, name='applicant_level_2_3_employee'),
     path('rejected_user/<str:username>', views.rejected_user, name='rejected_user'),
     path('retired_user/<str:username>', views.retired_user, name='retired_user'),
     path('terminated_user/<str:username>', views.terminated_user, name='terminated_user'),
@@ -37,11 +39,6 @@ urlpatterns = [
     path('manage_joblisting/<str:username>/authorized_account?=<str:verified_user>/create+or+delete+job+listed', views.manage_joblisting, name='manage_joblisting'),
     path('list_job/<str:username>/authorized_account?=<str:verified_user>', views.list_job, name='list_job'),
     path('delete_job/<str:username>/authorized_account?=<str:verified_user>', views.delete_job, name='delete_job'),
-
-######################## REDIRECTS ###########################
-
-    path('applicant_level1/<str:username>/not_verified', views.applicant_level1, name='applicant_level1'),
-    path('applicant_level_2_3_employee/<str:username>/verified_user?=<str:verified_user>', views.applicant_level_2_3_employee, name='applicant_level_2_3_employee'),
     
 ######################## GLOBAL ###########################
 
