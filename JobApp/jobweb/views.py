@@ -183,6 +183,51 @@ def returntoprofile(request, username):
         return redirect('logout_user')
 
 @login_required(login_url='/login_user')
+def rejected_user(request, username):
+    if request.user.username==username and request.user.is_authenticated and request.user.account_type == "Rejected":
+        info1 = account_registration.objects.filter(username=username)
+        info2 = other_info.objects.filter(username=username)
+        info3 = interview.objects.filter(username=username)
+
+        zippedItems = zip(info1, info2, info3)
+        context1 = {'info': zippedItems}
+        return render(request, 'html_files/User-Profile1.html', context1)
+        
+    else:
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
+        return redirect('logout_user')
+
+@login_required(login_url='/login_user')
+def retired_user(request, username):
+    if request.user.username==username and request.user.is_authenticated and request.user.account_type == "Retired":
+        info1 = account_registration.objects.filter(username=username)
+        info2 = other_info.objects.filter(username=username)
+        info3 = interview.objects.filter(username=username)
+
+        zippedItems = zip(info1, info2, info3)
+        context1 = {'info': zippedItems}
+        return render(request, 'html_files/User-Profile1.html', context1)
+        
+    else:
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
+        return redirect('logout_user')
+
+@login_required(login_url='/login_user')
+def terminated_user(request, username):
+    if request.user.username==username and request.user.is_authenticated and request.user.account_type == "Terminate":
+        info1 = account_registration.objects.filter(username=username)
+        info2 = other_info.objects.filter(username=username)
+        info3 = interview.objects.filter(username=username)
+
+        zippedItems = zip(info1, info2, info3)
+        context1 = {'info': zippedItems}
+        return render(request, 'html_files/User-Profile1.html', context1)
+        
+    else:
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
+        return redirect('logout_user')
+
+@login_required(login_url='/login_user')
 def requirements(request, username, verified_user):
     if request.user.username == username and request.user.verified_user == False and request.user.is_authenticated and request.user.account_type == "Applicant Level 1" or request.user.username == username and request.user.is_authenticated and request.user.account_type == "Applicant Level 2" or request.user.username == username and request.user.is_authenticated and request.user.account_type == "Applicant Level 3" or request.user.username == username and request.user.is_authenticated and request.user.account_type == "Employee":
         data1 = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
@@ -378,7 +423,7 @@ def delete_account(request, username, verified_user):
                         'appjobweb@gmail.com', #FROM
                         [username], #TO
                     )
-                    
+
             return redirect('hrdashboard', username=request.user.username, verified_user=True)
 
         else:
@@ -544,38 +589,6 @@ def set_interview(request, username_id, verified_user):
                     messages.success(request, 'Interview date was added.')
                     return redirect('hrdashboard', username=request.user.username, verified_user=True)
 
-                elif data2 == 'Employee':
-                    update_date_time = interview.objects.get(username=username_id)
-                    update_date_time.date_time = get_date_time
-                    update_date_time.save()
-
-                    messages.success(request, 'Interview date was added.')
-                    return redirect('hrdashboard', username=request.user.username, verified_user=True)
-
-                elif data2 == 'Terminate':
-                    update_date_time = interview.objects.get(username=username_id)
-                    update_date_time.date_time = get_date_time
-                    update_date_time.save()
-
-                    messages.success(request, 'Interview date was added.')
-                    return redirect('hrdashboard', username=request.user.username, verified_user=True)
-
-                elif data2 == 'Retired':
-                    update_date_time = interview.objects.get(username=username_id)
-                    update_date_time.date_time = get_date_time
-                    update_date_time.save()
-
-                    messages.success(request, 'Interview date was added.')
-                    return redirect('hrdashboard', username=request.user.username, verified_user=True)
-
-                elif data2 == 'Rejected':
-                    update_date_time = interview.objects.get(username=username_id)
-                    update_date_time.date_time = get_date_time
-                    update_date_time.save()
-
-                    messages.success(request, 'Interview date was added.')
-                    return redirect('hrdashboard', username=request.user.username, verified_user=True)
-
                 else:
                     update_date_time = interview.objects.get(username=username_id)
                     update_date_time.date_time = get_date_time
@@ -596,6 +609,13 @@ def change_employment(request, username, verified_user):
             account_registration.objects.filter(username=username).update(employment_status="Full Time Worker")
             messages.success(request, 'Employment was updated on account: ' + username)
 
+            send_mail(
+                        'Employment Updated', #SUBJECT
+                        'Your employment was updated successfully to FULL TIME', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
+
             return redirect('hrdashboard', username=request.user.username, verified_user=True)
 
 
@@ -603,11 +623,25 @@ def change_employment(request, username, verified_user):
             account_registration.objects.filter(username=username).update(employment_status="Part Time Worker")
             messages.success(request, 'Employment was updated on account: ' + username)
 
+            send_mail(
+                        'Employment Updated', #SUBJECT
+                        'Your employment was updated successfully to PART TIME', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
+
             return redirect('hrdashboard', username=request.user.username, verified_user=True)
 
         elif request.method == "POST" and "On Leave" in request.POST:
             account_registration.objects.filter(username=username).update(employment_status="On Vacation")
             messages.success(request, 'Employment was updated on account: ' + username)
+
+            send_mail(
+                        'Employment Updated', #SUBJECT
+                        'Your employment was updated successfully to ON LEAVE', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
 
             return redirect('hrdashboard', username=request.user.username, verified_user=True)
 
@@ -615,12 +649,27 @@ def change_employment(request, username, verified_user):
             account_registration.objects.filter(username=username).update(employment_status="Resigned")
             messages.success(request, 'Employment was updated on account: ' + username)
 
+            send_mail(
+                        'Employment Updated', #SUBJECT
+                        'Your employment was updated successfully to RESIGNED', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
+
             return redirect('hrdashboard', username=request.user.username, verified_user=True)
 
         elif request.method == "POST" and "Retired" in request.POST:
             account_registration.objects.filter(username=username).update(employment_status="Retired")
             account_registration.objects.filter(username=username).update(account_type="Retired")
             account_registration.objects.filter(username=username).update(applyingfor="Retired")
+
+            send_mail(
+                        'Employment Updated', #SUBJECT
+                        'Your employment was updated successfully to RETIRED', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
+
 
             messages.success(request, 'Employment was updated on account: ' + username)
 
@@ -631,6 +680,13 @@ def change_employment(request, username, verified_user):
             account_registration.objects.filter(username=username).update(account_type="Terminate")
             account_registration.objects.filter(username=username).update(applyingfor="Terminate")
 
+            send_mail(
+                        'Employment Updated', #SUBJECT
+                        'Your account was terminated.', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
+
             messages.success(request, 'Employment was Terminated.' + username)
 
             return redirect('hrdashboard', username=request.user.username, verified_user=True)
@@ -640,12 +696,17 @@ def change_employment(request, username, verified_user):
             account_registration.objects.filter(username=username).update(account_type="HRManager")
             account_registration.objects.filter(username=username).update(applyingfor="HRManager")
 
-            messages.success(request, 'Employment Account was Promoted.' + username)
+            send_mail(
+                        'Employment Updated', #SUBJECT
+                        'You have been promoted to be a HR Manager in the web app', #MESSAGE
+                        'appjobweb@gmail.com', #FROM
+                        [username], #TO
+                    )
 
+            messages.success(request, 'Employment Account was Promoted.' + username)
             return redirect('hrdashboard', username=request.user.username, verified_user=True)
 
         else:
-
             return redirect('change_employment')
             
     else:
@@ -737,51 +798,6 @@ def applicant_hired_reject(request, username, verified_user):
                 messages.success(request, 'Applicant succesfully Rejected.')
                 return redirect('hrdashboard', username=request.user.username, verified_user=verified_user)
             
-    else:
-        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
-        return redirect('logout_user')
-
-@login_required(login_url='/login_user')
-def rejected_user(request, username):
-    if request.user.username==username and request.user.is_authenticated and request.user.account_type == "Rejected":
-        info1 = account_registration.objects.filter(username=username)
-        info2 = other_info.objects.filter(username=username)
-        info3 = interview.objects.filter(username=username)
-
-        zippedItems = zip(info1, info2, info3)
-        context1 = {'info': zippedItems}
-        return render(request, 'html_files/User-Profile1.html', context1)
-        
-    else:
-        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
-        return redirect('logout_user')
-
-@login_required(login_url='/login_user')
-def retired_user(request, username):
-    if request.user.username==username and request.user.is_authenticated and request.user.account_type == "Retired":
-        info1 = account_registration.objects.filter(username=username)
-        info2 = other_info.objects.filter(username=username)
-        info3 = interview.objects.filter(username=username)
-
-        zippedItems = zip(info1, info2, info3)
-        context1 = {'info': zippedItems}
-        return render(request, 'html_files/User-Profile1.html', context1)
-        
-    else:
-        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
-        return redirect('logout_user')
-
-@login_required(login_url='/login_user')
-def terminated_user(request, username):
-    if request.user.username==username and request.user.is_authenticated and request.user.account_type == "Terminate":
-        info1 = account_registration.objects.filter(username=username)
-        info2 = other_info.objects.filter(username=username)
-        info3 = interview.objects.filter(username=username)
-
-        zippedItems = zip(info1, info2, info3)
-        context1 = {'info': zippedItems}
-        return render(request, 'html_files/User-Profile1.html', context1)
-        
     else:
         messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
