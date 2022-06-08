@@ -721,6 +721,7 @@ def applicant_hired_reject(request, username, verified_user):
         if request.method == "POST" and "Hire" in request.POST:
             if check_type == 'Applicant Level 1':
                 messages.error(request, 'Applicant not fully registered.')
+                
                 return redirect('manage_account', username=username, verified_user=verified_user)
 
             elif check_type == 'Applicant Level 2':
@@ -933,5 +934,16 @@ def print_data_employee(request, username):
     zippedItems = zip(info1, info2, info3)
     context1 = {'info': zippedItems}
     return render(request, 'html_files/User-Profile1-Employee.html', context1)
+
+def email_notify(request, username):
+    info1 = account_registration.objects.filter(username=username)
+    info2 = other_info.objects.filter(username_id=username)
+    info3 = interview.objects.filter(username_id=username)
+
+    zippedItems = zip(info1, info2, info3)
+    context1 = {'info': zippedItems}
+    return render(request, 'html_files/User-Profile1-Applicant.html', context1)
+
+
 
 ################################### DEBUG ############################################
