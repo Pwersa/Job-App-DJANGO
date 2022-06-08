@@ -936,6 +936,13 @@ def print_data_employee(request, username):
     return render(request, 'html_files/User-Profile1-Employee.html', context1)
 
 def email_notify(request, username):
+    send_mail(
+            'Finish account now', #SUBJECT
+            'We would like you inform you that we are now hiring you, but your account is not fully registered or did not pas requirements yet, please work up to Level 3 in order to Hire.', #MESSAGE
+            'appjobweb@gmail.com', #FROM
+            [username], #TO
+        )
+    
     info1 = account_registration.objects.filter(username=username)
     info2 = other_info.objects.filter(username_id=username)
     info3 = interview.objects.filter(username_id=username)
@@ -943,7 +950,6 @@ def email_notify(request, username):
     zippedItems = zip(info1, info2, info3)
     context1 = {'info': zippedItems}
     return render(request, 'html_files/User-Profile1-Applicant.html', context1)
-
 
 
 ################################### DEBUG ############################################
