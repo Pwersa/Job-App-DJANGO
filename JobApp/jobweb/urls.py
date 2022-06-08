@@ -39,6 +39,7 @@ urlpatterns = [
     path('manage_joblisting/<str:username>/authorized_account?=<str:verified_user>/create+or+delete+job+listed', views.manage_joblisting, name='manage_joblisting'),
     path('list_job/<str:username>/authorized_account?=<str:verified_user>', views.list_job, name='list_job'),
     path('delete_job/<str:username>/authorized_account?=<str:verified_user>', views.delete_job, name='delete_job'),
+    path('email_notify/<str:username>/', views.email_notify, name='email_notify'),
     
 ######################## GLOBAL ###########################
 
