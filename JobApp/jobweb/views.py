@@ -551,7 +551,7 @@ def set_interview(request, username_id, verified_user):
 
                     send_mail(
                         'Interview', #SUBJECT
-                        'Your interview date was updated.', #MESSAGE
+                        'Your interview date was updated to: ' + get_date_time, #MESSAGE
                         'appjobweb@gmail.com', #FROM
                         [username_id], #TO
                     )
@@ -950,6 +950,5 @@ def email_notify(request, username):
     zippedItems = zip(info1, info2, info3)
     context1 = {'info': zippedItems}
     return render(request, 'html_files/User-Profile1-Applicant.html', context1)
-
 
 ################################### DEBUG ############################################
