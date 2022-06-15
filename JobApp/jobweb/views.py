@@ -566,7 +566,7 @@ def set_interview(request, username_id, verified_user):
 
                     send_mail(
                         'Interview', #SUBJECT
-                        'Your interview date was updated.', #MESSAGE
+                        'Your interview date was updated.' + get_date_time,, #MESSAGE
                         'appjobweb@gmail.com', #FROM
                         [username_id], #TO
                     )
@@ -581,7 +581,7 @@ def set_interview(request, username_id, verified_user):
 
                     send_mail(
                         'Interview', #SUBJECT
-                        'Your interview date was updated.', #MESSAGE
+                        'Your interview date was updated.' + get_date_time,, #MESSAGE
                         'appjobweb@gmail.com', #FROM
                         [username_id], #TO
                     )
