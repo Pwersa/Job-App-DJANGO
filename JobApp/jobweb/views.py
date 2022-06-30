@@ -923,28 +923,32 @@ def change_password(request, username, verified_user):
     context = {'form': form }
     return render(request, 'html_files/Changepassword.html', context)
 
-################################### In progress ############################################
-
+@login_required(login_url='/login_user')
 def applicant_employee_create_pdf(request, username, *args, **kwargs):
-    account = get_object_or_404(account_registration, pk=username)
-    second_info = get_object_or_404(other_info, pk=username)
+    if request.user.is_authenticated:
+        account = get_object_or_404(account_registration, pk=username)
+        second_info = get_object_or_404(other_info, pk=username)
 
-    template_path = 'html_files/PDFViewer.html'
-    context = {'account': account, 'second_info': second_info}
- 
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="RESUME.pdf"'
-  
-    template = get_template(template_path)
-    html = template.render(context)
+        template_path = 'html_files/PDFViewer.html'
+        context = {'account': account, 'second_info': second_info}
     
-    pisa_status = pisa.CreatePDF(
-       html, dest=response)
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="RESUME.pdf"'
     
-    if pisa_status.err:
-       return HttpResponse('We had some errors <pre>' + html + '</pre>')
-    return response
+        template = get_template(template_path)
+        html = template.render(context)
+        
+        pisa_status = pisa.CreatePDF(
+        html, dest=response)
+        
+        if pisa_status.err:
+            return HttpResponse('We had some errors <pre>' + html + '</pre>')
+        return response
+        
+    else:
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
+        return redirect('logout_user')
 
-
+################################### In progress ############################################
 
 ################################### DEBUG ############################################
