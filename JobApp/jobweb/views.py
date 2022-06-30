@@ -618,7 +618,6 @@ def change_employment(request, username, verified_user):
 
             return redirect('hrdashboard', username=request.user.username, verified_user=True)
 
-
         elif request.method == "POST" and "Part Time" in request.POST:
             account_registration.objects.filter(username=username).update(employment_status="Part Time Worker")
             messages.success(request, 'Employment was updated on account: ' + username)
@@ -860,6 +859,27 @@ def delete_job(request, username, verified_user):
 
 ###################################################### GENERAL ######################################################
 
+@login_required(login_url='/login_user')
+def email_notify(request, username):
+    if request.user.is_authenticated and request.user.account_type == "HRManager":
+        send_mail(
+                'Finish account now', #SUBJECT
+                'We would like you inform you that we are now hiring you, but your account is not fully registered or did not pas requirements yet, please work up to Level 3 in order to Hire.', #MESSAGE
+                'appjobweb@gmail.com', #FROM
+                [username], #TO
+            )
+        
+        info1 = account_registration.objects.filter(username=username)
+        info2 = other_info.objects.filter(username_id=username)
+        info3 = interview.objects.filter(username_id=username)
+
+        zippedItems = zip(info1, info2, info3)
+        context1 = {'info': zippedItems}
+        return render(request, 'html_files/User-Profile1-Applicant.html', context1)
+        
+    else:
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
+        return redirect('logout_user')
 
 @login_required(login_url='/login_user')
 def change_password(request, username, verified_user):
@@ -901,9 +921,7 @@ def change_password(request, username, verified_user):
     context = {'form': form }
     return render(request, 'html_files/Changepassword.html', context)
 
-
 ################################### In progress ############################################
-
 
 def print_data(request, username):
     messages.success(request, 'Feature not yet available.')
@@ -935,20 +953,5 @@ def print_data_employee(request, username):
     context1 = {'info': zippedItems}
     return render(request, 'html_files/User-Profile1-Employee.html', context1)
 
-def email_notify(request, username):
-    send_mail(
-            'Finish account now', #SUBJECT
-            'We would like you inform you that we are now hiring you, but your account is not fully registered or did not pas requirements yet, please work up to Level 3 in order to Hire.', #MESSAGE
-            'appjobweb@gmail.com', #FROM
-            [username], #TO
-        )
-    
-    info1 = account_registration.objects.filter(username=username)
-    info2 = other_info.objects.filter(username_id=username)
-    info3 = interview.objects.filter(username_id=username)
-
-    zippedItems = zip(info1, info2, info3)
-    context1 = {'info': zippedItems}
-    return render(request, 'html_files/User-Profile1-Applicant.html', context1)
 
 ################################### DEBUG ############################################
