@@ -43,13 +43,11 @@ urlpatterns = [
     
 ######################## GLOBAL ###########################
 
-    path('print_data/<str:username>/', views.print_data, name='print_data'),
-    path('print_data_applicant/<str:username>/', views.print_data_applicant, name='print_data_applicant'),
-    path('print_data_employee/<str:username>/', views.print_data_employee, name='print_data_employee'),
-    
     path('change_password/<str:username>/verified_user?=<str:verified_user>', views.change_password, name='change_password'),
-
+    path('applicant_employee_create_pdf/<str:username>', views.applicant_employee_create_pdf, name='applicant_employee_create_pdf'),
+    
 ############################# DEBUG ########################################
+
     #path('home_debug', views.home_debug, name='home_debug'),
     #path('login_authenticate', views.login_authenticate, name='login_authenticate'),
     #path('hrdashboard_debug', views.hrdashboard_debug, name='hrdashboard_debug'),

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from .forms import *
 from .models import *
@@ -6,9 +6,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 
-
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from django.contrib.staticfiles import finders
 ################################################ WEBSITE ######################################################
-
 
 #hr_account_login_email = []
 #login_authorization = []
@@ -833,7 +835,7 @@ def list_job(request, username, verified_user):
             return redirect('hrdashboard', username=username, verified_user=verified_user)
 
     else:
-        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page.account_registrationuopda Please log in again.')
         return redirect('logout_user')
 
 @login_required(login_url='/login_user')
@@ -923,35 +925,26 @@ def change_password(request, username, verified_user):
 
 ################################### In progress ############################################
 
-def print_data(request, username):
-    messages.success(request, 'Feature not yet available.')
-    info1 = account_registration.objects.filter(username=username)
-    info2 = other_info.objects.filter(username_id=username)
-    info3 = interview.objects.filter(username_id=username)
+def applicant_employee_create_pdf(request, username, *args, **kwargs):
+    account = get_object_or_404(account_registration, pk=username)
+    second_info = get_object_or_404(other_info, pk=username)
 
-    zippedItems = zip(info1, info2, info3)
-    context1 = {'info': zippedItems}
-    return render(request, 'html_files/User-Profile1.html', context1)
+    template_path = 'html_files/PDFViewer.html'
+    context = {'account': account, 'second_info': second_info}
+ 
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="RESUME.pdf"'
+  
+    template = get_template(template_path)
+    html = template.render(context)
+    
+    pisa_status = pisa.CreatePDF(
+       html, dest=response)
+    
+    if pisa_status.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
 
-def print_data_applicant(request, username):
-    messages.success(request, 'Feature not yet available.')
-    info1 = account_registration.objects.filter(username=username)
-    info2 = other_info.objects.filter(username_id=username)
-    info3 = interview.objects.filter(username_id=username)
-
-    zippedItems = zip(info1, info2, info3)
-    context1 = {'info': zippedItems}
-    return render(request, 'html_files/User-Profile1-Applicant.html', context1)
-
-def print_data_employee(request, username):
-    messages.success(request, 'Feature not yet available.')
-    info1 = account_registration.objects.filter(username=username)
-    info2 = other_info.objects.filter(username_id=username)
-    info3 = interview.objects.filter(username_id=username)
-
-    zippedItems = zip(info1, info2, info3)
-    context1 = {'info': zippedItems}
-    return render(request, 'html_files/User-Profile1-Employee.html', context1)
 
 
 ################################### DEBUG ############################################
