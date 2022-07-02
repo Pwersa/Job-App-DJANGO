@@ -5,8 +5,8 @@ from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
-
 from django.http import HttpResponse
+
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.contrib.staticfiles import finders
@@ -933,7 +933,7 @@ def applicant_employee_create_pdf(request, username, *args, **kwargs):
         context = {'account': account, 'second_info': second_info}
     
         response = HttpResponse(content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename="RESUME.pdf"'
+        response['Content-Disposition'] = 'attachment; filename="user-information (Jobweb App).pdf"'
     
         template = get_template(template_path)
         html = template.render(context)
