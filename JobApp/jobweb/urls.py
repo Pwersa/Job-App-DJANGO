@@ -45,6 +45,7 @@ urlpatterns = [
 
     path('change_password/<str:username>/verified_user?=<str:verified_user>', views.change_password, name='change_password'),
     path('applicant_employee_create_pdf/<str:username>', views.applicant_employee_create_pdf, name='applicant_employee_create_pdf'),
+    path('export_as_csv', views.export_as_csv, name='export_as_csv'),
     
 ############################# DEBUG ########################################
 

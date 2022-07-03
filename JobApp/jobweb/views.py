@@ -6,10 +6,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.http import HttpResponse
-
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.contrib.staticfiles import finders
+import csv
 ################################################ WEBSITE ######################################################
 
 #hr_account_login_email = []
@@ -950,5 +950,26 @@ def applicant_employee_create_pdf(request, username, *args, **kwargs):
         return redirect('logout_user')
 
 ################################### In progress ############################################
+
+def export_as_csv(request):
+    response = HttpResponse(
+        content_type='text/csv',
+        headers={'Content-Disposition': 'attachment; filename="Applicant_Employee_Accounts.csv"'},
+    )
+
+    writer = csv.writer(response)
+
+    first_info = account_registration.objects.all()
+    second_info = other_info.objects.all()
+    zippedItems = zip(first_info, second_info)
+
+    writer.writerow(['Email', 'First Name', 'Last Name', 'Middle Name', 'Contact #', 'Civil Status', 'Citizenship', 'Religion', 'Birthplace', 'Address', 'Applying For', 
+                    'Account Type', 'Employment Status', 'Elementary', 'Highschool', 'College', 'Philhealth', 'SSS', 'Pag-Ibig', 'TIN', 'NBI'])
+
+    for a, b in zippedItems:
+        writer.writerow([a.username, a.first_name, a.last_name, a.middle_name, a.cellphone, b.civilstatus, b.citizenship, b.religion, b.bplace, a.address, a.applyingfor,
+                        a.account_type, a.employment_status, b.elementary, b.highschool, b.college, b.philhealth, b.SSS, b.pagibig, b.TIN, b.NBI]) 
+
+    return response
 
 ################################### DEBUG ############################################
