@@ -320,14 +320,26 @@
                      
                     <div class="row" style="text-align: center;">
                         <div class="col-sm-12">
-                            <a class="btn btn-outline-info" style="width: 250px; color: #000000" href="{% url 'applicant_employee_create_pdf' data.pk %}">Print Applicant's Information</a>
+                            <a class="btn btn-outline-info" style="width: 210px; color: #000000" onclick="export_information()">Print Employee's Informations</a>
                         </div>
                     </div>
 
                 </div>
             </div>
         </div>
-    {% endfor %}
     </div>
+
+    <script>
+
+        function export_information(){
+            if (confirm("Click yes for confirmation of the request") == true) {
+                window.location.assign("{% url 'applicant_employee_create_pdf' data.pk %}");
+            } else {
+                alert("You canceled the request.")
+        }}
+
+    </script>
+
+    {% endfor %}
 
 </body>

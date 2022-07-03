@@ -381,7 +381,7 @@
 
                     <div class="row" style="text-align: center;">
                         <div class="col-sm-12">
-                            <a class="btn btn-outline-info" style="width: 210px; color: #000000" href="{% url 'applicant_employee_create_pdf' data.pk %}">Print my Informations</a>
+                            <a class="btn btn-outline-info" style="width: 210px; color: #000000" onclick="export_information()">Print my Informations</a>
                         </div>
                     </div>
 
@@ -398,7 +398,7 @@
                 </div>
             </div>
         </div>
-    {% endfor %}
+    
     </div>
 
     <script>
@@ -407,9 +407,17 @@
             setTimeout(function() {
                 $(".alert").alert('close');
                 }, 5000);
-        }); 
+        });
+
+        function export_information(){
+            if (confirm("Click yes for confirmation of the request") == true) {
+                window.location.assign("{% url 'applicant_employee_create_pdf' data.pk %}");
+            } else {
+                alert("You canceled the request.")
+        }}
 
     </script>          
      
+     {% endfor %}
 
 </body>
