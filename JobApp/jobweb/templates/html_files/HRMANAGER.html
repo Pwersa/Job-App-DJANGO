@@ -37,7 +37,7 @@
 
                     
                     <ul class="dropdown-menu dropdown-menu dropdown-menu-end">
-                        <a class="dropdown-item" href="{% url 'export_as_csv' %}"> Export Accounts (except HR) </a>
+                        <a class="dropdown-item" onclick="csv_export()" style="cursor: pointer;"> Export Accounts (except HR) </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'change_password' db.pk db.verified_user %}"> Change Password </a>
                         <a class="dropdown-item" href="{% url 'logout_user' %}"> Log Out </a>
@@ -165,6 +165,14 @@
                     $(".alert").alert('close');
                     }, 5000);
             }); 
+
+            function csv_export(){
+            if (confirm("Click yes for confirmation of the request") == true) {
+                window.location.assign("{% url 'export_as_csv' %}");
+            } else {
+                alert("You canceled the request.")
+            }
+        }
 
         </script>          
     </body>
