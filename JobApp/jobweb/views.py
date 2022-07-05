@@ -951,25 +951,41 @@ def applicant_employee_create_pdf(request, username, *args, **kwargs):
 
 ################################### In progress ############################################
 
+@login_required(login_url='/login_user')
 def export_as_csv(request):
-    response = HttpResponse(
-        content_type='text/csv',
-        headers={'Content-Disposition': 'attachment; filename="Applicant_Employee_Accounts.csv"'},
-    )
+    if request.user.verified_user == True and request.user.is_authenticated and request.user.account_type == "HRManager":
+        response = HttpResponse(
+            content_type='text/csv',
+            headers={'Content-Disposition': 'attachment; filename="Applicant_Employee_Accounts.csv"'},
+        )
 
-    writer = csv.writer(response)
+        writer = csv.writer(response)
 
-    first_info = account_registration.objects.all()
-    second_info = other_info.objects.all()
-    zippedItems = zip(first_info, second_info)
+        first_info = account_registration.objects.all()
+        second_info = other_info.objects.all()
+        zippedItems = zip(first_info, second_info)
 
-    writer.writerow(['Email', 'First Name', 'Last Name', 'Middle Name', 'Contact #', 'Civil Status', 'Citizenship', 'Religion', 'Birthplace', 'Address', 'Applying For', 
-                    'Account Type', 'Employment Status', 'Elementary', 'Highschool', 'College', 'Philhealth', 'SSS', 'Pag-Ibig', 'TIN', 'NBI'])
+        writer.writerow(['Email', 'First Name', 'Last Name', 'Middle Name', 'Contact #', 'Civil Status', 'Citizenship', 'Religion', 'Birthplace', 'Address', 'Applying For', 
+                        'Account Type', 'Employment Status', 'Elementary', 'Highschool', 'College', 'Philhealth', 'SSS', 'Pag-Ibig', 'TIN', 'NBI'])
 
-    for a, b in zippedItems:
-        writer.writerow([a.username, a.first_name, a.last_name, a.middle_name, a.cellphone, b.civilstatus, b.citizenship, b.religion, b.bplace, a.address, a.applyingfor,
-                        a.account_type, a.employment_status, b.elementary, b.highschool, b.college, b.philhealth, b.SSS, b.pagibig, b.TIN, b.NBI]) 
+        for a, b in zippedItems:
+            writer.writerow([a.username, a.first_name, a.last_name, a.middle_name, a.cellphone, b.civilstatus, b.citizenship, b.religion, b.bplace, a.address, a.applyingfor,
+                            a.account_type, a.employment_status, b.elementary, b.highschool, b.college, b.philhealth, b.SSS, b.pagibig, b.TIN, b.NBI]) 
 
-    return response
+        return response
 
 ################################### DEBUG ############################################
+
+@login_required(login_url='/login_user')
+def hrdashboard_debug(request, username, verified_user):
+    if request.user.verified_user == True and request.user.is_authenticated and request.user.account_type == "HRManager":
+        account = account_registration.objects.all()
+        user_interview = interview.objects.values('date_time')
+        hr_account = account_registration.objects.filter(username=request.user.username)
+
+        zippedItems = zip(account, user_interview)
+        return render(request, 'html_files/HRMANAGER-DEBUG.html', {'zippedItems': zippedItems, 'hr_account': hr_account})
+            
+    else:
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
+        return redirect('logout_user')
