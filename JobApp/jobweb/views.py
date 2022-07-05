@@ -875,6 +875,7 @@ def email_send(request,):
                 [receiver], #TO
             )
 
+        messages.success(request, 'Email succesfully sent.')
         return redirect('hrdashboard', username=request.user.username, verified_user=True)
 
     else:

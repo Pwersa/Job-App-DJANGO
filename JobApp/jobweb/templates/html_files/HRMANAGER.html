@@ -49,17 +49,25 @@
                             <div class="modal-body">
                                 <form method="POST" action="{% url 'email_send' %}">   
                                     {% csrf_token %}  
-                                    <label for="recipient-name" class="col-form-label">To:</label>
-                                    <input type="email" class="form-control" id="email-to" name="email-to">
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">To:</label>
+                                        <input type="email" class="form-control" id="email-to" name="email-to">
+                                    </div>
 
-                                    <label for="recipient-name" class="col-form-label">Subject:</label>
-                                    <input type="text" class="form-control" id="email-subject" name="email-subject">
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Subject:</label>
+                                        <input type="text" class="form-control" id="email-subject" name="email-subject">
+                                    </div>
 
-                                    <label for="message-text" class="col-form-label">Message:</label>
-                                    <input type="text" class="form-control" id="email-text" name="email-text">
-                                
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button class="btn btn-primary" button="submit">Send</button>
+                                    <div class="form-group">
+                                        <label for="message-text" class="col-form-label">Message:</label>
+                                        <input type="text" class="form-control" id="email-text" name="email-text">
+                                    </div>
+                                    
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button class="btn btn-primary" button="submit">Send</button>
+                                    </div>
                          
                                 </form>
                                 
