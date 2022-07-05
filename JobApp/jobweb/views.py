@@ -1,3 +1,4 @@
+from django.dispatch import receiver
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from .forms import *
@@ -742,6 +743,7 @@ def applicant_hired_reject(request, username, verified_user):
                 account_registration.objects.filter(username=username).update(job=update_job)
                 account_registration.objects.filter(username=username).update(applyingfor='')
                 account_registration.objects.filter(username=username).update(account_type="Employee")
+                account_registration.objects.filter(username=username).update(applyingfor="Employee")
                 interview.objects.filter(username=username).update(date_time=None)
                 
                 messages.success(request, 'Applicant Successfully Hired!')
@@ -857,6 +859,28 @@ def delete_job(request, username, verified_user):
     else:
         messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
+
+@login_required(login_url='/login_user')
+def email_send(request,):
+    if request.user.is_authenticated and request.user.account_type == "HRManager":
+
+        receiver = request.POST['email-to']
+        subject = request.POST['email-subject']
+        message = request.POST['email-text']
+
+        send_mail(
+                subject, #SUBJECT
+                message, #MESSAGE
+                'appjobweb@gmail.com', #FROM
+                [receiver], #TO
+            )
+
+        return redirect('hrdashboard', username=request.user.username, verified_user=True)
+
+    else:
+        messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
+        return redirect('logout_user')
+
 
 
 ###################################################### GENERAL ######################################################
