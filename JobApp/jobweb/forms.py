@@ -5,7 +5,7 @@ from django.forms import ModelForm, ModelChoiceField
 from .models import *
 
 class first_registration(UserCreationForm):
-    applyingfor = ModelChoiceField(queryset=job_listing.objects.values_list('jtitle', flat=True))
+    applyingfor = ModelChoiceField(widget=forms.Select, queryset=job_listing.objects.values_list('jtitle', flat=True))
 
     class Meta:
         model = account_registration 
