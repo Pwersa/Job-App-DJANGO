@@ -63,7 +63,7 @@
                                         <label for="message-text" class="col-form-label">Message:</label>
                                         <input type="text" class="form-control" id="email-text" name="email-text">
                                     </div>
-                                    
+
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                         <button class="btn btn-primary" button="submit">Send</button>
@@ -86,10 +86,10 @@
 
                     
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <a class="dropdown-item" onclick="csv_export()" style="cursor: pointer; text-align: end;">Export User Accounts</a>
+                        <a class="dropdown-item" onclick="csv_export()" style="cursor: pointer;">Export User Accounts</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{% url 'change_password' db.pk db.verified_user %}" style="text-align: end;">Change Password</a>
-                        <a class="dropdown-item" href="{% url 'logout_user' %}" style="text-align: end;">Sign Out Account</a>
+                        <a class="dropdown-item" href="{% url 'change_password' db.pk db.verified_user %}">Change Password</a>
+                        <a class="dropdown-item" href="{% url 'logout_user' %}">Sign Out Account</a>
                     </ul>
 
                     {% endfor %}
