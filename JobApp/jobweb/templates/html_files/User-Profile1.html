@@ -9,6 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 
     <title>User Profile</title>
 </head>
@@ -131,9 +132,9 @@
                     <div class="card-title" style="font-weight: bold">
                         Quick Account Settings:
                     </div>
-                    <a href="{% url 'change_password' data.pk data.verified_user %}" class="btn btn-outline-info" style="width: 170px; color: #000000; margin-bottom: 10px;">Change Password</a>
+                    <a href="{% url 'change_password' data.pk data.verified_user %}" class="btn btn-outline-info" style="width: 190px; color: #000000; margin-bottom: 10px;"><i class="bi bi-key"></i>&nbsp;&nbsp;Change Password</a>
                     <br>
-                    <a href="{% url 'logout_user' %}" class="btn btn-outline-info" style="width: 90px; color: #000000">Log out</a>
+                    <a href="{% url 'logout_user' %}" class="btn btn-outline-info" style="width: 115px; color: #000000"><i class="bi bi-box-arrow-right"></i>&nbsp;&nbsp;Log out</a>
 
                     {% endif %}
 
@@ -146,14 +147,14 @@
             <div class="card shadow p-3 mb-5 bg-white rounded">
                 <div class="card-body list-group list-group-flush" style="margin-left: 20px;">
                     <div class="row">
-                        <div class="card-title" style="font-weight: bold; text-align: center; margin-bottom: 30px;">
+                        <div class="card-title" style="font-weight: bold; text-align: center; margin-bottom: 30px;"><i class="bi bi-person-square"></i>&nbsp;
                             Account Information
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-4">
-                            <h6>Email/Username:</h6>
+                        <div class="col-lg-5">
+                            <h6><i class="bi bi-envelope"></i>&nbsp;&nbsp;Email/Username:</h6>
                         </div>
                         <div class="col-lg-6  text-secondary">
                             {{data.username}}
@@ -163,8 +164,8 @@
                     <hr>
 
                     <div class="row">
-                        <div class="col-lg-4">
-                            <h6 class="mb-0">Contact #:</h6>
+                        <div class="col-lg-5">
+                            <h6 class="mb-0"><i class="bi bi-telephone"></i>&nbsp;&nbsp;Contact #:</h6>
                         </div>
                         <div class="col-lg-6  text-secondary">
                             {{data.cellphone}}
@@ -174,8 +175,8 @@
                     <hr>
 
                     <div class="row">
-                        <div class="col-lg-4">
-                            <h6 class="mb-0">Civil Status:</h6>
+                        <div class="col-lg-5">
+                            <h6 class="mb-0"><i class="bi bi-person"></i>&nbsp;&nbsp;Civil Status:</h6>
                         </div>
                         <div class="col-lg-6  text-secondary">
 
@@ -191,8 +192,8 @@
                     <hr>
 
                     <div class="row">
-                        <div class="col-lg-4">
-                            <h6 class="mb-0">Birthday:</h6>
+                        <div class="col-lg-5">
+                            <h6 class="mb-0"><i class="bi bi-gift"></i>&nbsp;&nbsp;Birthday:</h6>
                         </div>
                         <div class="col-lg-6  text-secondary">
                             {{data.birthday}}
@@ -202,10 +203,10 @@
                     <hr>
 
                     <div class="row">
-                        <div class="col-lg-4">
-                            <h6 class="mb-0">Address:</h6>
+                        <div class="col-lg-5">
+                            <h6 class="mb-0"><i class="bi bi-geo-alt"></i>&nbsp;&nbsp;Address:</h6>
                         </div>
-                        <div class="col-lg-8 text-secondary">
+                        <div class="col-lg-7 text-secondary">
                             {{data.address}}
                         </div>
                     </div>
@@ -213,8 +214,8 @@
                     <hr>
 
                     <div class="row">
-                        <div class="col-lg-4">
-                            <h6 class="mb-0">Educational Background:</h6>
+                        <div class="col-lg-5">
+                            <h6 class="mb-0"><i class="bi bi-bookmark"></i>&nbsp;&nbsp;Educational Background:</h6>
                         </div>
                             <div class="col-lg-6  text-secondary">
                                 Click <u type="button"  data-toggle="modal" data-target="#exampleModalCenter_1">
@@ -272,8 +273,8 @@
                     <hr>
 
                     <div class="row">
-                        <div class="col-lg-4">
-                            <h6 class="mb-0">Signature:</h6>
+                        <div class="col-lg-5">
+                            <h6 class="mb-0"><i class="bi bi-pen"></i>&nbsp;&nbsp;Signature:</h6>
                         </div>
                         {% if data1.signature == 'No photo' %}
                         <div class="col-lg-6  text-secondary">
@@ -313,13 +314,13 @@
                     <hr>
 
                     <div class="row">
-                        <div class="card-title" style="font-weight: bold; text-align: center; margin-bottom: 30px;">
+                        <div class="card-title" style="font-weight: bold; text-align: center; margin-bottom: 30px;"><i class="bi bi-person-video2"></i>&nbsp;
                             Government ID's
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-5">
                             <h6 class="mb-0">Philhealth:</h6>
                         </div>
                         <div class="col-lg-6  text-secondary">
@@ -329,7 +330,7 @@
                     <hr>
 
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-5">
                             <h6 class="mb-0">Pag-Ibig:</h6>
                         </div>
                         <div class="col-lg-6  text-secondary">
@@ -339,7 +340,7 @@
                     <hr>
 
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-5">
                             <h6 class="mb-0">SSS:</h6>
                         </div>
                         <div class="col-lg-6  text-secondary">
@@ -349,7 +350,7 @@
                     <hr>
 
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-5">
                             <h6 class="mb-0">NBI:</h6>
                         </div>
                         <div class="col-lg-6  text-secondary">
@@ -359,7 +360,7 @@
                     <hr>
 
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-5">
                             <h6 class="mb-0">TIN:</h6>
                         </div>
                         <div class="col-lg-6  text-secondary">
@@ -372,7 +373,7 @@
 
                     <div class="row" style="text-align: center;">
                         <div class="col-sm-12">
-                            <a class="btn btn-outline-info" style="width: 250px; color: #000000" href="{% url 'signup1' data.pk data.verified_user %}">Finish my Account Registration</a>
+                            <a class="btn btn-outline-info" style="width: 270px; color: #000000" href="{% url 'signup1' data.pk data.verified_user %}"><i class="bi bi-person-lines-fill"></i>&nbsp;&nbsp;Finish my Account Registration</a>
                         </div>
                     </div>
 
@@ -380,7 +381,7 @@
 
                     <div class="row" style="text-align: center;">
                         <div class="col-sm-12">
-                            <a class="btn btn-outline-info" style="width: 210px; color: #000000" onclick="export_information()">Export my informations...</a>
+                            <a class="btn btn-outline-info" style="width: 235px; color: #000000" onclick="export_information()"><i class="bi bi-arrow-bar-up"></i>&nbsp;&nbsp;Export my informations...</a>
                         </div>
                     </div>
 
