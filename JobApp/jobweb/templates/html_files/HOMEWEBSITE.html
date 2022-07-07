@@ -7,6 +7,7 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,8 +58,9 @@
     </div>
     {% endif %}
 
+    {% for jobs in job %}
+
     <div class="container-fluid">
-        {% for jobs in job %}
         <div class="card shadow p-3 mb-4 bg-white rounded" style="margin-left: 200px; margin-right: 200px;">
             
             <div class="row" style="margin-top: 5px; margin-left: 10px;"> 
@@ -66,21 +68,48 @@
                     <img class="card-img-top" src="/static/pictures/joblist_icon.png" alt="Card image cap">
                 </div>
                     <div class="col-lg-10">
-                        <h5 class="card-title"> &nbsp;&nbsp;JOB TITLE:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{jobs.jtitle}}</h5>
-                        <p>&nbsp;&nbsp;&nbsp; JOB DESCRIPTION: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{jobs.jdesc}}</p>
-                        <p>&nbsp;&nbsp;&nbsp; JOB REQUIREMENTS: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{jobs.jobreq1}}</p>
+                        <h4 class="card-title" style="text-align: center;">{{jobs.jtitle}}</h4>
+                        <p>&nbsp;&nbsp;&nbsp;JOB DESCRIPTION:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{jobs.jdesc}}</p>
+                        <p>&nbsp;&nbsp;&nbsp;JOB REQUIREMENTS:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{jobs.jobreq1}}</p>
                         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{jobs.jobreq2}}</p>
                         <p>&nbsp;&nbsp;&nbsp;&nbsp;AVERAGE SALARY:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{jobs.salary}}</p>
-                        <a class="btn btn-outline-info" style="margin-left: 600px; margin-bottom: 5px;" onclick="apply_now()">Apply Now!</a>
+                        
+                        <div style="text-align: end;">
+                            <a class="btn btn-outline-info" style="width: 150px; margin-right: 10px;" onclick="apply_now()">Apply Now!</a>
+                        </div>
+                       
                     </div>
             </div>
         </div>
-        {% endfor %}
+
     </div>
 
+    {% empty %}
+    <br><br>
+    <div class="row justify-content-center">
+        <div class="card text-center shadow p-3 mb-5 bg-white rounded" style="width: 20rem;">                       
+            <div class="card-body">
+                <div class="profile-pic-div">
+                    <i class="bi bi-emoji-frown"></i>
+                </div>
+
+                <br><br><br>
+
+                <h3>There are no Jobs available right now, please come back later.</h3>
+
+                <br><br><br>
+
+                <small>
+                    It's either the developer of the web or the HR Manager's fault.
+                </small>
+            </div>  
+        </div>
+    
+    {% endfor %}
+        
+    <div id="footer" style="text-align: center; position: padding-bottom;"> Website is powered by: <i class="bi bi-bootstrap" ></i>&nbsp;<a href="https://getbootstrap.com/docs/4.6/getting-started/introduction/">v4.6.x</a></div>
 
     <script>
-        
         $('#myAlert').ready(function() {
             setTimeout(function() {
                 $(".alert").alert('close');
@@ -119,7 +148,6 @@
             else{
                 alert("Search the job: " + job_name);
             }
-
         }
 
         function apply_now(){
@@ -131,5 +159,5 @@
         }
         
     </script>
-</body>
 
+</body>
