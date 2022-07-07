@@ -1,1 +1,1 @@
-web: gunicorn jobweb.wsgi
+web: gunicorn wsgi:JobApp
