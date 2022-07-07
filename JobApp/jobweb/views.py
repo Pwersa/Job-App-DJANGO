@@ -122,7 +122,7 @@ def signup(request):
     return render(request, 'html_files/Registration-Form.html', context)
 
 def signup1(request, username, verified_user):
-    if request.user.is_authenticated and request.user.account_type == "Applicant Level 1" and request.user.verified_user == False:
+    if request.user.is_authenticated and request.user.verified_user == False and request.user.account_type == "Applicant Level 1" or request.user.is_authenticated and request.user.verified_user == True and request.user.account_type == "Applicant Level 2" or request.user.is_authenticated and request.user.verified_user == True and request.user.account_type == "Applicant Level 3" or request.user.is_authenticated and request.user.verified_user == True and request.user.account_type == "Employee" :
         profile = other_info.objects.get(username=username)
         form1 = second_registration(instance=profile)
 
@@ -157,7 +157,7 @@ def signup1(request, username, verified_user):
 
 @login_required(login_url='/login_user')
 def user_profile(request, username, verified_user):
-    if request.user.verified_user == False and request.user.is_authenticated and request.user.account_type == "Applicant Level 1" or request.user.is_authenticated and request.user.account_type == "Applicant Level 3" or request.user.is_authenticated and request.user.account_type == "Employee":
+    if request.user.verified_user == False and request.user.is_authenticated and request.user.account_type == "Applicant Level 1" or request.user.verified_user == True and request.user.is_authenticated and request.user.account_type == "Applicant Level 2" or request.user.verified_user == True and request.user.is_authenticated and request.user.account_type == "Applicant Level 3" or request.user.verified_user == True and request.user.is_authenticated and request.user.account_type == "Employee":
         info1 = account_registration.objects.filter(username=username)
         info2 = other_info.objects.filter(username_id=username)
         info3 = interview.objects.filter(username_id=username)
@@ -239,6 +239,10 @@ def requirements(request, username, verified_user):
             messages.error(request, 'Please finish registration before submitting requirements.')
             return redirect('user_profile', username=username, verified_user=verified_user)
 
+        if data1 == 'Applicant Level 2':
+            messages.error(request, 'Please finish up to Applicant Level 3 before submitting requirements.')
+            return redirect('user_profile', username=username, verified_user=verified_user)
+
         else:
             data = other_info.objects.filter(username_id=username)
             context1 = {'check': data}
@@ -308,7 +312,7 @@ def applicant_level_2_3_employee(request, username, verified_user):
 @login_required(login_url='/login_user')
 def hrdashboard(request, username, verified_user):
     if request.user.verified_user == True and request.user.is_authenticated and request.user.account_type == "HRManager":
-        account = account_registration.objects.all()
+        account = account_registration.objects.all().exclude(username='appjobweb@gmail.com')
         user_interview = interview.objects.values('date_time')
         hr_account = account_registration.objects.filter(username=request.user.username)
 

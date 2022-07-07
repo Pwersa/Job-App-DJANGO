@@ -15,7 +15,14 @@
     
 
     <body class="row g-3", background="/static/pictures/bg.jpg" >
-      <div class="fs-1 p-4 mb-2 fw-bold text-center" style="background-color: #1f2833; color: #66fcf1">Complete Your Information</div>
+
+      {% if request.user.account_type == 'Applicant Level 1' %}
+      <div class="fs-1 p-4 mb-2 fw-bold text-center" style="background-color: #1f2833; color: #66fcf1">Complete Your User Information</div>
+
+      {% else %}
+      <div class="fs-1 p-4 mb-2 fw-bold text-center" style="background-color: #1f2833; color: #66fcf1">Edit User Information</div>
+
+      {% endif %}
 
       <form method="POST" enctype="multipart/form-data" class="row g-4">
         {% csrf_token %}
@@ -57,7 +64,7 @@
                 <input type="file" id="signature" name="signature" required>
               </div>
               
-        <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e; color: #000000"><i class="bi bi-bookmark-check"></i>&nbsp;&nbsp;Educational Background</div>
+        <div class="p-3 mb-2 fw-bold" style="background-color: #45a29e; color: #000000" style="background-repeat: repeat-y; "><i class="bi bi-bookmark-check"></i>&nbsp;&nbsp;Educational Background</div>
         
                 <div class="col-md-6">
                   {{form.elementary|as_crispy_field}}
@@ -152,10 +159,9 @@
                     <div class="col-md-3">
                       {{form.refcom2|as_crispy_field}}
                     </div>
-
-                    <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;"><i class="bi bi-person-video2"></i>&nbsp;&nbsp;Government Numbers (Please enter zeroes(0) if ID is not yet available)</div>
+          
+                    <div class="p-3 mb-2 fw-bold" style="background-color:#45a29e;"><i class="bi bi-person-video2"></i>&nbsp;&nbsp;Government Numbers (Please enter zeroes (0) if ID is not yet available)</div>
                   
-
                     <div class="col-md-4">
                       {{form.philhealth|as_crispy_field}}
                     </div>
@@ -186,7 +192,7 @@
                         <p>I hereby certify that the above information as true and correct to the best of my
                           knowledge and belief. I also understand that any misinterpration will be considered
                           reason for withdrawal of an offer or subsequent dismissal if employed.</p>
-                          <button class="btn btn-primary te" type="submit" button="submit">Submit Details</button>
+                          <button class="btn btn-primary te" type="submit" button="submit" style="width: 180px;">Submit Details</button>
                           
                       </div>
                     
@@ -200,7 +206,8 @@
                     <div class="col-md-4">
                       <label for="accounttype" class="form-label"></label>
                       <input class="form-control" type="hidden" id="accounttype" name="update_account_type" value="Applicant Level 2" >
-                    </div>                                  
+                    </div>   
+
       </form>        
     </body>  
 </html>

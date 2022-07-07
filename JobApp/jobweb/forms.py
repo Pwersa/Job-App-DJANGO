@@ -63,9 +63,9 @@ class second_registration(ModelForm):
                 'philhealth':'Philhealth ID',
                 'pagibig':'Pag-ibig ID',
                 'TIN':'Tin Number',
-                'NBI':'NBI Clearance (To be filled out later, best when record is new.)',
+                'NBI':'NBI Clearance (Best when record is new)',
                 'SSS':'SSS ID',
-                'med_record':'Medical Record (To be filled out later, best when record is new.)',
+                'med_record':'Medical Record (Best when record is new)',
                 'signature':'Signature (Picture)',
                 }
 
