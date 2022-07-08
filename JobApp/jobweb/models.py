@@ -6,9 +6,6 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class account_registration(AbstractUser):
-    
-    #applyingfor1 = [('Choice1', 'Please select here')]
-
     username = models.EmailField(primary_key=True, verbose_name='username', unique=True, default="")
     password1 = models.CharField(verbose_name='password1', max_length=20, default="")
     password2 = models.CharField(verbose_name='password2', max_length=20, default="")
@@ -25,11 +22,9 @@ class account_registration(AbstractUser):
     account_type = models.CharField(verbose_name='account_type',max_length=99)
     verified_user = models.BooleanField(verbose_name='verified_user', max_length=99, default=False)
 
-
     USERNAME_FIELD = 'username'
 
 class other_info(models.Model):
-
     citizenship_options = [('Single', 'Single'), 
                             ('Married', 'Married'), 
                             ('Widowed', 'Widowed'),
@@ -71,7 +66,6 @@ class other_info(models.Model):
     SSS = models.CharField(verbose_name='SSS', max_length=99, null=True, blank=True)
     med_record = models.CharField(verbose_name='med_record', max_length=6, null=True, blank=True)
     signature = models.ImageField(verbose_name='signature', null=True, default="No photo", upload_to="signature/")
-    
 
     USERNAME_FIELD = 'username'
     

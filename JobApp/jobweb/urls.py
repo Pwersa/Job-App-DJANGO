@@ -52,7 +52,7 @@ urlpatterns = [
 
     #path('home_debug', views.home_debug, name='home_debug'),
     #path('login_authenticate', views.login_authenticate, name='login_authenticate'),
-    path('hrdashboard_debug/<str:username>/authorized_account?=<str:verified_user>', views.hrdashboard_debug, name='hrdashboard_debug'),
-    path('hrdashboard_debug', views.hrdashboard_debug, name='hrdashboard_debug'),
+    #path('hrdashboard_debug/<str:username>/authorized_account?=<str:verified_user>', views.hrdashboard_debug, name='hrdashboard_debug'),
+    #path('hrdashboard_debug', views.hrdashboard_debug, name='hrdashboard_debug'),
     
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
