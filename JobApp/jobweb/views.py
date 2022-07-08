@@ -14,9 +14,6 @@ import csv
 
 ################################################ WEBSITE ######################################################
 
-#hr_account_login_email = []
-#login_authorization = []
-
 def home(request):
     asd = job_listing.objects.all()
     context = { 'job' : asd }
@@ -757,7 +754,6 @@ def applicant_hired_reject(request, username, verified_user):
 
         if request.method == "POST" and "Reject" in request.POST:
             data2 = account_registration.objects.filter(username=username).values_list('account_type', flat=True).first()
-            print(data2)
 
             if data2 == 'Applicant Level 1':
 
@@ -825,19 +821,15 @@ def manage_joblisting(request, username, verified_user):
 @login_required(login_url='/login_user')
 def list_job(request, username, verified_user):
     if request.user.verified_user == True and request.user.is_authenticated and request.user.account_type == "HRManager":
-        print('TEST 1')
         if request.method == "POST":
-            print('TEST 2')
             job_title = request.POST['job_title']
             job_desc = request.POST['job_description']
             job_req = request.POST['jobreq1']
             job_req2 = request.POST['jobreq2']
             work_pay = request.POST['salary']
-            print('TEST 3')
 
             job_listing.objects.create(jtitle=job_title, jdesc=job_desc, jobreq1=job_req, jobreq2=job_req2, salary=work_pay)
 
-            print('TEST 4')
             messages.success(request, 'Job is ADDED successfully.')
             return redirect('hrdashboard', username=username, verified_user=verified_user)
 
@@ -849,10 +841,9 @@ def list_job(request, username, verified_user):
 def delete_job(request, username, verified_user):
     if request.user.is_authenticated and request.user.account_type == "HRManager":
         if request.method == "POST":
-
             job_name = request.POST['deletejob']
             job1 = job_listing.objects.filter(jtitle=job_name).values_list('jtitle', flat=True).first()
-            print(job1)
+            
             if job_name == job1:
                 job_listing.objects.filter(jtitle=job_name).delete()
                 messages.success(request, 'Job is DELETED succesfully.')
@@ -886,8 +877,6 @@ def email_send(request,):
     else:
         messages.warning(request, 'You have been logged out because of accessing unauthorized page. Please log in again.')
         return redirect('logout_user')
-
-
 
 ###################################################### GENERAL ######################################################
 
