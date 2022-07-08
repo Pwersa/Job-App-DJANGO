@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +16,7 @@
 
     
 
-    <body class="row g-3", background="/static/pictures/bg.jpg" >
+    <body class="row g-3", background="{% static 'pictures/bg.png' %}" >
 
       {% if request.user.account_type == 'Applicant Level 1' %}
       <div class="fs-1 p-4 mb-2 fw-bold text-center" style="background-color: #1f2833; color: #66fcf1">Complete Your User Information</div>
